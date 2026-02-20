@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinDecide Baby — Brand Identity System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f0f4ee; font-family: 'DM Mono', monospace; font-size: 13px; color: #1c211a; padding: 48px 40px 80px; max-width: 980px; margin: 0 auto; }
+.kit-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; padding-bottom: 20px; border-bottom: 1px solid #d0dace; }
+.kit-logo { display: flex; align-items: center; gap: 10px; }
+.kit-logo-main { font-family: 'DM Serif Display', serif; font-size: 22px; }
+.kit-logo-sub { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #5a8f6a; font-weight: 500; }
+.logo-dot { width: 10px; height: 10px; background: #5a8f6a; border-radius: 50%; }
+.kit-meta { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #5a6557; }
+.section { margin-bottom: 64px; }
+.section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #5a6557; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #d0dace; }
+.card { background: #f7faf6; border: 1px solid #d0dace; border-radius: 10px; padding: 28px; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* NAME HERO */
+.name-hero { background: #1c211a; border-radius: 12px; padding: 48px; margin-bottom: 24px; position: relative; overflow: hidden; }
+.name-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 15%, rgba(90,143,106,0.3) 0%, transparent 55%), radial-gradient(ellipse at 15% 85%, rgba(61,122,82,0.2) 0%, transparent 50%); }
+.name-word { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 300; letter-spacing: -1.5px; line-height: 1; color: #f0f4ee; position: relative; z-index: 1; margin-bottom: 8px; }
+.name-word span { color: #8fcc9a; font-style: italic; }
+.name-badge { display: inline-block; background: rgba(90,143,106,0.3); border: 1px solid rgba(90,143,106,0.5); border-radius: 20px; padding: 4px 14px; font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #8fcc9a; position: relative; z-index: 1; margin-bottom: 12px; }
+.name-tagline { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(240,244,238,0.3); position: relative; z-index: 1; }
+
+/* MEANING CARDS */
+.meaning-card { background: #f7faf6; border: 1px solid #d0dace; border-radius: 10px; padding: 24px; }
+.meaning-word { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 4px; display: flex; align-items: baseline; gap: 8px; }
+.meaning-pron { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6557; font-weight: 300; }
+.meaning-pos { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #5a8f6a; margin-bottom: 8px; }
+.meaning-origin { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; background: #d8ead9; border: 1px solid #d0dace; border-radius: 4px; padding: 3px 8px; color: #5a6557; margin-bottom: 8px; }
+.meaning-def { font-size: 12px; line-height: 1.7; margin-bottom: 10px; }
+.meaning-why { font-size: 11px; color: #5a6557; line-height: 1.6; padding-top: 10px; border-top: 1px solid #d0dace; }
+
+/* COLOR CARDS */
+.color-card { border-radius: 10px; overflow: hidden; border: 1px solid #d0dace; }
+.color-swatch { height: 100px; }
+.color-body { padding: 16px; background: #f7faf6; }
+.color-name { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 2px; }
+.color-hex { font-size: 10px; color: #5a6557; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
+.color-desc { font-size: 11px; color: #5a6557; line-height: 1.6; }
+.color-fn { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #5a8f6a; margin-top: 8px; }
+
+/* ELEMENT CARDS */
+.element-card { background: #f7faf6; border: 1px solid #d0dace; border-radius: 8px; padding: 20px; }
+.element-name { font-family: 'DM Serif Display', serif; font-size: 15px; margin: 8px 0 6px; }
+.element-desc { font-size: 11px; color: #5a6557; line-height: 1.6; }
+.element-meaning { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #5a8f6a; padding-top: 8px; border-top: 1px solid #d0dace; margin-top: 8px; }
+
+/* ASSET CARDS */
+.asset-card { background: #f7faf6; border: 1px solid #d0dace; border-radius: 10px; padding: 20px; }
+.asset-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #5a6557; margin-bottom: 12px; }
+.spec-block { background: #1c211a; border-radius: 8px; padding: 16px 20px; margin-top: 12px; }
+.spec-line { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(240,244,238,0.5); line-height: 1.9; }
+.spec-line strong { color: #8fcc9a; }
+
+/* INSTAGRAM DARK */
+.insta-dark { width: 100%; aspect-ratio: 1; background: #1c211a; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; position: relative; overflow: hidden; border-radius: 8px; }
+.insta-dark::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 15%, rgba(90,143,106,0.35) 0%, transparent 55%); }
+.id-top { position: absolute; top: 24px; left: 24px; z-index: 1; }
+.id-logo { display: flex; align-items: center; gap: 6px; }
+.id-dot { width: 7px; height: 7px; background: #5a8f6a; border-radius: 50%; }
+.id-name { font-family: 'DM Serif Display', serif; font-size: 13px; color: #f0f4ee; }
+.id-badge { display: inline-block; background: rgba(90,143,106,0.25); border: 1px solid rgba(90,143,106,0.4); border-radius: 10px; padding: 2px 8px; font-family: 'DM Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.12em; color: #8fcc9a; margin-top: 4px; }
+.id-head { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 300; letter-spacing: -0.5px; color: #f0f4ee; line-height: 1.05; margin-bottom: 10px; position: relative; z-index: 1; }
+.id-head em { font-style: italic; color: #8fcc9a; }
+.id-sub { font-family: 'DM Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(240,244,238,0.3); position: relative; z-index: 1; }
+
+/* INSTAGRAM LIGHT */
+.insta-light { width: 100%; aspect-ratio: 1; background: #f0f4ee; display: flex; flex-direction: column; padding: 32px; position: relative; overflow: hidden; border-radius: 8px; }
+.insta-light::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 80%, rgba(90,143,106,0.08) 0%, transparent 55%); }
+.il-badge { font-family: 'DM Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.2em; color: #5a8f6a; margin-bottom: 16px; position: relative; z-index: 1; }
+.il-num { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 300; color: #5a8f6a; line-height: 1; margin-bottom: 4px; position: relative; z-index: 1; }
+.il-head { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1c211a; line-height: 1.2; margin-bottom: 10px; position: relative; z-index: 1; }
+.il-body { font-family: 'DM Mono', monospace; font-size: 10px; color: #5a6557; line-height: 1.7; position: relative; z-index: 1; flex: 1; }
+.il-logo { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; border-top: 1px solid #d0dace; padding-top: 12px; }
+.il-logo-name { font-family: 'DM Serif Display', serif; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+
+/* LINKEDIN */
+.linkedin { width: 100%; aspect-ratio: 4/1; background: #f7faf6; display: flex; align-items: center; padding: 0 36px; position: relative; overflow: hidden; border-radius: 8px; border: 1px solid #d0dace; }
+.lb-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: #5a8f6a; }
+.lb-left { flex: 1; }
+.lb-logo-name { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1c211a; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.lb-tag { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: #5a6557; }
+.lb-div { width: 1px; height: 50px; background: #d0dace; margin: 0 32px; }
+.lb-stats { display: flex; gap: 24px; }
+.lb-stat-n { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 300; color: #5a8f6a; line-height: 1; margin-bottom: 3px; }
+.lb-stat-l { font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: #5a6557; }
+</style>
+</head>
+<body>
+
+<div class="kit-header">
+  <div class="kit-logo">
+    <span class="logo-dot"></span>
+    <div>
+      <div class="kit-logo-main">SkinDecide</div>
+      <div class="kit-logo-sub">Baby</div>
+    </div>
+  </div>
+  <div class="kit-meta">Brand Identity System · 2025</div>
+</div>
+
+<!-- 01 NAME -->
+<div class="section">
+  <div class="section-label">01 — The Name & Why It's Different</div>
+  <div class="name-hero">
+    <div class="name-badge">Sister brand · SkinDecide family</div>
+    <div class="name-word">SkinDecide <span>Baby</span></div>
+    <div class="name-tagline">Safety-first · Minimalism by default · Not a product recommender</div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="meaning-card">
+      <div class="meaning-word">Baby <span class="meaning-pron">/ˈbeɪbi/</span></div>
+      <div class="meaning-pos">Noun — the audience</div>
+      <div class="meaning-origin">Middle English · babe</div>
+      <div class="meaning-def">A human in the first year of life. Skin that is 20–30% thinner than adult skin, with dramatically higher permeability, a still-developing acid mantle, and a surface-area-to-volume ratio that causes significantly greater systemic absorption of topical ingredients.</div>
+      <div class="meaning-why">"Baby" is added as a suffix — not rebranded. This signals clear family membership while naming the specific, distinct audience. The science changes. The scrutiny doubles. The name reflects both.</div>
+    </div>
+    <div class="meaning-card">
+      <div class="meaning-word">Safety-first <span class="meaning-pron">/ˈseɪfti fɜːst/</span></div>
+      <div class="meaning-pos">Compound adjective — the philosophy</div>
+      <div class="meaning-origin">Product positioning — not an ingredient</div>
+      <div class="meaning-def">A fundamentally different market from adult skincare. Where SkinDecide optimises for efficacy, SkinDecide Baby optimises for risk minimisation. The app's purpose is not to recommend more products — it is to help parents use fewer.</div>
+      <div class="meaning-why">This is the most important brand distinction. Most baby product brands sell more. SkinDecide Baby is the only brand that actively argues: "You probably don't need this." That counter-intuitive honesty is the brand's core differentiator.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:16px;">Why This Is a Different Category</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;margin-bottom:6px;">The problem</div>
+        <div style="font-size:12px;line-height:1.7;color:#5a6557;">Parental anxiety + "hypoallergenic" and "mild" having no legal definition + product overload for something that requires minimal intervention. "100% natural" is not a safety guarantee — it is a marketing claim.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;margin-bottom:6px;">The biology</div>
+        <div style="font-size:12px;line-height:1.7;color:#5a6557;">Baby skin absorbs ingredients more readily into the bloodstream. Fragrance, phenoxyethanol, essential oils, and penetration enhancers carry higher systemic risk. The scoring system applies adult-plus-50% caution thresholds.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;margin-bottom:6px;">The promise</div>
+        <div style="font-size:12px;line-height:1.7;color:#5a6557;">Not a product comparison tool. A safety and minimalism assistant. The app actively tells parents what they do NOT need. Water and a mild cleanser is sufficient for most babies under 12 months.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 COLORS -->
+<div class="section">
+  <div class="section-label">02 — Color System & Meanings</div>
+  <div style="margin-bottom:12px; font-size:12px; color:#5a6557; line-height:1.7; background:#f7faf6; border:1px solid #d0dace; border-radius:8px; padding:16px;">
+    <strong style="color:#1c211a;">Color philosophy:</strong> SkinDecide Baby's palette is softer and more muted than SkinDecide's parchment-and-ember. The sages, soft whites, and warm greens evoke calm, botanical gentleness — not clinical sterility. Every color choice signals: <em>this is for something fragile and precious.</em>
+  </div>
+  <div class="g3">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#1c211a;"></div>
+      <div class="color-body">
+        <div class="color-name">Dark Sage</div>
+        <div class="color-hex">#1C211A · Deep warm-green near-black</div>
+        <div class="color-desc">Ink that is green-toned, not black or warm brown. Distinct from SkinDecide's Ink (#1A1612) — the green undertone signals botanical safety, not editorial authority. All scientific text is set in Dark Sage.</div>
+        <div class="color-fn">Primary text · scientific authority · calm weight</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#5a8f6a;"></div>
+      <div class="color-body">
+        <div class="color-name">Sage</div>
+        <div class="color-hex">#5A8F6A · Medium sage green</div>
+        <div class="color-desc">The brand accent — not a fire red or a warning amber, but a living green. Named after Salvia officinalis: a plant associated with healing, wisdom, and protection. Calmer than SkinDecide's Ember. The brand dot is Sage.</div>
+        <div class="color-fn">Brand accent · brand dot · verified · safe</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#f0f4ee;border:1px solid #d0dace;"></div>
+      <div class="color-body">
+        <div class="color-name">Linen</div>
+        <div class="color-hex">#F0F4EE · Soft sage-tinged white</div>
+        <div class="color-desc">Warmer and greener than SkinDecide's Parchment. The colour of organic cotton muslin — the material of baby blankets. Softer, more yielding than the parent brand. The background is gentler because the subject is.</div>
+        <div class="color-fn">Background · softness · organic warmth</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#3d7a52;"></div>
+      <div class="color-body">
+        <div class="color-name">Evidence</div>
+        <div class="color-hex">#3D7A52 · Deep forest green</div>
+        <div class="color-desc">Used exclusively when something is evidence-backed and safe for baby use. A deeper, more serious green than the Sage accent — evidence claims deserve weight. Named for its function: this is green for "this has science behind it."</div>
+        <div class="color-fn">Evidence-backed · clinical · verified for babies</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#8a7340;"></div>
+      <div class="color-body">
+        <div class="color-name">Caution</div>
+        <div class="color-hex">#8A7340 · Muted amber-ochre</div>
+        <div class="color-desc">The same functional role as SkinDecide's Amber — but softer and less saturated. In baby context, caution is never alarming — it is informative. "Be aware" not "be afraid." A parent sees amber and pauses. They do not panic.</div>
+        <div class="color-fn">Caution · awareness · conditional claims</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#5a6557;"></div>
+      <div class="color-body">
+        <div class="color-name">Mossy</div>
+        <div class="color-hex">#5A6557 · Warm grey-green</div>
+        <div class="color-desc">Supporting text, labels, metadata. Green-toned grey — warmer than neutral grey, botanical without being botanical. Every piece of context information: dates, help text, secondary notes.</div>
+        <div class="color-fn">Secondary text · support · context · calm</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 ELEMENTS -->
+<div class="section">
+  <div class="section-label">03 — Brand Elements & Meanings</div>
+  <div class="g3">
+    <div class="element-card">
+      <div style="font-size:22px;margin-bottom:8px;color:#5a8f6a;">●</div>
+      <div class="element-name">The Sage Dot</div>
+      <div class="element-desc">The same structural element as SkinDecide and HairDecide — but in Sage green. Family mark. At 10px (slightly larger than parent brand) — because the baby context requires more visibility and gentleness.</div>
+      <div class="element-meaning">Family unity · gentleness · botanical safety</div>
+    </div>
+    <div class="element-card">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:#5a8f6a;margin-bottom:8px;font-family:'DM Mono',monospace;">Baby</div>
+      <div class="element-name">The Sub-Badge</div>
+      <div class="element-desc">The word "BABY" appears as a monospace sub-label beneath "SkinDecide" in all contexts. Never abbreviated. Never stylised. Always in Sage monospace — marking the category distinction clearly and calmly.</div>
+      <div class="element-meaning">Category clarity · sub-brand position · calm labelling</div>
+    </div>
+    <div class="element-card">
+      <div style="font-size:22px;margin-bottom:8px;">↓</div>
+      <div class="element-name">The Downward Arrow</div>
+      <div class="element-desc">Used in the Minimalism Indicator — pointing downward to signal: less is better. Unique to SkinDecide Baby. No other brand in the SkinDecide family uses this symbol. It is the anti-consumption icon.</div>
+      <div class="element-meaning">Less · minimalism · safety through simplicity</div>
+    </div>
+    <div class="element-card">
+      <div style="font-size:22px;margin-bottom:8px;opacity:0.7;">✗</div>
+      <div class="element-name">The "Not Needed" Mark</div>
+      <div class="element-desc">SkinDecide Baby is the only brand in the family that regularly tells users a product is NOT needed. The ✗ in this context does not mean danger — it means "this adds unnecessary risk without adding benefit." A different kind of honesty.</div>
+      <div class="element-meaning">Subtraction · minimalism · risk reduction</div>
+    </div>
+    <div class="element-card">
+      <div style="font-size:14px;font-family:'DM Mono',monospace;color:#5a6557;margin-bottom:8px;">pH 5.0–5.5</div>
+      <div class="element-name">The pH Range</div>
+      <div class="element-desc">Baby skin's acid mantle develops over the first weeks of life. The optimal pH for baby skincare products is 5.0–5.5 — more acidic than many "gentle" products. This number appears in product guidance to ground abstract claims in measurable science.</div>
+      <div class="element-meaning">Measurable truth · acid mantle science · infant skin biology</div>
+    </div>
+    <div class="element-card">
+      <div style="font-size:18px;margin-bottom:8px;color:#d0dace;">⬡</div>
+      <div class="element-name">The Hexagon</div>
+      <div class="element-desc">Inherited from the SkinDecide parent brand — the molecular structure symbol. In baby context used rarely and only for ingredient analysis — it signals "this is science" without visual alarm. Shown outlined and muted.</div>
+      <div class="element-meaning">Molecular analysis · inherited science mark · family link</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 TYPOGRAPHY -->
+<div class="section">
+  <div class="section-label">04 — Typography & Meaning</div>
+  <div class="g2">
+    <div class="card">
+      <div style="font-family:'Fraunces',serif;font-size:34px;font-weight:300;letter-spacing:-0.5px;line-height:1.15;margin-bottom:12px;">Gentle by design.<br><em style="color:#5a8f6a;">Not by marketing.</em></div>
+      <div style="font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:6px;">Fraunces — Display</div>
+      <div style="font-size:11px;color:#5a6557;line-height:1.7;">Same typeface as SkinDecide — family consistency. But: the scale is smaller (40px not 40px), the leading is tighter. Baby content does not need to shout. The sage italic replaces ember red — warmth without urgency. Fraunces's optical "wonkiness" is intentional: it is warm and imperfect, like the subject matter.</div>
+    </div>
+    <div class="card">
+      <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;color:#5a6557;margin-bottom:12px;">Parfum — hoog risico<br>Ceramide NP — gunstig<br>Zinkoxide 10–40%<br>EU Reg. 1223/2009</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:6px;">DM Mono — Body, Data & Claims</div>
+      <div style="font-size:11px;color:#5a6557;line-height:1.7;">All ingredient names, regulatory references, pH values, risk levels. In SkinDecide Baby, DM Mono is used for Dutch-language claims analysis text — it feels like an official document, which is appropriate for regulatory content. The monospace signals: this is verifiable.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 TAGLINES -->
+<div class="section">
+  <div class="section-label">05 — Tagline System</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#8a9480;margin-bottom:8px;">Primary</div><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:300;letter-spacing:-0.3px;line-height:1.2;">Gentle by design.<br><em style="color:#5a8f6a;">Not by marketing.</em></div></div>
+        <div style="font-size:12px;color:#5a6557;line-height:1.8;border-left:2px solid #d0dace;padding-left:20px;">"Gentle by design" claims intentional minimalism — product formulation and routine design choices that reduce risk. "Not by marketing" is the challenge: most baby products claim gentleness without defining it. This tagline separates the brand from that category entirely.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#8a9480;margin-bottom:8px;">Mission</div><div style="font-family:'DM Mono',monospace;font-size:12px;color:#5a6557;line-height:1.6;">Niet: productvergelijker.<br>Wel: veiligheids-assistent<br>voor ouders.</div></div>
+        <div style="font-size:12px;color:#5a6557;line-height:1.8;border-left:2px solid #d0dace;padding-left:20px;">Dutch-language mission statement. Immediately distinguishes by saying what the brand is NOT. Most apps are product comparers — SkinDecide Baby is not. The word "veiligheids-assistent" (safety assistant) positions it as a tool for parental peace of mind, not a shopping guide.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#8a9480;margin-bottom:8px;">Minimalism</div><div style="font-family:'Fraunces',serif;font-size:18px;font-weight:300;font-style:italic;">Water en een milde cleanser is genoeg.</div></div>
+        <div style="font-size:12px;color:#5a6557;line-height:1.8;border-left:2px solid #d0dace;padding-left:20px;">The most radical statement in the brand system. Actively counter-marketing. Used in the Minimalism Indicator and the About page. It tells the truth that the baby product industry has no incentive to tell: for most healthy babies under 12 months, plain water and one gentle wash product is genuinely sufficient.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 CANVA ASSETS -->
+<div class="section">
+  <div class="section-label">06 — Canva-Ready Assets</div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="asset-card">
+      <div class="asset-label">Instagram Post — Dark · 1080×1080px</div>
+      <div style="margin-bottom:12px;"><div class="insta-dark">
+        <div class="id-top">
+          <div class="id-logo"><div class="id-dot"></div><div class="id-name">SkinDecide</div></div>
+          <div class="id-badge">Baby</div>
+        </div>
+        <div class="id-head">Gentle by design.<br><em>Not by marketing.</em></div>
+        <div class="id-sub">Evidence-based baby skincare · Safety-first</div>
+      </div></div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #1C211A + radial sage gradient top-right</div>
+        <div class="spec-line"><strong>Logo:</strong> dot 7px #5A8F6A + DM Serif Display 15px + "BABY" badge DM Mono 8px</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 64px Light #F0F4EE · italic: #8FCC9A</div>
+        <div class="spec-line"><strong>Subtext:</strong> DM Mono 10px #F0F4EE 30% opacity · uppercase</div>
+        <div class="spec-line"><strong>Margins:</strong> 60px all sides</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-label">Instagram Post — Light (Stat) · 1080×1080px</div>
+      <div style="margin-bottom:12px;"><div class="insta-light">
+        <div class="il-badge">Did you know?</div>
+        <div class="il-num">0</div>
+        <div class="il-head">Products needed for<br>healthy newborn skin.</div>
+        <div class="il-body">Plain water is sufficient<br>for the first month.<br>Less is more. Verified.</div>
+        <div class="il-logo">
+          <div class="il-logo-name"><span style="width:6px;height:6px;background:#5a8f6a;border-radius:50%;display:inline-block;"></span> SkinDecide <span style="font-size:9px;color:#5a8f6a;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;">Baby</span></div>
+          <span style="font-size:9px;color:#8a9480;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;">Safety-first</span>
+        </div>
+      </div></div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #F0F4EE + subtle sage radial</div>
+        <div class="spec-line"><strong>Big number:</strong> Fraunces 120px Light #5A8F6A</div>
+        <div class="spec-line"><strong>Sub-headline:</strong> DM Serif Display 22px #1C211A</div>
+        <div class="spec-line"><strong>Body:</strong> DM Mono 12px #5A6557 · line-height 1.7</div>
+        <div class="spec-line"><strong>Bottom bar:</strong> 1px #D0DACE + logo + DM Mono badge</div>
+      </div>
+    </div>
+  </div>
+  <div class="asset-card" style="margin-bottom:16px;">
+    <div class="asset-label">LinkedIn Cover · 1584×396px</div>
+    <div style="margin-bottom:12px;"><div class="linkedin">
+      <div class="lb-bar"></div>
+      <div class="lb-left">
+        <div class="lb-logo-name"><span style="width:8px;height:8px;background:#5a8f6a;border-radius:50%;display:inline-block;"></span>SkinDecide <span style="font-family:'DM Mono',monospace;font-size:11px;color:#5a8f6a;letter-spacing:0.1em;">Baby</span></div>
+        <div class="lb-tag">Safety-first · Evidence-based · Minimalism by default</div>
+      </div>
+      <div class="lb-div"></div>
+      <div class="lb-stats">
+        <div><div class="lb-stat-n">0</div><div class="lb-stat-l">Products needed</div></div>
+        <div><div class="lb-stat-n">↓</div><div class="lb-stat-l">Less = safer</div></div>
+        <div><div class="lb-stat-n">✓</div><div class="lb-stat-l">EU-verified claims</div></div>
+      </div>
+    </div></div>
+    <div class="spec-block">
+      <div class="spec-line"><strong>Background:</strong> #F7FAF6 · Left bar 5px solid #5A8F6A</div>
+      <div class="spec-line"><strong>Logo:</strong> dot 8px + DM Serif Display 20px + "Baby" DM Mono 11px #5A8F6A</div>
+      <div class="spec-line"><strong>Stats:</strong> Fraunces 28px Light #5A8F6A · labels DM Mono 8px</div>
+    </div>
+  </div>
+  <div class="asset-card">
+    <div class="asset-label">App Icon — All Sizes</div>
+    <div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;padding:16px 0;margin-bottom:12px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:80px;height:80px;border-radius:20px;background:#1c211a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(90,143,106,0.45) 0%,transparent 55%);"></div>
+          <div style="font-family:'DM Serif Display',serif;color:#f0f4ee;font-size:30px;position:relative;z-index:1;line-height:1;">Sk</div>
+          <div style="position:absolute;width:10px;height:10px;background:#5a8f6a;border-radius:50%;top:10px;right:11px;z-index:2;"></div>
+        </div>
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.07em;color:#8a9480;">1024px</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:56px;height:56px;border-radius:14px;background:#1c211a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(90,143,106,0.45) 0%,transparent 55%);"></div>
+          <div style="font-family:'DM Serif Display',serif;color:#f0f4ee;font-size:21px;position:relative;z-index:1;line-height:1;">Sk</div>
+          <div style="position:absolute;width:8px;height:8px;background:#5a8f6a;border-radius:50%;top:7px;right:7px;z-index:2;"></div>
+        </div>
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.07em;color:#8a9480;">512px</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:#1c211a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(90,143,106,0.45) 0%,transparent 55%);"></div>
+          <div style="font-family:'DM Serif Display',serif;color:#f0f4ee;font-size:15px;position:relative;z-index:1;line-height:1;">Sk</div>
+          <div style="position:absolute;width:6px;height:6px;background:#5a8f6a;border-radius:50%;top:5px;right:5px;z-index:2;"></div>
+        </div>
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.07em;color:#8a9480;">180px</div>
+      </div>
+    </div>
+    <div class="spec-block">
+      <div class="spec-line"><strong>Background:</strong> #1C211A + radial sage gradient top-right</div>
+      <div class="spec-line"><strong>Letters "Sk":</strong> DM Serif Display · #F0F4EE · same initials as parent brand</div>
+      <div class="spec-line"><strong>Sage dot:</strong> #5A8F6A · top-right · ~12% of icon size</div>
+      <div class="spec-line"><strong>Corner radius:</strong> 23% of icon size (Apple guideline)</div>
+      <div class="spec-line"><strong>Note:</strong> Same initials "Sk" as parent — family mark. Dot colour differentiates.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 07 FONTS -->
+<div class="section">
+  <div class="section-label">07 — Font Sources (All Free · All in Canva)</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+      <div><div style="font-family:'Fraunces',serif;font-size:20px;margin-bottom:6px;">Fraunces</div><div style="font-size:11px;color:#5a6557;line-height:1.7;margin-bottom:6px;">Headlines. Light (300) + Light Italic. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;">fonts.google.com → "Fraunces"</div></div>
+      <div><div style="font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:6px;">DM Serif Display</div><div style="font-size:11px;color:#5a6557;line-height:1.7;margin-bottom:6px;">Logo, card titles. Regular only. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;">fonts.google.com → "DM Serif Display"</div></div>
+      <div><div style="font-family:'DM Mono',monospace;font-size:17px;margin-bottom:6px;">DM Mono</div><div style="font-size:11px;color:#5a6557;line-height:1.7;margin-bottom:6px;">Body, data, claims, regulatory text. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5a8f6a;">fonts.google.com → "DM Mono"</div></div>
+    </div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #d0dace;font-size:11px;color:#5a6557;"><strong style="color:#1c211a;">In Canva:</strong> All three fonts are pre-loaded in Canva's font library. No download needed. Search by exact name in the font picker.</div>
+  </div>
+</div>
+
+</body>
+</html>

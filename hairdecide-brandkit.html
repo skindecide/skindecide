@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HairDecide — Brand Identity System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f5f0e0; font-family: 'DM Mono', monospace; font-size: 13px; color: #1c1608; padding: 48px 40px 80px; max-width: 980px; margin: 0 auto; }
+.kit-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; padding-bottom: 20px; border-bottom: 1px solid #e0d4a8; }
+.kit-logo { display: flex; align-items: center; gap: 10px; font-family: 'DM Serif Display', serif; font-size: 22px; }
+.logo-dot { width: 10px; height: 10px; background: #a07820; border-radius: 50%; }
+.kit-meta { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #7a6a40; }
+.section { margin-bottom: 64px; }
+.section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #7a6a40; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e0d4a8; }
+.card { background: #faf7ee; border: 1px solid #e0d4a8; border-radius: 10px; padding: 28px; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* NAME HERO */
+.name-hero { background: #1c1608; border-radius: 12px; padding: 48px; margin-bottom: 24px; position: relative; overflow: hidden; }
+.name-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 15%, rgba(201,162,39,0.35) 0%, transparent 55%), radial-gradient(ellipse at 15% 85%, rgba(184,96,32,0.2) 0%, transparent 50%); }
+.name-word { font-family: 'Fraunces', serif; font-size: 64px; font-weight: 300; letter-spacing: -2px; line-height: 1; color: #f5f0e0; position: relative; z-index: 1; margin-bottom: 8px; }
+.name-word span { color: #c9a227; font-style: italic; }
+.name-tagline { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(245,240,224,0.35); position: relative; z-index: 1; }
+
+/* MEANING CARDS */
+.meaning-card { background: #faf7ee; border: 1px solid #e0d4a8; border-radius: 10px; padding: 24px; }
+.meaning-word { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 4px; display: flex; align-items: baseline; gap: 8px; }
+.meaning-pron { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6a40; font-weight: 300; }
+.meaning-pos { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #a07820; margin-bottom: 8px; }
+.meaning-origin { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; background: #f0e4b8; border: 1px solid #e0d4a8; border-radius: 4px; padding: 3px 8px; color: #7a6a40; margin-bottom: 8px; }
+.meaning-def { font-size: 12px; color: #1c1608; line-height: 1.7; margin-bottom: 10px; }
+.meaning-why { font-size: 11px; color: #7a6a40; line-height: 1.6; padding-top: 10px; border-top: 1px solid #e0d4a8; }
+
+/* COLOR CARDS */
+.color-card { border-radius: 10px; overflow: hidden; border: 1px solid #e0d4a8; }
+.color-swatch { height: 100px; }
+.color-body { padding: 16px; background: #faf7ee; }
+.color-name { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 2px; }
+.color-hex { font-size: 10px; color: #7a6a40; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
+.color-desc { font-size: 11px; color: #7a6a40; line-height: 1.6; }
+.color-fn { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #a07820; margin-top: 8px; }
+
+/* ELEMENT CARDS */
+.element-card { background: #faf7ee; border: 1px solid #e0d4a8; border-radius: 8px; padding: 20px; }
+.element-symbol { font-size: 24px; margin-bottom: 8px; }
+.element-name { font-family: 'DM Serif Display', serif; font-size: 15px; margin-bottom: 6px; }
+.element-desc { font-size: 11px; color: #7a6a40; line-height: 1.6; }
+.element-meaning { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #a07820; padding-top: 8px; border-top: 1px solid #e0d4a8; margin-top: 8px; }
+
+/* SOCIAL ASSETS */
+.asset-card { background: #faf7ee; border: 1px solid #e0d4a8; border-radius: 10px; padding: 20px; }
+.asset-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #7a6a40; margin-bottom: 12px; }
+.spec-block { background: #1c1608; border-radius: 8px; padding: 16px 20px; margin-top: 12px; }
+.spec-line { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(245,240,224,0.5); line-height: 1.9; }
+.spec-line strong { color: #c9a227; }
+
+/* INSTAGRAM DARK */
+.insta-dark { width: 100%; aspect-ratio: 1; background: #1c1608; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; position: relative; overflow: hidden; border-radius: 8px; }
+.insta-dark::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 10%, rgba(201,162,39,0.4) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(184,96,32,0.25) 0%, transparent 50%); }
+.id-logo { position: absolute; top: 24px; left: 24px; display: flex; align-items: center; gap: 6px; z-index: 1; }
+.id-dot { width: 7px; height: 7px; background: #c9a227; border-radius: 50%; }
+.id-name { font-family: 'DM Serif Display', serif; font-size: 15px; color: #f5f0e0; }
+.id-head { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; color: #f5f0e0; line-height: 1.05; margin-bottom: 10px; position: relative; z-index: 1; }
+.id-head em { font-style: italic; color: #c9a227; }
+.id-sub { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(245,240,224,0.35); position: relative; z-index: 1; }
+
+/* INSTAGRAM LIGHT */
+.insta-light { width: 100%; aspect-ratio: 1; background: #f5f0e0; display: flex; flex-direction: column; justify-content: center; padding: 32px; position: relative; overflow: hidden; border-radius: 8px; }
+.insta-light::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 80%, rgba(201,162,39,0.12) 0%, transparent 55%); }
+.il-step { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #a07820; margin-bottom: 12px; position: relative; z-index: 1; }
+.il-head { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 300; letter-spacing: -1px; line-height: 1.05; color: #1c1608; margin-bottom: 12px; position: relative; z-index: 1; }
+.il-head em { font-style: italic; color: #a07820; }
+.il-body { font-family: 'DM Mono', monospace; font-size: 10px; color: #7a6a40; line-height: 1.7; position: relative; z-index: 1; }
+.il-logo { position: absolute; bottom: 24px; left: 32px; right: 32px; display: flex; align-items: center; justify-content: space-between; z-index: 1; }
+.il-logo-name { font-family: 'DM Serif Display', serif; font-size: 14px; color: #1c1608; display: flex; align-items: center; gap: 6px; }
+
+/* LINKEDIN */
+.linkedin { width: 100%; aspect-ratio: 4/1; background: #faf7ee; display: flex; align-items: center; padding: 0 36px; position: relative; overflow: hidden; border-radius: 8px; border: 1px solid #e0d4a8; }
+.lb-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #c9a227, #b86020); }
+.lb-left { flex: 1; }
+.lb-logo-name { font-family: 'DM Serif Display', serif; font-size: 20px; color: #1c1608; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.lb-tag { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: #7a6a40; }
+.lb-div { width: 1px; height: 50px; background: #e0d4a8; margin: 0 32px; }
+.lb-stats { display: flex; gap: 28px; }
+.lb-stat-n { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 300; color: #a07820; line-height: 1; margin-bottom: 3px; }
+.lb-stat-l { font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: #7a6a40; }
+
+/* APP ICON */
+.icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.icon-box { background: #1c1608; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.icon-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(201,162,39,0.5) 0%, transparent 55%); }
+.icon-letter { font-family: 'DM Serif Display', serif; color: #f5f0e0; position: relative; z-index: 1; line-height: 1; }
+.icon-dot { position: absolute; background: #c9a227; border-radius: 50%; z-index: 2; }
+.icon-size { font-size: 9px; text-transform: uppercase; letter-spacing: 0.07em; color: #9b9060; }
+</style>
+</head>
+<body>
+
+<div class="kit-header">
+  <div class="kit-logo">
+    <span class="logo-dot"></span>
+    HairDecide
+  </div>
+  <div class="kit-meta">Brand Identity System · 2025</div>
+</div>
+
+<!-- 01 NAME -->
+<div class="section">
+  <div class="section-label">01 — The Name & Positioning</div>
+  <div class="name-hero">
+    <div class="name-word">Hair<span>Decide</span></div>
+    <div class="name-tagline">Scalp health first · Evidence-based · No marketing noise</div>
+  </div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="meaning-card">
+      <div class="meaning-word">Hair <span class="meaning-pron">/hɛr/</span></div>
+      <div class="meaning-pos">Noun — the subject</div>
+      <div class="meaning-origin">Proto-Germanic · hærą</div>
+      <div class="meaning-def">The keratinized filament growing from follicles in the dermis. Hair is dead tissue from the shaft upward — only the follicle is alive. This distinction matters: products act on dead cells, not living biology.</div>
+      <div class="meaning-why">HairDecide names its subject clinically — not aspirationally. "Locks", "mane", "strands" all romanticize. "Hair" is biological and precise. It sets the tone for everything that follows.</div>
+    </div>
+    <div class="meaning-card">
+      <div class="meaning-word">Decide <span class="meaning-pron">/dɪˈsaɪd/</span></div>
+      <div class="meaning-pos">Verb — the action</div>
+      <div class="meaning-origin">Latin · decidere — "to cut off"</div>
+      <div class="meaning-def">From Latin de- (off) + caedere (to cut). Literally: to cut away uncertainty. In hair science context: to cut through marketing claims and cut off overconsumption. The verb is active, rational, definitive.</div>
+      <div class="meaning-why">The same root as SkinDecide — deliberate brand family consistency. "Decide" positions users as rational agents making informed choices, not passive beauty consumers.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-family:'DM Serif Display',serif; font-size:17px; margin-bottom:16px;">Positioning Statement</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;margin-bottom:6px;">The shift</div>
+        <div style="font-size:12px;line-height:1.7;color:#7a6a40;">From "beautiful hair" → to "healthy scalp". The scalp is the foundation — it is skin, with follicles, sebaceous glands, and a microbiome. Every hair problem starts there.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;margin-bottom:6px;">The problem</div>
+        <div style="font-size:12px;line-height:1.7;color:#7a6a40;">"Repair", "bond building", "keratin restoration" — these terms are used without definition. Cosmetic effect vs. structural interaction are conflated. Overconsumption follows.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;margin-bottom:6px;">The promise</div>
+        <div style="font-size:12px;line-height:1.7;color:#7a6a40;">The dermatologist for your scalp in your pocket. Minimum effective routine. Maximum ingredient transparency. Marketing vs. molecule — decoded.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 COLORS -->
+<div class="section">
+  <div class="section-label">02 — Color System & Meanings</div>
+  <div class="g3" style="margin-bottom:16px;">
+    <div class="color-card">
+      <div class="color-swatch" style="background:linear-gradient(135deg,#1c1608,#2c2010);"></div>
+      <div class="color-body">
+        <div class="color-name">Ebony</div>
+        <div class="color-hex">#1C1608 · Warm near-black</div>
+        <div class="color-desc">The colour of the hair cortex itself — the dense, melanin-rich protein core. Warm-toned to avoid digital coldness. Every piece of scientific information is set in Ebony.</div>
+        <div class="color-fn">Authority · weight · scientific text</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:linear-gradient(135deg,#c9a227,#a07820);"></div>
+      <div class="color-body">
+        <div class="color-name">Gold</div>
+        <div class="color-hex">#C9A227 · Warm gold</div>
+        <div class="color-desc">The colour of melanin in its eumelanin form — responsible for blonde and brown hair tones. In nature, gold signals value and rarity. In HairDecide, it signals the brand itself and evidence-backed ingredients.</div>
+        <div class="color-fn">Brand accent · evidence · decision point</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:linear-gradient(135deg,#b86020,#904810);"></div>
+      <div class="color-body">
+        <div class="color-name">Copper</div>
+        <div class="color-hex">#B86020 · Warm copper</div>
+        <div class="color-desc">The colour of pheomelanin — the pigment responsible for red and auburn hair. Copper is warmer and more visible than gold at smaller sizes. Used for marketing/concern indicators that need attention but not alarm.</div>
+        <div class="color-fn">Warning · marketing claims · caution</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#f5f0e0;border:1px solid #e0d4a8;"></div>
+      <div class="color-body">
+        <div class="color-name">Wheat</div>
+        <div class="color-hex">#F5F0E0 · Warm cream</div>
+        <div class="color-desc">The colour of unprocessed, natural hair in raking light. Warmer and more saturated than SkinDecide's Parchment — distinguishing the family member while maintaining the editorial tone.</div>
+        <div class="color-fn">Background · breathing space · warmth</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#4a7a3a;"></div>
+      <div class="color-body">
+        <div class="color-name">Forest</div>
+        <div class="color-hex">#4A7A3A · Deep green</div>
+        <div class="color-desc">The colour of rosemary — one of the few botanicals with emerging hair science evidence. Used exclusively for verified, evidence-backed claims. Warmer and deeper than SkinDecide's green to maintain differentiation.</div>
+        <div class="color-fn">Verified · evidence-backed · proceed</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#7a6a40;"></div>
+      <div class="color-body">
+        <div class="color-name">Umber</div>
+        <div class="color-hex">#7A6A40 · Warm grey-brown</div>
+        <div class="color-desc">The colour of dried hair strand cross-sections in microscopy — the transitional zone between cortex and cuticle. All secondary text, metadata, and supporting context is set in Umber.</div>
+        <div class="color-fn">Secondary text · context · metadata</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 ELEMENTS -->
+<div class="section">
+  <div class="section-label">03 — Brand Elements & Meanings</div>
+  <div class="g3">
+    <div class="element-card">
+      <div class="element-symbol" style="color:#c9a227;">●</div>
+      <div class="element-name">The Gold Dot</div>
+      <div class="element-desc">The same dot as SkinDecide — but in gold. Brand family consistency through structure, differentiation through colour. At the logo position: top-left, not top-right. Hair grows from roots — so does this brand.</div>
+      <div class="element-meaning">Precision · the follicle · family mark</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="font-family:'DM Serif Display',serif;font-size:26px;">Hd</div>
+      <div class="element-name">The Icon Initials</div>
+      <div class="element-desc">"Hd" — not "HD". The lowercase 'd' signals the verb "decide" is the active part. Visually it reads as a scientific abbreviation — like element symbols or taxonomic codes. Legible at any size.</div>
+      <div class="element-meaning">Identity · scientific shorthand · active verb</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="color:#c9a227;font-family:'Fraunces',serif;font-style:italic;font-size:26px;">em</div>
+      <div class="element-name">Gold Italic</div>
+      <div class="element-desc">The key word in every headline is italicised and gold. Unlike SkinDecide's ember red, gold italic is warmer and more aspirational — hair is both science and desire. The tension is intentional.</div>
+      <div class="element-meaning">The word that carries truth — in gold</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol">🧬</div>
+      <div class="element-name">The Disulfide Bond</div>
+      <div class="element-desc">The most important bond in hair science: the disulfide (S–S) bond between cysteine residues in the cortex. When these break (bleach, heat, chemical treatment) hair loses structural integrity. The brand decodes whether products actually repair this — or just coat it.</div>
+      <div class="element-meaning">Structural truth · the molecule behind the claim</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="font-family:'DM Mono',monospace;font-size:14px;color:#7a6a40;">pH 4.5–5.5</div>
+      <div class="element-name">The Monospace Fact</div>
+      <div class="element-desc">All data, percentages, and INCI names are set in DM Mono. The pH range 4.5–5.5 is the optimal range for the cuticle to remain closed and the scalp's acid mantle intact. Numbers in monospace = data you can verify.</div>
+      <div class="element-meaning">Objectivity · the number behind the claim</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="display:flex;gap:4px;align-items:center;"><span style="background:#c9a227;width:3px;height:32px;border-radius:2px;"></span><span style="background:#c9a227;opacity:0.6;width:3px;height:24px;border-radius:2px;"></span><span style="background:#c9a227;opacity:0.3;width:3px;height:16px;border-radius:2px;"></span></div>
+      <div class="element-name">The Gradient Bar</div>
+      <div class="element-desc">Used in data visualisations: ingredient concentration bars, porosity scale, damage level. Gold at maximum, fading to near-invisible. Concentration order in INCI mirrors this — highest ingredient first.</div>
+      <div class="element-meaning">Concentration · scale · evidence gradient</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 TYPOGRAPHY -->
+<div class="section">
+  <div class="section-label">04 — Typography & Meaning</div>
+  <div class="g2">
+    <div class="card">
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:300;letter-spacing:-0.5px;line-height:1.1;margin-bottom:12px;">Scalp first.<br><em style="color:#a07820;">Hair follows.</em></div>
+      <div style="font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:6px;">Fraunces — Display</div>
+      <div style="font-size:11px;color:#7a6a40;line-height:1.7;">Every headline. "Wonky" optical-size serif — at display sizes its quirks emerge, like a strand of hair up close revealing its complex structure. The italic in gold creates the contrast between scientific base and warm aspiration. All section titles use Fraunces Light (300) with a negative italic in Gold.</div>
+    </div>
+    <div class="card">
+      <div style="font-family:'DM Mono',monospace;font-size:14px;line-height:1.9;color:#7a6a40;margin-bottom:12px;">pH 4.5–5.5<br>Ketoconazole 2%<br>Hydrolysed Keratin<br>Bis-Aminopropyl Diglycol Dimaleate</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:6px;">DM Mono — Body & Data</div>
+      <div style="font-size:11px;color:#7a6a40;line-height:1.7;">Every ingredient name, percentage, INCI term, and clinical note. Monospace signals: this is data. Equal character width means INCI lists align perfectly. The typeface of lab reports, clinical protocols, and trichological documentation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 TAGLINES -->
+<div class="section">
+  <div class="section-label">05 — Tagline System</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#9b9060;margin-bottom:8px;">Primary</div><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:300;letter-spacing:-0.3px;line-height:1.2;">Scalp first.<br><em style="color:#a07820;">Hair follows.</em></div></div>
+        <div style="font-size:12px;color:#7a6a40;line-height:1.8;border-left:2px solid #e0d4a8;padding-left:20px;">The core insight of the brand in three words. "Scalp first" repositions the entire category — from aesthetics to dermatology. "Hair follows" is the logical consequence: healthy scalp → healthy hair. The period after "Scalp first" is a full stop of confidence.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#9b9060;margin-bottom:8px;">Claims</div><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:300;font-style:italic;letter-spacing:-0.3px;">Marketing vs. molecule.</div></div>
+        <div style="font-size:12px;color:#7a6a40;line-height:1.8;border-left:2px solid #e0d4a8;padding-left:20px;">The central tension of the brand. "Bond repair" — is it a cosmetic film or a molecular interaction? "Marketing vs. molecule" is the question HairDecide answers. Used on the Claims section and in any marketing about the claims decoder feature.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+        <div><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#9b9060;margin-bottom:8px;">Positioning</div><div style="font-family:'DM Mono',monospace;font-size:12px;color:#7a6a40;line-height:1.6;">De dermatoloog<br>voor je hoofdhuid<br>in je broekzak.</div></div>
+        <div style="font-size:12px;color:#7a6a40;line-height:1.8;border-left:2px solid #e0d4a8;padding-left:20px;">Dutch-language positioning statement for NL/BE markets. "Dermatoloog" positions the brand as clinical, not cosmetic. "Voor je hoofdhuid" reinforces scalp-first philosophy. "In je broekzak" grounds it: accessible, always available, democratic expertise.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 CANVA ASSETS -->
+<div class="section">
+  <div class="section-label">06 — Canva-Ready Assets</div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="asset-card">
+      <div class="asset-label">Instagram Post — Dark · 1080×1080px</div>
+      <div style="margin-bottom:12px;"><div class="insta-dark">
+        <div class="id-logo"><div class="id-dot"></div><div class="id-name">HairDecide</div></div>
+        <div class="id-head">Scalp first.<br><em>Hair follows.</em></div>
+        <div class="id-sub">Evidence-based · hairdecide.com</div>
+      </div></div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #1C1608 + radial gold gradient (top-right) + copper (bottom-left)</div>
+        <div class="spec-line"><strong>Logo:</strong> dot 7px #C9A227 + DM Serif Display 18px #F5F0E0</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 70px Light #F5F0E0 · italic: #C9A227</div>
+        <div class="spec-line"><strong>Subtext:</strong> DM Mono 12px #F5F0E0 35% opacity · uppercase</div>
+        <div class="spec-line"><strong>Margins:</strong> 60px all sides</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-label">Instagram Post — Light · 1080×1080px</div>
+      <div style="margin-bottom:12px;"><div class="insta-light">
+        <div class="il-step">Ingredient decoded</div>
+        <div class="il-head">Ketoconazole.<br><em>Not just shampoo.</em></div>
+        <div class="il-body">Antifungal · proven for dandruff<br>Leave on 3–5 min for efficacy</div>
+        <div class="il-logo">
+          <div class="il-logo-name"><span style="width:6px;height:6px;background:#a07820;border-radius:50%;display:inline-block;"></span>HairDecide</div>
+          <span style="font-size:9px;color:#9b9060;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;">Scalp-first</span>
+        </div>
+      </div></div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #F5F0E0 + subtle gold radial (bottom-right)</div>
+        <div class="spec-line"><strong>Step label:</strong> DM Mono 11px #A07820 uppercase · letter-spacing 0.2em</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 70px Light #1C1608 · italic: #A07820</div>
+        <div class="spec-line"><strong>Body:</strong> DM Mono 13px #7A6A40 · line-height 1.8</div>
+        <div class="spec-line"><strong>Logo bottom:</strong> dot 6px + DM Serif Display 16px</div>
+      </div>
+    </div>
+  </div>
+  <div class="asset-card" style="margin-bottom:16px;">
+    <div class="asset-label">LinkedIn Cover · 1584×396px</div>
+    <div style="margin-bottom:12px;"><div class="linkedin">
+      <div class="lb-bar"></div>
+      <div class="lb-left">
+        <div class="lb-logo-name"><span style="width:8px;height:8px;background:#c9a227;border-radius:50%;display:inline-block;"></span>HairDecide</div>
+        <div class="lb-tag">Scalp health · Evidence-based hair decisions</div>
+      </div>
+      <div class="lb-div"></div>
+      <div class="lb-stats">
+        <div><div class="lb-stat-n">0</div><div class="lb-stat-l">Marketing claims</div></div>
+        <div><div class="lb-stat-n">pH 5</div><div class="lb-stat-l">Optimal scalp</div></div>
+        <div><div class="lb-stat-n">✓</div><div class="lb-stat-l">Molecule verified</div></div>
+      </div>
+    </div></div>
+    <div class="spec-block">
+      <div class="spec-line"><strong>Background:</strong> #FAF7EE · Left bar 5px: linear-gradient #C9A227 → #B86020</div>
+      <div class="spec-line"><strong>Logo:</strong> Circle 8px #C9A227 + DM Serif Display 22px #1C1608</div>
+      <div class="spec-line"><strong>Tagline:</strong> DM Mono 10px #7A6A40 · uppercase · letter-spacing 0.14em</div>
+      <div class="spec-line"><strong>Stats numbers:</strong> Fraunces 30px Light #A07820 · labels DM Mono 8px #7A6A40</div>
+    </div>
+  </div>
+  <div class="asset-card">
+    <div class="asset-label">App Icon — All Sizes</div>
+    <div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;padding:16px 0;margin-bottom:12px;">
+      <div class="icon-wrap"><div class="icon-box" style="width:80px;height:80px;border-radius:20px;"><div class="icon-letter" style="font-size:32px;">Hd</div><div class="icon-dot" style="width:10px;height:10px;top:10px;right:11px;"></div></div><div class="icon-size">1024px</div></div>
+      <div class="icon-wrap"><div class="icon-box" style="width:56px;height:56px;border-radius:14px;"><div class="icon-letter" style="font-size:22px;">Hd</div><div class="icon-dot" style="width:8px;height:8px;top:7px;right:7px;"></div></div><div class="icon-size">512px</div></div>
+      <div class="icon-wrap"><div class="icon-box" style="width:40px;height:40px;border-radius:10px;"><div class="icon-letter" style="font-size:16px;">Hd</div><div class="icon-dot" style="width:6px;height:6px;top:5px;right:5px;"></div></div><div class="icon-size">180px</div></div>
+    </div>
+    <div class="spec-block">
+      <div class="spec-line"><strong>Background:</strong> #1C1608 + radial gold gradient top-right</div>
+      <div class="spec-line"><strong>Letters "Hd":</strong> DM Serif Display · #F5F0E0 · lowercase d intentional</div>
+      <div class="spec-line"><strong>Gold dot:</strong> #C9A227 · top-right · ~12% of icon size</div>
+      <div class="spec-line"><strong>Corner radius:</strong> 23% of icon size (Apple guideline)</div>
+    </div>
+  </div>
+</div>
+
+<!-- 07 FONTS -->
+<div class="section">
+  <div class="section-label">07 — Font Sources (All Free · All in Canva)</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+      <div><div style="font-family:'Fraunces',serif;font-size:20px;margin-bottom:6px;">Fraunces</div><div style="font-size:11px;color:#7a6a40;line-height:1.7;margin-bottom:6px;">Headlines. Light (300) + Light Italic. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;">fonts.google.com → "Fraunces"</div></div>
+      <div><div style="font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:6px;">DM Serif Display</div><div style="font-size:11px;color:#7a6a40;line-height:1.7;margin-bottom:6px;">Logo, card titles. Regular only. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;">fonts.google.com → "DM Serif Display"</div></div>
+      <div><div style="font-family:'DM Mono',monospace;font-size:17px;margin-bottom:6px;">DM Mono</div><div style="font-size:11px;color:#7a6a40;line-height:1.7;margin-bottom:6px;">Body, data, INCI lists. Light / Regular / Medium. Google Fonts.</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#a07820;">fonts.google.com → "DM Mono"</div></div>
+    </div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #e0d4a8;font-size:11px;color:#7a6a40;"><strong style="color:#1c1608;">In Canva:</strong> All three fonts are pre-loaded in Canva's font library. Search by name in the font picker — no download or upload required.</div>
+  </div>
+</div>
+
+</body>
+</html>
