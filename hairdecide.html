@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HairDecide — Evidence-Based Hair Care</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef0e8;
+    --surface: #f5f6f0;
+    --ink: #1a1e14;
+    --ink-muted: #5c6248;
+    --accent: #b05a2a;
+    --accent-light: #f0ddd0;
+    --green: #2d5c38;
+    --green-light: #cde0d2;
+    --amber: #7a6830;
+    --amber-light: #ede4c4;
+    --border: #d4d8c8;
+    --card: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 13px; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.6; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
+  .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { padding: 6px 14px; border: 1px solid transparent; border-radius: 4px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); background: none; transition: all 0.2s; }
+  .nav-tab:hover { color: var(--ink); border-color: var(--border); }
+  .nav-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 40px 80px; }
+  .section { display: none; animation: fadeUp 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header { margin-bottom: 32px; }
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-muted); margin-bottom: 10px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 300; letter-spacing: -1px; line-height: 1.1; }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 15px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  .form-group { margin-bottom: 16px; }
+  label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 6px; }
+  select, input[type="text"], input[type="number"] { width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+  select:focus, input:focus { border-color: var(--accent); }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+  .checkbox-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .checkbox-chip { padding: 6px 12px; border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 11px; transition: all 0.15s; user-select: none; }
+  .checkbox-chip:hover { border-color: var(--accent); }
+  .checkbox-chip.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .btn { padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline { background: none; border: 1px solid var(--border); color: var(--ink-muted); }
+  .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-small-inline { padding: 8px 14px; font-size: 10px; display: inline-flex; align-items: center; }
+
+  .tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-red { background: #f0ddd0; color: #a04020; }
+  .tag-muted { background: #e4e8da; color: var(--ink-muted); }
+
+  .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 12px; line-height: 1.6; margin-bottom: 12px; }
+  .alert-green { background: var(--green-light); border: 1px solid #a0c4a8; }
+  .alert-amber { background: var(--amber-light); border: 1px solid #c8b870; }
+  .alert-red { background: #f0ddd0; border: 1px solid #d4a080; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  .help-text { font-size: 11px; color: var(--ink-muted); line-height: 1.6; }
+  .profile-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; background: var(--accent-light); border-radius: 20px; font-size: 11px; color: var(--accent); margin: 3px; font-family: 'DM Mono', monospace; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--ink); color: var(--bg); border-radius: 50%; font-size: 10px; margin-right: 8px; flex-shrink: 0; }
+  .routine-step-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; color: var(--ink-muted); margin-bottom: 3px; }
+
+  .ingredient-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .ingredient-row:last-child { border-bottom: none; }
+  .ingredient-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .ingredient-bar-fill { height: 100%; border-radius: 2px; }
+
+  .product-result { animation: fadeUp 0.3s ease; }
+  .product-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .product-name { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 4px; }
+  .product-brand { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 12px; flex-direction: row; align-items: center; gap: 0; height: 52px; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .logo { font-size: 15px; flex-shrink: 0; padding-right: 12px; border-right: 1px solid var(--border); height: 100%; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .logo-dot { width: 7px; height: 7px; }
+    .nav-tabs { flex: 1; display: flex; overflow-x: auto; scrollbar-width: none; height: 100%; }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab { flex: 0 0 auto; padding: 0 11px; font-size: 9px; border-radius: 0; border: none; border-bottom: 2px solid transparent; height: 100%; display: flex; align-items: center; letter-spacing: 0.04em; white-space: nowrap; }
+    .nav-tab.active { background: none; color: var(--ink); border-bottom-color: var(--accent); }
+    .main { padding: 20px 16px 60px; }
+    body { font-size: 14px; }
+    .section-title { font-size: 28px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 12px; }
+    .card { padding: 16px; }
+    select, input[type="text"], input[type="number"] { padding: 14px; font-size: 16px; }
+    .btn { padding: 15px 20px; font-size: 13px; width: 100%; text-align: center; }
+    .btn-small-inline { width: auto; padding: 10px 14px; font-size: 12px; }
+    .checkbox-chip { padding: 10px 16px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="logo-dot"></span>HairDecide</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('profile')">Profile</button>
+    <button class="nav-tab" onclick="showSection('scanner')">Scanner</button>
+    <button class="nav-tab" onclick="showSection('routine')">Routine</button>
+    <button class="nav-tab" onclick="showSection('score')">Score</button>
+    <button class="nav-tab" onclick="openAbout()" style="opacity:0.6;">About</button>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- PROFILE -->
+  <div class="section active" id="section-profile">
+    <div class="section-header">
+      <div class="section-label">Step 01 — Hair Profile</div>
+      <h1 class="section-title">Know your hair.<br><em>Skip the rest.</em></h1>
+    </div>
+
+    <div id="profiles-list" style="margin-bottom:24px;"></div>
+
+    <div id="profile-form-card" class="card">
+      <div class="card-title" id="profile-form-title"><span class="card-icon" style="background:#cde0d2">+</span> New Hair Profile</div>
+      <div class="grid-2">
+        <div>
+          <div class="form-group">
+            <label>Profile Name</label>
+            <input type="text" id="profileName" placeholder="e.g. My Hair, Partner">
+          </div>
+          <div class="form-group">
+            <label>Hair Type</label>
+            <select id="hairType">
+              <option value="">Select type</option>
+              <option value="straight">Straight (Type 1)</option>
+              <option value="wavy">Wavy (Type 2)</option>
+              <option value="curly">Curly (Type 3)</option>
+              <option value="coily">Coily / Afro (Type 4)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Hair Thickness</label>
+            <select id="hairThickness">
+              <option value="">Select thickness</option>
+              <option value="fine">Fine — individual strands thin</option>
+              <option value="medium">Medium — balanced</option>
+              <option value="thick">Thick / Coarse — sturdy strands</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Scalp Type</label>
+            <select id="scalpType">
+              <option value="">Select scalp type</option>
+              <option value="oily">Oily — greasy within 1–2 days</option>
+              <option value="normal">Normal — balanced</option>
+              <option value="dry">Dry — flaky, tight</option>
+              <option value="dandruff">Dandruff / Seborrhoeic dermatitis</option>
+              <option value="sensitive">Sensitive — reacts easily</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label>Primary Concern</label>
+            <select id="primaryConcern">
+              <option value="">Select concern</option>
+              <option value="hairloss">Hair loss / thinning</option>
+              <option value="dandruff">Dandruff / flaking</option>
+              <option value="damage">Damage / breakage</option>
+              <option value="dryness">Dryness / frizz</option>
+              <option value="oilyscalp">Oily scalp / flat roots</option>
+              <option value="growth">Hair growth support</option>
+              <option value="colour">Colour-treated hair</option>
+              <option value="maintenance">General maintenance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Chemical Treatments</label>
+            <div class="checkbox-group" id="treatments">
+              <div class="checkbox-chip" onclick="toggleChip(this)">Colour / highlights</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Bleached</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Permed</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Relaxed</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Keratin treated</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">None</div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:8px;">
+            <label>Heat styling frequency</label>
+            <select id="heatFreq">
+              <option value="never">Never</option>
+              <option value="occasional">Occasionally (1–2×/week)</option>
+              <option value="frequent">Frequently (most days)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-small-inline" onclick="saveProfile()">Save Profile →</button>
+        <button class="btn btn-outline btn-small-inline" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <div id="profile-result" style="display:none; margin-top:24px;">
+      <div class="card">
+        <div class="card-title"><span class="card-icon" style="background:#cde0d2">✓</span> <span id="profile-result-name">Routine Architecture</span></div>
+        <div id="profile-chips" style="margin-bottom:20px;"></div>
+        <hr class="divider">
+        <div style="font-family:'DM Serif Display',serif; font-size:13px; margin-bottom:8px;">Evidence-Based Hair Routine</div>
+        <div class="help-text" style="margin-bottom:16px;">Ingredient and method recommendations based on your hair profile. Hair science is an underresearched field — this reflects the best available clinical and trichological evidence.</div>
+        <div id="routine-architecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCANNER -->
+  <div class="section" id="section-scanner">
+    <div class="section-header">
+      <div class="section-label">Step 02 — Ingredient Analysis</div>
+      <h1 class="section-title">What's actually<br><em>in the bottle.</em></h1>
+    </div>
+    <div id="scanner-input">
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title"><span class="card-icon" style="background:#cde0d2">⬡</span> Paste INCI Ingredient List</div>
+        <div class="help-text" style="margin-bottom:12px;">Find the ingredient list on the packaging or brand website. Hair products have different concerns than skincare — silicones, sulfates, and protein balance matter more here.</div>
+        <textarea id="inci-input" placeholder="e.g. Aqua, Sodium Lauryl Sulfate, Cocamidopropyl Betaine, Panthenol, Niacinamide, Keratin, Dimethicone..."
+          style="width:100%; height:120px; padding:14px; background:var(--bg); border:1px solid var(--border); border-radius:8px; font-family:'DM Mono',monospace; font-size:13px; resize:vertical; outline:none; color:var(--ink); line-height:1.6;"></textarea>
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-small-inline" onclick="analyzeINCIInput()">Analyze →</button>
+          <button class="btn btn-outline btn-small-inline" onclick="simulateScan()">Load Demo</button>
+        </div>
+      </div>
+    </div>
+    <div id="scanner-result" style="display:none; margin-top:32px;" class="product-result">
+      <div class="product-header">
+        <div>
+          <div class="product-name" id="product-name">Demo Product</div>
+          <div class="product-brand" id="product-brand">Hair Analysis</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'DM Serif Display',serif; font-size:32px;" id="risk-score">—</div>
+          <div style="font-size:11px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em">Formula Score</div>
+        </div>
+      </div>
+      <div id="alerts-area"></div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#cde0d2">✓</span> Beneficial Ingredients</div>
+          <div id="active-ingredients"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#f0ddd0">⚠</span> Watch List</div>
+          <div id="watch-ingredients"></div>
+          <div id="watch-empty" style="display:none; color:var(--ink-muted); font-size:12px; padding:12px 0;">No flagged ingredients detected.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">All Ingredients — Concentration Order</div>
+        <div class="help-text" style="margin-bottom:12px;">INCI lists ordered highest → lowest. First 5 ingredients = ~80% of the formula.</div>
+        <div id="all-ingredients"></div>
+      </div>
+      <div style="margin-top:20px;">
+        <button class="btn btn-outline btn-small-inline" onclick="resetScanner()">Check Another Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUTINE OPTIMIZER -->
+  <div class="section" id="section-routine">
+    <div class="section-header">
+      <div class="section-label">Step 03 — Wash Day Planner</div>
+      <h1 class="section-title">Build your<br><em>wash day routine.</em></h1>
+    </div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title"><span class="card-icon" style="background:#cde0d2">+</span> Add Product</div>
+      <div style="display:grid; grid-template-columns:1fr 140px auto; gap:8px; align-items:end;">
+        <div><label>Product Name</label><input type="text" id="product-add" placeholder="e.g. Olaplex No. 5 Conditioner"></div>
+        <div><label>Step</label>
+          <select id="product-step">
+            <option value="pre-wash">Pre-wash</option>
+            <option value="shampoo">Shampoo</option>
+            <option value="conditioner">Conditioner</option>
+            <option value="mask">Mask / deep treat</option>
+            <option value="leave-in">Leave-in</option>
+            <option value="styler">Styler</option>
+            <option value="scalp">Scalp treatment</option>
+          </select>
+        </div>
+        <div><button class="btn btn-primary btn-small-inline" style="white-space:nowrap;margin-top:22px" onclick="addProduct()">Add →</button></div>
+      </div>
+      <div style="margin-top:10px;"><label>Key Ingredients (optional)</label><input type="text" id="product-inci" placeholder="e.g. keratin, panthenol, dimethicone"></div>
+    </div>
+    <div id="routine-items"></div>
+    <div id="routine-warnings" style="margin-top:20px;"></div>
+  </div>
+
+  <!-- SCORE -->
+  <div class="section" id="section-score">
+    <div class="section-header">
+      <div class="section-label">Step 04 — Routine Audit</div>
+      <h1 class="section-title">Your routine,<br><em>decoded.</em></h1>
+    </div>
+    <div id="score-content">
+      <div class="alert alert-green"><span>○</span><div>Add a hair profile and products to your routine to generate a personalised score and recommendations.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ABOUT -->
+<div id="about-modal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26,30,20,0.6); backdrop-filter:blur(4px); overflow-y:auto;">
+  <div style="max-width:560px; margin:40px auto; background:var(--surface); border-radius:12px; padding:40px; position:relative; border:1px solid var(--border);">
+    <button onclick="closeAbout()" style="position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-muted);">✕ Close</button>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+      <span class="logo-dot"></span>
+      <span style="font-family:'DM Serif Display',serif; font-size:22px;">HairDecide</span>
+    </div>
+    <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:300; margin-bottom:8px; line-height:1.2;">Less frizz.<br><em style="color:var(--accent)">More science.</em></div>
+    <div style="font-size:12px; color:var(--ink-muted); margin-bottom:24px; line-height:1.7;">A sister product to SkinDecide, built for evidence-based hair and scalp decisions. Cuts through ingredient marketing to tell you what actually works — and what your hair type actually needs.</div>
+    <div style="border-top:1px solid var(--border); padding-top:20px; margin-bottom:16px;">
+      <div style="font-family:'DM Serif Display',serif; font-size:15px; margin-bottom:10px;">Privacy & Terms</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8;"><strong style="color:var(--ink);">No data stored beyond session.</strong> Profiles deleted when you close this tab. No personal data collected. <strong style="color:var(--ink);">Not medical advice.</strong> Consult a trichologist or dermatologist for hair loss, scalp conditions, or alopecia.</div>
+    </div>
+    <div style="font-size:11px; color:var(--ink-muted); border-top:1px solid var(--border); padding-top:16px;">Part of the SkinDecide family · Evidence-based beauty decisions</div>
+  </div>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'score') renderScore();
+}
+function toggleChip(el) { el.classList.toggle('selected'); }
+function openAbout() { document.getElementById('about-modal').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function closeAbout() { document.getElementById('about-modal').style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('about-modal').addEventListener('click', function(e) { if (e.target === this) closeAbout(); });
+
+// ====== ROUTINE DB ======
+const routineDB = {
+  hairloss: [
+    { step: 'Scalp treatment', time: 'Daily or as directed', actives: 'Minoxidil 2–5% (evidence-backed) · or Caffeine 0.2%+ shampoo', evidence: 'Very High', note: 'Minoxidil is the only topical ingredient with strong clinical evidence for androgenetic alopecia. Prolongs anagen (growth) phase. Requires consistent daily use — results visible at 4–6 months, stops working if discontinued. Caffeine shampoos have some in-vitro evidence but far weaker than minoxidil.', ingredients: 'Minoxidil 2–5% · Caffeine 0.2% · Niacinamide 2–5%', avoid: 'Products claiming to "stimulate growth" without minoxidil, caffeine, or proven actives' },
+    { step: 'Shampoo', time: '2–3× per week', actives: 'Ketoconazole 1–2% shampoo (if dandruff-related loss)', evidence: 'High', note: 'If hair loss is accompanied by scalp inflammation or dandruff, ketoconazole 1–2% reduces scalp DHT and has adjunct anti-androgenetic evidence. Use as a scalp treatment (leave 2–5 min), not just a wash. Gentle amino-acid shampoo otherwise.', ingredients: 'Ketoconazole 1–2% · or amino-acid surfactants (Sodium Cocoyl Glutamate) · no SLS', avoid: 'SLS/SLES — can worsen scalp inflammation. Harsh clarifying shampoos.' },
+    { step: 'Supplement (internal)', time: 'Daily — discuss with GP', actives: 'Biotin · Iron · Zinc · Vitamin D — only if deficient', evidence: 'Medium', note: 'Biotin supplementation shows evidence only in biotin deficiency — which is rare. Iron deficiency anaemia is the most common nutritional cause of diffuse hair loss, especially in women. Test serum ferritin (target >70 µg/L for hair). Zinc and Vitamin D deficiencies also linked to hair loss.', ingredients: 'Serum ferritin, iron, zinc, Vit D blood test recommended before supplementing', avoid: 'High-dose biotin supplementation without deficiency — wastes money and skews thyroid test results' },
+  ],
+  dandruff: [
+    { step: 'Antifungal shampoo', time: '2–3× per week for 4 weeks · then 1×/week maintenance', actives: 'Ketoconazole 2% (Rx) or 1% (OTC) · Zinc Pyrithione 1–2% · Selenium Sulfide 1%', evidence: 'Very High', note: 'Dandruff is caused by Malassezia yeast, not dryness or poor hygiene. Antifungal shampoos are the only clinically proven treatment. Ketoconazole is most effective; Zinc Pyrithione (e.g. Head & Shoulders) is a good maintenance option. Leave shampoo on scalp for 3–5 minutes for efficacy.', ingredients: 'Ketoconazole 2% (Rx) · Ketoconazole 1% (OTC) · Zinc Pyrithione 1–2% · Selenium Sulfide 1%', avoid: 'Moisturising shampoos as primary treatment — they do not address the fungal cause. Tea tree oil is inconsistent.' },
+    { step: 'Scalp hydration', time: 'Post-wash · on scalp only', actives: 'Salicylic Acid 1–2% scalp serum (for seborrhoeic scale)', evidence: 'Medium-High', note: 'Salicylic acid 1–2% helps dissolve and lift scale (keratolytic action). Use as a scalp serum 1–2×/week before shampooing or leave-in. Distinct from antifungal treatment — addresses the physical scale, not the fungal cause.', ingredients: 'Salicylic Acid 1–2% · Tea Tree Oil 5% (secondary adjunct only) · no fragrance', avoid: 'Heavy oils on scalp (traps Malassezia) · skipping antifungal step' },
+  ],
+  damage: [
+    { step: 'Protein treatment', time: 'Weekly (severe damage) · bi-weekly (maintenance)', actives: 'Hydrolysed Keratin · Hydrolysed Wheat Protein · Olaplex (Bis-Aminopropyl Diglycol Dimaleate)', evidence: 'High', note: 'Chemical damage (bleach, colour, relaxers) breaks disulfide bonds in the cortex — the structural backbone of hair. Hydrolysed proteins temporarily fill gaps and strengthen the cuticle. Olaplex chemistry (bond multiplier) has clinical evidence for repairing disulfide bonds — not just coating the strand. Do not overuse protein — can cause brittleness (protein overload).', ingredients: 'Bis-Aminopropyl Diglycol Dimaleate (Olaplex) · Hydrolysed Keratin · Hydrolysed Wheat Protein · Hydrolysed Silk', avoid: 'Protein overload (every wash) — causes stiffness and breakage. Silicone-only masks (coat without repairing).' },
+    { step: 'Deep conditioning', time: 'Weekly · 10–30 min', actives: 'Behentrimonium Chloride · Cetearyl Alcohol · Ceramides + fatty acids', evidence: 'High', note: 'Conditioner works by cationic surfactants (BTAC, BTMS) adsorbing to the negatively charged damaged cuticle — reducing friction and improving manageability. Ceramides and fatty acids penetrate the cortex and reduce porosity. Heat (shower cap + warm towel) improves penetration by opening the cuticle.', ingredients: 'Behentrimonium Chloride (BTAC) · Cetearyl Alcohol · Ceramides · Linoleic / Oleic acid', avoid: 'Silicone-only conditioners on high-porosity hair — build-up without moisture' },
+    { step: 'Heat protection', time: 'Every heat styling session — no exceptions', actives: 'Cyclopentasiloxane / Dimethicone (heat barrier) + Hydrolysed Protein', evidence: 'High', note: 'Heat above 180°C causes irreversible protein denaturation and cuticle damage. Heat protectants form a thermal barrier. Silicones (Dimethicone, Cyclomethicone) have the strongest heat-barrier evidence. Always use on damp hair before heat — dry hair has lower heat tolerance.', ingredients: 'Dimethicone · Cyclopentasiloxane · Hydrolysed Keratin · Amodimethicone', avoid: 'Skipping heat protectant · using iron above 200°C · heat on wet hair (steam damage)' },
+    { step: 'Trim', time: 'Every 6–8 weeks', actives: 'Physical — cutting split ends', evidence: 'Very High', note: 'Split ends cannot be repaired — only physically removed. Products temporarily smooth the appearance but the structural damage extends up the shaft over time. Regular trims are the only evidence-based way to prevent split end propagation. "Growth-protective" trims are not slower growth — they prevent length loss from breakage.', ingredients: '— (non-product step)', avoid: 'Delay beyond 12 weeks if hair is actively breaking' },
+  ],
+  dryness: [
+    { step: 'Co-wash or gentle shampoo', time: '1–2× per week (curly / coily) · 2–3× (wavy)', actives: 'Sulfate-free · Cetearyl Alcohol-based co-wash · or amino-acid shampoo', evidence: 'Medium-High', note: 'Curly and coily hair is structurally drier — the twist of the shaft prevents sebum from travelling down the strand. Over-shampooing strips natural lipids. Co-washing (conditioner-washing) maintains moisture for type 3–4 hair. The "Curly Girl Method" is largely unvalidated scientifically but aligns with reducing harsh surfactants, which is evidence-backed.', ingredients: 'Behentrimonium Chloride · Cetearyl Alcohol · Glycerin · no SLS or SLES', avoid: 'SLS — too stripping for dry/curly hair. Daily shampooing. High-lather shampoos.' },
+    { step: 'Deep conditioning', time: 'Weekly · with heat or steam', actives: 'Humectants (Glycerin, Aloe) + Emollients (Shea butter, Argan oil) + BTAC', evidence: 'High', note: 'The LOC (Liquid-Oil-Cream) or LCO method layers moisture and sealing in the optimal order. Glycerin is the most effective humectant for hair — draws moisture from air into the cortex. Shea butter, Argan oil, and Marula oil are emollients that seal the cuticle after moisture application.', ingredients: 'Glycerin · Aloe Vera · Behentrimonium Chloride · Shea Butter · Argan Oil · Avocado Oil', avoid: 'Protein-heavy masks without moisture balance — dries out curly hair. Mineral oil on scalp.' },
+    { step: 'Leave-in conditioner', time: 'After every wash · on damp hair', actives: 'Glycerin-based leave-in · lightweight oil seal', evidence: 'Medium-High', note: 'Leave-in conditioners prolong the conditioning effect by maintaining cuticle smoothness between washes. Apply to soaking-wet hair (not towel-dried) to lock in maximum water. Follow with a light oil seal (Argan, Jojoba, or Squalane) to prevent water evaporation.', ingredients: 'Glycerin · Aloe Vera Juice · Panthenol · Argan Oil (seal) · Jojoba Oil (seal)', avoid: 'Applying to dry hair · heavy butters on fine hair (weighs down)' },
+    { step: 'Anti-frizz sealer', time: 'Styling step — on soaking wet hair', actives: 'Dimethicone or Amodimethicone (frizz control) · or Flaxseed gel (CG-friendly)', evidence: 'Medium', note: 'Frizz is caused by the hair cuticle lifting and absorbing ambient humidity. Silicones (Amodimethicone) are most effective at sealing the cuticle. For CG/silicone-free routines, flaxseed gel and high-glycerin gels provide hold without silicones — humidity resistance is lower.', ingredients: 'Amodimethicone (non-water-soluble) · or Flaxseed gel · Hydroxyethylcellulose', avoid: 'Touching hair while drying — breaks gel cast and creates frizz' },
+  ],
+  oilyscalp: [
+    { step: 'Shampoo', time: 'Every 1–2 days', actives: 'Balancing shampoo · Salicylic Acid 1% or Zinc Pyrithione', evidence: 'High', note: 'Oily scalp is driven by overactive sebaceous glands, not by under-washing — though infrequent washing can worsen it. SLS shampoos work but over-strip, triggering compensatory sebum production. Zinc Pyrithione regulates sebum and has mild antifungal benefits. Salicylic acid dissolves sebum plugs in follicles.', ingredients: 'Zinc Pyrithione 1% · Salicylic Acid 1% · Sodium Cocoyl Glutamate (gentle surfactant)', avoid: 'Silicone-heavy conditioner on scalp · oil treatments on scalp · very hot water (stimulates sebum)' },
+    { step: 'Conditioner application', time: 'Mid-lengths and ends only — never scalp', actives: 'Lightweight conditioner — no heavy silicones at roots', evidence: 'High', note: 'Applying conditioner to the scalp adds weight and sebum-like texture, making roots flat and greasy faster. Apply from mid-shaft downward. Rinse with cool water to close the cuticle and reduce flat root appearance.', ingredients: 'Behentrimonium Chloride · lightweight silicones (water-soluble) · Panthenol', avoid: 'Conditioner on scalp · heavy butters or oils near roots · dry shampoo overuse (builds up sebum+starch)' },
+  ],
+  growth: [
+    { step: 'Scalp massage', time: 'Daily · 4 minutes', actives: 'Mechanical stimulation — no product required', evidence: 'Medium-High', note: 'A 2016 study (Koyama et al.) found 4 minutes of daily standardised scalp massage over 24 weeks increased hair shaft thickness. Proposed mechanism: mechanical stress on dermal papilla cells. No product required — use fingertips, not nails. Scalp massage tools have no additional evidence over fingers.', ingredients: '— fingertips only · or add Rosemary oil (limited evidence)', avoid: 'Nails on scalp · scratching · vigorous rubbing' },
+    { step: 'Rosemary oil treatment', time: '2× per week · leave-in or wash out', actives: 'Rosemary (Rosmarinus officinalis) oil — 2–3 drops diluted in carrier oil', evidence: 'Medium', note: 'A 2023 randomised trial found rosemary oil comparable to Minoxidil 2% for hair count at 6 months, with less scalp itch. Proposed mechanism: improved microcirculation and DHT inhibition. Must be diluted (1–2%) in a carrier oil (Jojoba, Castor) to avoid irritation. Evidence is still limited but promising.', ingredients: 'Rosmarinus Officinalis Leaf Oil 1–2% · Ricinus Communis (Castor) Oil · Jojoba Oil', avoid: 'Applying undiluted · relying on rosemary alone for androgenetic alopecia · essential oil overuse' },
+    { step: 'Nutritional baseline', time: 'Daily — address deficiencies first', actives: 'Ferritin >70 µg/L · Zinc · Vitamin D · Biotin only if deficient', evidence: 'High', note: 'Optimal hair growth requires adequate nutrition. The most impactful and underdiagnosed factor is low ferritin (iron stores) — even within "normal" reference ranges. Target ferritin >70 µg/L for hair. Test before supplementing. Hair growth supplements (Viviscal, Nutrafol) have some manufacturer-funded evidence but are expensive relative to correcting a specific deficiency.', ingredients: 'Ferrous sulfate or bisglycinate (iron) · Zinc bisglycinate · Vitamin D3', avoid: 'Supplementing without testing · relying on biotin alone · expensive branded supplements without identified deficiency' },
+  ],
+  colour: [
+    { step: 'Colour-safe shampoo', time: '2–3× per week — cool water', actives: 'Sulfate-free · BTAC-based · UV filter (Benzophenone-4 or Polyquaternium)', evidence: 'High', note: 'Sulfates strip colour molecules from the cortex. Use sulfate-free (SLS/SLES-free) shampoo. Wash with cool water — hot water opens the cuticle and accelerates colour fade. UV exposure is the other major colour-fade cause — look for UV filters.', ingredients: 'Behentrimonium Chloride · Benzophenone-4 (UV filter) · Polyquaternium-7 · no SLS/SLES', avoid: 'SLS/SLES shampoos · hot water · sun exposure without UV-filter products' },
+    { step: 'Toning / colour maintenance', time: 'Weekly (blondes) · bi-weekly (brunettes)', actives: 'Violet/Blue pigment shampoo or conditioner', evidence: 'Medium', note: 'Toning shampoos deposit temporary colour pigments to counteract warm/yellow tones from fading. The purple/violet counteracts yellow (colour wheel complement). Do not leave on longer than directed — can deposit too much pigment. Use 1–2× per week, not daily.', ingredients: 'Violet or Blue temporary pigment · Behentrimonium Chloride', avoid: 'Daily use of purple shampoo — over-tones to grey/purple. Inconsistent use.' },
+    { step: 'Bond repair treatment', time: 'Weekly', actives: 'Olaplex / bond-building chemistry (Bis-Aminopropyl Diglycol Dimaleate)', evidence: 'High', note: 'Colour processes — especially bleaching — break disulfide bonds in the cortex. Bond multiplier chemistry rebuilds these bonds from within. Use in-shower (No. 3 equivalent) weekly for maintenance, and ask for in-salon bond builder (No. 1/2 equivalent) at every colour appointment.', ingredients: 'Bis-Aminopropyl Diglycol Dimaleate · Hydrolysed Keratin · Hydrolysed Wheat Protein', avoid: 'Protein overload — balance with moisture masks. Skipping heat protection after treatment.' },
+  ],
+  maintenance: [
+    { step: 'Shampoo', time: '2–3× per week for most hair types', actives: 'pH-balanced shampoo (4.5–5.5) · matched to scalp type', evidence: 'High', note: 'Washing frequency should match scalp oil production — not a fixed schedule. Fine/oily hair may need daily washing; thick/dry hair every 3–4 days. A pH-balanced shampoo (4.5–5.5) keeps the cuticle closed. Most shampoos are in this range.', ingredients: 'Sodium Cocoyl Glutamate · Cocamidopropyl Betaine · pH 4.5–5.5', avoid: 'Daily washing for dry/curly types · heavy SLS for colour-treated or damaged hair' },
+    { step: 'Conditioner', time: 'Every wash · mid-lengths to ends', actives: 'Behentrimonium Chloride (BTAC) + Cetearyl Alcohol + lightweight protein', evidence: 'High', note: 'Conditioner is the most universally beneficial hair product. BTAC (cationic surfactant) adsorbs to damaged cuticle reducing friction. Cetearyl Alcohol is an emollient fatty alcohol — not drying. Leave on for 1–3 minutes for full effect. Always rinse with cool water.', ingredients: 'Behentrimonium Chloride · Cetearyl Alcohol · Panthenol · Hydrolysed Silk (light protein)', avoid: 'Skipping conditioner · applying to scalp · rinsing with hot water' },
+    { step: 'Heat protection', time: 'Every heat styling session', actives: 'Silicone-based thermal protectant (Dimethicone) · or protein mist', evidence: 'High', note: 'Apply before any heat above 150°C. Section hair and apply evenly. Silicones provide the best thermal barrier; protein sprays offer secondary cuticle reinforcement. No heat protectant is effective above 230°C — avoid extreme heat entirely.', ingredients: 'Dimethicone · Cyclomethicone · Amodimethicone · Hydrolysed Keratin', avoid: 'Heat above 200°C · heat on wet hair · skipping on "just a quick blowdry" days' },
+  ],
+};
+
+// ====== PROFILE SYSTEM ======
+let savedProfiles = [];
+let editingProfileId = null;
+
+async function loadProfiles() {
+  try { const r = await window.storage.get('hairdecide-profiles'); savedProfiles = r ? JSON.parse(r.value) : []; } catch(e) { savedProfiles = []; }
+  renderProfilesList();
+}
+async function persistProfiles() {
+  try { await window.storage.set('hairdecide-profiles', JSON.stringify(savedProfiles)); } catch(e) {}
+}
+
+function renderProfilesList() {
+  const el = document.getElementById('profiles-list');
+  if (!savedProfiles.length) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div style="margin-bottom:12px; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-muted);">Saved Profiles (${savedProfiles.length})</div>
+    <div style="display:flex; flex-direction:column; gap:10px;" id="profiles-cards">
+      ${savedProfiles.map(p => `
+        <div class="card" style="padding:16px; display:flex; align-items:center; gap:12px; cursor:pointer;" data-pid="${p.id}">
+          <div style="flex:1; pointer-events:none;">
+            <div style="font-family:'DM Serif Display',serif; font-size:16px; margin-bottom:6px;">${p.name}</div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">${p.chips.slice(0,3).map(c => `<span class="tag tag-muted">${c}</span>`).join('')}</div>
+          </div>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button data-action="edit" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--ink-muted);">Edit</button>
+            <button data-action="delete" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--accent);">✕</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  const cards = document.getElementById('profiles-cards');
+  if (cards) cards.addEventListener('click', function(e) {
+    const btn = e.target.closest('button[data-action]');
+    if (btn) { e.stopPropagation(); if (btn.dataset.action === 'edit') editProfile(btn.dataset.id); if (btn.dataset.action === 'delete') deleteProfile(btn.dataset.id); }
+    else { const card = e.target.closest('[data-pid]'); if (card) viewProfile(card.dataset.pid); }
+  });
+}
+
+function saveProfile() {
+  const name = document.getElementById('profileName').value.trim() || 'My Hair';
+  const hairType = document.getElementById('hairType').value;
+  const hairThickness = document.getElementById('hairThickness').value;
+  const scalpType = document.getElementById('scalpType').value;
+  const concern = document.getElementById('primaryConcern').value;
+  const heatFreq = document.getElementById('heatFreq').value;
+  if (!concern) { alert('Please select a primary concern.'); return; }
+  const treatments = Array.from(document.querySelectorAll('#treatments .checkbox-chip.selected')).map(c => c.textContent);
+  const chips = [hairType || 'hair', scalpType || 'scalp', concern, ...treatments.filter(c => c !== 'None')];
+  const profile = { id: editingProfileId || ('h' + Date.now()), name, hairType, hairThickness, scalpType, concern, treatments, heatFreq, chips, savedAt: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) };
+  if (editingProfileId) { savedProfiles = savedProfiles.map(p => p.id === editingProfileId ? profile : p); editingProfileId = null; }
+  else savedProfiles.push(profile);
+  persistProfiles(); renderProfilesList(); viewProfile(profile.id); resetForm();
+}
+
+function viewProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id); if (!p) return;
+  document.getElementById('profile-result-name').textContent = p.name;
+  document.getElementById('profile-chips').innerHTML = p.chips.map(c => `<div class="profile-chip">✓ ${c}</div>`).join('') + `<div class="profile-chip" style="color:var(--ink-muted)">Saved ${p.savedAt}</div>`;
+  const architecture = routineDB[p.concern] || routineDB.maintenance;
+  const ec = (e) => e === 'Very High' || e === 'High' ? 'tag-green' : e === 'Medium-High' || e === 'Medium' ? 'tag-amber' : 'tag-muted';
+  document.getElementById('routine-architecture').innerHTML = architecture.map((step, i) => {
+    const q = encodeURIComponent('best ' + (p.hairType || '') + ' hair ' + step.step.toLowerCase() + ' ' + step.actives.split('·')[0].trim().substring(0,40));
+    return `<div style="padding:16px 0; border-bottom:1px solid var(--border);">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px;">
+        <div style="flex:1; min-width:0;">
+          <div class="routine-step-label" style="margin-bottom:4px;"><span class="step-num">${i+1}</span>${step.step}<span style="margin-left:8px; font-size:10px; color:var(--ink-muted); text-transform:none; letter-spacing:0; font-weight:400;">⏱ ${step.time}</span></div>
+          <div style="font-family:'DM Serif Display',serif; font-size:15px; line-height:1.3;">${step.actives}</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0;">
+          <span class="tag ${ec(step.evidence)}">Evidence: ${step.evidence}</span>
+          <a href="https://www.google.com/search?q=${q}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:5px 9px; font-family:'DM Mono',monospace; font-size:9px; text-decoration:none; color:var(--ink-muted); white-space:nowrap; text-transform:uppercase; letter-spacing:0.06em;">🔍 Search</a>
+        </div>
+      </div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.6; margin-bottom:10px;">${step.note}</div>
+      ${step.ingredients !== '—' ? `<div style="display:flex; gap:8px; align-items:baseline; margin-bottom:6px; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); flex-shrink:0;">✓ Look for</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.ingredients}</span></div>` : ''}
+      ${step.avoid ? `<div style="display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); flex-shrink:0;">✗ Avoid</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.avoid}</span></div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('profile-result').style.display = 'block';
+  document.getElementById('profile-result').scrollIntoView({ behavior: 'smooth' });
+}
+
+function editProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id); if (!p) return;
+  editingProfileId = id;
+  document.getElementById('profileName').value = p.name;
+  document.getElementById('hairType').value = p.hairType || '';
+  document.getElementById('hairThickness').value = p.hairThickness || '';
+  document.getElementById('scalpType').value = p.scalpType || '';
+  document.getElementById('primaryConcern').value = p.concern;
+  document.getElementById('heatFreq').value = p.heatFreq || 'never';
+  document.querySelectorAll('#treatments .checkbox-chip').forEach(c => c.classList.toggle('selected', (p.treatments||[]).includes(c.textContent)));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#ede4c4">✎</span> Edit Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'inline-flex';
+  document.getElementById('profile-form-card').scrollIntoView({ behavior: 'smooth' });
+}
+function deleteProfile(id) {
+  if (!confirm('Delete this profile?')) return;
+  savedProfiles = savedProfiles.filter(p => p.id !== id);
+  persistProfiles(); renderProfilesList();
+  if (!savedProfiles.length) document.getElementById('profile-result').style.display = 'none';
+}
+function cancelEdit() { editingProfileId = null; resetForm(); }
+function resetForm() {
+  ['profileName','hairType','hairThickness','scalpType','primaryConcern'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('heatFreq').value = 'never';
+  document.querySelectorAll('#treatments .checkbox-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#cde0d2">+</span> New Hair Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'none';
+}
+loadProfiles();
+
+// ====== SCANNER ======
+const hairActives = {
+  'panthenol': { fn: 'Provitamin B5 · penetrates cortex, strengthens from within', badge: 'tag-green' },
+  'hydrolysed keratin': { fn: 'Protein · fills cuticle gaps, reduces porosity', badge: 'tag-green' },
+  'hydrolysed wheat protein': { fn: 'Protein · strengthens and adds body', badge: 'tag-green' },
+  'behentrimonium chloride': { fn: 'Cationic conditioner · reduces friction, detangles', badge: 'tag-green' },
+  'behentrimonium methosulfate': { fn: 'Gentle cationic conditioner · detangling', badge: 'tag-green' },
+  'cetearyl alcohol': { fn: 'Fatty alcohol · emollient, not drying', badge: 'tag-green' },
+  'dimethicone': { fn: 'Silicone · seals cuticle, heat protection, frizz control', badge: 'tag-amber' },
+  'amodimethicone': { fn: 'Amino-silicone · targeted cuticle repair, excellent frizz control', badge: 'tag-green' },
+  'glycerin': { fn: 'Humectant · draws moisture into cortex', badge: 'tag-green' },
+  'niacinamide': { fn: 'B3 · scalp sebum regulation, emerging evidence', badge: 'tag-green' },
+  'caffeine': { fn: 'Scalp stimulant · some evidence for hair density', badge: 'tag-amber' },
+  'ketoconazole': { fn: 'Antifungal · clinically proven for dandruff/seborrhoeic dermatitis', badge: 'tag-green' },
+  'zinc pyrithione': { fn: 'Antifungal + sebum-regulating · proven for dandruff', badge: 'tag-green' },
+  'argan oil': { fn: 'Emollient · seals cuticle, reduces frizz', badge: 'tag-green' },
+  'bis-aminopropyl diglycol dimaleate': { fn: 'Bond multiplier (Olaplex) · repairs disulfide bonds', badge: 'tag-green' },
+  'salicylic acid': { fn: 'BHA · dissolves scalp sebum plugs and scale', badge: 'tag-green' },
+  'biotin': { fn: 'B7 · evidence only for biotin deficiency (rare)', badge: 'tag-amber' },
+};
+const hairWatchlist = {
+  'sodium lauryl sulfate': { risk: 'Medium', note: 'Harsh surfactant. Strips colour and natural lipids. Fine for oily scalp types; avoid for dry, curly, colour-treated, or damaged hair.' },
+  'sodium laureth sulfate': { risk: 'Low-Medium', note: 'Milder than SLS but still stripping for dry or colour-treated hair. Generally acceptable for normal scalp.' },
+  'parfum': { risk: 'Low', note: 'Fragrance. Can cause scalp sensitisation in some. Less concern for hair than skin, but worth noting for scalp conditions.' },
+  'alcohol denat': { risk: 'Medium', note: 'Drying alcohol in leave-in products. Causes brittleness and moisture loss. Acceptable in rinse-off products.' },
+  'polyquaternium-11': { risk: 'Low', note: 'Build-up potential with frequent use. Clarifying shampoo needed monthly if used daily.' },
+  'mineral oil': { risk: 'Low-Medium', note: 'Occlusive on scalp — can trap Malassezia. Fine for mid-lengths and ends.' },
+  'isopropyl alcohol': { risk: 'Medium', note: 'Short-chain drying alcohol. Causes brittleness. Avoid in leave-in products for dry or damaged hair.' },
+  'formaldehyde': { risk: 'High', note: 'Found in some keratin treatments. Carcinogen — EU-restricted. Check for DMDM Hydantoin or Bronopol as formaldehyde-releasing preservatives.' },
+  'dmdm hydantoin': { risk: 'Medium-High', note: 'Formaldehyde-releasing preservative. Potential scalp sensitiser and hair loss link in some studies.' },
+};
+
+const demoProduct = {
+  name: 'Olaplex No. 5 Bond Maintenance Conditioner', brand: 'Category: Conditioner · Damaged / Colour-treated',
+  safetyScore: 87,
+  actives: [
+    { name: 'Bis-Aminopropyl Diglycol Dimaleate', fn: 'Bond multiplier (Olaplex) · repairs disulfide bonds', badge: 'tag-green' },
+    { name: 'Behentrimonium Chloride', fn: 'Cationic conditioner · reduces friction, detangles', badge: 'tag-green' },
+    { name: 'Cetearyl Alcohol', fn: 'Fatty alcohol · emollient, not drying', badge: 'tag-green' },
+    { name: 'Panthenol', fn: 'Provitamin B5 · penetrates cortex, strengthens from within', badge: 'tag-green' },
+  ],
+  watchlist: [],
+  alerts: [
+    { type: 'green', icon: '✓', text: 'Bond-building chemistry detected. Addresses root cause of chemical damage, not just surface coating.' },
+    { type: 'green', icon: '✓', text: 'No sulfates, no harsh alcohols. Safe for colour-treated and damaged hair.' },
+  ],
+  allIngredients: ['Aqua', 'Cetearyl Alcohol', 'Behentrimonium Chloride', 'Bis-Aminopropyl Diglycol Dimaleate', 'Hydrolysed Wheat Protein', 'Panthenol', 'Glycerin', 'Amodimethicone', 'Phenoxyethanol', 'Lactic Acid', 'Parfum', 'Cetrimonium Chloride', 'Trideceth-6', 'Isopropyl Alcohol', 'EDTA']
+};
+
+function simulateScan() { displayProduct(demoProduct); }
+function analyzeINCIInput() {
+  const input = document.getElementById('inci-input').value.trim();
+  if (!input) { simulateScan(); return; }
+  const ingredients = input.split(',').map(i => i.trim()).filter(Boolean);
+  const lc = ingredients.map(i => i.toLowerCase());
+  const actives = [], watchlist = [], alerts = [];
+  for (const [key, val] of Object.entries(hairActives)) { const m = ingredients.find(i => i.toLowerCase().includes(key)); if (m) actives.push({ name: m, fn: val.fn, badge: val.badge }); }
+  for (const [key, val] of Object.entries(hairWatchlist)) { const m = ingredients.find(i => i.toLowerCase().includes(key)); if (m) watchlist.push({ name: m, risk: val.risk, note: val.note }); }
+  const hasSLS = lc.some(i => i === 'sodium lauryl sulfate');
+  const hasFormaldehyde = lc.some(i => i.includes('formaldehyde') || i.includes('dmdm'));
+  const hasBondBuilder = lc.some(i => i.includes('bis-aminopropyl') || i.includes('maleic acid'));
+  if (hasFormaldehyde) alerts.push({ type: 'red', icon: '✗', text: 'Formaldehyde or formaldehyde-releasing preservative detected. EU-restricted. Associated with hair loss and scalp sensitisation.' });
+  if (hasSLS) alerts.push({ type: 'amber', icon: '⚠', text: 'SLS detected. Effective cleanser for oily scalps, but too stripping for dry, curly, colour-treated, or damaged hair.' });
+  if (hasBondBuilder) alerts.push({ type: 'green', icon: '✓', text: 'Bond-building chemistry detected. Addresses structural damage at cortex level — not just surface coating.' });
+  if (!hasFormaldehyde && !hasSLS) alerts.push({ type: 'green', icon: '✓', text: 'No major red flags detected for general use.' });
+  const score = Math.max(0, 100 - (watchlist.filter(w => w.risk === 'High' || w.risk === 'Medium-High').length * 20) - (watchlist.filter(w => w.risk === 'Medium').length * 8));
+  displayProduct({ name: 'Custom Hair Product', brand: 'INCI Analysis · ' + ingredients.length + ' ingredients', safetyScore: score, actives, watchlist, alerts, allIngredients: ingredients });
+}
+
+function displayProduct(p) {
+  document.getElementById('product-name').textContent = p.name;
+  document.getElementById('product-brand').textContent = p.brand;
+  document.getElementById('risk-score').textContent = p.safetyScore;
+  document.getElementById('risk-score').style.color = p.safetyScore >= 80 ? 'var(--green)' : p.safetyScore >= 60 ? 'var(--amber)' : 'var(--accent)';
+  document.getElementById('alerts-area').innerHTML = p.alerts.map(a => `<div class="alert alert-${a.type === 'green' ? 'green' : a.type === 'amber' ? 'amber' : 'red'}"><span>${a.icon}</span><div>${a.text}</div></div>`).join('');
+  document.getElementById('active-ingredients').innerHTML = p.actives.length ? p.actives.map(a => `<div class="ingredient-row"><div style="flex:1"><div style="font-size:12px; font-weight:500; margin-bottom:2px;">${a.name}</div><div style="font-size:11px; color:var(--ink-muted);">${a.fn}</div></div><span class="tag ${a.badge}">Active</span></div>`).join('') : '<div style="color:var(--ink-muted); font-size:12px; padding:8px 0">No specific actives detected.</div>';
+  const wl = p.watchlist;
+  if (wl && wl.length) { document.getElementById('watch-ingredients').innerHTML = wl.map(w => `<div class="ingredient-row"><div style="flex:1"><div style="font-size:12px; font-weight:500; margin-bottom:2px;">${w.name}</div><div style="font-size:11px; color:var(--ink-muted);">${w.note}</div></div><span class="tag tag-${w.risk === 'High' || w.risk === 'Medium-High' ? 'red' : 'amber'}">${w.risk}</span></div>`).join(''); document.getElementById('watch-empty').style.display = 'none'; }
+  else { document.getElementById('watch-ingredients').innerHTML = ''; document.getElementById('watch-empty').style.display = 'block'; }
+  document.getElementById('all-ingredients').innerHTML = p.allIngredients.map((ing, i) => `<div class="ingredient-row"><span style="font-size:10px; color:var(--ink-muted); width:20px; flex-shrink:0;">${i+1}</span><span style="flex:1; font-size:12px;">${ing}</span><div class="ingredient-bar"><div class="ingredient-bar-fill" style="width:${Math.max(4, 100 - i * (100/p.allIngredients.length))}%; background:${i < 3 ? 'var(--accent)' : i < 7 ? 'var(--amber)' : 'var(--border)'};"></div></div></div>`).join('');
+  document.getElementById('scanner-input').style.display = 'none';
+  document.getElementById('scanner-result').style.display = 'block';
+}
+function resetScanner() {
+  document.getElementById('scanner-input').style.display = 'block';
+  document.getElementById('scanner-result').style.display = 'none';
+  document.getElementById('inci-input').value = '';
+}
+
+// ====== ROUTINE OPTIMIZER ======
+let userRoutine = [];
+function addProduct() {
+  const name = document.getElementById('product-add').value.trim();
+  if (!name) return;
+  const step = document.getElementById('product-step').value;
+  const inci = document.getElementById('product-inci').value.trim();
+  userRoutine.push({ id: 'r' + Date.now(), name, step, inci });
+  document.getElementById('product-add').value = '';
+  document.getElementById('product-inci').value = '';
+  renderRoutine();
+}
+function removeProduct(id) { userRoutine = userRoutine.filter(p => p.id !== id); renderRoutine(); }
+function renderRoutine() {
+  const el = document.getElementById('routine-items');
+  if (!userRoutine.length) { el.innerHTML = '<div class="alert alert-green"><span>○</span><div>Add products to your wash day routine to analyse for conflicts and redundancies.</div></div>'; document.getElementById('routine-warnings').innerHTML = ''; return; }
+  const stepOrder = ['pre-wash','shampoo','conditioner','mask','leave-in','styler','scalp'];
+  const sorted = [...userRoutine].sort((a,b) => stepOrder.indexOf(a.step) - stepOrder.indexOf(b.step));
+  el.innerHTML = `<div class="card"><div class="card-title">Wash Day Routine (${userRoutine.length} products)</div>${sorted.map(p => `<div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--border);"><div style="flex:1"><div style="font-size:12px; font-weight:500;">${p.name}</div><div style="font-size:10px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:2px;">${p.step}${p.inci ? ' · ' + p.inci : ''}</div></div><button onclick="removeProduct('${p.id}')" style="background:none; border:1px solid var(--border); border-radius:4px; padding:4px 8px; cursor:pointer; font-size:10px; color:var(--accent); font-family:'DM Mono',monospace;">✕</button></div>`).join('')}</div>`;
+  checkConflicts();
+}
+function checkConflicts() {
+  const warnings = [];
+  const allInci = userRoutine.map(p => p.inci.toLowerCase()).join(' ');
+  const hasProtein = allInci.includes('keratin') || allInci.includes('protein');
+  const hasHeavySilicone = allInci.includes('dimethicone') || allInci.includes('cyclopentasiloxane');
+  const hasSulfateFree = userRoutine.some(p => p.step === 'shampoo') && !allInci.includes('sodium lauryl sulfate') && !allInci.includes('sodium laureth sulfate');
+  const shampooCount = userRoutine.filter(p => p.step === 'shampoo').length;
+  if (hasProtein && shampooCount > 1) warnings.push({ type: 'amber', text: 'Multiple shampoos detected with protein. Risk of protein overload — stiffness and breakage. Keep protein to 1–2 products max.' });
+  if (hasHeavySilicone && hasSulfateFree) warnings.push({ type: 'amber', text: 'Non-water-soluble silicones (Dimethicone) detected with a sulfate-free shampoo. Silicone build-up may occur over time — clarify monthly with a sulfate shampoo or switch to water-soluble silicones (Amodimethicone).' });
+  const leaveIn = userRoutine.filter(p => p.step === 'leave-in');
+  if (leaveIn.length > 2) warnings.push({ type: 'amber', text: 'More than 2 leave-in products. Product overload can weigh down hair and cause build-up. Simplify to 1 leave-in conditioner + 1 styler.' });
+  const el = document.getElementById('routine-warnings');
+  el.innerHTML = warnings.length ? warnings.map(w => `<div class="alert alert-${w.type}"><span>⚠</span><div>${w.text}</div></div>`).join('') : '<div class="alert alert-green"><span>✓</span><div>No conflicts detected in your current routine.</div></div>';
+}
+
+// ====== SCORE ======
+function renderScore() {
+  const el = document.getElementById('score-content');
+  if (!savedProfiles.length && !userRoutine.length) { el.innerHTML = '<div class="alert alert-green"><span>○</span><div>Add a hair profile and products to your routine to generate a score.</div></div>'; return; }
+  const profile = savedProfiles[0];
+  const productCount = userRoutine.length;
+  const hasProtein = userRoutine.some(p => p.inci.toLowerCase().includes('keratin') || p.inci.toLowerCase().includes('protein'));
+  const hasMoisture = userRoutine.some(p => p.inci.toLowerCase().includes('glycerin') || p.inci.toLowerCase().includes('panthenol'));
+  const hasHeatProtect = userRoutine.some(p => p.step === 'styler' && (p.inci.toLowerCase().includes('dimethicone') || p.inci.toLowerCase().includes('silicone')));
+  const simplicityScore = Math.max(20, 100 - ((productCount - 3) * 12));
+  const proteinMoistureScore = (hasProtein && hasMoisture) ? 90 : hasProtein ? 60 : hasMoisture ? 75 : 50;
+  const heatScore = profile?.heatFreq === 'never' ? 100 : profile?.heatFreq === 'occasional' ? (hasHeatProtect ? 85 : 55) : hasHeatProtect ? 70 : 35;
+  el.innerHTML = `
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="card" style="text-align:center">
+        <div style="font-family:'DM Serif Display',serif; font-size:36px; color:${simplicityScore >= 70 ? 'var(--green)' : simplicityScore >= 50 ? 'var(--amber)' : 'var(--accent)'}">${simplicityScore}</div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-muted); margin-top:4px;">Simplicity</div>
+        <div style="font-size:11px; color:var(--ink-muted); margin-top:6px; line-height:1.5;">${productCount} products in routine</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-family:'DM Serif Display',serif; font-size:36px; color:${proteinMoistureScore >= 80 ? 'var(--green)' : 'var(--amber)'}">${proteinMoistureScore}</div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-muted); margin-top:4px;">Protein / Moisture</div>
+        <div style="font-size:11px; color:var(--ink-muted); margin-top:6px; line-height:1.5;">${hasProtein && hasMoisture ? 'Balanced' : hasProtein ? 'Protein-heavy — add moisture' : hasMoisture ? 'Moisture present' : 'Add protein + moisture'}</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-family:'DM Serif Display',serif; font-size:36px; color:${heatScore >= 70 ? 'var(--green)' : heatScore >= 50 ? 'var(--amber)' : 'var(--accent)'}">${heatScore}</div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-muted); margin-top:4px;">Heat Safety</div>
+        <div style="font-size:11px; color:var(--ink-muted); margin-top:6px; line-height:1.5;">${profile?.heatFreq === 'never' ? 'No heat — optimal' : hasHeatProtect ? 'Heat protectant detected' : 'Missing heat protectant'}</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Score Notes</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8;">
+        ${!hasProtein ? '<div style="margin-bottom:8px;">⚠ No protein ingredients detected. Damaged or chemically-treated hair benefits from weekly hydrolysed protein.</div>' : ''}
+        ${!hasMoisture ? '<div style="margin-bottom:8px;">⚠ No humectants (Glycerin, Panthenol) detected. Moisture is the foundation of healthy hair.</div>' : ''}
+        ${productCount > 6 ? '<div style="margin-bottom:8px;">⚠ More than 6 products detected. Simplifying reduces build-up and lets you identify what\'s actually working.</div>' : ''}
+        ${heatScore < 60 ? '<div style="margin-bottom:8px;">⚠ Frequent heat use without protection detected. Add a silicone-based heat protectant before every session.</div>' : ''}
+        ${heatScore >= 80 && proteinMoistureScore >= 80 && simplicityScore >= 70 ? '<div style="color:var(--green);">✓ Your routine looks well-balanced. Consistency is more important than perfection.</div>' : ''}
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>
