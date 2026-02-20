@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinDecide — Evidence-Based Beauty</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --surface: #faf8f4;
+    --ink: #1a1612;
+    --ink-muted: #6b6358;
+    --accent: #c8432a;
+    --accent-light: #f0ded9;
+    --green: #2a7a4b;
+    --green-light: #d6ede1;
+    --amber: #b8780a;
+    --amber-light: #fdefd0;
+    --border: #ddd8ce;
+    --card: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-dot { 
+    width: 8px; height: 8px; 
+    background: var(--accent); 
+    border-radius: 50%; 
+    display: inline-block; 
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 6px 14px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    background: none;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--ink); border-color: var(--border); }
+  .nav-tab.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .nav-badge {
+    font-size: 10px;
+    background: var(--accent);
+    color: white;
+    padding: 1px 5px;
+    border-radius: 10px;
+    margin-left: 4px;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 40px 80px;
+  }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeUp 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* FORM ELEMENTS */
+  .form-group { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    appearance: none;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  select:focus, input:focus { border-color: var(--ink); }
+
+  .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .checkbox-chip {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.15s;
+    background: var(--surface);
+    user-select: none;
+  }
+  .checkbox-chip:hover { border-color: var(--ink); }
+  .checkbox-chip.selected {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: #2d2820; transform: translateY(-1px); }
+  .btn-outline {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--ink);
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+  .btn-accent {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-accent:hover { background: #b0371f; }
+
+  /* TAGS */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-red { background: var(--accent-light); color: var(--accent); }
+  .tag-muted { background: #eee; color: var(--ink-muted); }
+
+  /* SCORE RING */
+  .score-ring-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .score-ring {
+    position: relative;
+    width: 80px; height: 80px;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+  }
+  .score-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+
+  /* INGREDIENT ROW */
+  .ingredient-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ingredient-row:last-child { border-bottom: none; }
+  .ingredient-name {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+  .ingredient-bar {
+    width: 80px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .ingredient-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.8s ease;
+  }
+  .concentration-label {
+    font-size: 10px;
+    color: var(--ink-muted);
+    width: 40px;
+    text-align: right;
+  }
+
+  /* CLAIM ROW */
+  .claim-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .claim-row:last-child { border-bottom: none; }
+  .claim-text { flex: 1; font-size: 13px; line-height: 1.5; }
+  .claim-verdict {
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.4;
+    max-width: 200px;
+  }
+
+  /* ROUTINE TABLE */
+  .routine-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .routine-row:last-child { border-bottom: none; }
+  .routine-step-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+  }
+  .routine-step-name {
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  /* SCANNER AREA */
+  .scanner-area {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 48px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .scanner-area:hover {
+    border-color: var(--ink);
+    background: var(--surface);
+  }
+  .scanner-icon { font-size: 48px; margin-bottom: 16px; }
+  .scanner-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .scanner-sub { color: var(--ink-muted); font-size: 12px; }
+
+  /* PRODUCT RESULT */
+  .product-result {
+    animation: fadeUp 0.3s ease;
+  }
+  .product-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 4px;
+  }
+  .product-brand { color: var(--ink-muted); font-size: 12px; }
+
+  /* SIMPLICITY SCORE SECTION */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .score-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  /* ALERT BOX */
+  .alert {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .alert-red { background: var(--accent-light); color: var(--accent); border-left: 3px solid var(--accent); }
+  .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-green { background: var(--green-light); color: var(--green); border-left: 3px solid var(--green); }
+
+  /* OVERLAP WARNING */
+  .overlap-card {
+    background: var(--amber-light);
+    border: 1px solid #e4b84a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .overlap-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .overlap-desc { font-size: 12px; color: #7a5206; line-height: 1.5; }
+
+  /* PROFILE DISPLAY */
+  .profile-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    margin: 3px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* HELPER TEXT */
+  .help-text {
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-top: 6px;
+  }
+
+  /* RANGE INPUT */
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--ink);
+  }
+
+  /* STEP HEADER */
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 11px;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ===== MOBILE-FIRST RESPONSIVE ===== */
+  @media (max-width: 768px) {
+
+    /* NAV — top bar on mobile */
+    nav {
+      padding: 0 12px;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      height: 52px;
+    }
+    .logo {
+      font-size: 15px;
+      flex-shrink: 0;
+      padding-right: 12px;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .logo-dot { width: 7px; height: 7px; }
+    .nav-tabs {
+      flex: 1;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      height: 100%;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      flex: 0 0 auto;
+      padding: 0 11px;
+      font-size: 9px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 2px solid transparent;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .nav-tab.active {
+      background: none;
+      color: var(--ink);
+      border-bottom-color: var(--accent);
+    }
+    .nav-badge { display: none; }
+    .mobile-logo { display: none !important; }
+
+    /* MAIN — normal padding */
+    .main {
+      padding: 20px 16px 60px;
+    }
+
+    /* TYPOGRAPHY — bigger on mobile for readability */
+    body { font-size: 14px; }
+    .section-title { font-size: 28px; letter-spacing: -0.5px; }
+    .section-label { font-size: 11px; }
+
+    /* GRIDS — always single column */
+    .grid-2, .grid-3, .score-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    /* CARDS — less padding */
+    .card { padding: 16px; }
+    .card-title { font-size: 16px; margin-bottom: 14px; }
+
+    /* FORMS — larger touch targets */
+    label { font-size: 12px; margin-bottom: 8px; }
+    select, input[type="text"], input[type="number"] {
+      padding: 14px 14px;
+      font-size: 16px; /* prevents iOS zoom */
+      border-radius: 8px;
+    }
+    textarea {
+      font-size: 16px !important; /* prevents iOS zoom */
+      padding: 14px !important;
+    }
+
+    /* CHIPS — larger tap area */
+    .checkbox-chip {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+
+    /* BUTTONS — full width & taller */
+    .btn {
+      padding: 15px 20px;
+      font-size: 13px;
+      border-radius: 8px;
+      width: 100%;
+      text-align: center;
+    }
+    /* Exception: small inline buttons */
+    .btn-small-inline {
+      width: auto;
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+
+    /* SCANNER area */
+    .scanner-area { padding: 32px 16px; }
+    .scanner-icon { font-size: 36px; }
+
+    /* ROUTINE form grid — stack on mobile */
+    .routine-add-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+    .routine-add-grid .btn { grid-column: 1 / -1; }
+
+    /* ROUTINE rows */
+    .routine-row {
+      grid-template-columns: 1fr auto !important;
+      gap: 8px;
+      padding: 12px 0;
+    }
+    .routine-row > div:nth-child(2) { display: none; } /* hide tags on mobile */
+
+    /* INGREDIENT rows */
+    .ingredient-row { gap: 8px; }
+    .ingredient-bar { width: 50px; }
+
+    /* CLAIMS */
+    .claim-row { flex-direction: column; gap: 8px; }
+    .claim-verdict { max-width: 100%; }
+
+    /* ALERTS */
+    .alert { font-size: 13px; }
+
+    /* SCORE rings — 2 per row */
+    .score-grid { grid-template-columns: 1fr 1fr !important; }
+
+    /* PROFILE result chips */
+    .profile-chip { font-size: 13px; padding: 7px 14px; }
+
+    /* SECTION HEADER */
+    .section-header { margin-bottom: 20px; }
+
+    /* PRODUCT HEADER */
+    .product-header { flex-direction: column; gap: 12px; }
+    .product-header > div:last-child { text-align: left; }
+  }
+
+  /* Extra small phones */
+  @media (max-width: 380px) {
+    .section-title { font-size: 24px; }
+    .score-grid { grid-template-columns: 1fr 1fr !important; }
+    .nav-tab { font-size: 8px; padding: 10px 2px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-dot"></span>
+    SkinDecide
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('profile')">Profile</button>
+    <button class="nav-tab" onclick="showSection('scanner')">Scanner</button>
+    <button class="nav-tab" onclick="showSection('routine')">Routine</button>
+    <button class="nav-tab" onclick="showSection('score')">Score <span class="nav-badge">!</span></button>
+    <button class="nav-tab" onclick="openAbout()" style="opacity:0.6;">About</button>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="mobile-logo" style="display:none">
+    <span class="logo-dot"></span>
+    SkinDecide
+  </div>
+
+  <!-- ===== 1. PROFILE ===== -->
+  <div class="section active" id="section-profile">
+    <div class="section-header">
+      <div class="section-label">Step 01 — Foundation</div>
+      <h1 class="section-title">Your <em>skin profile,</em><br>not your wishlist.</h1>
+    </div>
+
+    <!-- Saved profiles list -->
+    <div id="profiles-list" style="margin-bottom: 24px;"></div>
+
+    <!-- Form card -->
+    <div id="profile-form-card" class="card">
+      <div class="card-title" id="profile-form-title"><span class="card-icon" style="background:#f0ede6">+</span> New Skin Profile</div>
+
+      <div class="form-group">
+        <label>Profile Name (e.g. "My Skin", "Partner", "Summer Routine")</label>
+        <input type="text" id="profileName" placeholder="e.g. My Skin">
+      </div>
+
+      <div class="grid-2" style="margin-top:4px;">
+        <div>
+          <div style="font-family:'DM Serif Display',serif; font-size:13px; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span class="card-icon" style="background:#f0ede6">🧬</span> Skin Biology</div>
+          <div class="form-group">
+            <label>Skin Type</label>
+            <select id="skinType">
+              <option value="">Select type</option>
+              <option value="dry">Dry — tight, flaky, dull</option>
+              <option value="oily">Oily — shiny, enlarged pores</option>
+              <option value="combo">Combination — oily T-zone, dry cheeks</option>
+              <option value="normal">Normal — balanced, minimal issues</option>
+              <option value="sensitive">Sensitive — reactive, prone to redness</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fitzpatrick Skin Tone</label>
+            <select id="fitzpatrick">
+              <option value="">Select tone</option>
+              <option value="1-2">I-II — Very fair, burns easily</option>
+              <option value="3-4">III-IV — Medium, tans gradually</option>
+              <option value="5-6">V-VI — Dark, rarely burns</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Known Sensitivities / Conditions</label>
+            <div class="checkbox-group" id="conditions">
+              <div class="checkbox-chip" onclick="toggleChip(this)">Rosacea</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Eczema</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Acne-prone</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Perioral dermatitis</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Fragrance allergy</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Nickel allergy</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">None</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family:'DM Serif Display',serif; font-size:13px; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><span class="card-icon" style="background:#e8f5ee">🎯</span> Goals & Constraints</div>
+          <div class="form-group">
+            <label>Primary Skin Concern</label>
+            <select id="primaryConcern">
+              <option value="">Select concern</option>
+              <option value="acne">Active acne / breakouts</option>
+              <option value="pigmentation">Hyperpigmentation / dark spots</option>
+              <option value="aging">Fine lines / loss of firmness</option>
+              <option value="barrier">Damaged barrier / dryness</option>
+              <option value="redness">Redness / sensitivity</option>
+              <option value="texture">Uneven texture</option>
+              <option value="maintenance">General maintenance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Secondary Concern (optional)</label>
+            <select id="secondaryConcern">
+              <option value="">None</option>
+              <option value="acne">Acne</option>
+              <option value="pigmentation">Hyperpigmentation</option>
+              <option value="aging">Anti-aging</option>
+              <option value="redness">Redness</option>
+              <option value="texture">Texture</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Budget (€/month) — <span id="budgetVal">€50</span></label>
+            <input type="range" id="budget" min="10" max="200" value="50" step="5" oninput="document.getElementById('budgetVal').textContent='€'+this.value">
+          </div>
+          <div class="form-group">
+            <label>Routine Complexity</label>
+            <div class="checkbox-group" id="complexity">
+              <div class="checkbox-chip selected" onclick="selectOne(this, 'complexity')">Minimal (2–3 steps)</div>
+              <div class="checkbox-chip" onclick="selectOne(this, 'complexity')">Moderate (4–6 steps)</div>
+              <div class="checkbox-chip" onclick="selectOne(this, 'complexity')">Comprehensive (7+)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-small-inline" onclick="saveProfile()">Save Profile →</button>
+        <button class="btn btn-outline btn-small-inline" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Active profile result -->
+    <div id="profile-result" style="display:none; margin-top: 24px;">
+      <div class="card">
+        <div class="card-title"><span class="card-icon" style="background:#e8f5ee">✓</span> <span id="profile-result-name">Routine Architecture</span></div>
+        <div id="profile-chips" style="margin-bottom: 20px;"></div>
+        <hr class="divider">
+        <div style="font-family:'DM Serif Display',serif; font-size:13px; margin-bottom:8px;">Evidence-Based Routine Architecture</div>
+        <div class="help-text" style="margin-bottom: 16px;">Ingredient categories recommended based on this profile. Not product recommendations — actives with clinical evidence for these concerns.</div>
+        <div id="routine-architecture"></div>
+      </div>
+
+    </div>
+  </div>
+
+    <!-- ===== 2. SCANNER ===== -->
+  <div class="section" id="section-scanner">
+    <div class="section-header">
+      <div class="section-label">Step 02 — Ingredient Analysis</div>
+      <h1 class="section-title">What's <em>actually</em><br>in the bottle.</h1>
+    </div>
+
+    <div id="scanner-input">
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title"><span class="card-icon" style="background:#f0ede6">⬡</span> Paste INCI Ingredient List</div>
+        <div class="help-text" style="margin-bottom:12px;">Find the ingredient list on the product packaging or brand website, then paste it below. Ingredients are listed comma-separated in order of concentration (highest → lowest).</div>
+        <textarea id="inci-input" placeholder="e.g. Water, Glycerin, Niacinamide, Ceramide NP, Sodium Hyaluronate, Retinol, Parfum..."
+          style="width:100%; height:120px; padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; font-family:'DM Mono',monospace; font-size:13px; resize:vertical; outline:none; color:var(--ink); line-height:1.6;"></textarea>
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <button class="btn btn-primary btn-small-inline" onclick="analyzeINCIInput()">Analyze Ingredients →</button>
+          <button class="btn btn-outline btn-small-inline" onclick="simulateScan()">Load Demo</button>
+        </div>
+      </div>
+      <div class="alert alert-amber" style="font-size:11px;">
+        <span>ℹ</span>
+        <div><strong>Where to find the INCI list:</strong> On the back or bottom of the packaging, on the brand's website product page, or on <a href="https://incidecoder.com" target="_blank" style="color:var(--amber)">INCIdecoder.com</a> (search by product name).</div>
+      </div>
+    </div>
+
+    <div id="scanner-result" style="display:none; margin-top: 32px;" class="product-result">
+      <div class="product-header">
+        <div>
+          <div class="product-name" id="product-name">CeraVe Moisturising Cream</div>
+          <div class="product-brand" id="product-brand">Category: Moisturiser · Jar 340g</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'DM Serif Display',serif; font-size:32px;" id="risk-score">82</div>
+          <div style="font-size:11px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em">Safety Score</div>
+        </div>
+      </div>
+
+      <div id="alerts-area"></div>
+
+      <div class="grid-2" style="margin-top: 16px;">
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#e8f5ee">⬡</span> Active Ingredients</div>
+          <div id="active-ingredients"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#fdefd0">⚠</span> Watch List</div>
+          <div id="watch-ingredients"></div>
+          <div id="watch-empty" style="display:none; color:var(--ink-muted); font-size:12px; padding: 12px 0;">No flagged ingredients for your profile.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">All Ingredients — Estimated Concentration Order</div>
+        <div class="help-text" style="margin-bottom: 12px;">INCI lists are ordered by concentration (highest → lowest). Ingredients below 1% are often interchangeable.</div>
+        <div id="all-ingredients"></div>
+      </div>
+
+      <div style="margin-top: 20px; display: flex; gap: 8px; flex-wrap:wrap;">
+        <button class="btn btn-outline btn-small-inline" onclick="resetScanner()">Scan Another Product</button>
+        <button class="btn btn-primary btn-small-inline" onclick="addToRoutine()">Add to My Routine →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. ROUTINE OPTIMIZER ===== -->
+  <div class="section" id="section-routine">
+    <div class="section-header">
+      <div class="section-label">Step 04 — Optimization</div>
+      <h1 class="section-title">Less overlap.<br><em>More results.</em></h1>
+    </div>
+
+    <!-- Add product form -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="card-title"><span class="card-icon" style="background:#e8f5ee">+</span> Add Product to Routine</div>
+      <div style="display:grid; grid-template-columns:1fr 120px 120px auto; gap:8px; align-items:end;" class="routine-add-grid">
+        <div>
+          <label>Product Name</label>
+          <input type="text" id="product-add" placeholder="e.g. CeraVe Moisturising Cream">
+        </div>
+        <div>
+          <label>Time of Day</label>
+          <select id="product-time">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+            <option value="AM/PM">AM + PM</option>
+          </select>
+        </div>
+        <div>
+          <label>Cost (€/mo)</label>
+          <input type="number" id="product-price" placeholder="0" min="0" max="999">
+        </div>
+        <div>
+          <button class="btn btn-primary btn-small-inline" style="white-space:nowrap" onclick="addProductInput()">Add →</button>
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <label>INCI / Key Ingredients (optional, comma-separated)</label>
+        <input type="text" id="product-inci" placeholder="e.g. niacinamide, ceramide NP, glycerin">
+      </div>
+    </div>
+
+    <!-- Routine list -->
+    <div id="routine-items"></div>
+    <div id="overlap-warnings" style="margin-top: 20px;"></div>
+    <div id="alternative-suggestions" style="margin-top: 16px;"></div>
+  </div>
+
+  <!-- ===== 5. SIMPLICITY SCORE ===== -->
+  <div class="section" id="section-score">
+    <div class="section-header">
+      <div class="section-label">Step 05 — Routine Audit</div>
+      <h1 class="section-title">Your routine,<br><em>objectively scored.</em></h1>
+    </div>
+    <div id="score-content"></div>
+  </div>
+</div>
+
+<script>
+// ====== NAVIGATION ======
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'score') renderScore();
+}
+
+// ====== CHIP TOGGLES ======
+function toggleChip(el) {
+  el.classList.toggle('selected');
+}
+function selectOne(el, groupId) {
+  el.closest('#' + groupId).querySelectorAll('.checkbox-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ====== PROFILE ======
+const routineDB = {
+  acne: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Low-pH gentle cleanser (pH 4.5–5.5)',
+      evidence: 'High',
+      note: 'Preserves acid mantle and skin microbiome. Avoid SLS (Sodium Lauryl Sulfate). Look for glucoside or amino-acid surfactants. Pat dry, never rub.',
+      ingredients: 'Sodium Cocoyl Glutamate · Coco-Glucoside · Glycerin',
+      avoid: 'Scrubs · cleansing brushes · hot water · SLS/SLES',
+    },
+    {
+      step: 'Active Serum', time: 'AM',
+      actives: 'Niacinamide 5–10%',
+      evidence: 'High',
+      note: 'Reduces sebum production, minimises pore appearance, calms post-inflammatory redness. No photosensitivity — safe for AM use. Start at 5%, increase if tolerated. Zinc PCA 1% adds sebum control.',
+      ingredients: 'Niacinamide 5–10% · Zinc PCA 1%',
+      avoid: 'High-dose niacinamide (>10%) combined with pure Vitamin C in same step',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'SPF50+ broad-spectrum (UVA + UVB)',
+      evidence: 'Very High',
+      note: 'Non-negotiable. UV triggers post-inflammatory hyperpigmentation (PIH) — dark marks after spots heal. Choose a non-comedogenic formula. Chemical or mineral both fine.',
+      ingredients: 'Zinc Oxide or Tinosorb M/S · PA++++ UVA rating · non-comedogenic base',
+      avoid: 'Skipping on cloudy days — UVA penetrates clouds and glass',
+    },
+    {
+      step: 'BHA Exfoliant', time: 'PM — 2–3x/week',
+      actives: 'Salicylic Acid 0.5–2% at pH 3–4',
+      evidence: 'High',
+      note: 'Oil-soluble BHA penetrates into the pore lining — the only exfoliant that works inside the pore. Start 2x/week. At 2% most effective; 0.5–1% for beginners. Benzoyl Peroxide 2.5% is an evidence-backed alternative for bacterial acne.',
+      ingredients: 'Salicylic Acid 1–2% · pH 3–4 for efficacy',
+      avoid: 'Same night as retinol — over-exfoliation risk',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Non-comedogenic · Ceramides + Hyaluronic Acid',
+      evidence: 'Medium',
+      note: 'Essential even for oily, acne-prone skin. Skipping moisturiser causes compensatory sebum overproduction. Gel or fluid texture preferred.',
+      ingredients: 'Ceramide NP/AP · Hyaluronic Acid · Glycerin · no coconut oil or isopropyl myristate',
+      avoid: 'Heavy occlusives, mineral oil, thick butters if prone to comedones',
+    },
+  ],
+
+  pigmentation: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Low-pH gentle cleanser (pH 4.5–5.5)',
+      evidence: 'High',
+      note: 'Avoid abrasive scrubs — physical exfoliation can trigger post-inflammatory hyperpigmentation (PIH), especially in Fitzpatrick IV–VI skin tones.',
+      ingredients: 'Amino-acid surfactants · no physical beads',
+      avoid: 'Harsh scrubs · over-washing',
+    },
+    {
+      step: 'Antioxidant', time: 'AM — after cleanse',
+      actives: 'L-Ascorbic Acid 10–15% at pH <3.5',
+      evidence: 'High',
+      note: 'Inhibits tyrosinase enzyme → blocks melanin synthesis. Also neutralises UV-induced free radicals. Most potent as L-Ascorbic Acid but unstable — store dark/cool, use within 3 months. Ascorbyl Glucoside is more stable but ~40% less potent.',
+      ingredients: 'L-Ascorbic Acid 15% · Vitamin E (Tocopherol) 1% · Ferulic Acid 0.5% — the CE Ferulic trio doubles antioxidant activity',
+      avoid: 'Yellowed/brown Vit C = oxidised = ineffective. High Vit C + high Niacinamide simultaneously.',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'SPF50+ with UVA PA++++ protection',
+      evidence: 'Very High',
+      note: 'Without SPF, every pigmentation treatment is undone daily. UVA directly stimulates melanin. Reapply every 2h if outdoors. A PPD >16 or PA++++ rating is essential.',
+      ingredients: 'Tinosorb S/M · Zinc Oxide · Uvinul A Plus · PA++++',
+      avoid: 'SPF30 or lower — insufficient UVA protection during active treatment',
+    },
+    {
+      step: 'Brightening Active', time: 'PM',
+      actives: 'Azelaic Acid 10–20% or Alpha-Arbutin 2%',
+      evidence: 'High',
+      note: 'Azelaic Acid: dual tyrosinase inhibitor + anti-inflammatory. OTC max 10%; 15–20% requires prescription. Alpha-Arbutin 2%: slower-acting but well-tolerated on sensitive skin. Tranexamic Acid 2–5% has strong emerging evidence.',
+      ingredients: 'Azelaic Acid 10% OTC · Alpha-Arbutin 2% · Tranexamic Acid 2–5%',
+      avoid: 'Kojic Acid in high concentrations — sensitiser risk. Hydroquinone without medical supervision.',
+    },
+    {
+      step: 'Retinoid', time: 'PM — alternate nights',
+      actives: 'Retinol 0.025% → 0.05% → 0.1% (titrate over 12 weeks)',
+      evidence: 'High',
+      note: 'Accelerates keratinocyte turnover, pushing pigmented cells to surface faster. Introduce slowly: 1x/week for 2 weeks, then 2x, then 3x. Full effect: 3–6 months. Retinaldehyde 0.05–0.1% faster and better tolerated.',
+      ingredients: 'Retinol 0.025–0.1% · or Retinaldehyde 0.05–0.1% in emollient base',
+      avoid: 'Same night as AHA/BHA. Never in pregnancy.',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Ceramides + Hyaluronic Acid + Panthenol (B5) 1–5%',
+      evidence: 'Medium',
+      note: 'Barrier support reduces sensitisation from actives. Apply after serums (2–3 min). Niacinamide 5% in moisturiser adds secondary brightening benefit.',
+      ingredients: 'Ceramide NP · Sodium Hyaluronate · Panthenol 1–5% · Niacinamide 5%',
+      avoid: 'Skipping moisturiser when using retinol — accelerates irritation',
+    },
+  ],
+
+  aging: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Gentle hydrating cleanser — pH 5–6',
+      evidence: 'High',
+      note: 'Avoid over-stripping. Mature skin produces less sebum — cream or milk texture preserves lipids. In AM, a water rinse alone is often sufficient.',
+      ingredients: 'Glycerin · Ceramides · gentle surfactants at low concentration',
+      avoid: 'Foaming gels with SLS · hot water · over-cleansing',
+    },
+    {
+      step: 'Antioxidant', time: 'AM — after cleanse',
+      actives: 'Vitamin C 10–15% (L-AA) + Vitamin E 1% + Ferulic Acid 0.5%',
+      evidence: 'Very High',
+      note: 'The CE Ferulic combination is the gold standard. Ferulic acid doubles the antioxidant activity of vitamins C and E. Stimulates collagen synthesis, reduces fine lines, neutralises UV free radicals. Apply before SPF.',
+      ingredients: 'L-Ascorbic Acid 10–15% · Tocopherol 1% · Ferulic Acid 0.5% · pH 2.5–3.5',
+      avoid: 'Vitamin C above 20% — more irritation, no extra benefit. Oxidised (yellowed) formulas.',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'SPF50+ broad-spectrum',
+      evidence: 'Very High',
+      note: '80–90% of visible aging (wrinkles, laxity, uneven tone) is UV-induced photoaging. SPF50+ used consistently outperforms any serum or active. The single most evidence-backed anti-aging intervention.',
+      ingredients: 'Tinosorb S · Zinc Oxide · Uvinul T 150 · PA++++',
+      avoid: 'SPF in foundation or powder — insufficient quantity. Skipping in winter.',
+    },
+    {
+      step: 'Retinoid', time: 'PM only',
+      actives: 'Retinol 0.025% (week 1–4) → 0.05% (month 2–3) → 0.1% (maintain)',
+      evidence: 'Very High',
+      note: 'Most evidence-backed topical anti-aging active. Stimulates collagen synthesis, increases cell turnover, reduces fine lines over 3–6 months. Retinaldehyde 0.05% is more effective per molecule and better tolerated.',
+      ingredients: 'Retinol 0.025–0.1% · or Retinaldehyde 0.05% · in emollient base',
+      avoid: 'Starting at high concentration. Using with AHA on same night. Skipping SPF next morning.',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Ceramides + Peptides (Matrixyl 3000) + Glycerin',
+      evidence: 'Medium-High',
+      note: 'Ceramides restore barrier integrity. Palmitoyl Tripeptide-1/7 (Matrixyl 3000) has emerging evidence for collagen stimulation. Glycerin is a cornerstone humectant. Richer texture at night.',
+      ingredients: 'Ceramide NP/AP/EOP · Palmitoyl Tripeptide-1 + Palmitoyl Tetrapeptide-7 · Glycerin · Squalane',
+      avoid: 'Fragrance — sensitises aging skin. Luxury claims without ingredient transparency.',
+    },
+  ],
+
+  barrier: [
+    {
+      step: 'Cleanser', time: 'PM only — water rinse AM',
+      actives: 'Syndet or micellar water — pH 5–5.5',
+      evidence: 'High',
+      note: 'Damaged barrier cannot tolerate surfactants. AM: rinse with lukewarm water only. PM: syndet pH 5–5.5 or micellar water. No double-cleanse whatsoever.',
+      ingredients: 'Sodium Cocoyl Isethionate · Cocamidopropyl Betaine · Micellar water without alcohol',
+      avoid: 'Any foaming cleanser · double cleansing · hot water · physical exfoliation',
+    },
+    {
+      step: 'Barrier Repair', time: 'AM + PM',
+      actives: 'Ceramides + Cholesterol + Fatty Acids in 3:1:1 ratio',
+      evidence: 'Very High',
+      note: 'The MLE (Multi-Lamellar Emulsion) 3:1:1 ratio directly replicates the skin lipid bilayer structure. Most clinically validated approach to barrier restoration. Expect 2–6 weeks of consistent use for measurable improvement.',
+      ingredients: 'Ceramide NP + AP + EOP · Cholesterol · Linoleic Acid · Phytosphingosine',
+      avoid: 'Products with only one ceramide type — the full 3:1:1 ratio matters',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'Mineral-only SPF50 (Zinc Oxide / Titanium Dioxide)',
+      evidence: 'Very High',
+      note: 'Chemical UV filters can penetrate and irritate a compromised barrier. Choose mineral-only while healing. Tinted mineral SPF minimises white cast.',
+      ingredients: 'Zinc Oxide 10–20% · Titanium Dioxide · no chemical UV filters',
+      avoid: 'Chemical filters (avobenzone, octinoxate, oxybenzone) until barrier is restored',
+    },
+    {
+      step: 'Occlusive', time: 'PM — final step',
+      actives: 'Petrolatum (Vaseline) 1–3% or Squalane + humectants',
+      evidence: 'Very High',
+      note: 'Occlusives physically prevent transepidermal water loss (TEWL). Petrolatum is the gold standard — inert, hypoallergenic, highly effective. Apply as final PM step ("slugging"). Squalane is a lighter option.',
+      ingredients: 'Petrolatum (Vaseline) · Squalane · Glycerin · Hyaluronic Acid',
+      avoid: 'All actives until barrier heals: no retinoids, AHA/BHA, Vitamin C, or fragrance',
+    },
+    {
+      step: '⚠ Pause all actives', time: '2–6 weeks',
+      actives: 'Fragrance · Alcohols · AHA/BHA · Retinoids · Vitamin C — all paused',
+      evidence: '—',
+      note: 'All actives — however beneficial in a healthy routine — further degrade a compromised barrier. Pause completely until skin no longer stings with water or shows redness. Reintroduce one at a time, starting with the most gentle.',
+      ingredients: '—',
+      avoid: 'Rushing reintroduction. Any product with Parfum / Fragrance.',
+    },
+  ],
+
+  redness: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Ultra-gentle syndet — pH 5–5.5, no physical exfoliation',
+      evidence: 'High',
+      note: 'Water temperature matters for rosacea — lukewarm only. Hot water dilates blood vessels and triggers flushing. Pat dry, never rub.',
+      ingredients: 'Sodium Cocoyl Glutamate · Glycerin · no menthol, mint, or scrub particles',
+      avoid: 'Hot water · physical exfoliation · AHAs/BHAs during flare · fragrance',
+    },
+    {
+      step: 'Anti-inflammatory Active', time: 'AM or PM',
+      actives: 'Azelaic Acid 15–20% (Rx) or Niacinamide 4–5% (OTC)',
+      evidence: 'High',
+      note: 'Azelaic Acid 15–20% is EU/US approved for rosacea — prescription required above 10%. Reduces erythema, papules, pustules. Niacinamide 4–5% is the best OTC option: reduces TEWL and calms reactive skin.',
+      ingredients: 'Azelaic Acid 10% OTC · Niacinamide 4–5%',
+      avoid: 'Benzoyl peroxide · strong AHA/BHA · retinoids during active flares',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'Mineral SPF50 with neutral or green tint',
+      evidence: 'Very High',
+      note: 'UV is a primary rosacea trigger. Mineral/physical filters less likely to sting on reactive skin than chemical filters. Green-tinted SPF neutralises redness visually while protecting.',
+      ingredients: 'Zinc Oxide 15–20% · Titanium Dioxide · iron oxides for tint · no oxybenzone',
+      avoid: 'Chemical UV filters on sensitised skin · skipping SPF in winter',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Ceramides + Panthenol (B5) 1–5% + Centella Asiatica',
+      evidence: 'Medium-High',
+      note: 'Panthenol has clinically validated anti-inflammatory and barrier-repair properties. Centella Asiatica (Madecassoside, Asiaticoside) shows anti-inflammatory evidence for rosacea-adjacent conditions. Keep routine minimal — 3–4 products max.',
+      ingredients: 'Ceramide NP/AP · Panthenol 1–5% · Madecassoside · Allantoin',
+      avoid: 'Fragrance · essential oils (tea tree, lavender, peppermint) · witch hazel · alcohol denat',
+    },
+  ],
+
+  texture: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Low-pH gentle cleanser (pH 4.5–5.5)',
+      evidence: 'High',
+      note: 'Consistent base. Avoid abrasive cleansers. Double-cleanse only if wearing waterproof SPF or heavy makeup.',
+      ingredients: 'Amino-acid surfactants · no physical exfoliant particles',
+      avoid: 'Harsh scrubs · over-cleansing',
+    },
+    {
+      step: 'Chemical Exfoliant', time: 'PM — 2–3x/week',
+      actives: 'Glycolic Acid 5–10% or Lactic Acid 5–10% · PHA for sensitive',
+      evidence: 'High',
+      note: 'AHAs dissolve bonds between dead skin cells, accelerating surface turnover. Glycolic Acid (smallest molecule, deepest penetration) is most potent. Lactic Acid is more hydrating and gentler. PHAs (Gluconolactone 10%) work at surface only — ideal for sensitive skin. Always SPF next morning.',
+      ingredients: 'Glycolic Acid 7–10% at pH 3–4 · Lactic Acid 5–10% · or Gluconolactone 10% (PHA)',
+      avoid: 'Same night as retinol. More than 3x/week. AHA + BHA simultaneously.',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'SPF50+ broad-spectrum',
+      evidence: 'Very High',
+      note: 'Freshly exfoliated skin is significantly more photosensitive. UV directly counteracts texture improvement. Non-negotiable on AHA/retinol days.',
+      ingredients: 'Any SPF50+ broad-spectrum · PA++++',
+      avoid: 'Skipping SPF after using exfoliants the night before',
+    },
+    {
+      step: 'Retinoid', time: 'PM — alternate with exfoliant',
+      actives: 'Retinol 0.025–0.05% (start) → 0.1% (maintain)',
+      evidence: 'High',
+      note: 'Regulates keratinocyte turnover — improves texture, pores, fine lines over 3–6 months. Alternate nights: retinol Mon/Wed/Fri, AHA Tue/Thu. Do not use same night as AHA/BHA.',
+      ingredients: 'Retinol 0.025–0.1% · in squalane or ceramide base to buffer irritation',
+      avoid: 'Starting above 0.05% · same night as AHA · skipping moisturiser after',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Ceramides + Niacinamide 5% + Glycerin',
+      evidence: 'Medium-High',
+      note: 'Niacinamide 5% refines pore appearance and regulates sebum over 8–12 weeks. Ceramides support barrier integrity between exfoliant uses. Slightly richer texture at PM.',
+      ingredients: 'Ceramide NP · Niacinamide 5% · Glycerin · Hyaluronic Acid',
+      avoid: 'Heavy pore-clogging occlusives if texture includes congestion',
+    },
+  ],
+
+  maintenance: [
+    {
+      step: 'Cleanser', time: 'AM + PM',
+      actives: 'Gentle low-pH cleanser (pH 4.5–5.5)',
+      evidence: 'High',
+      note: 'The non-negotiable foundation. AM water rinse is sufficient if skin is not oily overnight. Consistency matters more than product price.',
+      ingredients: 'Amino-acid surfactants · Glycerin · no SLS for daily use',
+      avoid: 'Harsh foaming cleansers · over-cleansing',
+    },
+    {
+      step: 'Antioxidant', time: 'AM — optional but high-value',
+      actives: 'Vitamin C 10–15% (L-AA) or Niacinamide 5%',
+      evidence: 'Medium-High',
+      note: 'Prevention over correction. L-Ascorbic Acid 10–15% is the highest-impact preventive investment — neutralises UV free radicals, supports collagen, fades early pigmentation. Niacinamide 5% is more stable, gentler, with broad benefits.',
+      ingredients: 'L-Ascorbic Acid 10–15% + Ferulic Acid 0.5% · or Niacinamide 5% + Zinc 1%',
+      avoid: 'Over-complicated antioxidant cocktails — one well-formulated product is sufficient',
+    },
+    {
+      step: 'SPF', time: 'AM — final step',
+      actives: 'SPF30–50+ broad-spectrum',
+      evidence: 'Very High',
+      note: 'The single highest-impact thing for long-term skin health. Prevents photoaging (80–90% of wrinkles and uneven tone), skin cancer, and pigmentation. SPF30 sufficient for daily indoor use; SPF50+ for outdoor activity.',
+      ingredients: 'Any broad-spectrum SPF30–50+ · PA+++ minimum',
+      avoid: 'SPF in foundation or powder — never applied in sufficient quantity',
+    },
+    {
+      step: 'Moisturiser', time: 'AM + PM',
+      actives: 'Ceramides + Hyaluronic Acid + Glycerin',
+      evidence: 'Medium',
+      note: 'Match texture to skin type: gel for oily, lotion for combination, cream for dry. Apply to slightly damp skin for best humectant effect. Ceramides maintain barrier integrity long-term.',
+      ingredients: 'Ceramide NP/AP · Sodium Hyaluronate · Glycerin · no unnecessary fragrance',
+      avoid: 'Expensive luxury moisturisers without ceramide content — price does not equal efficacy',
+    },
+  ],
+};
+
+// ====== MULTI-PROFILE SYSTEM ======
+let savedProfiles = [];
+let editingProfileId = null;
+
+async function loadProfiles() {
+  try {
+    const result = await window.storage.get('skindecide-profiles');
+    savedProfiles = result ? JSON.parse(result.value) : [];
+  } catch(e) {
+    savedProfiles = [];
+  }
+  renderProfilesList();
+}
+
+async function persistProfiles() {
+  try {
+    await window.storage.set('skindecide-profiles', JSON.stringify(savedProfiles));
+  } catch(e) {}
+}
+
+function renderProfilesList() {
+  const el = document.getElementById('profiles-list');
+  if (!savedProfiles.length) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div style="margin-bottom:12px; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-muted);">Saved Profiles (${savedProfiles.length})</div>
+    <div style="display:flex; flex-direction:column; gap:10px;" id="profiles-cards">
+      ${savedProfiles.map(p => `
+        <div class="card" style="padding:16px; display:flex; align-items:center; gap:12px; cursor:pointer;" data-pid="${p.id}">
+          <div style="flex:1; pointer-events:none;">
+            <div style="font-family:'DM Serif Display',serif; font-size:16px; margin-bottom:6px;">${p.name}</div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+              ${p.chips.slice(0,3).map(c => `<span class="tag tag-muted">${c}</span>`).join('')}
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button data-action="edit" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--ink-muted);">Edit</button>
+            <button data-action="delete" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--accent);">✕</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+
+  const cards = document.getElementById('profiles-cards');
+  if (cards) {
+    cards.addEventListener('click', function(e) {
+      const btn = e.target.closest('button[data-action]');
+      if (btn) {
+        e.stopPropagation();
+        if (btn.dataset.action === 'edit') editProfile(btn.dataset.id);
+        if (btn.dataset.action === 'delete') deleteProfile(btn.dataset.id);
+      } else {
+        const card = e.target.closest('[data-pid]');
+        if (card) viewProfile(card.dataset.pid);
+      }
+    });
+  }
+}
+
+function saveProfile() {
+  const name = document.getElementById('profileName').value.trim() || 'My Skin';
+  const skinType = document.getElementById('skinType').value;
+  const concern = document.getElementById('primaryConcern').value;
+  if (!skinType || !concern) { alert('Please select your skin type and primary concern.'); return; }
+
+  const conditions = Array.from(document.querySelectorAll('#conditions .checkbox-chip.selected')).map(c => c.textContent);
+  const complexity = document.querySelector('#complexity .checkbox-chip.selected')?.textContent || 'Minimal';
+  const budget = document.getElementById('budget').value;
+  const fitzpatrick = document.getElementById('fitzpatrick').value;
+  const secondary = document.getElementById('secondaryConcern').value;
+
+  const chips = [skinType + ' skin', concern, '€' + budget + '/mo', ...conditions.filter(c => c !== 'None')];
+
+  const profile = {
+    id: editingProfileId || ('p' + Date.now()),
+    name, skinType, concern, secondary, fitzpatrick,
+    conditions, complexity, budget, chips,
+    savedAt: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }),
+  };
+
+  if (editingProfileId) {
+    savedProfiles = savedProfiles.map(p => p.id === editingProfileId ? profile : p);
+    editingProfileId = null;
+  } else {
+    savedProfiles.push(profile);
+  }
+
+  persistProfiles();
+  renderProfilesList();
+  viewProfile(profile.id);
+  resetForm();
+}
+
+function viewProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id);
+  if (!p) return;
+  document.getElementById('profile-result-name').textContent = p.name;
+  document.getElementById('profile-chips').innerHTML =
+    p.chips.map(c => `<div class="profile-chip">✓ ${c}</div>`).join('') +
+    `<div class="profile-chip" style="color:var(--ink-muted)">Saved ${p.savedAt}</div>`;
+
+  const architecture = routineDB[p.concern] || routineDB.maintenance;
+  const evidenceColor = (e) => e === 'Very High' || e === 'High' ? 'tag-green' : e === 'Medium-High' || e === 'Medium' ? 'tag-amber' : 'tag-muted';
+  const pBudget = parseInt(p.budget);
+  const budgetLabel = pBudget <= 30 ? 'affordable drugstore' : pBudget <= 80 ? 'mid-range' : 'premium';
+
+  document.getElementById('routine-architecture').innerHTML = architecture.map((step, i) => {
+    const query = encodeURIComponent('best ' + budgetLabel + ' ' + p.skinType + ' skin ' + step.step.toLowerCase() + ' ' + step.actives.split('·')[0].trim().substring(0,40));
+    const googleUrl = 'https://www.google.com/search?q=' + query;
+    return `<div style="padding: 16px 0; border-bottom: 1px solid var(--border);">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px;">
+        <div style="flex:1; min-width:0;">
+          <div class="routine-step-label" style="margin-bottom:4px;">
+            <span class="step-num">${i+1}</span>${step.step}
+            <span style="margin-left:8px; font-size:10px; color:var(--ink-muted); text-transform:none; letter-spacing:0; font-weight:400;">⏱ ${step.time}</span>
+          </div>
+          <div style="font-family:'DM Serif Display',serif; font-size:15px; color:var(--ink); line-height:1.3;">${step.actives}</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0;">
+          <span class="tag ${evidenceColor(step.evidence)}">Evidence: ${step.evidence}</span>
+          <a href="${googleUrl}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:5px 9px; font-family:'DM Mono',monospace; font-size:9px; text-decoration:none; color:var(--ink-muted); white-space:nowrap; text-transform:uppercase; letter-spacing:0.06em; cursor:pointer;">🔍 Search</a>
+        </div>
+      </div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.6; margin-bottom:10px;">${step.note}</div>
+      ${step.ingredients && step.ingredients !== '—' ? `<div style="display:flex; gap:8px; align-items:baseline; margin-bottom:6px; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); flex-shrink:0;">✓ Look for</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.ingredients}</span></div>` : ''}
+      ${step.avoid ? `<div style="display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); flex-shrink:0;">✗ Avoid</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.avoid}</span></div>` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('profile-result').style.display = 'block';
+  document.getElementById('profile-result').scrollIntoView({ behavior: 'smooth' });
+}
+
+function editProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id);
+  if (!p) return;
+  editingProfileId = id;
+  document.getElementById('profileName').value = p.name;
+  document.getElementById('skinType').value = p.skinType;
+  document.getElementById('primaryConcern').value = p.concern;
+  document.getElementById('secondaryConcern').value = p.secondary || '';
+  document.getElementById('fitzpatrick').value = p.fitzpatrick || '';
+  document.getElementById('budget').value = p.budget;
+  document.getElementById('budgetVal').textContent = '€' + p.budget;
+  document.querySelectorAll('#conditions .checkbox-chip').forEach(c => c.classList.toggle('selected', p.conditions.includes(c.textContent)));
+  document.querySelectorAll('#complexity .checkbox-chip').forEach(c => c.classList.toggle('selected', c.textContent === p.complexity));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#fdefd0">✎</span> Edit Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'inline-flex';
+  document.getElementById('profile-form-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function deleteProfile(id) {
+  if (!confirm('Delete this profile?')) return;
+  savedProfiles = savedProfiles.filter(p => p.id !== id);
+  persistProfiles();
+  renderProfilesList();
+  if (!savedProfiles.length) document.getElementById('profile-result').style.display = 'none';
+}
+
+function cancelEdit() { editingProfileId = null; resetForm(); }
+
+function resetForm() {
+  document.getElementById('profileName').value = '';
+  document.getElementById('skinType').value = '';
+  document.getElementById('primaryConcern').value = '';
+  document.getElementById('secondaryConcern').value = '';
+  document.getElementById('fitzpatrick').value = '';
+  document.getElementById('budget').value = 50;
+  document.getElementById('budgetVal').textContent = '€50';
+  document.querySelectorAll('#conditions .checkbox-chip').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('#complexity .checkbox-chip').forEach((c,i) => c.classList.toggle('selected', i===0));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#f0ede6">+</span> New Skin Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'none';
+}
+
+loadProfiles();
+
+// ====== SCANNER ======
+const demoProduct = {
+  name: 'CeraVe Moisturising Cream',
+  brand: 'Category: Moisturiser · For dry to very dry skin',
+  safetyScore: 88,
+  alerts: [
+    { type: 'green', icon: '✓', text: 'No fragrance detected. Suitable for sensitive skin.' },
+    { type: 'green', icon: '✓', text: 'No drying alcohols (denatured). Contains beneficial fatty alcohols only.' },
+  ],
+  actives: [
+    { name: 'Ceramide NP / AP / EOP (3-type complex)', conc: 85, level: 'High', color: 'var(--green)', badge: 'tag-green', function: 'Barrier repair · restores lipid bilayer structure' },
+    { name: 'Hyaluronic Acid (Sodium Hyaluronate)', conc: 60, level: 'Moderate', color: 'var(--green)', badge: 'tag-green', function: 'Humectant · water-binding up to 1000x weight' },
+    { name: 'Niacinamide 4%', conc: 45, level: 'Active', color: 'var(--green)', badge: 'tag-green', function: 'Barrier support · pore minimizing · anti-inflammatory' },
+    { name: 'Cholesterol', conc: 30, level: 'Supporting', color: 'var(--amber)', badge: 'tag-amber', function: 'Completes the ceramide-cholesterol-fatty acid ratio (3:1:1)' },
+  ],
+  watchlist: [],
+  allIngredients: [
+    'Water', 'Glycerin', 'Cetearyl Alcohol', 'Caprylic/Capric Triglyceride', 'Behentrimonium Methosulfate', 'Cetyl Alcohol', 'Ceramide NP', 'Ceramide AP', 'Ceramide EOP', 'Cholesterol', 'Sodium Hyaluronate', 'Niacinamide', 'Dimethicone', 'Carbomer', 'Sodium Lauroyl Lactylate', 'Sodium PCA', 'Phytosphingosine', 'Xanthan Gum', 'Tocopherol', 'EDTA', 'Phenoxyethanol', 'Methylparaben'
+  ]
+};
+
+function simulateScan() {
+  displayProduct(demoProduct);
+}
+
+function analyzeINCIInput() {
+  const input = document.getElementById('inci-input').value.trim();
+  if (!input) { simulateScan(); return; }
+  const ingredients = input.split(',').map(i => i.trim()).filter(Boolean);
+  const custom = {
+    name: 'Custom Product',
+    brand: 'INCI Analysis · ' + ingredients.length + ' ingredients detected',
+    safetyScore: 75,
+    alerts: detectAlerts(ingredients),
+    actives: detectActives(ingredients),
+    watchlist: detectWatchlist(ingredients),
+    allIngredients: ingredients,
+  };
+  displayProduct(custom);
+}
+
+function detectAlerts(ingredients) {
+  const alerts = [];
+  const lc = ingredients.map(i => i.toLowerCase());
+  const hasFragrance = lc.some(i => i.includes('parfum') || i.includes('fragrance') || i.includes('linalool') || i.includes('limonene'));
+  const hasDryAlcohol = lc.some(i => i === 'alcohol denat' || i === 'denatured alcohol' || i === 'sd alcohol');
+  if (hasFragrance) alerts.push({ type: 'amber', icon: '⚠', text: 'Fragrance detected (Parfum or allergens). High sensitization potential, especially for barrier-compromised or rosacea skin.' });
+  if (hasDryAlcohol) alerts.push({ type: 'red', icon: '✗', text: 'Drying alcohol detected (Alcohol Denat). Can disrupt barrier function and increase transepidermal water loss (TEWL). Avoid if dry or sensitive.' });
+  if (!hasFragrance && !hasDryAlcohol) alerts.push({ type: 'green', icon: '✓', text: 'No major red flags detected for general use. Always patch test on new skin.' });
+  return alerts;
+}
+
+const activeMap = {
+  'niacinamide': { function: 'Sebum regulation · anti-inflammatory · barrier support', color: 'var(--green)', badge: 'tag-green' },
+  'retinol': { function: 'Cell turnover · anti-aging · collagen synthesis', color: 'var(--green)', badge: 'tag-green' },
+  'ascorbic acid': { function: 'Antioxidant · brightening · collagen synthesis', color: 'var(--green)', badge: 'tag-green' },
+  'salicylic acid': { function: 'BHA · exfoliant · comedolytic · anti-inflammatory', color: 'var(--green)', badge: 'tag-green' },
+  'glycolic acid': { function: 'AHA · exfoliant · collagen stimulation', color: 'var(--amber)', badge: 'tag-amber' },
+  'hyaluronic acid': { function: 'Humectant · moisture binding', color: 'var(--green)', badge: 'tag-green' },
+  'sodium hyaluronate': { function: 'Humectant · smaller MW than HA, deeper penetration', color: 'var(--green)', badge: 'tag-green' },
+  'ceramide': { function: 'Barrier lipid · structural integrity', color: 'var(--green)', badge: 'tag-green' },
+  'azelaic acid': { function: 'Anti-inflammatory · tyrosinase inhibitor · anti-bacterial', color: 'var(--green)', badge: 'tag-green' },
+  'alpha-arbutin': { function: 'Tyrosinase inhibitor · brightening', color: 'var(--green)', badge: 'tag-green' },
+  'peptide': { function: 'Collagen stimulation (emerging evidence)', color: 'var(--amber)', badge: 'tag-amber' },
+};
+
+function detectActives(ingredients) {
+  const found = [];
+  for (const [key, val] of Object.entries(activeMap)) {
+    const match = ingredients.find(i => i.toLowerCase().includes(key));
+    if (match) {
+      const idx = ingredients.findIndex(i => i.toLowerCase().includes(key));
+      const total = ingredients.length;
+      const pct = Math.max(10, Math.round((1 - idx / total) * 80));
+      found.push({ name: match, conc: pct, level: idx < 5 ? 'High' : idx < 10 ? 'Moderate' : 'Low', color: val.color, badge: val.badge, function: val.function });
+    }
+  }
+  return found.length ? found : [{ name: 'No recognized actives found', conc: 5, level: '—', color: 'var(--ink-muted)', badge: 'tag-muted', function: 'Consider whether this product serves a specific purpose.' }];
+}
+
+const watchlistMap = {
+  'parfum': { risk: 'High', note: 'Common sensitizer. Contains undisclosed allergens.' },
+  'fragrance': { risk: 'High', note: 'Common sensitizer. May contain 3,000+ undisclosed compounds.' },
+  'alcohol denat': { risk: 'Medium', note: 'Drying. Can disrupt skin barrier.' },
+  'sd alcohol': { risk: 'Medium', note: 'Drying alcohol. Avoid for dry/sensitive skin.' },
+  'linalool': { risk: 'Low-Medium', note: 'Oxidized form is a contact allergen. Fragrance component.' },
+  'limonene': { risk: 'Low-Medium', note: 'Fragrance allergen. EU-listed as potential sensitizer.' },
+  'methylisothiazolinone': { risk: 'High', note: 'Preservative banned in EU leave-on products. Contact allergen.' },
+  'formaldehyde': { risk: 'Very High', note: 'Known carcinogen and sensitizer. Rarely listed directly — check releasers.' },
+  'sodium lauryl sulfate': { risk: 'Medium', note: 'Potent surfactant. Strips barrier. Irritating for sensitive skin.' },
+};
+
+function detectWatchlist(ingredients) {
+  const found = [];
+  for (const [key, val] of Object.entries(watchlistMap)) {
+    if (ingredients.some(i => i.toLowerCase().includes(key))) {
+      found.push({ name: ingredients.find(i => i.toLowerCase().includes(key)), ...val });
+    }
+  }
+  return found;
+}
+
+function displayProduct(product) {
+  document.getElementById('product-name').textContent = product.name;
+  document.getElementById('product-brand').textContent = product.brand;
+  document.getElementById('risk-score').textContent = product.safetyScore;
+
+  document.getElementById('alerts-area').innerHTML = product.alerts.map(a =>
+    `<div class="alert alert-${a.type}"><span>${a.icon}</span><div>${a.text}</div></div>`
+  ).join('');
+
+  document.getElementById('active-ingredients').innerHTML = product.actives.map(a => `
+    <div class="ingredient-row">
+      <div class="ingredient-name">
+        <div>${a.name}</div>
+        <div style="font-size:10px; color:var(--ink-muted); margin-top:2px">${a.function}</div>
+      </div>
+      <div class="ingredient-bar"><div class="ingredient-fill" style="width:${a.conc}%; background:${a.color}"></div></div>
+      <div><span class="tag ${a.badge}">${a.level}</span></div>
+    </div>
+  `).join('') || '<div style="color:var(--ink-muted);font-size:12px;padding:12px 0">No key actives detected.</div>';
+
+  if (product.watchlist && product.watchlist.length) {
+    document.getElementById('watch-ingredients').innerHTML = product.watchlist.map(w => `
+      <div class="ingredient-row">
+        <div class="ingredient-name">
+          <div>${w.name}</div>
+          <div style="font-size:10px; color:var(--ink-muted); margin-top:2px">${w.note}</div>
+        </div>
+        <span class="tag ${w.risk === 'High' || w.risk === 'Very High' ? 'tag-red' : 'tag-amber'}">${w.risk} risk</span>
+      </div>
+    `).join('');
+    document.getElementById('watch-empty').style.display = 'none';
+  } else {
+    document.getElementById('watch-ingredients').innerHTML = '';
+    document.getElementById('watch-empty').style.display = 'block';
+  }
+
+  document.getElementById('all-ingredients').innerHTML = product.allIngredients.map((ing, i) => {
+    const isBelow1pct = i >= Math.floor(product.allIngredients.length * 0.6);
+    return `<span class="tag tag-muted" style="margin:3px; ${isBelow1pct ? 'opacity:0.6' : ''}">${ing}</span>`;
+  }).join('');
+
+  document.getElementById('scanner-input').style.display = 'none';
+  document.getElementById('scanner-result').style.display = 'block';
+}
+
+function resetScanner() {
+  document.getElementById('scanner-input').style.display = 'block';
+  document.getElementById('scanner-result').style.display = 'none';
+  document.getElementById('inci-input').value = '';
+}
+
+function addToRoutine() {
+  alert('Product added to your routine. Visit the Routine tab to see overlap analysis.');
+}
+
+// ====== ROUTINE OPTIMIZER ======
+let userRoutine = [];
+let routineCounter = 0;
+
+const overlapRules = [
+  {
+    ingredients: ['niacinamide'],
+    title: 'Niacinamide used multiple times',
+    desc: 'More than one product contains niacinamide. This is redundant — benefits plateau around 4–5%. Keep it in one product only.',
+  },
+  {
+    ingredients: ['retinol', 'glycolic acid'],
+    title: 'Retinol + AHA conflict',
+    desc: 'Combining retinol and glycolic acid can cause significant irritation and over-exfoliation. Use on alternating nights.',
+  },
+  {
+    ingredients: ['retinol', 'salicylic acid'],
+    title: 'Retinol + BHA conflict',
+    desc: 'Using retinol and salicylic acid together increases irritation risk. Alternate nights, or use BHA AM / retinol PM.',
+  },
+  {
+    ingredients: ['vitamin c', 'ascorbic acid'],
+    title: 'Vitamin C used multiple times',
+    desc: 'Multiple products contain vitamin C. This adds irritation load without extra benefit — one well-formulated C serum is sufficient.',
+  },
+  {
+    ingredients: ['hyaluronic acid', 'sodium hyaluronate'],
+    title: 'Hyaluronic acid redundancy',
+    desc: 'Multiple products contain hyaluronic acid or sodium hyaluronate. This is not harmful but is unnecessary — consolidate.',
+  },
+  {
+    ingredients: ['ceramide'],
+    title: 'Ceramides used multiple times',
+    desc: 'Multiple ceramide products detected. Ceramides are beneficial but doubling up offers no extra benefit — pick one.',
+  },
+];
+
+function detectOverlaps(routine) {
+  const found = [];
+  overlapRules.forEach(rule => {
+    const matchingProducts = routine.filter(p =>
+      rule.ingredients.some(ing => p.actives.some(a => a.toLowerCase().includes(ing)))
+    );
+    if (matchingProducts.length >= 2) {
+      found.push({ ...rule, products: matchingProducts.map(p => p.name) });
+    }
+  });
+  return found;
+}
+
+function renderRoutine() {
+  const el = document.getElementById('routine-items');
+  const warnEl = document.getElementById('overlap-warnings');
+  const altEl = document.getElementById('alternative-suggestions');
+
+  if (userRoutine.length === 0) {
+    el.innerHTML = `
+      <div class="card" style="text-align:center; padding:48px 24px;">
+        <div style="font-size:36px; margin-bottom:16px;">○</div>
+        <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:300; margin-bottom:8px;">Your routine is empty</div>
+        <div style="color:var(--ink-muted); font-size:12px;">Add products above to start building your evidence-based routine.</div>
+      </div>`;
+    warnEl.innerHTML = '';
+    altEl.innerHTML = '';
+    return;
+  }
+
+  const total = userRoutine.reduce((s, p) => s + (parseFloat(p.price) || 0), 0);
+
+  el.innerHTML = `
+    <div class="card">
+      <div class="card-title">My Routine — ${userRoutine.length} product${userRoutine.length !== 1 ? 's' : ''}</div>
+      ${userRoutine.map((p, i) => `
+        <div class="routine-row" style="grid-template-columns: 1fr auto auto; gap:10px;">
+          <div>
+            <div class="routine-step-label">${p.time}</div>
+            <div class="routine-step-name" style="font-size:13px; margin-top:2px;">${p.name}</div>
+            <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:3px;">
+              ${p.actives.filter(Boolean).map(a => `<span class="tag tag-muted" style="margin:1px">${a.trim()}</span>`).join('')}
+            </div>
+          </div>
+          <div style="font-size:12px; color:var(--ink-muted); white-space:nowrap; align-self:center;">${p.price ? '€' + p.price + '/mo' : '—'}</div>
+          <button onclick="removeProduct(${p.id})" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:12px; color:var(--accent); white-space:nowrap; align-self:center; min-height:36px; transition:all 0.15s;" onmouseover="this.style.background='var(--accent-light)'" onmouseout="this.style.background='none'">✕</button>
+        </div>
+      `).join('')}
+      <div class="routine-row" style="grid-template-columns:100px 1fr auto auto; font-weight:500; background:var(--surface); border-radius:6px; padding:14px; margin-top:8px;">
+        <div style="font-family:'DM Serif Display',serif;">Total</div>
+        <div></div>
+        <div style="font-family:'DM Serif Display',serif; font-size:18px;">€${total.toFixed(0)}/mo</div>
+        <div></div>
+      </div>
+    </div>`;
+
+  // Overlap detection
+  const overlaps = detectOverlaps(userRoutine);
+  if (overlaps.length) {
+    warnEl.innerHTML = `
+      <div class="card-title" style="font-family:'DM Serif Display',serif; font-size:16px; margin-bottom:12px;">⚠ Detected Overlaps & Conflicts</div>
+      ${overlaps.map(o => `
+        <div class="overlap-card">
+          <div class="overlap-title">${o.title}</div>
+          <div class="overlap-desc">${o.desc}</div>
+          <div style="margin-top:8px">${o.products.map(p => `<span class="tag tag-amber" style="margin:2px">${p}</span>`).join('')}</div>
+        </div>
+      `).join('')}`;
+  } else {
+    warnEl.innerHTML = userRoutine.length >= 2
+      ? `<div class="alert alert-green"><span>✓</span><div>No ingredient overlaps or conflicts detected in your current routine.</div></div>`
+      : '';
+  }
+
+  altEl.innerHTML = '';
+}
+
+function addProductInput() {
+  const name = document.getElementById('product-add').value.trim();
+  if (!name) return;
+  const time = document.getElementById('product-time').value;
+  const price = document.getElementById('product-price').value;
+  const inci = document.getElementById('product-inci').value;
+  const actives = inci ? inci.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+  userRoutine.push({ id: routineCounter++, name, time, price, actives });
+
+  document.getElementById('product-add').value = '';
+  document.getElementById('product-price').value = '';
+  document.getElementById('product-inci').value = '';
+
+  renderRoutine();
+  renderScore();
+}
+
+function removeProduct(id) {
+  userRoutine = userRoutine.filter(p => p.id !== id);
+  renderRoutine();
+  renderScore();
+}
+
+// ====== SCORE ======
+const irritantIngredients = ['alcohol denat', 'sd alcohol', 'parfum', 'fragrance', 'linalool', 'limonene', 'glycolic acid', 'salicylic acid', 'retinol', 'ascorbic acid'];
+const efficacyIngredients = ['retinol', 'niacinamide', 'vitamin c', 'ascorbic acid', 'ceramide', 'hyaluronic acid', 'sodium hyaluronate', 'salicylic acid', 'glycolic acid', 'azelaic acid', 'alpha-arbutin', 'spf', 'zinc oxide', 'peptide'];
+const hasSPF = (routine) => routine.some(p => p.actives.some(a => /spf|zinc oxide|tinosorb|tinosorb|uvinul/i.test(a)) || /spf/i.test(p.name));
+
+function scoreColor(val) {
+  if (val >= 70) return 'var(--green)';
+  if (val >= 45) return 'var(--amber)';
+  return 'var(--accent)';
+}
+
+function scoreRing(val, label) {
+  const circumference = 201;
+  const offset = circumference - (val / 100) * circumference;
+  const color = scoreColor(val);
+  return `
+    <div class="score-card">
+      <div class="score-ring-wrap">
+        <div class="score-ring">
+          <svg width="80" height="80">
+            <circle cx="40" cy="40" r="32" fill="none" stroke="#eee" stroke-width="6"/>
+            <circle cx="40" cy="40" r="32" fill="none" stroke="${color}" stroke-width="6"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+          </svg>
+          <div class="score-ring-val" style="color:${color}">${val}</div>
+        </div>
+        <div class="score-label">${label}</div>
+      </div>
+    </div>`;
+}
+
+function renderScore() {
+  const el = document.getElementById('score-content');
+  if (!el) return;
+
+  if (userRoutine.length === 0) {
+    el.innerHTML = `
+      <div class="card" style="text-align:center; padding:48px 24px;">
+        <div style="font-size:36px; margin-bottom:16px;">○</div>
+        <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:300; margin-bottom:8px;">No routine to score yet</div>
+        <div style="color:var(--ink-muted); font-size:12px;">Add products in the Routine tab first.</div>
+      </div>`;
+    return;
+  }
+
+  const allActives = userRoutine.flatMap(p => p.actives.map(a => a.toLowerCase()));
+  const overlaps = detectOverlaps(userRoutine);
+
+  // EFFICACY: how many evidence-backed actives present
+  const efficacyMatches = efficacyIngredients.filter(e => allActives.some(a => a.includes(e)));
+  const spfBonus = hasSPF(userRoutine) ? 20 : 0;
+  const efficacyRaw = Math.min(100, Math.round((efficacyMatches.length / 5) * 80) + spfBonus);
+  const efficacy = Math.max(10, efficacyRaw);
+
+  // IRRITATION: fragrance, drying alcohol, over-exfoliation (AHA + retinol same time)
+  const irritants = irritantIngredients.filter(i => allActives.some(a => a.includes(i)));
+  const irritationLoad = Math.max(10, Math.min(100, 100 - irritants.length * 15));
+
+  // REDUNDANCY: based on overlaps detected
+  const redundancy = Math.max(10, 100 - overlaps.length * 25);
+
+  // COST EFFICIENCY: >€100/mo = low, <€30 = high
+  const total = userRoutine.reduce((s, p) => s + (parseFloat(p.price) || 0), 0);
+  const costEfficiency = total === 0 ? 100 : Math.max(10, Math.min(100, Math.round(100 - (total - 20) * 0.7)));
+
+  // Build recommendations
+  const recs = [];
+  if (!hasSPF(userRoutine)) {
+    recs.push({ type: 'red', icon: '✗', text: '<strong>No SPF detected.</strong> Daily broad-spectrum SPF50+ is the single highest-impact intervention for skin health and anti-aging. Add it to your AM routine.' });
+  } else {
+    recs.push({ type: 'green', icon: '✓', text: '<strong>SPF present.</strong> The most impactful step in any routine. Make sure it\'s your final AM product.' });
+  }
+  overlaps.forEach(o => {
+    recs.push({ type: 'amber', icon: '⚠', text: `<strong>${o.title}.</strong> ${o.desc}` });
+  });
+  if (irritants.includes('parfum') || irritants.includes('fragrance')) {
+    recs.push({ type: 'amber', icon: '⚠', text: '<strong>Fragrance detected</strong> in one or more products. Common sensitizer. Consider fragrance-free alternatives, especially if you have rosacea or barrier damage.' });
+  }
+  if (irritants.includes('alcohol denat') || irritants.includes('sd alcohol')) {
+    recs.push({ type: 'red', icon: '✗', text: '<strong>Drying alcohol detected.</strong> Can impair barrier function and increase TEWL. Replace with a formula without denatured alcohol.' });
+  }
+  if (overlaps.length === 0 && hasSPF(userRoutine)) {
+    recs.push({ type: 'green', icon: '✓', text: '<strong>No conflicts or redundancies detected</strong> in your current routine. Well structured.' });
+  }
+  if (total > 100) {
+    recs.push({ type: 'amber', icon: '⚠', text: `<strong>High monthly spend (€${total.toFixed(0)}/mo).</strong> Review whether each product is earning its place — many high-performers have affordable dupes.` });
+  }
+
+  // Label each product
+  const redundantNames = overlaps.flatMap(o => o.products);
+  const labeledProducts = userRoutine.map((p, i) => {
+    const isRedundant = redundantNames.filter(n => n === p.name).length > 1 && redundantNames.indexOf(p.name) !== redundantNames.lastIndexOf(p.name);
+    const hasEfficacy = efficacyIngredients.some(e => p.actives.some(a => a.toLowerCase().includes(e))) || /spf/i.test(p.name);
+    const tag = redundantNames.includes(p.name)
+      ? `<span class="tag tag-amber">⚠ Review</span>`
+      : hasEfficacy
+        ? `<span class="tag tag-green">✓ Active</span>`
+        : `<span class="tag tag-muted">— Support</span>`;
+    return { ...p, tag };
+  });
+
+  el.innerHTML = `
+    <div class="score-grid" style="margin-bottom:20px;">
+      ${scoreRing(efficacy, 'Efficacy')}
+      ${scoreRing(irritationLoad, 'Irritation Load')}
+      ${scoreRing(redundancy, 'Redundancy')}
+      ${scoreRing(costEfficiency, 'Cost Efficiency')}
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Routine at a Glance</div>
+        ${labeledProducts.map((p, i) => `
+          <div class="routine-row" style="grid-template-columns:1fr auto auto;">
+            <div>
+              <div class="routine-step-label">${p.time} · #${i+1}</div>
+              <div class="routine-step-name">${p.name}</div>
+            </div>
+            ${p.tag}
+            <div style="font-size:12px; color:var(--ink-muted); white-space:nowrap;">${p.price ? '€'+p.price+'/mo' : '—'}</div>
+          </div>
+        `).join('')}
+        <div class="routine-row" style="grid-template-columns:1fr auto; font-weight:500; background:var(--surface); border-radius:6px; padding:12px; margin-top:8px;">
+          <div style="font-size:13px;">${userRoutine.length} product${userRoutine.length !== 1 ? 's' : ''}</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:18px;">€${total.toFixed(0)}/mo</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Recommendations</div>
+        ${recs.map(r => `<div class="alert alert-${r.type}" style="margin-bottom:10px;"><span>${r.icon}</span><div>${r.text}</div></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// Initial renders
+renderRoutine();
+renderScore();
+</script>
+<!-- ===== ABOUT MODAL ===== -->
+<div id="about-modal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26,22,18,0.6); backdrop-filter:blur(4px); overflow-y:auto;">
+  <div style="max-width:600px; margin:40px auto; background:var(--surface); border-radius:12px; padding:40px; position:relative; border:1px solid var(--border);">
+    <button onclick="closeAbout()" style="position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-muted);">✕ Close</button>
+
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+      <span class="logo-dot"></span>
+      <span style="font-family:'DM Serif Display',serif; font-size:22px;">SkinDecide</span>
+    </div>
+
+    <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:300; letter-spacing:-0.5px; margin-bottom:8px; line-height:1.2;">Less hype.<br><em style="color:var(--accent)">More science.</em></div>
+    <div style="font-size:12px; color:var(--ink-muted); margin-bottom:28px; line-height:1.7;">SkinDecide is a personal skincare decision assistant — not an inspiration app. It helps you make rational, evidence-based product choices instead of trend-driven or marketing-led ones.</div>
+
+    <div style="border-top:1px solid var(--border); padding-top:20px; margin-bottom:20px;">
+      <div style="font-family:'DM Serif Display',serif; font-size:15px; margin-bottom:12px;">Privacy Statement</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8;">
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">No data is stored beyond your session.</strong> All skin profiles, routine data, and analysis results exist only in your browser's active memory and are deleted when you close this tab or session.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">No personal data is collected or transmitted</strong> to any server by SkinDecide itself. Ingredient analysis, claims checking, and routine scoring all run locally in your browser.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">AI-powered features</strong> (claims analysis, product suggestions) use the Anthropic Claude API. Inputs are processed per request and are not stored or used for training. See <a href="https://anthropic.com/privacy" target="_blank" style="color:var(--accent);">Anthropic's Privacy Policy</a> for details.</p>
+        <p><strong style="color:var(--ink);">GDPR / AVG compliance:</strong> Because no personal data is stored or processed beyond the active session, SkinDecide does not require cookie consent or a data processing agreement for its core functionality.</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:20px; margin-bottom:20px;">
+      <div style="font-family:'DM Serif Display',serif; font-size:15px; margin-bottom:12px;">Terms of Use</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8;">
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">Not medical advice.</strong> SkinDecide provides general skincare information based on publicly available scientific literature. It is not a substitute for professional dermatological advice. Always consult a qualified dermatologist for medical skin conditions.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">AI-generated content.</strong> Product suggestions and claims analyses are AI-generated and may contain errors. Always verify ingredient lists independently before purchasing or using a product.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">No commercial relationships.</strong> SkinDecide has no affiliate, advertising, or sponsorship relationships with any cosmetics brand. Product suggestions are generated algorithmically with no commercial influence.</p>
+        <p><strong style="color:var(--ink);">Accuracy.</strong> While we aim for scientific accuracy, formulations change. Evidence in cosmetic dermatology is an evolving field. Information is provided in good faith but without warranty.</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:16px; font-size:11px; color:var(--ink-muted); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+      <span>SkinDecide · Evidence-based beauty · Version 1.0</span>
+      <span>Built with science, not trends.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAbout() { document.getElementById('about-modal').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function closeAbout() { document.getElementById('about-modal').style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('about-modal').addEventListener('click', function(e) { if (e.target === this) closeAbout(); });
+</script>
+
+</body>
+</html>
