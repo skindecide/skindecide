@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinDecide — Brand Identity & Meanings</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f0ece2;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: #1a1612;
+  padding: 48px 40px 80px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.kit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd8ce;
+}
+.kit-logo { display: flex; align-items: center; gap: 10px; font-family: 'DM Serif Display', serif; font-size: 22px; }
+.logo-dot { width: 10px; height: 10px; background: #c8432a; border-radius: 50%; }
+.kit-meta { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #6b6358; }
+.section { margin-bottom: 64px; }
+.section-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #6b6358;
+  margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ddd8ce;
+}
+.card {
+  background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 10px; padding: 28px;
+}
+
+/* ===== NAMING SECTION ===== */
+.name-hero {
+  background: #1a1612;
+  border-radius: 12px;
+  padding: 48px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.name-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(200,67,42,0.3) 0%, transparent 55%);
+}
+.name-word {
+  font-family: 'Fraunces', serif;
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #f5f0e8;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+}
+.name-word span { color: #e8846e; font-style: italic; }
+.name-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(245,240,232,0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.meaning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.meaning-card {
+  background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 10px; padding: 24px;
+}
+.meaning-word {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.meaning-pronunciation {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #6b6358;
+  font-weight: 300;
+}
+.meaning-pos {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c8432a;
+  margin-bottom: 8px;
+}
+.meaning-def {
+  font-size: 12px;
+  color: #1a1612;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.meaning-why {
+  font-size: 11px;
+  color: #6b6358;
+  line-height: 1.6;
+  padding-top: 10px;
+  border-top: 1px solid #ddd8ce;
+}
+.meaning-origin {
+  display: inline-block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: #f0ece2;
+  border: 1px solid #ddd8ce;
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: #6b6358;
+  margin-bottom: 8px;
+}
+
+/* ===== ELEMENT MEANINGS ===== */
+.element-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.element-card {
+  background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 8px; padding: 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.element-symbol {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.element-name { font-family: 'DM Serif Display', serif; font-size: 15px; }
+.element-desc { font-size: 11px; color: #6b6358; line-height: 1.6; }
+.element-meaning {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c8432a;
+  padding-top: 8px;
+  border-top: 1px solid #ddd8ce;
+}
+
+/* ===== COLOR MEANINGS ===== */
+.color-meaning-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.color-meaning-card { border-radius: 10px; overflow: hidden; border: 1px solid #ddd8ce; }
+.color-swatch-large { height: 100px; }
+.color-meaning-body { padding: 16px; background: #faf8f4; }
+.color-name-big { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 2px; }
+.color-hex-small { font-size: 10px; color: #6b6358; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
+.color-meaning-text { font-size: 11px; color: #6b6358; line-height: 1.6; }
+.color-functional { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #c8432a; margin-top: 8px; }
+
+/* ===== TYPOGRAPHY MEANINGS ===== */
+.type-meaning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.type-meaning-card { background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 10px; padding: 24px; }
+.type-specimen { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.1; }
+.type-specimen em { font-style: italic; color: #c8432a; }
+.type-specimen-mono { font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.8; color: #6b6358; margin-bottom: 12px; }
+.type-name { font-family: 'DM Serif Display', serif; font-size: 15px; margin-bottom: 4px; }
+.type-meaning { font-size: 11px; color: #6b6358; line-height: 1.6; }
+
+/* ===== CANVA ASSETS ===== */
+.canva-intro { background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+.canva-intro-title { font-family: 'DM Serif Display', serif; font-size: 17px; margin-bottom: 8px; }
+.canva-intro-text { font-size: 12px; color: #6b6358; line-height: 1.7; }
+.canva-asset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.canva-asset-card { background: #faf8f4; border: 1px solid #ddd8ce; border-radius: 10px; padding: 20px; }
+.canva-asset-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6358; margin-bottom: 12px; }
+.canva-preview { border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+.canva-spec { font-size: 11px; color: #6b6358; line-height: 1.8; }
+.canva-spec strong { color: #1a1612; }
+
+/* Social banners */
+.insta-sq {
+  width: 100%; aspect-ratio: 1; background: #1a1612;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  position: relative; overflow: hidden;
+}
+.insta-sq::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 75% 15%, rgba(200,67,42,0.3) 0%, transparent 55%);
+}
+.is-logo { position: absolute; top: 24px; left: 24px; display: flex; align-items: center; gap: 6px; z-index: 1; }
+.is-dot { width: 7px; height: 7px; background: #c8432a; border-radius: 50%; }
+.is-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: #f5f0e8; }
+.is-headline { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 300; letter-spacing: -0.5px; color: #f5f0e8; line-height: 1.05; margin-bottom: 10px; position: relative; z-index: 1; }
+.is-headline em { font-style: italic; color: #e8846e; }
+.is-sub { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(245,240,232,0.4); position: relative; z-index: 1; }
+
+.insta-light {
+  width: 100%; aspect-ratio: 1; background: #f5f0e8;
+  display: flex; flex-direction: column; justify-content: center; padding: 32px;
+  position: relative; overflow: hidden;
+}
+.insta-light::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 70%, rgba(200,67,42,0.08) 0%, transparent 55%);
+}
+.il-step { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #c8432a; margin-bottom: 12px; position: relative; z-index: 1; }
+.il-headline { font-family: 'Fraunces', serif; font-size: 34px; font-weight: 300; letter-spacing: -1px; line-height: 1.05; color: #1a1612; margin-bottom: 12px; position: relative; z-index: 1; }
+.il-headline em { font-style: italic; color: #c8432a; }
+.il-body { font-family: 'DM Mono', monospace; font-size: 10px; color: #6b6358; line-height: 1.7; position: relative; z-index: 1; }
+.il-logo { position: absolute; bottom: 24px; left: 32px; right: 32px; display: flex; align-items: center; justify-content: space-between; z-index: 1; }
+.il-logo-name { font-family: 'DM Serif Display', serif; font-size: 14px; color: #1a1612; display: flex; align-items: center; gap: 6px; }
+
+.linkedin-banner {
+  width: 100%; aspect-ratio: 4/1; background: #f5f0e8;
+  display: flex; align-items: center; padding: 0 36px;
+  position: relative; overflow: hidden; border: 1px solid #ddd8ce;
+}
+.lb-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #c8432a; }
+.lb-left { flex: 1; }
+.lb-logo { font-family: 'DM Serif Display', serif; font-size: 19px; color: #1a1612; display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+.lb-tagline { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: #6b6358; }
+.lb-div { width: 1px; height: 50px; background: #ddd8ce; margin: 0 32px; }
+.lb-stats { display: flex; gap: 28px; }
+.lb-stat-n { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 300; color: #c8432a; line-height: 1; margin-bottom: 3px; }
+.lb-stat-l { font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6358; }
+
+/* App icon */
+.icon-row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.icon-box {
+  background: #1a1612; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.icon-box::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 25%, rgba(200,67,42,0.45) 0%, transparent 55%);
+}
+.icon-letter { font-family: 'DM Serif Display', serif; color: #f5f0e8; position: relative; z-index: 1; line-height: 1; }
+.icon-red-dot { position: absolute; background: #c8432a; border-radius: 50%; z-index: 2; }
+.icon-size-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.07em; color: #9b9389; }
+
+/* Copy spec blocks */
+.spec-block { background: #1a1612; border-radius: 8px; padding: 16px 20px; margin-top: 12px; }
+.spec-line { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(245,240,232,0.5); line-height: 1.9; }
+.spec-line strong { color: #e8846e; }
+</style>
+</head>
+<body>
+
+<div class="kit-header">
+  <div class="kit-logo">
+    <span class="logo-dot"></span>
+    SkinDecide
+  </div>
+  <div class="kit-meta">Brand Identity & Meaning System · 2025</div>
+</div>
+
+<!-- ===== 01 NAME MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">01 — The Name: What It Means</div>
+
+  <div class="name-hero">
+    <div class="name-word">Skin<span>Decide</span></div>
+    <div class="name-tagline">Verb-first · Action-oriented · No passive consumption</div>
+  </div>
+
+  <div class="meaning-grid">
+    <div class="meaning-card">
+      <div class="meaning-word">
+        Skin
+        <span class="meaning-pronunciation">/skɪn/</span>
+      </div>
+      <div class="meaning-pos">Noun — the subject</div>
+      <div class="meaning-origin">Old English · scinn</div>
+      <div class="meaning-def">The largest organ of the human body. The interface between self and world. Not a canvas to be improved — a functional biological system to be understood.</div>
+      <div class="meaning-why">By naming the product's subject first, the brand positions skin as something to be known scientifically — not beautified, transformed, or fixed. Skin is the starting point, not the problem.</div>
+    </div>
+    <div class="meaning-card">
+      <div class="meaning-word">
+        Decide
+        <span class="meaning-pronunciation">/dɪˈsaɪd/</span>
+      </div>
+      <div class="meaning-pos">Verb — the action</div>
+      <div class="meaning-origin">Latin · decidere — "to cut off"</div>
+      <div class="meaning-def">From Latin <em>de-</em> (off) + <em>caedere</em> (to cut). Literally: to cut away uncertainty. To resolve doubt by eliminating alternatives. An active, rational choice.</div>
+      <div class="meaning-why">The verb "decide" signals agency. Users are not passive receivers of product recommendations — they make informed choices. The Latin root "cut off" mirrors what the brand does: cuts through marketing noise to reach clarity.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-family:'DM Serif Display',serif; font-size:17px; margin-bottom:16px;">Why the combination works</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+      <div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a; margin-bottom:6px;">Structure</div>
+        <div style="font-size:12px; line-height:1.7; color:#6b6358;">Noun + Verb. The most direct grammatical structure possible. No adjectives, no modifiers. This mirrors the brand philosophy: no excess.</div>
+      </div>
+      <div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a; margin-bottom:6px;">Tension</div>
+        <div style="font-size:12px; line-height:1.7; color:#6b6358;">"Skin" is biological and passive. "Decide" is cognitive and active. The brand sits exactly at that intersection — science meets personal agency.</div>
+      </div>
+      <div>
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a; margin-bottom:6px;">Differentiation</div>
+        <div style="font-size:12px; line-height:1.7; color:#6b6358;">Every beauty brand name suggests transformation or aspiration (Glow, Radiance, Pure). SkinDecide suggests <em>thinking</em>. A fundamentally different category signal.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 02 ELEMENT MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">02 — Brand Elements & Their Meanings</div>
+  <div class="element-grid">
+    <div class="element-card">
+      <div class="element-symbol" style="color:#c8432a">●</div>
+      <div class="element-name">The Red Dot</div>
+      <div class="element-desc">A single point of precision. In scientific notation, a dot marks the decimal — the exact value. In optics, a single focused point of light. Always placed at top-right: the alert position.</div>
+      <div class="element-meaning">Meaning: precision · focus · the moment of decision</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="color:#1a1612; font-family:'DM Serif Display',serif;">Sk</div>
+      <div class="element-name">The Initials Icon</div>
+      <div class="element-desc">Not an abstract symbol — actual letters. Chosen because "Sk" looks like the beginning of a scientific abbreviation (like "Sp." for species in taxonomy). Legible at any size.</div>
+      <div class="element-meaning">Meaning: identity · taxonomy · belonging to a system</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="font-family:'DM Serif Display',serif; font-size:28px; font-style:italic; color:#c8432a">em</div>
+      <div class="element-name">Italic Emphasis</div>
+      <div class="element-desc">In scientific writing, italics mark species names (Homo sapiens) and foreign terms — things requiring precise definition. SkinDecide uses italics for the key word in every headline.</div>
+      <div class="element-meaning">Meaning: the word that carries the truth of the sentence</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol">⬡</div>
+      <div class="element-name">The Hexagon</div>
+      <div class="element-desc">The hexagon appears in chemistry (benzene ring), in biology (honeycomb, cellular structures), and in materials science. It's the most efficient packing structure in nature.</div>
+      <div class="element-meaning">Meaning: molecular structure · natural efficiency · science</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="font-family:'DM Mono',monospace; font-size:18px; color:#6b6358;">pH 4.5</div>
+      <div class="element-name">Monospace Data</div>
+      <div class="element-desc">All data, percentages, and ingredient names are set in DM Mono — the typeface of lab reports, code, and clinical documentation. Data should look like data.</div>
+      <div class="element-meaning">Meaning: objectivity · measurement · clinical honesty</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol" style="background:#f0ece2; width:36px; height:36px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:18px;">—</div>
+      <div class="element-name">The Em Dash</div>
+      <div class="element-desc">Used consistently where most brands would use a colon or period. The em dash signals a pause before precision — a beat before the exact fact arrives. Borrowed from scientific notation.</div>
+      <div class="element-meaning">Meaning: pause · then precision · the beat before truth</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 03 COLOR MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">03 — Color System & Meanings</div>
+  <div class="color-meaning-grid">
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#1a1612"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Ink</div>
+        <div class="color-hex-small">#1A1612 · Near-black warm</div>
+        <div class="color-meaning-text">The colour of printed text in scientific journals. Not pure black — warm-toned to suggest analogue, human knowledge rather than digital sterility. Information you can trust.</div>
+        <div class="color-functional">Function: primary text, authority, weight</div>
+      </div>
+    </div>
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#c8432a"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Ember</div>
+        <div class="color-hex-small">#C8432A · Warm red-orange</div>
+        <div class="color-meaning-text">Not the red of alarm or danger — the red of a heated element in a lab. The colour of azelaic acid's molecular model. Warm enough to feel human, saturated enough to demand attention.</div>
+        <div class="color-functional">Function: decision point, accent, brand mark</div>
+      </div>
+    </div>
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#f5f0e8"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Parchment</div>
+        <div class="color-hex-small">#F5F0E8 · Warm off-white</div>
+        <div class="color-meaning-text">The colour of aged paper — peer-reviewed journals, annotated research, prescription pads. Signals that this information has history and weight. Deliberately anti-digital, anti-glossy.</div>
+        <div class="color-functional">Function: background, breathing room, trust</div>
+      </div>
+    </div>
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#2a7a4b"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Evidence</div>
+        <div class="color-hex-small">#2A7A4B · Forest green</div>
+        <div class="color-meaning-text">Named after its function. The colour used exclusively when something is scientifically supported. In traffic systems, green means proceed safely. In SkinDecide, it means: this is real.</div>
+        <div class="color-functional">Function: verified, safe, proceed, science-backed</div>
+      </div>
+    </div>
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#b8780a"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Caution</div>
+        <div class="color-hex-small">#B8780A · Amber-ochre</div>
+        <div class="color-meaning-text">Amber: the colour used in laboratory warning labels for "handle with care". Not stop — but pay attention. Used for emerging evidence, vague claims, and ingredients that need context.</div>
+        <div class="color-functional">Function: nuance, proceed with awareness, vague</div>
+      </div>
+    </div>
+    <div class="color-meaning-card">
+      <div class="color-swatch-large" style="background:#6b6358"></div>
+      <div class="color-meaning-body">
+        <div class="color-name-big">Stone</div>
+        <div class="color-hex-small">#6B6358 · Warm grey</div>
+        <div class="color-meaning-text">The colour of concrete lab surfaces, the grey of neutral steel instruments. Context and supporting information — present and readable, but not competing for attention with primary content.</div>
+        <div class="color-functional">Function: secondary text, metadata, de-emphasis</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 04 TYPOGRAPHY MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">04 — Typography & Its Meaning</div>
+  <div class="type-meaning-grid">
+    <div class="type-meaning-card">
+      <div class="type-specimen">Science,<br><em>not trends.</em></div>
+      <div class="type-name">Fraunces — Display</div>
+      <div class="type-meaning">Named after Fraunces Tavern in New York, one of America's oldest. Designed by Phaedra Charles & Flavia Zimbardi — a "wonky" serif with optical size variation. At small sizes it's elegant; at large sizes its quirks emerge. Like scientific findings: the closer you look, the more interesting it gets. The italic is warm, humanist — emotion within rigour.</div>
+    </div>
+    <div class="type-meaning-card">
+      <div class="type-specimen-mono">Niacinamide 5% ·<br>pH 3.5–4.0<br>BHA · INCI verified</div>
+      <div class="type-name">DM Mono — Body & Data</div>
+      <div class="type-meaning">Monospace typefaces were designed for typewriters and terminals — where every character needed equal space for alignment. In SkinDecide, it signals that all data is treated equally and precisely. Percentages, ingredient names, and scores all look like they belong in a lab report. Designed by Colophon Foundry — a type studio known for functional, no-nonsense design.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 05 TAGLINE MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">05 — Tagline System & Meanings</div>
+  <div style="display:grid; grid-template-columns:1fr; gap:12px;">
+    <div class="card">
+      <div style="display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start;">
+        <div>
+          <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:#9b9389; margin-bottom:8px;">Primary tagline</div>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:300; letter-spacing:-0.3px; line-height:1.2;">Less hype.<br><em style="color:#c8432a">More science.</em><br>Fewer products.</div>
+        </div>
+        <div style="font-size:12px; color:#6b6358; line-height:1.8; border-left:2px solid #ddd8ce; padding-left:20px;">
+          Three sentences. Each one shorter in character count than the previous — visually tightening like a scientific conclusion. "Less" and "Fewer" are reductive — a rare move in an industry built on addition. "More science" is the only additive phrase, making it the emotional and logical centre. The full-stop after each clause forces a pause — read it slowly.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start;">
+        <div>
+          <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:#9b9389; margin-bottom:8px;">Decision tagline</div>
+          <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:300; letter-spacing:-0.3px; font-style:italic;">Evidence-based beauty.</div>
+        </div>
+        <div style="font-size:12px; color:#6b6358; line-height:1.8; border-left:2px solid #ddd8ce; padding-left:20px;">
+          "Evidence-based" is borrowed from medicine — where it means treatment decisions made from published, peer-reviewed clinical evidence rather than tradition or anecdote. By applying it to beauty, SkinDecide makes a category-level claim: this is what medical-grade thinking looks like for skincare. The italic sets it apart — a definition, not a slogan.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start;">
+        <div>
+          <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:#9b9389; margin-bottom:8px;">Mission</div>
+          <div style="font-family:'DM Mono',monospace; font-size:13px; color:#6b6358; line-height:1.6;">Not an inspiration app.<br>A decision tool.</div>
+        </div>
+        <div style="font-size:12px; color:#6b6358; line-height:1.8; border-left:2px solid #ddd8ce; padding-left:20px;">
+          Deliberately negative positioning: by saying what it's NOT, it creates distance from the inspiration economy (Pinterest, TikTok, Instagram beauty). "A decision tool" is the direct functional claim — no metaphor, no aspiration. This mirrors the product itself: plain-language descriptions of what works and why.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 06 CANVA-READY ASSETS ===== -->
+<div class="section">
+  <div class="section-label">06 — Canva-Ready Assets</div>
+
+  <div class="canva-intro">
+    <div class="canva-intro-title">How to use these in Canva</div>
+    <div class="canva-intro-text">Each asset below includes exact Canva specifications — font names, hex codes, and sizes. Open Canva → Create Design → choose the format → use the specs below to recreate each asset. All fonts are available in Canva's font library.</div>
+  </div>
+
+  <div class="canva-asset-grid">
+
+    <!-- Instagram Post Dark -->
+    <div class="canva-asset-card">
+      <div class="canva-asset-label">Instagram Post — Dark · 1080×1080px</div>
+      <div class="canva-preview">
+        <div class="insta-sq">
+          <div class="is-logo">
+            <div class="is-dot"></div>
+            <div class="is-name">SkinDecide</div>
+          </div>
+          <div class="is-headline">Less hype.<br><em>More science.</em><br>Fewer products.</div>
+          <div class="is-sub">Evidence-based beauty · skindecide.com</div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #1A1612</div>
+        <div class="spec-line"><strong>Gradient overlay:</strong> Radial, #C8432A 30% opacity, top-right corner</div>
+        <div class="spec-line"><strong>Logo:</strong> Circle 10px #C8432A + DM Serif Display 20px #F5F0E8</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 72px Light, #F5F0E8 / italic word: #E8846E</div>
+        <div class="spec-line"><strong>Subtext:</strong> DM Mono 12px, #F5F0E8 40% opacity, uppercase</div>
+        <div class="spec-line"><strong>Margin:</strong> 60px all sides</div>
+      </div>
+    </div>
+
+    <!-- Instagram Post Light -->
+    <div class="canva-asset-card">
+      <div class="canva-asset-label">Instagram Post — Light · 1080×1080px</div>
+      <div class="canva-preview">
+        <div class="insta-light">
+          <div class="il-step">Ingredient of the week</div>
+          <div class="il-headline">Niacinamide.<br><em>5% is enough.</em></div>
+          <div class="il-body">Reduces sebum · minimises pores<br>Calms redness · no photosensitivity</div>
+          <div class="il-logo">
+            <div class="il-logo-name">
+              <span style="width:7px; height:7px; background:#c8432a; border-radius:50%; display:inline-block;"></span>
+              SkinDecide
+            </div>
+            <span style="font-size:9px; color:#9b9389; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.1em;">Evidence-based</span>
+          </div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #F5F0E8</div>
+        <div class="spec-line"><strong>Label:</strong> DM Mono 11px, #C8432A, uppercase, letter-spacing 0.2em</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 72px Light, #1A1612 / italic: #C8432A</div>
+        <div class="spec-line"><strong>Body:</strong> DM Mono 13px, #6B6358, line-height 1.8</div>
+        <div class="spec-line"><strong>Logo bottom-left:</strong> dot 7px #C8432A + DM Serif Display 16px</div>
+        <div class="spec-line"><strong>Margin:</strong> 60px all sides</div>
+      </div>
+    </div>
+
+    <!-- LinkedIn Banner -->
+    <div class="canva-asset-card" style="grid-column:span 2;">
+      <div class="canva-asset-label">LinkedIn Cover Banner · 1584×396px (4:1)</div>
+      <div class="canva-preview">
+        <div class="linkedin-banner">
+          <div class="lb-bar"></div>
+          <div class="lb-left">
+            <div class="lb-logo">
+              <span style="width:8px; height:8px; background:#c8432a; border-radius:50%; display:inline-block;"></span>
+              SkinDecide
+            </div>
+            <div class="lb-tagline">Evidence-based beauty decisions</div>
+          </div>
+          <div class="lb-div"></div>
+          <div class="lb-stats">
+            <div>
+              <div class="lb-stat-n">0</div>
+              <div class="lb-stat-l">Marketing claims</div>
+            </div>
+            <div>
+              <div class="lb-stat-n" style="font-size:20px;">100%</div>
+              <div class="lb-stat-l">Ingredient science</div>
+            </div>
+            <div>
+              <div class="lb-stat-n">↓</div>
+              <div class="lb-stat-l">Less products</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #F5F0E8 · Left accent bar 6px wide #C8432A</div>
+        <div class="spec-line"><strong>Logo:</strong> Circle 8px #C8432A + DM Serif Display 22px #1A1612</div>
+        <div class="spec-line"><strong>Tagline:</strong> DM Mono 11px, #6B6358, uppercase, letter-spacing 0.14em</div>
+        <div class="spec-line"><strong>Divider:</strong> 1px vertical line #DDD8CE, height 60px</div>
+        <div class="spec-line"><strong>Stats numbers:</strong> Fraunces 32px Light #C8432A · Labels: DM Mono 9px uppercase #6B6358</div>
+        <div class="spec-line"><strong>Left padding:</strong> 48px from bar</div>
+      </div>
+    </div>
+
+    <!-- App Icon -->
+    <div class="canva-asset-card">
+      <div class="canva-asset-label">App Icon · All sizes</div>
+      <div class="canva-preview" style="background:#f0ece2; padding:20px; border-radius:8px; display:flex; align-items:center; gap:16px;">
+        <div class="icon-row">
+          <div class="icon-wrap">
+            <div class="icon-box" style="width:80px; height:80px; border-radius:20px;">
+              <div class="icon-letter" style="font-size:34px;">Sk</div>
+              <div class="icon-red-dot" style="width:10px; height:10px; top:10px; right:11px;"></div>
+            </div>
+            <div class="icon-size-label">1024px</div>
+          </div>
+          <div class="icon-wrap">
+            <div class="icon-box" style="width:56px; height:56px; border-radius:14px;">
+              <div class="icon-letter" style="font-size:24px;">Sk</div>
+              <div class="icon-red-dot" style="width:8px; height:8px; top:7px; right:7px;"></div>
+            </div>
+            <div class="icon-size-label">512px</div>
+          </div>
+          <div class="icon-wrap">
+            <div class="icon-box" style="width:40px; height:40px; border-radius:10px;">
+              <div class="icon-letter" style="font-size:17px;">Sk</div>
+              <div class="icon-red-dot" style="width:6px; height:6px; top:5px; right:5px;"></div>
+            </div>
+            <div class="icon-size-label">180px</div>
+          </div>
+          <div class="icon-wrap">
+            <div class="icon-box" style="width:28px; height:28px; border-radius:7px;">
+              <div class="icon-letter" style="font-size:12px;">Sk</div>
+              <div class="icon-red-dot" style="width:5px; height:5px; top:3px; right:3px;"></div>
+            </div>
+            <div class="icon-size-label">60px</div>
+          </div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #1A1612 + radial gradient #C8432A 45% opacity, top-right</div>
+        <div class="spec-line"><strong>Letters "Sk":</strong> DM Serif Display, #F5F0E8</div>
+        <div class="spec-line"><strong>Red dot:</strong> Circle #C8432A, top-right corner, ~12% of icon size</div>
+        <div class="spec-line"><strong>Corner radius:</strong> 23% of icon size (Apple guideline)</div>
+        <div class="spec-line"><strong>In Canva:</strong> Create 1024×1024px → Export PNG → resize for other sizes</div>
+      </div>
+    </div>
+
+    <!-- Story Template -->
+    <div class="canva-asset-card">
+      <div class="canva-asset-label">Instagram Story · 1080×1920px</div>
+      <div class="canva-preview" style="max-width:160px; margin:0 auto;">
+        <div style="aspect-ratio:9/16; background:#1a1612; border-radius:12px; overflow:hidden; position:relative; display:flex; flex-direction:column; justify-content:center; padding:20px;">
+          <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 80% 20%, rgba(200,67,42,0.35) 0%, transparent 55%);"></div>
+          <div style="position:absolute; top:16px; left:16px; display:flex; align-items:center; gap:5px; z-index:1;">
+            <div style="width:5px; height:5px; background:#c8432a; border-radius:50%;"></div>
+            <span style="font-family:'DM Serif Display',serif; font-size:11px; color:#f5f0e8;">SkinDecide</span>
+          </div>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:300; line-height:1.1; letter-spacing:-0.5px; color:#f5f0e8; position:relative; z-index:1; margin-bottom:8px;">Your SPF is<br>the best<br><em style="color:#e8846e">anti-aging</em><br>product you own.</div>
+          <div style="font-family:'DM Mono',monospace; font-size:7px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(245,240,232,0.35); position:relative; z-index:1;">Swipe for the science →</div>
+          <div style="position:absolute; bottom:14px; left:16px; right:16px; z-index:1; border-top:1px solid rgba(245,240,232,0.15); padding-top:8px;">
+            <div style="font-family:'DM Mono',monospace; font-size:7px; text-transform:uppercase; letter-spacing:0.1em; color:rgba(245,240,232,0.3);">Evidence-based beauty</div>
+          </div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <div class="spec-line"><strong>Background:</strong> #1A1612 + radial gradient</div>
+        <div class="spec-line"><strong>Headline:</strong> Fraunces 80px Light, #F5F0E8</div>
+        <div class="spec-line"><strong>Italic emphasis word:</strong> #E8846E</div>
+        <div class="spec-line"><strong>CTA text:</strong> DM Mono 14px, #F5F0E8 35% opacity</div>
+        <div class="spec-line"><strong>Logo:</strong> top-left, dot + DM Serif Display 18px</div>
+        <div class="spec-line"><strong>Bottom bar:</strong> 1px line #F5F0E8 15% + tagline DM Mono</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 07 FONT DOWNLOAD ===== -->
+<div class="section">
+  <div class="section-label">07 — Font Sources (All Free)</div>
+  <div class="card" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+    <div>
+      <div style="font-family:'Fraunces',serif; font-size:20px; margin-bottom:6px;">Fraunces</div>
+      <div style="font-size:11px; color:#6b6358; line-height:1.7; margin-bottom:8px;">Display headlines, section titles. Used in Light (300) and Light Italic. Available in Google Fonts.</div>
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a;">google.com/fonts → search "Fraunces"</div>
+    </div>
+    <div>
+      <div style="font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:6px;">DM Serif Display</div>
+      <div style="font-size:11px; color:#6b6358; line-height:1.7; margin-bottom:8px;">Logo wordmark, card titles. Used in Regular only. Available in Google Fonts.</div>
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a;">google.com/fonts → search "DM Serif Display"</div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:17px; margin-bottom:6px;">DM Mono</div>
+      <div style="font-size:11px; color:#6b6358; line-height:1.7; margin-bottom:8px;">Body text, data, labels, UI copy. Used in Light (300), Regular (400), Medium (500). Google Fonts.</div>
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#c8432a;">google.com/fonts → search "DM Mono"</div>
+    </div>
+  </div>
+  <div style="margin-top:12px; font-size:11px; color:#6b6358; background:#faf8f4; border:1px solid #ddd8ce; border-radius:8px; padding:16px;">
+    <strong style="color:#1a1612;">In Canva:</strong> All three fonts are already available in Canva's font library — search by name in the font picker. No download needed for Canva use.
+  </div>
+</div>
+
+</body>
+</html>
