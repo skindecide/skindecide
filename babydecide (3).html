@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinDecide Baby — Evidence-Based Baby Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4ee;
+    --surface: #f7faf6;
+    --ink: #1c211a;
+    --ink-muted: #5a6557;
+    --accent: #5a8f6a;
+    --accent-light: #d8ead9;
+    --green: #3d7a52;
+    --green-light: #d0e8d4;
+    --amber: #8a7340;
+    --amber-light: #f2e8cc;
+    --border: #d0dace;
+    --card: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 13px; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.5; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
+  .logo-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; display: inline-block; flex-shrink:0; }
+  .logo-sub { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-left: 2px; font-weight: 500; }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { padding: 6px 14px; border: 1px solid transparent; border-radius: 4px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); background: none; transition: all 0.2s; }
+  .nav-tab:hover { color: var(--ink); border-color: var(--border); }
+  .nav-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 40px 80px; }
+  .section { display: none; animation: fadeUp 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header { margin-bottom: 32px; }
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-muted); margin-bottom: 10px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 300; letter-spacing: -1px; line-height: 1.1; }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 15px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  .form-group { margin-bottom: 16px; }
+  label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 6px; }
+  select, input[type="text"], input[type="number"] { width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+  select:focus, input:focus { border-color: var(--accent); }
+
+  .checkbox-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .checkbox-chip { padding: 6px 12px; border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 11px; transition: all 0.15s; user-select: none; }
+  .checkbox-chip:hover { border-color: var(--accent); }
+  .checkbox-chip.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .btn { padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline { background: none; border: 1px solid var(--border); color: var(--ink-muted); }
+  .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-small-inline { padding: 8px 14px; font-size: 10px; display: inline-flex; align-items: center; }
+
+  .tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-red { background: #fde8e8; color: #b83232; }
+  .tag-muted { background: #e8ece6; color: var(--ink-muted); }
+
+  .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 12px; line-height: 1.6; margin-bottom: 12px; }
+  .alert-green { background: var(--green-light); border: 1px solid #a8d4b2; }
+  .alert-amber { background: var(--amber-light); border: 1px solid #d4c080; }
+  .alert-red { background: #fde8e8; border: 1px solid #f0b0b0; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  .help-text { font-size: 11px; color: var(--ink-muted); line-height: 1.6; }
+  .profile-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; background: var(--accent-light); border-radius: 20px; font-size: 11px; color: var(--accent); margin: 3px; font-family: 'DM Mono', monospace; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--ink); color: var(--bg); border-radius: 50%; font-size: 10px; margin-right: 8px; flex-shrink: 0; }
+  .routine-step-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; color: var(--ink-muted); margin-bottom: 3px; }
+
+  /* INGREDIENT ROWS */
+  .ingredient-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .ingredient-row:last-child { border-bottom: none; }
+  .ingredient-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .ingredient-bar-fill { height: 100%; border-radius: 2px; }
+
+  /* PRODUCT RESULT */
+  .product-result { animation: fadeUp 0.3s ease; }
+  .product-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .product-name { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 4px; }
+  .product-brand { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* SCORE RINGS */
+  .score-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .score-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+  .score-ring { position: relative; width: 80px; height: 80px; margin-bottom: 12px; }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .score-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); text-align: center; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 0 12px; flex-direction: row; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.06); height: 52px; }
+    .logo { font-size: 15px; flex-shrink: 0; padding-right: 12px; border-right: 1px solid var(--border); height: 100%; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .logo-dot { width: 7px; height: 7px; }
+    .nav-tabs { flex: 1; display: flex; overflow-x: auto; scrollbar-width: none; height: 100%; }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab { flex: 0 0 auto; padding: 0 11px; font-size: 9px; border-radius: 0; border: none; border-bottom: 2px solid transparent; height: 100%; display: flex; align-items: center; letter-spacing: 0.04em; white-space: nowrap; }
+    .nav-tab.active { background: none; color: var(--ink); border-bottom-color: var(--accent); }
+    .main { padding: 20px 16px 60px; }
+    body { font-size: 14px; }
+    .section-title { font-size: 28px; }
+    .grid-2, .grid-3, .score-grid { grid-template-columns: 1fr; gap: 12px; }
+    .score-grid { grid-template-columns: 1fr 1fr !important; }
+    .card { padding: 16px; }
+    select, input[type="text"], input[type="number"] { padding: 14px; font-size: 16px; border-radius: 8px; }
+    .btn { padding: 15px 20px; font-size: 13px; border-radius: 8px; width: 100%; text-align: center; }
+    .btn-small-inline { width: auto; padding: 10px 14px; font-size: 12px; }
+    .checkbox-chip { padding: 10px 16px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Sk<span class="logo-sub">&nbsp;baby</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('profile')">Profile</button>
+    <button class="nav-tab" onclick="showSection('scanner')">Scanner</button>
+    <button class="nav-tab" onclick="showSection('claims')">Claims</button>
+    <button class="nav-tab" onclick="showSection('score')">Score</button>
+    <button class="nav-tab" onclick="openAbout()" style="opacity:0.6;">About</button>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- PROFILE -->
+  <div class="section active" id="section-profile">
+    <div class="section-header">
+      <div class="section-label">Step 01 — Baby Profile</div>
+      <h1 class="section-title">Gentle by design.<br><em>Not by marketing.</em></h1>
+    </div>
+
+    <div id="profiles-list" style="margin-bottom:24px;"></div>
+
+    <div id="profile-form-card" class="card">
+      <div class="card-title" id="profile-form-title"><span class="card-icon" style="background:#d8ead9">+</span> New Baby Profile</div>
+      <div class="form-group">
+        <label>Profile Name (e.g. "Emma", "Our Baby")</label>
+        <input type="text" id="profileName" placeholder="e.g. Emma">
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="form-group">
+            <label>Age</label>
+            <select id="babyAge">
+              <option value="">Select age</option>
+              <option value="premature">Premature / NICU</option>
+              <option value="newborn">Newborn (0–4 weeks)</option>
+              <option value="infant">Infant (1–6 months)</option>
+              <option value="baby">Baby (6–12 months)</option>
+              <option value="toddler">Toddler (1–3 years)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Skin Type</label>
+            <select id="skinType">
+              <option value="">Select type</option>
+              <option value="normal">Normal — balanced, soft</option>
+              <option value="dry">Dry — flaky, tight</option>
+              <option value="sensitive">Sensitive — reactive, prone to redness</option>
+              <option value="eczema">Eczema-prone — itchy, inflamed patches</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label>Known Conditions</label>
+            <div class="checkbox-group" id="conditions">
+              <div class="checkbox-chip" onclick="toggleChip(this)">Eczema (atopic)</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Cradle cap</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Nappy rash</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Milk allergy</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">Fragrance sensitivity</div>
+              <div class="checkbox-chip" onclick="toggleChip(this)">None</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Primary Concern</label>
+            <select id="primaryConcern">
+              <option value="">Select concern</option>
+              <option value="barrier">Barrier protection & hydration</option>
+              <option value="eczema">Eczema / dry skin management</option>
+              <option value="cradlecap">Cradle cap</option>
+              <option value="nappy">Nappy rash prevention</option>
+              <option value="sensitive">Sensitive / reactive skin</option>
+              <option value="maintenance">General maintenance</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-small-inline" onclick="saveProfile()">Save Profile →</button>
+        <button class="btn btn-outline btn-small-inline" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <div id="profile-result" style="display:none; margin-top:24px;">
+      <div class="card">
+        <div class="card-title"><span class="card-icon" style="background:#d8ead9">✓</span> <span id="profile-result-name">Routine Architecture</span></div>
+        <div id="profile-chips" style="margin-bottom:20px;"></div>
+        <hr class="divider">
+        <div style="font-family:'DM Serif Display',serif; font-size:13px; margin-bottom:8px;">Evidence-Based Baby Routine</div>
+        <div class="help-text" style="margin-bottom:16px;">Gentle, clinically-informed recommendations for baby's developing skin barrier. Baby skin is 20–30% thinner than adult skin and significantly more permeable.</div>
+        <div id="routine-architecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCANNER -->
+  <div class="section" id="section-scanner">
+    <div class="section-header">
+      <div class="section-label">Step 02 — Ingredient Check</div>
+      <h1 class="section-title">What's in the<br><em>baby lotion?</em></h1>
+    </div>
+    <div id="scanner-input">
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title"><span class="card-icon" style="background:#d8ead9">⬡</span> Paste INCI Ingredient List</div>
+        <div class="help-text" style="margin-bottom:12px;">Find the ingredient list on the packaging or brand website. Baby products need stricter scrutiny — skin is more permeable and absorbs more.</div>
+        <textarea id="inci-input" placeholder="e.g. Aqua, Glycerin, Cetearyl Alcohol, Ceramide NP, Parfum..."
+          style="width:100%; height:120px; padding:14px; background:var(--bg); border:1px solid var(--border); border-radius:8px; font-family:'DM Mono',monospace; font-size:13px; resize:vertical; outline:none; color:var(--ink); line-height:1.6;"></textarea>
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-small-inline" onclick="analyzeINCIInput()">Analyze →</button>
+          <button class="btn btn-outline btn-small-inline" onclick="simulateScan()">Load Demo</button>
+        </div>
+      </div>
+      <div class="alert alert-amber" style="font-size:11px;">
+        <span>⚠</span>
+        <div><strong>Baby skin is not mini adult skin.</strong> Higher surface-area-to-volume ratio means ingredients absorb more readily into the bloodstream. Fragrance, preservatives, and certain emulsifiers that are "safe" for adults warrant extra caution in babies under 12 months.</div>
+      </div>
+    </div>
+    <div id="scanner-result" style="display:none; margin-top:32px;" class="product-result">
+      <div class="product-header">
+        <div>
+          <div class="product-name" id="product-name">Demo Product</div>
+          <div class="product-brand" id="product-brand">Baby Analysis</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'DM Serif Display',serif; font-size:32px;" id="risk-score">—</div>
+          <div style="font-size:11px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em">Safety Score</div>
+        </div>
+      </div>
+      <div id="alerts-area"></div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#d8ead9">✓</span> Beneficial Ingredients</div>
+          <div id="active-ingredients"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="card-icon" style="background:#fde8e8">⚠</span> Watch List for Babies</div>
+          <div id="watch-ingredients"></div>
+          <div id="watch-empty" style="display:none; color:var(--ink-muted); font-size:12px; padding:12px 0;">No flagged ingredients detected.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">All Ingredients — Concentration Order</div>
+        <div class="help-text" style="margin-bottom:12px;">INCI lists ordered highest → lowest. First 5 ingredients = ~80% of the formula.</div>
+        <div id="all-ingredients"></div>
+      </div>
+      <div style="margin-top:20px;">
+        <button class="btn btn-outline btn-small-inline" onclick="resetScanner()">Check Another Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAIMS -->
+  <div class="section" id="section-claims">
+    <div class="section-header">
+      <div class="section-label">Step 02b — Label Decoder</div>
+      <h1 class="section-title">What labels<br><em>actually mean.</em></h1>
+    </div>
+
+    <div class="alert alert-green" style="margin-bottom:20px;">
+      <span>○</span>
+      <div><strong>Less is more.</strong> For most babies under 12 months, plain water and a fragrance-free wash is all that is needed. This section helps you decode whether a product's claims are legally binding, clinically meaningful, or pure marketing.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title"><span class="card-icon" style="background:var(--accent-light)">⬡</span> Decode Baby Product Claims</div>
+      <div class="help-text" style="margin-bottom:12px;">Paste claims from any baby product label or website. We decode whether they are legally regulated, clinically tested, or marketing-driven — with EU regulatory context.</div>
+      <textarea id="claims-input" placeholder="e.g. 'Hypoallergenic. Dermatologically tested. 100% natural. Pediatrically tested. Fragrance-free.'"
+        style="width:100%; height:90px; padding:14px; background:var(--bg); border:1px solid var(--border); border-radius:8px; font-family:'DM Mono',monospace; font-size:13px; resize:vertical; outline:none; color:var(--ink); line-height:1.6; margin-bottom:12px;"></textarea>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-small-inline" onclick="decodeBabyClaims()">Decode Claims →</button>
+        <button class="btn btn-outline btn-small-inline" onclick="loadDemoClaims()">Load Demo</button>
+      </div>
+    </div>
+    <div id="claims-result" style="display:none; margin-bottom:24px;"></div>
+
+    <!-- MINIMALISME INDICATOR -->
+    <div class="card" style="border:2px solid var(--accent);">
+      <div class="card-title" style="color:var(--accent);">
+        <span class="card-icon" style="background:var(--accent-light)">↓</span>
+        Minimalism Check — Do You Actually Need This?
+      </div>
+      <div class="help-text" style="margin-bottom:16px;">Before buying any baby product, run it through this decision tree. Fewer products = fewer ingredients = lower risk.</div>
+      <div id="mini-check">
+        <div style="margin-bottom:12px;">
+          <label>What is the product?</label>
+          <select id="mini-product" onchange="runMinimalism()">
+            <option value="">Select product type</option>
+            <option value="bath">Baby bath / bubble bath</option>
+            <option value="shampoo">Baby shampoo</option>
+            <option value="lotion">Baby lotion / body lotion</option>
+            <option value="oil">Baby oil</option>
+            <option value="powder">Baby powder (talc/cornstarch)</option>
+            <option value="wipes">Baby wipes</option>
+            <option value="nappycream">Nappy cream / barrier cream</option>
+            <option value="sunscreen">Baby sunscreen</option>
+            <option value="toner">Baby toner / micellar water</option>
+            <option value="perfume">Baby perfume / cologne</option>
+            <option value="hairproduct">Baby hair product</option>
+          </select>
+        </div>
+        <div id="mini-result"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;" class="card">
+      <div class="card-title">Baby Product Claim Glossary</div>
+      <div class="help-text" style="margin-bottom:12px;">EU/UK legal context for common baby product claims.</div>
+      <div id="claims-glossary"></div>
+    </div>
+  </div>
+
+  <!-- SCORE -->
+  <div class="section" id="section-score">
+    <div class="section-header">
+      <div class="section-label">Step 03 — Routine Audit</div>
+      <h1 class="section-title">How gentle<br><em>is gentle enough?</em></h1>
+    </div>
+    <div id="score-content"></div>
+  </div>
+
+</div>
+
+<!-- ABOUT MODAL -->
+<div id="about-modal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(28,33,26,0.6); backdrop-filter:blur(4px); overflow-y:auto;">
+  <div style="max-width:560px; margin:40px auto; background:var(--surface); border-radius:12px; padding:40px; position:relative; border:1px solid var(--border);">
+    <button onclick="closeAbout()" style="position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-muted);">✕ Close</button>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+      <span class="logo-dot"></span>
+      <div><div style="font-family:'DM Serif Display',serif; font-size:20px; line-height:1;">Sk<span style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-left:4px;">baby</span></div><div style="font-size:10px;color:var(--ink-muted);margin-top:2px;">SkinDecide Baby</div></div>
+    </div>
+    <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:300; margin-bottom:8px; line-height:1.2;">Gentle by design.<br><em style="color:var(--accent)">Not by marketing.</em></div>
+    <div style="font-size:12px; color:var(--ink-muted); margin-bottom:24px; line-height:1.7;">A sister product to SkinDecide, built specifically for baby and infant skincare. Evidence-based ingredient analysis adapted for developing skin barriers and higher absorption rates.</div>
+    <div style="border-top:1px solid var(--border); padding-top:20px; margin-bottom:16px;">
+      <div style="font-family:'DM Serif Display',serif; font-size:15px; margin-bottom:10px;">Privacy Statement</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8; margin-bottom:12px;">
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">No data stored beyond session.</strong> All baby profiles and scan results exist only in your browser's session memory — permanently deleted when you close this tab. No personal data is collected or transmitted to any server.</p>
+        <p><strong style="color:var(--ink);">GDPR / AVG:</strong> No personal data is processed. SkinDecide Baby does not require cookie consent for its core functionality.</p>
+      </div>
+      <div style="font-family:'DM Serif Display',serif; font-size:15px; margin-bottom:10px; margin-top:16px;">Terms of Use</div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.8;">
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">Not medical advice.</strong> SkinDecide Baby provides general skincare information based on publicly available scientific and paediatric dermatological literature. Always consult a qualified paediatrician or paediatric dermatologist for clinical skin conditions in infants.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">AI-assisted outcomes.</strong> All ingredient analysis, safety scores, claims verdicts, and routine recommendations are generated by algorithmic and AI-based systems. These outputs are inherently fallible and may contain errors, omissions, or outdated information. <em>Never make clinical decisions based solely on SkinDecide Baby.</em> The safety of your baby requires professional verification.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">Conservative scoring.</strong> SkinDecide Baby applies stricter safety thresholds than adult skincare apps — reflecting baby skin's higher permeability and absorption. This is not equivalent to a formal medical safety assessment.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">Regulatory context.</strong> Claims analysis is based on EU Cosmetics Regulation (EC) No 1223/2009. US regulations (FDA) differ. Regulatory status of ingredients may change — always verify current guidance.</p>
+        <p style="margin-bottom:8px;"><strong style="color:var(--ink);">Premature babies.</strong> Recommendations are not calibrated for premature infants. Consult your NICU team before using any topical product on a premature baby.</p>
+        <p><strong style="color:var(--ink);">No commercial relationships.</strong> No affiliate, advertising, or sponsorship relationships with any baby care brand. No commercial influence affects any recommendation.</p>
+      </div>
+    </div>
+    <div style="font-size:11px; color:var(--ink-muted); border-top:1px solid var(--border); padding-top:16px;">Part of the SkinDecide family · Evidence-based beauty decisions</div>
+  </div>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'score') renderScore();
+}
+function toggleChip(el) { el.classList.toggle('selected'); }
+function selectOne(el, groupId) { el.closest('#' + groupId).querySelectorAll('.checkbox-chip').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); }
+function openAbout() { document.getElementById('about-modal').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function closeAbout() { document.getElementById('about-modal').style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('about-modal').addEventListener('click', function(e) { if (e.target === this) closeAbout(); });
+
+// ====== ROUTINE DB ======
+const routineDB = {
+  premature: [
+    { step: 'Touch', time: 'Minimal handling', actives: 'No products at all — NICU-guided care only', evidence: 'Very High', note: 'Premature skin is critically underdeveloped. The stratum corneum (barrier layer) is absent or severely incomplete before 32 weeks gestation. Permeability is extremely high — all topical products pose significant risk of systemic absorption. Follow NICU protocols exclusively.', ingredients: '— consult NICU team only', avoid: 'Any topical product not prescribed by NICU · emollients · tap water (use sterile water in NICU) · any product containing preservatives, fragrance, or alcohol' },
+    { step: 'Skin assessment', time: 'By NICU team', actives: 'Sunflower seed oil (if prescribed by NICU)', evidence: 'Medium', note: 'Some NICUs use prophylactic emollient (sunflower seed oil) to reduce TEWL in very preterm infants. This must be prescribed by and monitored by clinical staff. Evidence is mixed — some trials show benefit, others show no effect. Not a home intervention.', ingredients: 'Helianthus Annuus (Sunflower) Seed Oil only — if NICU-prescribed', avoid: 'Olive oil (disrupts barrier) · coconut oil (insufficient evidence for preterm) · any commercial baby product without NICU approval' },
+    { step: 'Transition to home', time: 'Post-NICU discharge', actives: 'Plain water only · no products until paediatric clearance', evidence: 'High', note: 'After NICU discharge, the skin barrier is still developing. Use plain lukewarm water for bathing. No emollients unless specifically recommended by your paediatric team. First bath at home: sponge bath only, no submersion until cord has fallen.', ingredients: 'Aqua (sterile or filtered lukewarm) only', avoid: 'All commercial baby products until cleared by paediatrician · fragranced products · any product with more than 3 ingredients' },
+  ],
+  barrier: [
+    { step: 'Bath', time: 'Daily or every other day', actives: 'Lukewarm water (37°C) · max 5–10 min · fragrance-free wash', evidence: 'High', note: 'Over-bathing strips the natural vernix and developing acid mantle. 2–3 baths per week is sufficient for newborns. Use only plain water or a pH-neutral (5.5–6.0) baby wash. Avoid all bubble baths.', ingredients: 'Aqua only · or pH-neutral syndets · no SLS, no fragrance', avoid: 'Hot water · bubble bath · adult body wash · scrubbing' },
+    { step: 'Moisturiser', time: 'After every bath · within 3 min', actives: 'Emollient-rich cream or ointment · Ceramides + Petrolatum', evidence: 'Very High', note: 'Baby skin loses water 2–3× faster than adult skin (TEWL). Apply within 3 minutes of bathing to lock in moisture — the "soak and seal" method. Thick creams and ointments outperform lotions. Ceramide-containing products are ideal.', ingredients: 'Ceramide NP/AP · Petrolatum · Glycerin · Shea butter · no fragrance', avoid: 'Lotions (too thin) · fragrance · anything with "natural" essential oils · nut oils (allergy risk)' },
+    { step: 'SPF', time: 'AM — outdoors only, 6+ months', actives: 'Mineral SPF50+ (Zinc Oxide / Titanium Dioxide only)', evidence: 'Very High', note: 'No sunscreen before 6 months — keep babies in shade and protective clothing instead. From 6 months: mineral-only SPF50+ on exposed areas. Chemical UV filters not recommended due to higher skin absorption. Reapply every 2 hours outdoors.', ingredients: 'Zinc Oxide 10–20% · Titanium Dioxide · no oxybenzone, no octinoxate', avoid: 'Any SPF under 6 months of age · chemical UV filters · sprays (inhalation risk)' },
+  ],
+  eczema: [
+    { step: 'Cleanse', time: 'Daily — lukewarm, quick', actives: 'Syndet bar pH 5.5 · fragrance-free · soap-free', evidence: 'High', note: 'Soap disrupts the acid mantle and removes ceramides — critical to avoid in eczema. Use syndet (synthetic detergent) at physiological pH. Keep baths to 5–10 minutes maximum in lukewarm water.', ingredients: 'Sodium Cocoyl Isethionate · Cocamidopropyl Betaine · pH 5.5 · no SLS, no soap, no fragrance', avoid: 'Soap · bubble bath · SLS · any fragrance · hot water' },
+    { step: 'Emollient', time: 'Minimum 2× daily — especially after bathing', actives: 'Ceramide cream or medical emollient (250–500g/week for eczema)', evidence: 'Very High', note: 'The cornerstone of eczema management in infants. Regular emollient application reduces flares by 50% (BEEP trial evidence). Use generous amounts — 250g/week minimum for eczema babies. The 3:1:1 ceramide:cholesterol:fatty acid ratio mimics the skin lipid barrier.', ingredients: 'Ceramide NP + AP + EOP · Cholesterol · Linoleic acid · Petrolatum or Paraffin · no fragrance', avoid: 'Olive oil (disrupts skin barrier in eczema) · nut oils · fragrance · anything with >10 ingredients for sensitive skin' },
+    { step: 'Topical Corticosteroid', time: 'As prescribed — flares only', actives: 'Hydrocortisone 1% (OTC) or prescribed strength', evidence: 'Very High', note: 'First-line treatment for eczema flares. Short-term use (5–7 days) on affected areas only. Hydrocortisone 1% is safe for short-term use from 2 years; in infants consult a GP or paediatric dermatologist. Apply before emollient, leave 30 min gap.', ingredients: 'Hydrocortisone 1% · always seek medical guidance for infants under 2', avoid: 'Using on face without medical guidance · using for longer than 7 days · stopping suddenly during a flare' },
+    { step: 'Trigger avoidance', time: 'Ongoing', actives: 'Fragrance elimination · temperature control · clothing materials', evidence: 'High', note: 'Wool and synthetic fabrics worsen eczema — use 100% cotton. Keep room temperature at 18–20°C. Wash all new clothing before use with fragrance-free detergent. Avoid overheating.', ingredients: '100% cotton clothing · fragrance-free detergent (e.g. Surcare, Ecover) · no fabric softener', avoid: 'Wool · synthetic fabrics · scented detergents · fabric softeners · overheating' },
+  ],
+  cradlecap: [
+    { step: 'Soften', time: 'Night before treatment', actives: 'Coconut oil or baby mineral oil applied to scalp', evidence: 'Medium', note: 'Apply a small amount of coconut oil or pure mineral oil to the scalp and leave overnight (or 30 minutes). This softens the crusts before gentle removal. Cradle cap (seborrhoeic dermatitis) is caused by overactive sebaceous glands, not poor hygiene — it resolves on its own by 6–12 months.', ingredients: 'Refined coconut oil (topical use only) · Mineral oil · no fragrance', avoid: 'Vigorous scrubbing · strong antifungal shampoos without medical advice · picking at crusts' },
+    { step: 'Gentle wash', time: 'After softening', actives: 'Baby shampoo · soft brush or cloth', evidence: 'Medium-High', note: 'After softening, gently wash the scalp with a fragrance-free baby shampoo. Use a soft-bristled baby brush or washcloth in circular movements. Do not forcibly remove scales — this risks infection. Repeat 2–3× per week.', ingredients: 'Fragrance-free baby shampoo · pH neutral · soft brush', avoid: 'Picking · forcible removal · adult dandruff shampoos (selenium sulfide, ketoconazole) without medical advice' },
+  ],
+  nappy: [
+    { step: 'Change frequency', time: 'Every 2–3 hours · immediately when soiled', actives: 'Frequent nappy changes are the most effective prevention', evidence: 'Very High', note: 'Nappy rash is caused by prolonged contact with urine and faeces, not by any ingredient deficiency. Frequent changing reduces contact time. Superabsorbent nappies keep skin drier than cloth.', ingredients: '— (non-product step)', avoid: 'Leaving soiled nappies on · wet wipes with fragrance or alcohol' },
+    { step: 'Cleanse', time: 'At every nappy change', actives: 'Plain water + cotton wool · or fragrance-free water wipes', evidence: 'High', note: 'Plain water and cotton wool is the most gentle option, especially for newborns. If using wipes, choose fragrance-free, alcohol-free, with pH 5.5. Avoid antibacterial wipes — they disrupt the skin microbiome.', ingredients: 'Aqua only · or fragrance-free water wipes · pH 5.5', avoid: 'Fragrance · alcohol · antibacterial ingredients · baby powder (talc inhalation risk, cornstarch may worsen fungal rash)' },
+    { step: 'Barrier cream', time: 'At every nappy change · preventively', actives: 'Zinc Oxide 10–40% or Petrolatum or Dimethicone', evidence: 'Very High', note: 'Apply a thick layer as a physical barrier between skin and moisture at every change — not just when rash appears. Zinc oxide is anti-inflammatory and antimicrobial. Petrolatum creates a waterproof barrier. Do not wipe off completely at next change — rub over it instead.', ingredients: 'Zinc Oxide 10–40% · Petrolatum · Dimethicone · Lanolin (avoid if wool allergy)', avoid: 'Fragrance · talc (inhalation risk) · boric acid · adult moisturisers without zinc oxide · antifungal creams without confirmed fungal infection' },
+  ],
+  sensitive: [
+    { step: 'Cleanse', time: 'Daily · minimal contact time', actives: 'Plain water or pH 5.5 fragrance-free syndet', evidence: 'High', note: 'For reactive baby skin, less is more. Plain water is always the safest choice. If a wash product is needed, choose the shortest ingredient list possible — fewer ingredients = fewer potential irritants. Avoid all fragrance, colourants, and preservatives where possible.', ingredients: 'Aqua only · or single-ingredient syndet · fragrance-free', avoid: 'Everything non-essential · fragrance · SLS · CAPB if reactive · colourants · essential oils' },
+    { step: 'Moisturise', time: 'After bathing · when dry', actives: 'Petrolatum or single-ingredient emollient', evidence: 'High', note: 'For very sensitive skin, pure petrolatum (Vaseline) is the safest moisturiser — it has the shortest possible ingredient list (1 ingredient), is inert, non-allergenic, and highly effective at reducing TEWL. Add ceramides if tolerated.', ingredients: 'Petrolatum (Vaseline, 1 ingredient) · or Ceramide cream with minimal preservatives', avoid: 'Products with more than 10 ingredients · fragrance · essential oils · nut-based oils · coloured or scented products' },
+  ],
+  maintenance: [
+    { step: 'Bath', time: '2–3× per week for newborns · daily from 3+ months', actives: 'Lukewarm water (37°C) · fragrance-free if needed', evidence: 'High', note: 'Healthy skin needs less intervention than marketing suggests. For babies with normal skin, water alone is sufficient for the first month. After that, a gentle fragrance-free baby wash is optional, not necessary.', ingredients: 'Aqua · or gentle fragrance-free syndet', avoid: 'Over-bathing · hot water · adult products · anything with fragrance' },
+    { step: 'Moisturise', time: 'After bathing if dry areas appear', actives: 'Light ceramide lotion or Petrolatum on dry patches', evidence: 'Medium', note: 'Normal baby skin does not need daily moisturising. If dry patches appear, apply a light, fragrance-free moisturiser after bathing. Thick emollients are only needed for very dry or eczema-prone skin.', ingredients: 'Ceramide NP · Glycerin · Petrolatum on dry patches · no fragrance', avoid: 'Fragrance · nut oils · essential oils · adult products' },
+    { step: 'Sun protection', time: 'AM · outdoors · from 6 months', actives: 'Shade + UPF 50+ clothing under 6 months · Zinc Oxide SPF50+ from 6 months', evidence: 'Very High', note: 'Under 6 months: shade, hat, and UPF50+ clothing is safer than sunscreen. From 6 months: apply mineral SPF50+ (Zinc Oxide only) to exposed skin. Avoid between 11am and 3pm where possible.', ingredients: 'Zinc Oxide 15–20% · Titanium Dioxide · no chemical filters', avoid: 'Direct sun under 6 months · chemical SPF filters · spray sunscreens' },
+  ],
+};
+
+// ====== PROFILE SYSTEM ======
+let savedProfiles = [];
+let editingProfileId = null;
+
+async function loadProfiles() {
+  try { const r = await window.storage.get('babydecide-profiles'); savedProfiles = r ? JSON.parse(r.value) : []; } catch(e) { savedProfiles = []; }
+  renderProfilesList();
+}
+async function persistProfiles() {
+  try { await window.storage.set('babydecide-profiles', JSON.stringify(savedProfiles)); } catch(e) {}
+}
+
+function renderProfilesList() {
+  const el = document.getElementById('profiles-list');
+  if (!savedProfiles.length) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div style="margin-bottom:12px; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-muted);">Saved Profiles (${savedProfiles.length})</div>
+    <div style="display:flex; flex-direction:column; gap:10px;" id="profiles-cards">
+      ${savedProfiles.map(p => `
+        <div class="card" style="padding:16px; display:flex; align-items:center; gap:12px; cursor:pointer;" data-pid="${p.id}">
+          <div style="flex:1; pointer-events:none;">
+            <div style="font-family:'DM Serif Display',serif; font-size:16px; margin-bottom:6px;">${p.name}</div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">${p.chips.slice(0,3).map(c => `<span class="tag tag-muted">${c}</span>`).join('')}</div>
+          </div>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button data-action="edit" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--ink-muted);">Edit</button>
+            <button data-action="delete" data-id="${p.id}" style="background:none; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; font-size:11px; font-family:'DM Mono',monospace; color:var(--accent);">✕</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  const cards = document.getElementById('profiles-cards');
+  if (cards) cards.addEventListener('click', function(e) {
+    const btn = e.target.closest('button[data-action]');
+    if (btn) { e.stopPropagation(); if (btn.dataset.action === 'edit') editProfile(btn.dataset.id); if (btn.dataset.action === 'delete') deleteProfile(btn.dataset.id); }
+    else { const card = e.target.closest('[data-pid]'); if (card) viewProfile(card.dataset.pid); }
+  });
+}
+
+function saveProfile() {
+  const name = document.getElementById('profileName').value.trim() || 'Baby';
+  const age = document.getElementById('babyAge').value;
+  const skinType = document.getElementById('skinType').value;
+  const concern = document.getElementById('primaryConcern').value;
+  if (!age || !concern) { alert('Please select age and primary concern.'); return; }
+  const conditions = Array.from(document.querySelectorAll('#conditions .checkbox-chip.selected')).map(c => c.textContent);
+  const chips = [age, skinType || 'skin', concern, ...conditions.filter(c => c !== 'None')];
+  const profile = { id: editingProfileId || ('p' + Date.now()), name, age, skinType, concern, conditions, chips, savedAt: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) };
+  if (editingProfileId) { savedProfiles = savedProfiles.map(p => p.id === editingProfileId ? profile : p); editingProfileId = null; }
+  else savedProfiles.push(profile);
+  persistProfiles(); renderProfilesList(); viewProfile(profile.id); resetForm();
+}
+
+function viewProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id);
+  if (!p) return;
+  document.getElementById('profile-result-name').textContent = p.name;
+  document.getElementById('profile-chips').innerHTML = p.chips.map(c => `<div class="profile-chip">✓ ${c}</div>`).join('') + `<div class="profile-chip" style="color:var(--ink-muted)">Saved ${p.savedAt}</div>`;
+  const architecture = routineDB[p.concern] || routineDB.maintenance;
+  const ec = (e) => e === 'Very High' || e === 'High' ? 'tag-green' : e === 'Medium-High' || e === 'Medium' ? 'tag-amber' : 'tag-muted';
+  document.getElementById('routine-architecture').innerHTML = architecture.map((step, i) => {
+    const q = encodeURIComponent('best baby ' + step.step.toLowerCase() + ' ' + step.actives.split('·')[0].trim().substring(0,40) + ' fragrance free');
+    return `<div style="padding:16px 0; border-bottom:1px solid var(--border);">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px;">
+        <div style="flex:1; min-width:0;">
+          <div class="routine-step-label" style="margin-bottom:4px;"><span class="step-num">${i+1}</span>${step.step}<span style="margin-left:8px; font-size:10px; color:var(--ink-muted); text-transform:none; letter-spacing:0; font-weight:400;">⏱ ${step.time}</span></div>
+          <div style="font-family:'DM Serif Display',serif; font-size:15px; line-height:1.3;">${step.actives}</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0;">
+          <span class="tag ${ec(step.evidence)}">Evidence: ${step.evidence}</span>
+          <a href="https://www.google.com/search?q=${q}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:5px 9px; font-family:'DM Mono',monospace; font-size:9px; text-decoration:none; color:var(--ink-muted); white-space:nowrap; text-transform:uppercase; letter-spacing:0.06em; cursor:pointer;">🔍 Search</a>
+        </div>
+      </div>
+      <div style="font-size:12px; color:var(--ink-muted); line-height:1.6; margin-bottom:10px;">${step.note}</div>
+      ${step.ingredients !== '—' ? `<div style="display:flex; gap:8px; align-items:baseline; margin-bottom:6px; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); flex-shrink:0;">✓ Look for</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.ingredients}</span></div>` : ''}
+      ${step.avoid ? `<div style="display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;"><span style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); flex-shrink:0;">✗ Avoid</span><span style="font-size:11px; color:var(--ink-muted); font-family:'DM Mono',monospace;">${step.avoid}</span></div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('profile-result').style.display = 'block';
+  document.getElementById('profile-result').scrollIntoView({ behavior: 'smooth' });
+}
+
+function editProfile(id) {
+  const p = savedProfiles.find(pr => pr.id === id); if (!p) return;
+  editingProfileId = id;
+  document.getElementById('profileName').value = p.name;
+  document.getElementById('babyAge').value = p.age;
+  document.getElementById('skinType').value = p.skinType || '';
+  document.getElementById('primaryConcern').value = p.concern;
+  document.querySelectorAll('#conditions .checkbox-chip').forEach(c => c.classList.toggle('selected', p.conditions.includes(c.textContent)));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#fdefd0">✎</span> Edit Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'inline-flex';
+  document.getElementById('profile-form-card').scrollIntoView({ behavior: 'smooth' });
+}
+function deleteProfile(id) {
+  if (!confirm('Delete this profile?')) return;
+  savedProfiles = savedProfiles.filter(p => p.id !== id);
+  persistProfiles(); renderProfilesList();
+  if (!savedProfiles.length) document.getElementById('profile-result').style.display = 'none';
+}
+function cancelEdit() { editingProfileId = null; resetForm(); }
+function resetForm() {
+  document.getElementById('profileName').value = '';
+  document.getElementById('babyAge').value = '';
+  document.getElementById('skinType').value = '';
+  document.getElementById('primaryConcern').value = '';
+  document.querySelectorAll('#conditions .checkbox-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('profile-form-title').innerHTML = '<span class="card-icon" style="background:#d8ead9">+</span> New Baby Profile';
+  document.getElementById('cancel-edit-btn').style.display = 'none';
+}
+loadProfiles();
+
+// ====== SCANNER ======
+const babyActiveMap = {
+  'ceramide': { function: 'Barrier lipid · essential for developing skin', badge: 'tag-green' },
+  'glycerin': { function: 'Humectant · gentle and safe', badge: 'tag-green' },
+  'petrolatum': { function: 'Occlusive · gold standard for TEWL reduction', badge: 'tag-green' },
+  'zinc oxide': { function: 'Barrier + anti-inflammatory (nappy rash)', badge: 'tag-green' },
+  'panthenol': { function: 'Provitamin B5 · calming and barrier repair', badge: 'tag-green' },
+  'sodium hyaluronate': { function: 'Humectant · moisture retention', badge: 'tag-green' },
+  'allantoin': { function: 'Soothing · promotes healing', badge: 'tag-green' },
+  'shea butter': { function: 'Emollient · barrier support (check nut allergy)', badge: 'tag-amber' },
+  'dimethicone': { function: 'Silicone barrier · protective, non-absorbing', badge: 'tag-green' },
+};
+const babyWatchlistMap = {
+  'parfum': { risk: 'High', note: 'Fragrance is the #1 contact allergen in baby products. Baby skin absorbs more readily — avoid entirely.' },
+  'fragrance': { risk: 'High', note: 'Same as Parfum. No fragrance should be in baby products.' },
+  'linalool': { risk: 'High', note: 'Fragrance allergen. Common in "natural" products. Highly sensitizing.' },
+  'limonene': { risk: 'High', note: 'Fragrance allergen. Found in citrus essential oils.' },
+  'alcohol denat': { risk: 'High', note: 'Drying alcohol. Disrupts barrier especially in babies.' },
+  'methylisothiazolinone': { risk: 'High', note: 'Preservative. EU-banned in leave-on products. High allergen — avoid in babies.' },
+  'phenoxyethanol': { risk: 'Medium', note: 'Common preservative. UK/EU advisory to avoid in products for children under 3 (Japan banned in baby products).' },
+  'sodium lauryl sulfate': { risk: 'High', note: 'Harsh surfactant. Strips natural lipids from baby skin barrier.' },
+  'tea tree oil': { risk: 'High', note: 'Essential oil. Hormonal disruption concerns and skin sensitiser. Not for babies.' },
+  'lavender oil': { risk: 'Medium', note: 'Essential oil. Potential sensitiser and hormonal disruption concerns in babies.' },
+  'oxybenzone': { risk: 'High', note: 'Chemical UV filter. High absorption through baby skin. Avoid entirely.' },
+  'propylene glycol': { risk: 'Medium', note: 'Penetration enhancer. Increases absorption of other ingredients — higher concern in babies.' },
+};
+
+const demoProduct = {
+  name: 'Mustela Hydra Bébé Body Lotion', brand: 'Category: Baby Moisturiser',
+  actives: [
+    { name: 'Ceramide', conc: 70, level: 'Barrier lipid', badge: 'tag-green', function: 'Barrier lipid · essential for developing skin' },
+    { name: 'Glycerin', conc: 80, level: 'Humectant', badge: 'tag-green', function: 'Humectant · gentle and safe' },
+    { name: 'Panthenol (B5)', conc: 50, level: 'Soothing', badge: 'tag-green', function: 'Provitamin B5 · calming and barrier repair' },
+  ],
+  watchlist: [],
+  alerts: [
+    { type: 'green', icon: '✓', text: 'Fragrance-free formula — ideal for sensitive baby skin.' },
+    { type: 'green', icon: '✓', text: 'No harsh preservatives detected. Phenoxyethanol-free.' },
+  ],
+  safetyScore: 91,
+  allIngredients: ['Aqua', 'Glycerin', 'Isopropyl Palmitate', 'Cetearyl Alcohol', 'Ceramide NP', 'Panthenol', 'Allantoin', 'Tocopherol', 'Xanthan Gum', 'Sodium Hyaluronate', 'Carbomer', 'Sodium Hydroxide', 'Disodium EDTA', 'Ethylhexylglycerin']
+};
+
+function simulateScan() { displayProduct(demoProduct); }
+function analyzeINCIInput() {
+  const input = document.getElementById('inci-input').value.trim();
+  if (!input) { simulateScan(); return; }
+  const ingredients = input.split(',').map(i => i.trim()).filter(Boolean);
+  const actives = [], watchlist = [], alerts = [];
+  const lc = ingredients.map(i => i.toLowerCase());
+  for (const [key, val] of Object.entries(babyActiveMap)) { const m = ingredients.find(i => i.toLowerCase().includes(key)); if (m) actives.push({ name: m, conc: 60, level: 'Beneficial', badge: val.badge, function: val.function }); }
+  for (const [key, val] of Object.entries(babyWatchlistMap)) { const m = ingredients.find(i => i.toLowerCase().includes(key)); if (m) watchlist.push({ name: m, risk: val.risk, note: val.note }); }
+  const hasFragrance = lc.some(i => i.includes('parfum') || i.includes('fragrance') || i.includes('linalool') || i.includes('limonene'));
+  const hasMIT = lc.some(i => i.includes('methylisothiazolinone'));
+  const hasSLS = lc.some(i => i === 'sodium lauryl sulfate' || i === 'sls');
+  if (hasFragrance) alerts.push({ type: 'red', icon: '✗', text: 'Fragrance detected. Not recommended for baby products — fragrance is the #1 allergen and absorbs more readily through baby skin.' });
+  if (hasMIT) alerts.push({ type: 'red', icon: '✗', text: 'Methylisothiazolinone (MIT) detected. EU-banned in leave-on products. High allergen — avoid in all baby products.' });
+  if (hasSLS) alerts.push({ type: 'red', icon: '✗', text: 'SLS detected. Too harsh for baby skin. Strips developing lipid barrier.' });
+  if (!hasFragrance && !hasMIT && !hasSLS) alerts.push({ type: 'green', icon: '✓', text: 'No major red flags detected. Always patch-test a new product on a small area for 48 hours first.' });
+  const wScore = Math.max(0, 100 - (watchlist.filter(w => w.risk === 'High').length * 20) - (watchlist.filter(w => w.risk === 'Medium').length * 8));
+  displayProduct({ name: 'Custom Baby Product', brand: 'INCI Analysis · ' + ingredients.length + ' ingredients', actives, watchlist, alerts, safetyScore: wScore, allIngredients: ingredients });
+}
+
+// Track scanned products for score
+let scannedProducts = [];
+
+function displayProduct(p) {
+  // Store for score calculation
+  scannedProducts.push({
+    name: p.name,
+    safetyScore: p.safetyScore,
+    watchlist: p.watchlist || [],
+    alerts: p.alerts || [],
+    allIngredients: p.allIngredients || []
+  });
+  document.getElementById('product-name').textContent = p.name;
+  document.getElementById('product-brand').textContent = p.brand;
+  document.getElementById('risk-score').textContent = p.safetyScore;
+  document.getElementById('risk-score').style.color = p.safetyScore >= 80 ? 'var(--green)' : p.safetyScore >= 60 ? 'var(--amber)' : 'var(--accent)';
+  document.getElementById('alerts-area').innerHTML = p.alerts.map(a => `<div class="alert alert-${a.type === 'green' ? 'green' : a.type === 'amber' ? 'amber' : 'red'}"><span>${a.icon}</span><div>${a.text}</div></div>`).join('');
+  document.getElementById('active-ingredients').innerHTML = p.actives.length ? p.actives.map(a => `<div class="ingredient-row"><div style="flex:1"><div style="font-size:12px; font-weight:500; margin-bottom:2px;">${a.name}</div><div style="font-size:11px; color:var(--ink-muted);">${a.function}</div></div><span class="tag ${a.badge}">${a.level}</span></div>`).join('') : '<div style="color:var(--ink-muted); font-size:12px; padding:8px 0">No specific beneficial ingredients detected.</div>';
+  const wl = p.watchlist;
+  if (wl && wl.length) {
+    document.getElementById('watch-ingredients').innerHTML = wl.map(w => `<div class="ingredient-row"><div style="flex:1"><div style="font-size:12px; font-weight:500; margin-bottom:2px;">${w.name}</div><div style="font-size:11px; color:var(--ink-muted);">${w.note}</div></div><span class="tag tag-${w.risk === 'High' ? 'red' : 'amber'}">${w.risk}</span></div>`).join('');
+    document.getElementById('watch-empty').style.display = 'none';
+  } else {
+    document.getElementById('watch-ingredients').innerHTML = '';
+    document.getElementById('watch-empty').style.display = 'block';
+  }
+  document.getElementById('all-ingredients').innerHTML = p.allIngredients.map((ing, i) => `<div class="ingredient-row"><span style="font-size:10px; color:var(--ink-muted); width:20px; flex-shrink:0;">${i+1}</span><span style="flex:1; font-size:12px;">${ing}</span><div class="ingredient-bar"><div class="ingredient-bar-fill" style="width:${Math.max(4, 100 - i * (100/p.allIngredients.length))}%; background:${i < 3 ? 'var(--accent)' : i < 7 ? 'var(--amber)' : 'var(--border)'};"></div></div></div>`).join('');
+  document.getElementById('scanner-input').style.display = 'none';
+  document.getElementById('scanner-result').style.display = 'block';
+}
+function resetScanner() {
+  document.getElementById('scanner-input').style.display = 'block';
+  document.getElementById('scanner-result').style.display = 'none';
+  document.getElementById('inci-input').value = '';
+  // Keep scanned history — don't clear
+}
+
+// ====== BABY CLAIMS DECODER ======
+const babyClaimsDB = [
+  { pattern: /hypoallerg/i, verdict: 'marketing', label: 'Not regulated', note: '"Hypoallergenic" has no legal definition in EU Cosmetics Regulation (EC) No 1223/2009. Any manufacturer may use the term without meeting a standard. The only reliable alternative: patch-test on a small skin area for 48 hours.' },
+  { pattern: /dermatolog(isch)?\s*(getest|tested|approved)/i, verdict: 'marketing', label: 'Vague / Marketing', note: '"Dermatologically tested" is not regulated. The test may have been conducted by a single dermatologist on a handful of participants. No legal minimum for study size or independence. Means very little in practice.' },
+  { pattern: /100%\s*natural|purely?\s*natural|nat[uü]r/i, verdict: 'marketing', label: 'Marketing', note: '"100% natural" is not defined in EU cosmetics law. Essential oils are 100% natural — and are potent allergens. "Natural" ≠ safe, especially for babies.' },
+  { pattern: /as.*gentle.*as.*water|as\s*gentle\s*as\s*water/i, verdict: 'marketing', label: 'Marketing / Unverifiable', note: 'Water has a pH of 7.0 — higher than the ideal pH for baby skin (5.0–5.5). "As gentle as water" is a marketing phrase with no clinical definition.' },
+  { pattern: /paediatric(ally)?\s*(tested|approved)|pediatrisch/i, verdict: 'marketing', label: 'Vague', note: '"Pediatrically tested" has no legal standard, comparable to "dermatologically tested". It implies testing on children but specifies no methodology, study size, or independence.' },
+  { pattern: /clinically\s*(tested|proven)|clinisch/i, verdict: 'marketing', label: 'Vague', note: 'Without published, peer-reviewed data in an accredited journal, "clinically tested" is not verifiable. Internal studies without independent peer review do not count.' },
+  { pattern: /fragrance.?free|parfumvrij/i, verdict: 'science', label: 'Positive claim', note: '"Fragrance-free" is a concrete, verifiable claim. Check the INCI for "Parfum" / "Fragrance" AND for individual fragrance allergens (Linalool, Limonene, Eugenol, Citronellol). "Unscented" ≠ fragrance-free — it may contain masking fragrance.' },
+  { pattern: /spf\s*\d+|uv.?prot/i, verdict: 'science', label: 'Regulated', note: 'SPF claims are regulated and require standardised testing (ISO 24444). Reliable from 6 months. Under 6 months: no sunscreen — use shade and UPF50+ clothing instead.' },
+  { pattern: /paraben.?free|zonder\s*paraben/i, verdict: 'marketing', label: 'Fear-based marketing', note: '"Paraben-free" is fear-based marketing. Parabens at cosmetic doses have been extensively studied and found safe by the EU Scientific Committee on Consumer Safety (SCCS). Alternative preservatives (e.g. methylisothiazolinone) often carry higher risk.' },
+  { pattern: /eco|sustainab|organic|natural/i, verdict: 'marketing', label: 'Check certification', note: 'Vague without certification. Look for: COSMOS Organic (Ecocert), BDIH, or NaTrue certificates. "Organic" without certification is a marketing claim. For babies, sustainability is secondary to safety.' },
+];
+
+const babyGlossary = [
+  { term: 'Hypoallergenic', verdict: 'marketing', note: 'No legal definition (EU/US). Self-declared by manufacturer. Only reliable after patch-test.' },
+  { term: 'Dermatologically tested', verdict: 'marketing', note: 'No standard study requirements. May mean 1 dermatologist + 10 participants.' },
+  { term: 'Mild / Gentle', verdict: 'marketing', note: 'No definition. Relative concept without legal boundary.' },
+  { term: '100% Natural', verdict: 'marketing', note: 'No EU definition. Essential oils are 100% natural and potent allergens.' },
+  { term: 'Fragrance-free', verdict: 'science', note: 'Verifiable in INCI. Also check for: Linalool, Limonene, Citronellol, Eugenol, Coumarin — these fragrance allergens are disclosed separately.' },
+  { term: 'Pediatrically tested', verdict: 'marketing', note: 'No standardised methodology required in EU.' },
+  { term: 'Certified Organic', verdict: 'science', note: 'Only reliable with COSMOS/Ecocert/BDIH logo on the packaging.' },
+  { term: 'Paraben-free', verdict: 'marketing', note: 'Fear-based marketing. Parabens are SCCS-approved. Alternatives are sometimes higher risk.' },
+  { term: 'pH-balanced', verdict: 'science', note: 'Verifiable. Ideal pH for baby skin: 5.0–5.5. Ask manufacturer for exact pH value.' },
+];
+
+const minimalismAdvice = {
+  bath: { need: 'Low', verdict: 'Probably not needed', color: 'var(--green)', icon: '✓', advice: 'Plain lukewarm water is sufficient for bathing newborns and infants up to 3–6 months. If needed, use a fragrance-free, pH-neutral (5.5) baby wash — maximum once per week. Bubble baths are never needed for babies.' },
+  shampoo: { need: 'Low', verdict: 'Rarely needed', color: 'var(--green)', icon: '✓', advice: 'Baby hair produces minimal sebum. Plain water or an occasional fragrance-free baby wash suffices. Dedicated baby shampoo is only needed if visible grease or cradle cap is present.' },
+  lotion: { need: 'Conditional', verdict: 'Only if skin is dry', color: 'var(--amber)', icon: '○', advice: 'For healthy, normal baby skin: no moisturiser needed. If dry patches appear, use a fragrance-free, ceramide-containing cream (not lotion) in small amounts on dry areas only. Ointments (Petrolatum) beat lotions.' },
+  oil: { need: 'Not recommended', verdict: 'Avoid — especially olive oil', color: 'var(--accent)', icon: '✗', advice: 'Baby oil (mineral oil) is safe but not necessary. Olive oil and sunflower oil (common in "natural" baby ranges) disrupt the developing skin barrier in healthy babies — evidence suggests they worsen dry skin. Avoid until 12+ months.' },
+  powder: { need: 'Not needed', verdict: 'Avoid', color: 'var(--accent)', icon: '✗', advice: 'Talc powder: inhalation risk — avoid entirely. Cornstarch powder: can worsen fungal nappy rash and clumps when wet. Neither product adds safety or benefit. Zinc oxide barrier cream is evidence-based for nappy rash instead.' },
+  wipes: { need: 'Conditional', verdict: 'For travel/convenience only', color: 'var(--amber)', icon: '○', advice: 'Plain water + cotton wool is best for newborns. Wipes are convenient but should be: fragrance-free, alcohol-free, pH 5.5. For nappies: wipe front-to-back. Discard if baby shows any redness from a particular wipe brand.' },
+  nappycream: { need: 'High', verdict: 'Use preventively', color: 'var(--green)', icon: '✓', advice: 'Zinc oxide 10–40% barrier cream is evidence-based and recommended at every nappy change — preventively, not only after a rash appears. Apply a thick layer. Do not wipe off completely at next change.' },
+  sunscreen: { need: 'High — from 6 months', verdict: 'Do not use under 6 months', color: 'var(--amber)', icon: '○', advice: 'Under 6 months: no sunscreen. Use shade, UPF50+ clothing, and a hat instead. From 6 months: mineral-only SPF50+ (Zinc Oxide/Titanium Dioxide). No chemical UV filters (oxybenzone, octinoxate) — too high systemic absorption in baby skin.' },
+  toner: { need: 'None', verdict: 'Never needed', color: 'var(--accent)', icon: '✗', advice: 'Baby toners and micellar waters are unnecessary. Baby skin has no congestion, pores, or need for toning. These products add unnecessary ingredient exposure. Use plain water.' },
+  perfume: { need: 'None', verdict: 'Never — avoid entirely', color: 'var(--accent)', icon: '✗', advice: 'Baby perfumes and colognes have no skin care benefit and are entirely fragrance. Fragrance is the number one contact allergen in baby products. Baby skin absorbs fragrance molecules more readily into the bloodstream. Never use.' },
+  hairproduct: { need: 'Very low', verdict: 'Rarely needed', color: 'var(--green)', icon: '✓', advice: 'Baby hair produces minimal sebum. No styling product is ever needed. For cradle cap: warm oil (massage in, wash out) and a soft brush. For tangles in toddlers: fragrance-free, gentle detangler only if necessary.' },
+};
+
+function loadDemoClaims() {
+  document.getElementById('claims-input').value = 'Hypoallergenic. Dermatologically tested. 100% natural. As gentle as water. Pediatrically tested. Paraben-free. Fragrance-free.';
+  decodeBabyClaims();
+}
+
+function decodeBabyClaims() {
+  const text = document.getElementById('claims-input').value.trim();
+  if (!text) { loadDemoClaims(); return; }
+  const found = babyClaimsDB.filter(c => c.pattern.test(text));
+  const science = found.filter(c => c.verdict === 'science').length;
+  const marketing = found.filter(c => c.verdict === 'marketing').length;
+  const tc = v => v === 'science' ? 'tag-green' : v === 'marketing' ? 'tag-red' : 'tag-amber';
+  document.getElementById('claims-result').innerHTML = `
+    <div class="grid-3" style="margin-bottom:16px;">
+      <div class="card" style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--green)">${science}</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px">Verifiable</div></div>
+      <div class="card" style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--accent)">${marketing}</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px">Marketing / Vague</div></div>
+      <div class="card" style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--amber)">${found.length - science - marketing}</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px">Conditional</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Claim Breakdown</div>
+      ${found.length ? found.map(c => `<div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start;flex-wrap:wrap;"><span class="tag ${tc(c.verdict)}" style="flex-shrink:0;min-width:90px;justify-content:center;">${c.label}</span><div style="font-size:12px;color:var(--ink-muted);line-height:1.6;flex:1;">${c.note}</div></div>`).join('') : '<div style="color:var(--ink-muted);font-size:12px;padding:12px 0;">No recognised claims detected. Try pasting more product marketing text.</div>'}
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:11px;color:var(--ink-muted);line-height:1.6;font-style:italic;">⚠ AI-assisted analysis. Always verify independently and consult a doctor for any concerns about infant skincare.</div>
+    </div>`;
+  document.getElementById('claims-result').style.display = 'block';
+}
+
+function runMinimalism() {
+  const val = document.getElementById('mini-product').value;
+  if (!val) return;
+  const a = minimalismAdvice[val];
+  document.getElementById('mini-result').innerHTML = `
+    <div class="alert alert-${a.color === 'var(--green)' ? 'green' : a.color === 'var(--amber)' ? 'amber' : 'red'}" style="margin-top:12px;">
+      <span style="font-size:18px;">${a.icon}</span>
+      <div>
+        <div style="font-weight:600;margin-bottom:4px;">${a.verdict} <span style="font-weight:400;font-size:11px;opacity:0.7;">(Need: ${a.need})</span></div>
+        <div style="font-size:12px;line-height:1.7;">${a.advice}</div>
+      </div>
+    </div>`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+if(document.getElementById('claims-glossary')) document.getElementById('claims-glossary').innerHTML = babyGlossary.map(g => {
+  const tc = g.verdict === 'science' ? 'tag-green' : g.verdict === 'marketing' ? 'tag-red' : 'tag-amber';
+  return `<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;flex-wrap:wrap;"><span class="tag ${tc}" style="flex-shrink:0;min-width:80px;justify-content:center;">${g.verdict === 'science' ? 'Verifiable' : g.verdict === 'marketing' ? 'Marketing' : 'Vague'}</span><div><div style="font-size:12px;font-weight:500;margin-bottom:3px;">${g.term}</div><div style="font-size:11px;color:var(--ink-muted);line-height:1.6;">${g.note}</div></div></div>`;
+}).join('');
+});
+
+// ====== BABY SCORE ENGINE (linked to profile + scanned products) ======
+function renderScore() {
+  const el = document.getElementById('score-content');
+  const profile = savedProfiles.length ? savedProfiles[0] : null;
+  const hasProfile = !!profile;
+  const hasScanned = scannedProducts.length > 0;
+
+  if (!hasProfile && !hasScanned) {
+    el.innerHTML = '<div class="alert alert-green"><span>○</span><div>Save a baby profile and scan at least one product to generate a personalised safety score.</div></div>';
+    return;
+  }
+
+  const concern = profile ? profile.concern : 'maintenance';
+  const age = profile ? profile.age : 'baby';
+  const conditions = profile ? (profile.conditions || []) : [];
+  const hasEczema = conditions.includes('Eczema (atopic)') || concern === 'eczema';
+  const hasPremature = age === 'premature';
+  const hasNappyRash = conditions.includes('Nappy rash') || concern === 'nappy';
+
+  const avgSafetyScore = hasScanned ? Math.round(scannedProducts.reduce((s, p) => s + p.safetyScore, 0) / scannedProducts.length) : null;
+
+  const fragranceHits = scannedProducts.filter(function(p) {
+    var hasAlert = p.alerts.some(function(a) { return a.type === 'red' && (a.text.toLowerCase().includes('fragrance') || a.text.toLowerCase().includes('parfum')); });
+    var hasIngredient = (p.allIngredients || []).some(function(i) { return ['parfum','fragrance','linalool','limonene','eugenol','citronellol','coumarin'].some(function(f) { return i.toLowerCase().includes(f); }); });
+    return hasAlert || hasIngredient;
+  }).length;
+
+  const highRiskCount = scannedProducts.reduce(function(acc, p) { return acc + (p.watchlist || []).filter(function(w) { return w.risk === 'High'; }).length; }, 0);
+
+  const ceramideCount = scannedProducts.filter(function(p) {
+    return (p.allIngredients || []).some(function(i) { return i.toLowerCase().includes('ceramide') || i.toLowerCase().includes('petrolatum'); });
+  }).length;
+
+  const productCount = scannedProducts.length;
+
+  const fragranceScore = Math.max(0, 100 - fragranceHits * (hasEczema || hasPremature ? 40 : 25));
+  const barrierScore = hasScanned ? Math.min(100, ceramideCount * 40 + (ceramideCount > 0 ? 20 : 0) + (highRiskCount === 0 ? 20 : 0)) : 50;
+  const simplicityScore = productCount === 0 ? 100 : productCount <= 2 ? 95 : productCount <= 4 ? 80 : productCount <= 6 ? 60 : Math.max(20, 80 - (productCount - 4) * 12);
+
+  var w0 = hasPremature ? 0.4 : hasEczema ? 0.35 : 0.35;
+  var w1 = hasPremature ? 0.3 : hasEczema ? 0.4 : 0.3;
+  var w2 = hasPremature ? 0.3 : hasEczema ? 0.25 : 0.35;
+  const overallScore = hasScanned ? Math.round(fragranceScore * w0 + barrierScore * w1 + simplicityScore * w2) : null;
+
+  function sc(s) { return s >= 80 ? 'var(--green)' : s >= 60 ? 'var(--amber)' : 'var(--accent)'; }
+
+  var profileBanner = '';
+  if (hasProfile) {
+    if (hasPremature) profileBanner = '<div class="alert alert-amber" style="margin-bottom:16px;"><span>⚠</span><div><strong>Premature profile active.</strong> Stricter thresholds apply. Premature skin is significantly more permeable. Consult your NICU team before any topical product.</div></div>';
+    else if (hasEczema) profileBanner = '<div class="alert alert-amber" style="margin-bottom:16px;"><span>○</span><div><strong>Eczema profile active.</strong> Barrier score weighted more heavily. Fragrance is critical — even trace amounts can trigger flares.</div></div>';
+    else if (hasNappyRash) profileBanner = '<div class="alert alert-green" style="margin-bottom:16px;"><span>○</span><div><strong>Nappy rash profile active.</strong> Zinc oxide 10–40% is the evidence-backed barrier intervention.</div></div>';
+  }
+
+  var profileContext = hasProfile ? ('<div style="font-size:11px;color:var(--ink-muted);margin-bottom:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;">Scoring for <strong style="color:var(--ink);">' + profile.name + '</strong> · ' + age + ' · ' + concern + '</div>') : '';
+
+  var serifFont = 'DM Serif Display';
+  var barrierDisplay = hasScanned ? ('<div style="font-family:'+serifFont+',serif;font-size:36px;color:' + sc(barrierScore) + '">' + barrierScore + '</div>') : '<div style="font-family:'+serifFont+',serif;font-size:36px;color:var(--border);">&#8212;</div>';
+
+  var overallCard = '';
+  if (hasScanned && overallScore !== null) {
+    overallCard = '<div class="card" style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;">' +
+      '<div>' +
+        '<div style="font-family:'+serifFont+',serif;font-size:15px;margin-bottom:4px;">Overall Safety Score</div>' +
+        '<div style="font-size:12px;color:var(--ink-muted);">' + productCount + ' product(s) scanned' + (profile ? ' · ' + profile.name : '') + (avgSafetyScore !== null ? ' · avg product score ' + avgSafetyScore + '/100' : '') + '</div>' +
+      '</div>' +
+      '<div style="font-family:'+serifFont+',serif;font-size:48px;color:' + sc(overallScore) + '">' + overallScore + '</div>' +
+    '</div>';
+  }
+
+  var notes = '';
+  if (!hasScanned) notes += '<div style="margin-bottom:8px;">○ Scan products in the Scanner tab to populate all scores. Each scanned product contributes to the analysis.</div>';
+  if (fragranceHits > 0) notes += '<div style="margin-bottom:8px;">⚠ Fragrance detected in ' + fragranceHits + ' product(s). Fragrance is the #1 allergen in baby products. Switch to verified fragrance-free alternatives.</div>';
+  else if (hasScanned) notes += '<div style="margin-bottom:8px;color:var(--green);">✓ No fragrance detected in scanned products.</div>';
+  if (highRiskCount > 0) notes += '<div style="margin-bottom:8px;">⚠ ' + highRiskCount + ' high-risk ingredient(s) detected. Review watchlist in Scanner tab.</div>';
+  else if (hasScanned) notes += '<div style="margin-bottom:8px;color:var(--green);">✓ No high-risk ingredients detected.</div>';
+  if (productCount > 4) notes += '<div style="margin-bottom:8px;">⚠ More than 4 products scanned. For babies under 12 months: plain water + 1 wash + 1 barrier cream is usually sufficient.</div>';
+  if (!hasProfile) notes += '<div style="margin-bottom:8px;">○ Save a baby profile (Profile tab) to add age- and condition-specific score weighting.</div>';
+
+  el.innerHTML = profileBanner + profileContext + overallCard +
+    '<div class="grid-3" style="margin-bottom:20px;">' +
+      '<div class="card" style="text-align:center;">' +
+        '<div style="font-family:'+serifFont+',serif;font-size:36px;color:' + sc(fragranceScore) + '">' + fragranceScore + '</div>' +
+        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px;">Fragrance Safety</div>' +
+        '<div style="font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.5;">' + (fragranceHits === 0 ? (hasScanned ? 'No fragrance ✓' : 'Scan to score') : fragranceHits + ' product(s) flagged') + '</div>' +
+      '</div>' +
+      '<div class="card" style="text-align:center;">' +
+        barrierDisplay +
+        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px;">Barrier Support</div>' +
+        '<div style="font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.5;">' + (hasScanned ? (ceramideCount > 0 ? ceramideCount + ' with ceramide/petrolatum' : 'No barrier ingredients') : 'Scan to score') + '</div>' +
+      '</div>' +
+      '<div class="card" style="text-align:center;">' +
+        '<div style="font-family:'+serifFont+',serif;font-size:36px;color:' + sc(simplicityScore) + '">' + simplicityScore + '</div>' +
+        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-top:4px;">Minimalism</div>' +
+        '<div style="font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.5;">' + productCount + ' scanned · ' + (productCount <= 2 ? 'Excellent' : productCount <= 4 ? 'Good' : 'Simplify') + '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="card"><div class="card-title">Score Notes</div>' +
+      '<div style="font-size:12px;color:var(--ink-muted);line-height:1.8;">' + notes +
+        '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;font-style:italic;">AI-assisted. Scores are indicative only. Always consult a paediatric dermatologist for clinical concerns.</div>' +
+      '</div>' +
+    '</div>';
+}
+
+</script>
+</body>
+</html>
