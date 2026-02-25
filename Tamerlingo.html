@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamer's Turkse Taalkwartiertje</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fdfbf7;min-height:100vh;color:#2c2c2c;line-height:1.6}
+.container{max-width:1400px;margin:0 auto}
+header{background:linear-gradient(135deg,#f8f6f3,#fff);padding:60px 40px;text-align:center;border-bottom:1px solid #e8e5df}
+h1{color:#1a1a1a;font-size:2.8em;margin-bottom:8px;font-weight:300;letter-spacing:-0.5px}
+.subtitle{color:#6b6b6b;font-size:.95em}
+.progress-section{background:#fff;padding:30px 40px;border-bottom:1px solid #e8e5df}
+.progress-info{display:flex;justify-content:space-between;margin-bottom:16px}
+.progress-label{font-size:.85em;color:#6b6b6b;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.progress-count{font-size:.9em;font-weight:500}
+.progress-bar{background:#f5f3ef;height:6px;border-radius:10px;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#c4b5a0,#a89885);height:100%;width:0%;transition:width .6s}
+.tabs{display:flex;background:#fff;border-bottom:1px solid #e8e5df;overflow-x:auto}
+.tab{flex:1;min-width:100px;padding:20px 16px;background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;font-size:.85em;font-weight:500;font-family:'Inter',sans-serif;color:#6b6b6b;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;transition:all .3s}
+.tab:hover{color:#2c2c2c;background:#fafaf8}
+.tab.active{color:#1a1a1a;border-bottom-color:#a89885;background:#fdfbf7}
+.content{display:none;padding:50px 40px;animation:fadeIn .4s ease}
+.content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.toggle-row{display:flex;justify-content:center;margin-bottom:32px}
+.toggle-group{display:flex;background:#f5f3ef;border-radius:50px;padding:4px;gap:0}
+.tgl-btn{padding:10px 24px;border:none;background:transparent;color:#6b6b6b;border-radius:50px;cursor:pointer;font-weight:500;font-family:'Inter',sans-serif;font-size:.88em;transition:all .3s}
+.tgl-btn.active{background:#fff;color:#1a1a1a;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.category-row{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap;justify-content:center}
+.cat-btn{padding:9px 20px;background:#fff;border:1px solid #e8e5df;border-radius:30px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.83em;color:#6b6b6b;font-weight:500;transition:all .3s}
+.cat-btn:hover{border-color:#c4b5a0;color:#2c2c2c}
+.cat-btn.active{background:#2c2c2c;color:#fff;border-color:#2c2c2c}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.word-card{background:#fff;padding:28px 20px;border-radius:12px;cursor:pointer;transition:all .3s;text-align:center;position:relative;border:1px solid #e8e5df;min-height:130px;display:flex;flex-direction:column;justify-content:center}
+.word-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:#c4b5a0}
+.word-card.flipped{background:#f5f3ef;border-color:#c4b5a0}
+.word-card.flipped .wc-front{display:none}
+.word-card .wc-back{display:none}
+.word-card.flipped .wc-back{display:block}
+.word-text{font-size:1.25em;font-weight:400;margin-bottom:6px;color:#1a1a1a}
+.word-hint{font-size:.88em;color:#6b6b6b}
+.play-btn{position:absolute;top:10px;right:10px;background:#f5f3ef;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.95em;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.play-btn:hover{background:#e8e5df;transform:scale(1.1)}
+.sentence-list{display:flex;flex-direction:column;gap:14px;max-width:860px;margin:0 auto}
+.sent-card{background:#fff;padding:22px 26px;border-radius:12px;border:1px solid #e8e5df;transition:all .3s}
+.sent-card:hover{border-color:#c4b5a0;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.sent-main{font-size:1.05em;color:#1a1a1a;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.sent-trans{color:#6b6b6b;font-size:.93em}
+.story-wrap{max-width:780px;margin:0 auto}
+.story-sel{width:100%;padding:10px 14px;border:1px solid #e8e5df;border-radius:8px;font-family:'Inter',sans-serif;font-size:.88em;background:#fff;margin-bottom:28px;cursor:pointer}
+.story-box{background:#fff;padding:46px;border-radius:16px;border:1px solid #e8e5df}
+.story-title{font-size:1.8em;color:#1a1a1a;margin-bottom:26px;text-align:center;font-weight:400}
+.story-body{font-size:1.1em;color:#2c2c2c;line-height:2.1}
+.cw{color:#a89885;font-weight:500;cursor:pointer;border-bottom:1px dotted #c4b5a0;transition:all .2s}
+.cw:hover{color:#8a7865;border-bottom-style:solid}
+.tooltip{position:fixed;background:#1a1a1a;color:#fff;padding:10px 14px;border-radius:8px;font-size:.88em;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.2);pointer-events:none;max-width:220px}
+.story-nav{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.story-nav button,.nav-btn{padding:10px 22px;background:#fff;border:1px solid #e8e5df;border-radius:30px;cursor:pointer;font-size:.83em;font-weight:500;font-family:'Inter',sans-serif;transition:all .3s}
+.story-nav button:hover,.nav-btn:hover{border-color:#c4b5a0;background:#fafaf8}
+.quiz-wrap{max-width:680px;margin:0 auto}
+.quiz-q{font-size:1.55em;color:#1a1a1a;margin-bottom:32px;text-align:center;font-weight:400}
+.quiz-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.quiz-opt{padding:18px;background:#fff;border:1px solid #e8e5df;border-radius:12px;cursor:pointer;text-align:center;transition:all .3s;font-size:1em;font-family:'Inter',sans-serif}
+.quiz-opt:hover{border-color:#c4b5a0;background:#fafaf8;transform:translateY(-2px)}
+.quiz-opt.correct{border-color:#7a9b76;background:#f0f5ef;color:#4a5f47}
+.quiz-opt.incorrect{border-color:#b88a7a;background:#faf5f3;color:#6b4a3f}
+.type-area{display:flex;flex-direction:column;align-items:center;gap:14px}
+.type-input{width:100%;max-width:380px;padding:14px 18px;font-size:1.05em;border:2px solid #e8e5df;border-radius:12px;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s;text-align:center}
+.type-input:focus{border-color:#a89885}
+.type-input.correct{border-color:#7a9b76;background:#f0f5ef;color:#4a5f47}
+.type-input.incorrect{border-color:#b88a7a;background:#faf5f3;color:#6b4a3f}
+.type-feedback{font-size:.95em;color:#6b6b6b;min-height:22px;text-align:center}
+.score-disp{text-align:center;font-size:1.2em;margin-top:26px;font-weight:400}
+.btn-primary{display:inline-block;padding:13px 30px;background:#2c2c2c;color:#fff;border:none;border-radius:30px;cursor:pointer;font-size:.88em;font-weight:500;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.5px;transition:all .3s;margin-top:18px}
+.btn-primary:hover{background:#1a1a1a;transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.audio-btn{background:none;border:none;cursor:pointer;font-size:1.15em;padding:5px;transition:transform .2s;opacity:.6}
+.audio-btn:hover{transform:scale(1.15);opacity:1}
+.pagination{display:flex;gap:6px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.pg-btn{padding:7px 13px;background:#fff;border:1px solid #e8e5df;border-radius:8px;cursor:pointer;font-size:.83em;font-weight:500;font-family:'Inter',sans-serif;min-width:38px;transition:all .3s}
+.pg-btn:hover{border-color:#c4b5a0;background:#fafaf8}
+.pg-btn.active{background:#2c2c2c;color:#fff;border-color:#2c2c2c}
+.pg-dots{padding:7px 4px;font-size:.83em;color:#6b6b6b}
+@media(max-width:768px){
+  header{padding:40px 20px}
+  h1{font-size:2em}
+  .content{padding:28px 16px}
+  .word-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .story-box{padding:24px 16px}
+  .tab{font-size:.72em;padding:14px 10px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Tamer's Turkse Taalkwartiertje</h1>
+    <p class="subtitle">Een elegante weg naar vloeiend Turks</p>
+  </header>
+
+  <div class="progress-section">
+    <div class="progress-info">
+      <span class="progress-label">Voortgang</span>
+      <span class="progress-count"><span id="learnedCount">0</span> / <span id="totalCount">0</span> woorden</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('words',this)">Woorden</button>
+    <button class="tab" onclick="switchTab('sentences',this)">Zinnen</button>
+    <button class="tab" onclick="switchTab('stories',this)">Verhalen</button>
+    <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- WOORDEN -->
+  <div id="words" class="content active">
+    <div class="toggle-row">
+      <div class="toggle-group">
+        <button class="tgl-btn active" id="wLangTR" onclick="setWordLang('tr-nl')">Turks → Nederlands</button>
+        <button class="tgl-btn" id="wLangNL" onclick="setWordLang('nl-tr')">Nederlands → Turks</button>
+      </div>
+    </div>
+    <div class="category-row" id="catRow"></div>
+    <div class="word-grid" id="wordGrid"></div>
+    <div class="pagination" id="wordPag"></div>
+  </div>
+
+  <!-- ZINNEN -->
+  <div id="sentences" class="content">
+    <div class="toggle-row">
+      <div class="toggle-group">
+        <button class="tgl-btn active" id="sLangTR" onclick="setSentLang('tr-nl')">Turks → Nederlands</button>
+        <button class="tgl-btn" id="sLangNL" onclick="setSentLang('nl-tr')">Nederlands → Turks</button>
+      </div>
+    </div>
+    <div class="sentence-list" id="sentList"></div>
+    <div class="pagination" id="sentPag"></div>
+  </div>
+
+  <!-- VERHALEN -->
+  <div id="stories" class="content">
+    <div class="story-wrap">
+      <select class="story-sel" id="storySel" onchange="renderStory(parseInt(this.value))"></select>
+      <div class="story-box" id="storyBox"></div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="content">
+    <div class="quiz-wrap">
+      <div class="toggle-row">
+        <div class="toggle-group">
+          <button class="tgl-btn active" id="modeClick" onclick="setMode('click')">Klikken</button>
+          <button class="tgl-btn" id="modeType" onclick="setMode('type')">Typen</button>
+        </div>
+      </div>
+      <div class="quiz-q" id="quizQ"></div>
+      <div id="quizBody"></div>
+      <div class="score-disp" id="scoreDisp"></div>
+      <div style="text-align:center">
+        <button class="btn-primary" id="nextBtn" onclick="nextQ()" style="display:none">Volgende vraag →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── VOCABULARY ───────────────────────────────────────────────────────────────
+const vocabulary = {
+basis:[
+{tr:'Merhaba',nl:'Hallo'},{tr:'Günaydın',nl:'Goedemorgen'},{tr:'İyi akşamlar',nl:'Goedenavond'},
+{tr:'İyi geceler',nl:'Goedenacht'},{tr:'Hoşça kal',nl:'Vaarwel'},{tr:'Görüşürüz',nl:'Tot ziens'},
+{tr:'Hoş geldin',nl:'Welkom'},{tr:'Teşekkür ederim',nl:'Dank je wel'},{tr:'Çok teşekkürler',nl:'Heel erg bedankt'},
+{tr:'Rica ederim',nl:'Graag gedaan'},{tr:'Lütfen',nl:'Alsjeblieft'},{tr:'Evet',nl:'Ja'},
+{tr:'Hayır',nl:'Nee'},{tr:'Belki',nl:'Misschien'},{tr:'Tamam',nl:'Oké'},
+{tr:'Anlıyorum',nl:'Ik begrijp het'},{tr:'Anlamıyorum',nl:'Ik begrijp het niet'},{tr:'Bilmiyorum',nl:'Ik weet het niet'},
+{tr:'İsminiz ne?',nl:'Wat is uw naam?'},{tr:'Benim adım',nl:'Mijn naam is'},
+{tr:'Nasılsın?',nl:'Hoe gaat het?'},{tr:'İyiyim',nl:'Goed'},{tr:'Fena değil',nl:'Niet slecht'},
+{tr:'Kötüyüm',nl:'Slecht'},{tr:'Özür dilerim',nl:'Het spijt me'},{tr:'Pardon',nl:'Pardon'},
+{tr:'Şimdi',nl:'Nu'},{tr:'Sonra',nl:'Later'},{tr:'Önce',nl:'Eerst'},
+{tr:'Burada',nl:'Hier'},{tr:'Orada',nl:'Daar'},{tr:'Nerede?',nl:'Waar?'},
+{tr:'Ne zaman?',nl:'Wanneer?'},{tr:'Neden?',nl:'Waarom?'},{tr:'Nasıl?',nl:'Hoe?'},
+{tr:'Kim?',nl:'Wie?'},{tr:'Ne?',nl:'Wat?'},{tr:'Hangisi?',nl:'Welke?'},
+{tr:'Kaç tane?',nl:'Hoeveel?'},{tr:'Çok',nl:'Veel'},{tr:'Az',nl:'Weinig'},
+{tr:'Hepsi',nl:'Alles'},{tr:'Hiçbir şey',nl:'Niets'},{tr:'Bir şey',nl:'Iets'},
+{tr:'Doğru',nl:'Juist'},{tr:'Yanlış',nl:'Fout'},{tr:'Büyük',nl:'Groot'},
+{tr:'Küçük',nl:'Klein'},{tr:'Yeni',nl:'Nieuw'},{tr:'Eski',nl:'Oud'},
+{tr:'Hızlı',nl:'Snel'},{tr:'Yavaş',nl:'Langzaam'},{tr:'Kolay',nl:'Makkelijk'},
+{tr:'Zor',nl:'Moeilijk'},{tr:'Açık',nl:'Open'},{tr:'Kapalı',nl:'Gesloten'},
+{tr:'Sıcak',nl:'Warm'},{tr:'Soğuk',nl:'Koud'},{tr:'Uzun',nl:'Lang'},
+{tr:'Kısa',nl:'Kort'},{tr:'Yüksek',nl:'Hoog'},{tr:'Alçak',nl:'Laag'},
+{tr:'Güçlü',nl:'Sterk'},{tr:'Zayıf',nl:'Zwak'},{tr:'Temiz',nl:'Schoon'},
+{tr:'Kirli',nl:'Vuil'},{tr:'Sessiz',nl:'Stil'},{tr:'Gürültülü',nl:'Luid'},
+{tr:'Mutlu',nl:'Blij'},{tr:'Üzgün',nl:'Verdrietig'},{tr:'Sinirli',nl:'Boos'},
+{tr:'Korkmuş',nl:'Bang'},{tr:'Yorgun',nl:'Moe'},{tr:'Enerjik',nl:'Energiek'},
+{tr:'Aç',nl:'Hongerig'},{tr:'Tok',nl:'Verzadigd'},{tr:'Hasta',nl:'Ziek'},
+{tr:'Sağlıklı',nl:'Gezond'},{tr:'Hazır',nl:'Klaar'},{tr:'Bekle',nl:'Wacht'},
+{tr:'Gel',nl:'Kom'},{tr:'Git',nl:'Ga'},{tr:'Dur',nl:'Stop'},
+{tr:'Bak',nl:'Kijk'},{tr:'Dinle',nl:'Luister'},{tr:'Konuş',nl:'Praat'},
+{tr:'Yardım et',nl:'Help'},{tr:'Tekrar',nl:'Opnieuw'},{tr:'Devam et',nl:'Ga door'},
+{tr:'Başla',nl:'Begin'},{tr:'Bitir',nl:'Klaar'},{tr:'Ver',nl:'Geef'},
+{tr:'Al',nl:'Neem'},{tr:'Seç',nl:'Kies'},{tr:'Değiştir',nl:'Verander'},
+{tr:'Sorun yok',nl:'Geen probleem'},{tr:'Tabii ki',nl:'Natuurlijk'},{tr:'Kesinlikle',nl:'Absoluut'},
+{tr:'Harika',nl:'Geweldig'},{tr:'Mükemmel',nl:'Perfect'},{tr:'Berbat',nl:'Vreselijk'},
+{tr:'Şanslı',nl:'Gelukkig'},{tr:'Umut',nl:'Hoop'},{tr:'Sabır',nl:'Geduld'},
+{tr:'Cesur',nl:'Dapper'},{tr:'Akıllı',nl:'Slim'},{tr:'Komik',nl:'Grappig'},
+{tr:'Ciddi',nl:'Serieus'},{tr:'Nazik',nl:'Vriendelijk'},{tr:'Kaba',nl:'Onbeleefd'},
+{tr:'Dürüst',nl:'Eerlijk'},{tr:'Yalan',nl:'Leugen'},{tr:'Gerçek',nl:'Waarheid'},
+{tr:'Önemli',nl:'Belangrijk'},{tr:'Gerekli',nl:'Noodzakelijk'},{tr:'Yasak',nl:'Verboden'},
+{tr:'Ücretsiz',nl:'Gratis'},{tr:'Pahalı',nl:'Duur'},{tr:'Ucuz',nl:'Goedkoop'},
+{tr:'Fiyat',nl:'Prijs'},{tr:'İndirim',nl:'Korting'},{tr:'Hediye',nl:'Cadeau'},
+{tr:'Tebrikler',nl:'Gefeliciteerd'},{tr:'İyi şanslar',nl:'Veel succes'},{tr:'Geçmiş olsun',nl:'Beterschap'},
+{tr:'Güle güle',nl:'Dag'},{tr:'Yarın görüşürüz',nl:'Tot morgen'},{tr:'İyi tatiller',nl:'Fijne vakantie'},
+{tr:'İyi yolculuklar',nl:'Goede reis'},{tr:'Sabah',nl:'Ochtend'},{tr:'Öğlen',nl:'Middag'},
+{tr:'Akşam',nl:'Avond'},{tr:'Gece',nl:'Nacht'},{tr:'Bugün',nl:'Vandaag'},
+{tr:'Dün',nl:'Gisteren'},{tr:'Yarın',nl:'Morgen'},{tr:'Hemen',nl:'Meteen'},
+{tr:'Dikkatli',nl:'Voorzichtig'},{tr:'Rahat',nl:'Comfortabel'},{tr:'Meşgul',nl:'Druk'},
+{tr:'Boş',nl:'Leeg'},{tr:'Dolu',nl:'Vol'},{tr:'Taze',nl:'Vers'},
+{tr:'Sık sık',nl:'Vaak'},{tr:'Bazen',nl:'Soms'},{tr:'Her zaman',nl:'Altijd'},
+{tr:'Hiçbir zaman',nl:'Nooit'},{tr:'Sadece',nl:'Alleen maar'},{tr:'Ve',nl:'En'},
+{tr:'Ama',nl:'Maar'},{tr:'Çünkü',nl:'Omdat'},{tr:'Eğer',nl:'Als'},
+{tr:'İçin',nl:'Voor'},{tr:'İle',nl:'Met'},{tr:'Olmadan',nl:'Zonder'},
+{tr:'Hakkında',nl:'Over'},{tr:'Gibi',nl:'Zoals'},{tr:'Katılıyorum',nl:'Ik ben het eens'},
+{tr:'Katılmıyorum',nl:'Ik ben het oneens'},{tr:'İlginç',nl:'Interessant'},{tr:'Sıkıcı',nl:'Saai'},
+{tr:'Şaşırtıcı',nl:'Verrassend'},{tr:'Garip',nl:'Raar'},{tr:'Mümkün',nl:'Mogelijk'},
+{tr:'Tehlikeli',nl:'Gevaarlijk'},{tr:'Güvenli',nl:'Veilig'},{tr:'Acil',nl:'Dringend'},
+{tr:'Yardım!',nl:'Help!'},{tr:'Polis',nl:'Politie'},{tr:'Hastane',nl:'Ziekenhuis'},
+{tr:'Yakın',nl:'Dichtbij'},{tr:'Uzak',nl:'Ver weg'},{tr:'Sola',nl:'Links'},
+{tr:'Sağa',nl:'Rechts'},{tr:'Düz',nl:'Rechtdoor'},{tr:'Geri',nl:'Terug'},
+{tr:'İleri',nl:'Vooruit'},{tr:'Yukarı',nl:'Omhoog'},{tr:'Aşağı',nl:'Omlaag'},
+{tr:'İçeri',nl:'Naar binnen'},{tr:'Dışarı',nl:'Naar buiten'},{tr:'Üst',nl:'Boven'},
+{tr:'Alt',nl:'Onder'},{tr:'Yan',nl:'Naast'},{tr:'Karşı',nl:'Tegenover'},
+{tr:'Önünde',nl:'Voor'},{tr:'Arkasında',nl:'Achter'},{tr:'Sanırım',nl:'Ik denk'},
+{tr:'Eminim',nl:'Ik weet zeker'},{tr:'Fark ettim',nl:'Ik merkte op'},{tr:'Unuttum',nl:'Vergeten'},
+{tr:'Neyse',nl:'Hoe dan ook'},{tr:'Galiba',nl:'Waarschijnlijk'},{tr:'Aslında',nl:'Eigenlijk'},
+{tr:'Özellikle',nl:'Vooral'},{tr:'Genellikle',nl:'Gewoonlijk'},{tr:'Yani',nl:'Dat wil zeggen'}
+],
+getallen:[
+{tr:'Sıfır',nl:'Nul'},{tr:'Bir',nl:'Één'},{tr:'İki',nl:'Twee'},{tr:'Üç',nl:'Drie'},
+{tr:'Dört',nl:'Vier'},{tr:'Beş',nl:'Vijf'},{tr:'Altı',nl:'Zes'},{tr:'Yedi',nl:'Zeven'},
+{tr:'Sekiz',nl:'Acht'},{tr:'Dokuz',nl:'Negen'},{tr:'On',nl:'Tien'},{tr:'On bir',nl:'Elf'},
+{tr:'On iki',nl:'Twaalf'},{tr:'On üç',nl:'Dertien'},{tr:'On dört',nl:'Veertien'},
+{tr:'On beş',nl:'Vijftien'},{tr:'On altı',nl:'Zestien'},{tr:'On yedi',nl:'Zeventien'},
+{tr:'On sekiz',nl:'Achttien'},{tr:'On dokuz',nl:'Negentien'},{tr:'Yirmi',nl:'Twintig'},
+{tr:'Yirmi bir',nl:'Eenentwintig'},{tr:'Yirmi iki',nl:'Tweeëntwintig'},{tr:'Yirmi beş',nl:'Vijfentwintig'},
+{tr:'Otuz',nl:'Dertig'},{tr:'Otuz bir',nl:'Eenendertig'},{tr:'Kırk',nl:'Veertig'},
+{tr:'Elli',nl:'Vijftig'},{tr:'Altmış',nl:'Zestig'},{tr:'Yetmiş',nl:'Zeventig'},
+{tr:'Seksen',nl:'Tachtig'},{tr:'Doksan',nl:'Negentig'},{tr:'Yüz',nl:'Honderd'},
+{tr:'İki yüz',nl:'Tweehonderd'},{tr:'Beş yüz',nl:'Vijfhonderd'},{tr:'Bin',nl:'Duizend'},
+{tr:'İki bin',nl:'Tweeduizend'},{tr:'On bin',nl:'Tienduizend'},{tr:'Yüz bin',nl:'Honderdduizend'},
+{tr:'Bir milyon',nl:'Één miljoen'},{tr:'Yarım',nl:'Half'},{tr:'Çeyrek',nl:'Kwart'},
+{tr:'Üçte bir',nl:'Eenderde'},{tr:'İlk',nl:'Eerste'},{tr:'İkinci',nl:'Tweede'},
+{tr:'Üçüncü',nl:'Derde'},{tr:'Dördüncü',nl:'Vierde'},{tr:'Beşinci',nl:'Vijfde'},
+{tr:'Altıncı',nl:'Zesde'},{tr:'Yedinci',nl:'Zevende'},{tr:'Sekizinci',nl:'Achtste'},
+{tr:'Dokuzuncu',nl:'Negende'},{tr:'Onuncu',nl:'Tiende'},{tr:'Son',nl:'Laatste'},
+{tr:'Tek',nl:'Oneven'},{tr:'Çift',nl:'Even'},{tr:'Artı',nl:'Plus'},
+{tr:'Eksi',nl:'Min'},{tr:'Çarpı',nl:'Maal'},{tr:'Bölü',nl:'Gedeeld door'},
+{tr:'Eşit',nl:'Gelijk aan'},{tr:'Toplam',nl:'Totaal'},{tr:'Fark',nl:'Verschil'},
+{tr:'Yüzde',nl:'Procent'},{tr:'Oran',nl:'Verhouding'},{tr:'Yaklaşık',nl:'Ongeveer'},
+{tr:'Tam olarak',nl:'Precies'},{tr:'En az',nl:'Minimaal'},{tr:'En fazla',nl:'Maximaal'},
+{tr:'Ortalama',nl:'Gemiddeld'},{tr:'Sayı',nl:'Getal'},{tr:'Rakam',nl:'Cijfer'},
+{tr:'Hesap',nl:'Berekening'},{tr:'Tane',nl:'Stuk'},{tr:'Adet',nl:'Stuks'},
+{tr:'Bir buçuk',nl:'Anderhalf'},{tr:'İki buçuk',nl:'Tweeënhalf'},{tr:'Üç buçuk',nl:'Drieënhalf'},
+{tr:'Negatif',nl:'Negatief'},{tr:'Pozitif',nl:'Positief'},{tr:'Kare',nl:'Kwadraat'},
+{tr:'Karekök',nl:'Vierkantswortel'},{tr:'Sonsuz',nl:'Oneindig'},{tr:'İstatistik',nl:'Statistiek'},
+{tr:'Grafik',nl:'Grafiek'},{tr:'Tablo',nl:'Tabel'},{tr:'Ölçü',nl:'Maat'},
+{tr:'Ağırlık',nl:'Gewicht'},{tr:'Uzunluk',nl:'Lengte'},{tr:'Genişlik',nl:'Breedte'},
+{tr:'Yükseklik',nl:'Hoogte'},{tr:'Derinlik',nl:'Diepte'},{tr:'Alan',nl:'Oppervlak'},
+{tr:'Hacim',nl:'Volume'},{tr:'Çap',nl:'Diameter'},{tr:'Yarıçap',nl:'Straal'},
+{tr:'Kilometre',nl:'Kilometer'},{tr:'Metre',nl:'Meter'},{tr:'Santimetre',nl:'Centimeter'},
+{tr:'Milimetre',nl:'Millimeter'},{tr:'Kilogram',nl:'Kilogram'},{tr:'Gram',nl:'Gram'},
+{tr:'Litre',nl:'Liter'},{tr:'Saniye',nl:'Seconde'},{tr:'Dakika',nl:'Minuut'},
+{tr:'Sıcaklık',nl:'Temperatuur'},{tr:'Celsius',nl:'Celsius'},{tr:'Hız',nl:'Snelheid'},
+{tr:'Mesafe',nl:'Afstand'},{tr:'Üçgen',nl:'Driehoek'},{tr:'Dörtgen',nl:'Vierhoek'},
+{tr:'Daire',nl:'Cirkel'},{tr:'Dikdörtgen',nl:'Rechthoek'},{tr:'Kare (şekil)',nl:'Vierkant'},
+{tr:'Silindir',nl:'Cilinder'},{tr:'Küre',nl:'Bol'},{tr:'Koni',nl:'Kegel'},
+{tr:'Piramit',nl:'Piramide'},{tr:'Çevre',nl:'Omtrek'},{tr:'Koordinat',nl:'Coördinaat'},
+{tr:'Eksen',nl:'As'},{tr:'Veri',nl:'Data'},{tr:'Olasılık',nl:'Kans'},
+{tr:'Denklem',nl:'Vergelijking'},{tr:'Değişken',nl:'Variabele'},{tr:'Sabit',nl:'Constante'},
+{tr:'Formül',nl:'Formule'},{tr:'Kural',nl:'Regel'},{tr:'Adım',nl:'Stap'},
+{tr:'Sonuç',nl:'Resultaat'},{tr:'İspat',nl:'Bewijs'},{tr:'Teorem',nl:'Stelling'},
+{tr:'Yüzey alanı',nl:'Oppervlakte'},{tr:'Logaritma',nl:'Logaritme'},{tr:'Matris',nl:'Matrix'},
+{tr:'Vektör',nl:'Vector'},{tr:'Küme',nl:'Verzameling'},{tr:'Değer',nl:'Waarde'},
+{tr:'Çözüm',nl:'Oplossing'},{tr:'Hata',nl:'Fout'},{tr:'Kontrol',nl:'Controle'}
+],
+eten:[
+{tr:'Su',nl:'Water'},{tr:'Ekmek',nl:'Brood'},{tr:'Çay',nl:'Thee'},{tr:'Kahve',nl:'Koffie'},
+{tr:'Süt',nl:'Melk'},{tr:'Yumurta',nl:'Ei'},{tr:'Peynir',nl:'Kaas'},{tr:'Tereyağı',nl:'Boter'},
+{tr:'Bal',nl:'Honing'},{tr:'Reçel',nl:'Jam'},{tr:'Et',nl:'Vlees'},{tr:'Tavuk',nl:'Kip'},
+{tr:'Balık',nl:'Vis'},{tr:'Domates',nl:'Tomaat'},{tr:'Salatalık',nl:'Komkommer'},
+{tr:'Soğan',nl:'Ui'},{tr:'Sarımsak',nl:'Knoflook'},{tr:'Patates',nl:'Aardappel'},
+{tr:'Havuç',nl:'Wortel'},{tr:'Ispanak',nl:'Spinazie'},{tr:'Marul',nl:'Sla'},
+{tr:'Biber',nl:'Paprika'},{tr:'Patlıcan',nl:'Aubergine'},{tr:'Kabak',nl:'Courgette'},
+{tr:'Mantar',nl:'Champignon'},{tr:'Maydanoz',nl:'Peterselie'},{tr:'Nane',nl:'Munt'},
+{tr:'Dereotu',nl:'Dille'},{tr:'Kekik',nl:'Tijm'},{tr:'Biberiye',nl:'Rozemarijn'},
+{tr:'Elma',nl:'Appel'},{tr:'Armut',nl:'Peer'},{tr:'Muz',nl:'Banaan'},
+{tr:'Portakal',nl:'Sinaasappel'},{tr:'Limon',nl:'Citroen'},{tr:'Çilek',nl:'Aardbei'},
+{tr:'Üzüm',nl:'Druif'},{tr:'Karpuz',nl:'Watermeloen'},{tr:'Kavun',nl:'Meloen'},
+{tr:'Şeftali',nl:'Perzik'},{tr:'Kiraz',nl:'Kers'},{tr:'Kayısı',nl:'Abrikoos'},
+{tr:'Erik',nl:'Pruim'},{tr:'İncir',nl:'Vijg'},{tr:'Nar',nl:'Granaatappel'},
+{tr:'Kivi',nl:'Kiwi'},{tr:'Ananas',nl:'Ananas'},{tr:'Mango',nl:'Mango'},
+{tr:'Ceviz',nl:'Walnoot'},{tr:'Fındık',nl:'Hazelnoot'},{tr:'Badem',nl:'Amandel'},
+{tr:'Fıstık',nl:'Pinda'},{tr:'Antep fıstığı',nl:'Pistache'},{tr:'Pirinç',nl:'Rijst'},
+{tr:'Makarna',nl:'Pasta'},{tr:'Un',nl:'Meel'},{tr:'Şeker',nl:'Suiker'},
+{tr:'Tuz',nl:'Zout'},{tr:'Kimyon',nl:'Komijn'},{tr:'Tarçın',nl:'Kaneel'},
+{tr:'Zencefil',nl:'Gember'},{tr:'Zerdeçal',nl:'Kurkuma'},{tr:'Safran',nl:'Saffraan'},
+{tr:'Zeytinyağı',nl:'Olijfolie'},{tr:'Sirke',nl:'Azijn'},{tr:'Salça',nl:'Tomatenpuree'},
+{tr:'Ketçap',nl:'Ketchup'},{tr:'Mayonez',nl:'Mayonaise'},{tr:'Hardal',nl:'Mosterd'},
+{tr:'Çorba',nl:'Soep'},{tr:'Salata',nl:'Salade'},{tr:'Pilav',nl:'Rijst (gekookt)'},
+{tr:'Kebap',nl:'Kebab'},{tr:'Köfte',nl:'Gehaktbal'},{tr:'Döner',nl:'Döner'},
+{tr:'Lahmacun',nl:'Turks pizza'},{tr:'Pide',nl:'Pide-brood'},{tr:'Börek',nl:'Börek'},
+{tr:'Dolma',nl:'Gevulde groente'},{tr:'Humus',nl:'Hummus'},{tr:'Cacık',nl:'Tzatziki'},
+{tr:'Ayran',nl:'Ayran'},{tr:'Şarap',nl:'Wijn'},{tr:'Bira',nl:'Bier'},
+{tr:'Meyve suyu',nl:'Vruchtensap'},{tr:'Limonata',nl:'Limonade'},{tr:'Gazlı su',nl:'Bruisend water'},
+{tr:'Sütlaç',nl:'Rijstpudding'},{tr:'Baklava',nl:'Baklava'},{tr:'Lokum',nl:'Turks fruit'},
+{tr:'Dondurma',nl:'Roomijs'},{tr:'Pasta',nl:'Taart'},{tr:'Kek',nl:'Cake'},
+{tr:'Kurabiye',nl:'Koekje'},{tr:'Çikolata',nl:'Chocolade'},{tr:'Kahvaltı',nl:'Ontbijt'},
+{tr:'Öğle yemeği',nl:'Lunch'},{tr:'Akşam yemeği',nl:'Avondeten'},{tr:'Tatlı',nl:'Dessert'},
+{tr:'Ana yemek',nl:'Hoofdgerecht'},{tr:'Tabak',nl:'Bord'},{tr:'Kase',nl:'Kom'},
+{tr:'Kaşık',nl:'Lepel'},{tr:'Çatal',nl:'Vork'},{tr:'Bıçak',nl:'Mes'},
+{tr:'Bardak',nl:'Glas'},{tr:'Fincan',nl:'Kopje'},{tr:'Şişe',nl:'Fles'},
+{tr:'Tencere',nl:'Pan'},{tr:'Tava',nl:'Koekenpan'},{tr:'Fırın (alet)',nl:'Oven'},
+{tr:'Buzdolabı',nl:'Koelkast'},{tr:'Kızartmak',nl:'Bakken'},{tr:'Pişirmek',nl:'Koken'},
+{tr:'Haşlamak',nl:'Koken in water'},{tr:'Izgara yapmak',nl:'Grillen'},{tr:'Karıştırmak',nl:'Roeren'},
+{tr:'Kesmek',nl:'Snijden'},{tr:'Doğramak',nl:'Hakken'},{tr:'Soylamak',nl:'Schillen'},
+{tr:'Tadına bakmak',nl:'Proeven'},{tr:'Servis etmek',nl:'Serveren'},{tr:'Porsiyon',nl:'Portie'},
+{tr:'Tarif',nl:'Recept'},{tr:'Malzeme',nl:'Ingrediënt'},{tr:'Vejetaryen',nl:'Vegetarisch'},
+{tr:'Vegan',nl:'Veganistisch'},{tr:'Glutensiz',nl:'Glutenvrij'},{tr:'Organik',nl:'Biologisch'},
+{tr:'Dondurulmuş',nl:'Diepgevroren'},{tr:'Konserve',nl:'Ingeblikt'},{tr:'Lezzetli',nl:'Lekker'},
+{tr:'Tatsız',nl:'Smakeloos'},{tr:'Ekşi',nl:'Zuur'},{tr:'Tuzlu',nl:'Zout'},
+{tr:'Baharatlı',nl:'Gekruid'},{tr:'Kremsi',nl:'Romig'},{tr:'Çıtır',nl:'Krokant'},
+{tr:'Sulu (meyve)',nl:'Sappig'},{tr:'Çiğ',nl:'Rauw'},{tr:'Haşlanmış',nl:'Gekookt'},
+{tr:'Kızarmış',nl:'Geroosterd'},{tr:'Soğuk servis',nl:'Koud geserveerd'},{tr:'Sıcak servis',nl:'Warm geserveerd'},
+{tr:'Iyi pişmiş',nl:'Goed doorbakken'},{tr:'Az pişmiş',nl:'Half rauw'},{tr:'Isıtmak',nl:'Opwarmen'}
+],
+familie:[
+{tr:'Anne',nl:'Moeder'},{tr:'Baba',nl:'Vader'},{tr:'Kardeş',nl:'Broer of zus'},{tr:'Çocuk',nl:'Kind'},
+{tr:'Aile',nl:'Familie'},{tr:'Dede',nl:'Opa'},{tr:'Nine',nl:'Oma'},{tr:'Büyükanne',nl:'Grootmoeder'},
+{tr:'Büyükbaba',nl:'Grootvader'},{tr:'Torun',nl:'Kleinkind'},{tr:'Erkek torun',nl:'Kleinzoon'},
+{tr:'Kız torun',nl:'Kleindochter'},{tr:'Oğul',nl:'Zoon'},{tr:'Kız',nl:'Dochter'},
+{tr:'Abla',nl:'Grote zus'},{tr:'Ağabey',nl:'Grote broer'},{tr:'Kız kardeş',nl:'Zus'},
+{tr:'Erkek kardeş',nl:'Broer'},{tr:'Eş',nl:'Partner'},{tr:'Koca',nl:'Man'},
+{tr:'Karı',nl:'Vrouw'},{tr:'Nişanlı',nl:'Verloofde'},{tr:'Sevgili',nl:'Vriend of vriendin'},
+{tr:'Bekar',nl:'Single'},{tr:'Evli',nl:'Getrouwd'},{tr:'Boşanmış',nl:'Gescheiden'},
+{tr:'Dul',nl:'Weduwe of weduwnaar'},{tr:'Amca',nl:'Oom (vaders broer)'},{tr:'Hala',nl:'Tante (vaders zus)'},
+{tr:'Dayı',nl:'Oom (moeders broer)'},{tr:'Teyze',nl:'Tante (moeders zus)'},{tr:'Kuzen',nl:'Neef of nicht'},
+{tr:'Yeğen',nl:'Neef of nicht (kind van broer of zus)'},{tr:'Kayınpeder',nl:'Schoonvader'},
+{tr:'Kayınvalide',nl:'Schoonmoeder'},{tr:'Gelin',nl:'Bruid'},{tr:'Damat',nl:'Bruidegom'},
+{tr:'Baldız',nl:'Schoonzus'},{tr:'Kayınbirader',nl:'Zwager'},{tr:'Enişte',nl:'Aangetrouwde oom'},
+{tr:'Aile üyesi',nl:'Familielid'},{tr:'Akraba',nl:'Verwant'},{tr:'Uzak akraba',nl:'Verre verwant'},
+{tr:'Soy',nl:'Afkomst'},{tr:'Soyağacı',nl:'Stamboom'},{tr:'Nesil',nl:'Generatie'},
+{tr:'Atalar',nl:'Voorouders'},{tr:'Torunlar',nl:'Nakomelingen'},{tr:'İkiz',nl:'Tweeling'},
+{tr:'Tek çocuk',nl:'Enig kind'},{tr:'İlk doğan',nl:'Eerstgeborene'},{tr:'Son doğan',nl:'Jongste kind'},
+{tr:'Üvey baba',nl:'Stiefvader'},{tr:'Üvey anne',nl:'Stiefmoeder'},{tr:'Üvey kardeş',nl:'Stiefbroer of stiefzus'},
+{tr:'Evlat edinilmiş',nl:'Geadopteerd'},{tr:'Doğum günü',nl:'Verjaardag'},{tr:'Yıldönümü',nl:'Jubileum'},
+{tr:'Nişan',nl:'Verloving'},{tr:'Düğün',nl:'Bruiloft'},{tr:'Nikâh',nl:'Huwelijksvoltrekking'},
+{tr:'Boşanma',nl:'Scheiding'},{tr:'Cenaze',nl:'Begrafenis'},{tr:'Yas',nl:'Rouw'},
+{tr:'Aile toplantısı',nl:'Familiebijeenkomst'},{tr:'Kutlama',nl:'Viering'},{tr:'Aile yemeği',nl:'Familiedinee'},
+{tr:'Bayram',nl:'Feestdag'},{tr:'Sünnet',nl:'Besnijdenis'},{tr:'Kına gecesi',nl:'Hennaavond'},
+{tr:'Komşu',nl:'Buurman of buurvrouw'},{tr:'Arkadaş',nl:'Vriend'},{tr:'Yakın arkadaş',nl:'Goede vriend'},
+{tr:'İş arkadaşı',nl:'Collega'},{tr:'Tanıdık',nl:'Bekende'},{tr:'Yabancı',nl:'Vreemde'},
+{tr:'Misafir',nl:'Gast'},{tr:'Bebek',nl:'Baby'},{tr:'Küçük çocuk',nl:'Peuter'},
+{tr:'Ergen',nl:'Tiener'},{tr:'Genç',nl:'Jongere'},{tr:'Yetişkin',nl:'Volwassene'},
+{tr:'Yaşlı',nl:'Ouder'},{tr:'Emekli',nl:'Gepensioneerde'},{tr:'Hamile',nl:'Zwanger'},
+{tr:'Yeni doğan',nl:'Pasgeborene'},{tr:'Bebek arabası',nl:'Kinderwagen'},{tr:'Oyuncak',nl:'Speelgoed'},
+{tr:'Büyümek',nl:'Opgroeien'},{tr:'Evlenmek',nl:'Trouwen'},{tr:'Doğmak',nl:'Geboren worden'},
+{tr:'Sevmek',nl:'Liefhebben'},{tr:'Özlemek',nl:'Missen'},{tr:'Desteklemek',nl:'Ondersteunen'},
+{tr:'Korumak',nl:'Beschermen'},{tr:'Paylaşmak',nl:'Delen'},{tr:'Birlikte',nl:'Samen'},
+{tr:'Sevgi',nl:'Liefde'},{tr:'Saygı',nl:'Respect'},{tr:'Güven',nl:'Vertrouwen'},
+{tr:'Sadakat',nl:'Loyaliteit'},{tr:'Bakım',nl:'Zorg'},{tr:'Sorumluluk',nl:'Verantwoordelijkheid'},
+{tr:'Aile değerleri',nl:'Familiewaarden'},{tr:'Gelenek',nl:'Traditie'},{tr:'Bayramlık',nl:'Feestkleding'},
+{tr:'Büyütmek',nl:'Opvoeden'},{tr:'Öğretmek',nl:'Leren'},{tr:'Affetmek',nl:'Vergeven'}
+],
+dagelijks:[
+{tr:'Ev',nl:'Huis'},{tr:'Araba',nl:'Auto'},{tr:'Okul',nl:'School'},{tr:'İş',nl:'Werk'},
+{tr:'Para',nl:'Geld'},{tr:'Kapı',nl:'Deur'},{tr:'Pencere',nl:'Raam'},{tr:'Masa',nl:'Tafel'},
+{tr:'Sandalye',nl:'Stoel'},{tr:'Koltuk',nl:'Fauteuil'},{tr:'Kanepe',nl:'Bank'},
+{tr:'Yatak',nl:'Bed'},{tr:'Yastık',nl:'Kussen'},{tr:'Battaniye',nl:'Deken'},
+{tr:'Dolap',nl:'Kast'},{tr:'Raf',nl:'Plank'},{tr:'Mutfak',nl:'Keuken'},
+{tr:'Banyo',nl:'Badkamer'},{tr:'Tuvalet',nl:'Toilet'},{tr:'Salon',nl:'Woonkamer'},
+{tr:'Yatak odası',nl:'Slaapkamer'},{tr:'Balkon',nl:'Balkon'},{tr:'Bahçe',nl:'Tuin'},
+{tr:'Garaj',nl:'Garage'},{tr:'Merdiven',nl:'Trap'},{tr:'Asansör',nl:'Lift'},
+{tr:'Anahtar',nl:'Sleutel'},{tr:'Kilit',nl:'Slot'},{tr:'Zil',nl:'Bel'},
+{tr:'Giriş',nl:'Ingang'},{tr:'Çıkış',nl:'Uitgang'},{tr:'Ampul',nl:'Gloeilamp'},
+{tr:'Priz',nl:'Stopcontact'},{tr:'Telefon',nl:'Telefoon'},{tr:'Bilgisayar',nl:'Computer'},
+{tr:'Tablet',nl:'Tablet'},{tr:'Televizyon',nl:'Televisie'},{tr:'Uzaktan kumanda',nl:'Afstandsbediening'},
+{tr:'Radyo',nl:'Radio'},{tr:'Kulaklık',nl:'Koptelefoon'},{tr:'Hoparlör',nl:'Luidspreker'},
+{tr:'Fotoğraf makinesi',nl:'Camera'},{tr:'Printer',nl:'Printer'},{tr:'Çamaşır makinesi',nl:'Wasmachine'},
+{tr:'Bulaşık makinesi',nl:'Vaatwasser'},{tr:'Süpürge',nl:'Stofzuiger'},{tr:'Deterjan',nl:'Wasmiddel'},
+{tr:'Sabun',nl:'Zeep'},{tr:'Şampuan',nl:'Shampoo'},{tr:'Diş macunu',nl:'Tandpasta'},
+{tr:'Diş fırçası',nl:'Tandenborstel'},{tr:'Havlu',nl:'Handdoek'},{tr:'Tuvalet kâğıdı',nl:'Toiletpapier'},
+{tr:'Ayna',nl:'Spiegel'},{tr:'Tarak',nl:'Kam'},{tr:'Parfüm',nl:'Parfum'},
+{tr:'Gözlük',nl:'Bril'},{tr:'Cüzdan',nl:'Portemonnee'},{tr:'Çanta',nl:'Tas'},
+{tr:'Sırt çantası',nl:'Rugzak'},{tr:'Şemsiye',nl:'Paraplu'},{tr:'Eldiven',nl:'Handschoenen'},
+{tr:'Atkı',nl:'Sjaal'},{tr:'Bere',nl:'Muts'},{tr:'Güneş gözlüğü',nl:'Zonnebril'},
+{tr:'Cep telefonu',nl:'Mobiele telefoon'},{tr:'İnternet',nl:'Internet'},{tr:'Wi-Fi',nl:'Wifi'},
+{tr:'E-posta',nl:'E-mail'},{tr:'Mesaj',nl:'Bericht'},{tr:'Sosyal medya',nl:'Sociale media'},
+{tr:'Fotoğraf',nl:'Foto'},{tr:'Müzik',nl:'Muziek'},{tr:'Film',nl:'Film'},
+{tr:'Dizi',nl:'Serie'},{tr:'Kitap',nl:'Boek'},{tr:'Dergi',nl:'Tijdschrift'},
+{tr:'Gazete',nl:'Krant'},{tr:'Haber',nl:'Nieuws'},{tr:'Takvim',nl:'Kalender'},
+{tr:'Ajanda',nl:'Agenda'},{tr:'Alarm',nl:'Alarm'},{tr:'Tatil',nl:'Vakantie'},
+{tr:'Hafta sonu',nl:'Weekend'},{tr:'İzin',nl:'Verlof'},{tr:'Maaş',nl:'Salaris'},
+{tr:'Fatura',nl:'Rekening'},{tr:'Kira',nl:'Huur'},{tr:'Kredi kartı',nl:'Creditcard'},
+{tr:'Banka',nl:'Bank'},{tr:'ATM',nl:'Geldautomaat'},{tr:'Tasarruf',nl:'Spaargeld'},
+{tr:'Bütçe',nl:'Budget'},{tr:'Vergi',nl:'Belasting'},{tr:'Sigorta',nl:'Verzekering'},
+{tr:'Alışveriş',nl:'Winkelen'},{tr:'Market',nl:'Supermarkt'},{tr:'Manav',nl:'Groenteman'},
+{tr:'Kasap',nl:'Slager'},{tr:'Fırın',nl:'Bakker'},{tr:'Eczane',nl:'Apotheek'},
+{tr:'Kuaför',nl:'Kapper'},{tr:'Postane',nl:'Postkantoor'},{tr:'Belediye',nl:'Gemeente'},
+{tr:'Hastane',nl:'Ziekenhuis'},{tr:'Park',nl:'Park'},{tr:'Meydan',nl:'Plein'},
+{tr:'Cadde',nl:'Laan'},{tr:'Sokak',nl:'Straat'},{tr:'Köprü',nl:'Brug'},
+{tr:'Kavşak',nl:'Kruispunt'},{tr:'Trafik ışığı',nl:'Verkeerslicht'},{tr:'Yaya geçidi',nl:'Zebrapad'},
+{tr:'Kaldırım',nl:'Stoep'},{tr:'Bisiklet yolu',nl:'Fietspad'},{tr:'Otobus',nl:'Bus'},
+{tr:'Metro',nl:'Metro'},{tr:'Tramvay',nl:'Tram'},{tr:'Taksi',nl:'Taxi'},
+{tr:'Tren',nl:'Trein'},{tr:'Uçak',nl:'Vliegtuig'},{tr:'Gemi',nl:'Schip'},
+{tr:'Bisiklet',nl:'Fiets'},{tr:'Motosiklet',nl:'Motor'},{tr:'Kamyon',nl:'Vrachtwagen'}
+],
+werkwoorden:[
+{tr:'Olmak',nl:'Zijn of worden'},{tr:'Yapmak',nl:'Doen of maken'},{tr:'Gitmek',nl:'Gaan'},
+{tr:'Gelmek',nl:'Komen'},{tr:'Görmek',nl:'Zien'},{tr:'Yemek',nl:'Eten'},
+{tr:'İçmek',nl:'Drinken'},{tr:'Uyumak',nl:'Slapen'},{tr:'Okumak',nl:'Lezen'},
+{tr:'Yazmak',nl:'Schrijven'},{tr:'Konuşmak',nl:'Praten'},{tr:'Dinlemek',nl:'Luisteren'},
+{tr:'Düşünmek',nl:'Denken'},{tr:'Anlamak',nl:'Begrijpen'},{tr:'Öğrenmek',nl:'Leren'},
+{tr:'Öğretmek',nl:'Onderwijzen'},{tr:'Çalışmak',nl:'Werken'},{tr:'Oynamak',nl:'Spelen'},
+{tr:'Koşmak',nl:'Rennen'},{tr:'Yürümek',nl:'Lopen'},{tr:'Oturmak',nl:'Zitten'},
+{tr:'Kalkmak',nl:'Opstaan'},{tr:'Durmak',nl:'Stoppen'},{tr:'Beklemek',nl:'Wachten'},
+{tr:'Aramak',nl:'Zoeken'},{tr:'Bulmak',nl:'Vinden'},{tr:'Almak',nl:'Nemen'},
+{tr:'Vermek',nl:'Geven'},{tr:'Tutmak',nl:'Vasthouden'},{tr:'Bırakmak',nl:'Loslaten'},
+{tr:'Açmak',nl:'Openen'},{tr:'Kapatmak',nl:'Sluiten'},{tr:'Başlamak',nl:'Beginnen'},
+{tr:'Bitirmek',nl:'Beëindigen'},{tr:'Devam etmek',nl:'Doorgaan'},{tr:'Dönmek',nl:'Terugkeren'},
+{tr:'Uçmak',nl:'Vliegen'},{tr:'Yüzmek',nl:'Zwemmen'},{tr:'Çizmek',nl:'Tekenen'},
+{tr:'Boyamak',nl:'Schilderen'},{tr:'Şarkı söylemek',nl:'Zingen'},{tr:'Dans etmek',nl:'Dansen'},
+{tr:'Fotoğraf çekmek',nl:'Fotograferen'},{tr:'Pişirmek',nl:'Koken'},{tr:'Temizlemek',nl:'Schoonmaken'},
+{tr:'Tamir etmek',nl:'Repareren'},{tr:'İnşa etmek',nl:'Bouwen'},{tr:'Satmak',nl:'Verkopen'},
+{tr:'Satın almak',nl:'Kopen'},{tr:'Kiralamak',nl:'Huren'},{tr:'Ödünç almak',nl:'Lenen'},
+{tr:'Ödemek',nl:'Betalen'},{tr:'Kazanmak',nl:'Verdienen'},{tr:'Kaybetmek',nl:'Verliezen'},
+{tr:'Seçmek',nl:'Kiezen'},{tr:'Değiştirmek',nl:'Veranderen'},{tr:'Kontrol etmek',nl:'Controleren'},
+{tr:'Onaylamak',nl:'Goedkeuren'},{tr:'Reddetmek',nl:'Weigeren'},{tr:'Kabul etmek',nl:'Accepteren'},
+{tr:'Davet etmek',nl:'Uitnodigen'},{tr:'Ziyaret etmek',nl:'Bezoeken'},{tr:'Karşılamak',nl:'Begroeten'},
+{tr:'Yardım etmek',nl:'Helpen'},{tr:'Desteklemek',nl:'Ondersteunen'},{tr:'Korumak',nl:'Beschermen'},
+{tr:'Kurtarmak',nl:'Redden'},{tr:'Uyarmak',nl:'Waarschuwen'},{tr:'Hatırlatmak',nl:'Herinneren'},
+{tr:'Unutmak',nl:'Vergeten'},{tr:'Hatırlamak',nl:'Herinneren (zich)'},{tr:'Planlamak',nl:'Plannen'},
+{tr:'Hazırlamak',nl:'Voorbereiden'},{tr:'Göndermek',nl:'Sturen'},{tr:'Paylaşmak',nl:'Delen'},
+{tr:'Birleştirmek',nl:'Samenvoegen'},{tr:'Ayırmak',nl:'Scheiden'},{tr:'Saymak',nl:'Tellen'},
+{tr:'Hesaplamak',nl:'Berekenen'},{tr:'Ölçmek',nl:'Meten'},{tr:'Tartmak',nl:'Wegen'},
+{tr:'Denemek',nl:'Proberen'},{tr:'Başarmak',nl:'Slagen'},{tr:'Vazgeçmek',nl:'Opgeven'},
+{tr:'Rekabet etmek',nl:'Concurreren'},{tr:'İşbirliği yapmak',nl:'Samenwerken'},{tr:'Anlaşmak',nl:'Het eens zijn'},
+{tr:'Tartışmak',nl:'Discussiëren'},{tr:'Şikâyet etmek',nl:'Klagen'},{tr:'Övmek',nl:'Prijzen'},
+{tr:'Eleştirmek',nl:'Bekritiseren'},{tr:'Affetmek',nl:'Vergeven'},{tr:'Özür dilemek',nl:'Verontschuldigen'},
+{tr:'Teşekkür etmek',nl:'Bedanken'},{tr:'Kutlamak',nl:'Vieren'},{tr:'Ağlamak',nl:'Huilen'},
+{tr:'Gülmek',nl:'Lachen'},{tr:'Şaşırmak',nl:'Verbazen'},{tr:'Korkmak',nl:'Bang zijn'},
+{tr:'Sevinmek',nl:'Blij zijn'},{tr:'Üzülmek',nl:'Verdrietig zijn'},{tr:'Sinirlenmek',nl:'Boos worden'},
+{tr:'Sakinleşmek',nl:'Kalmeren'},{tr:'Rahatlamak',nl:'Ontspannen'},{tr:'Yorulmak',nl:'Moe worden'},
+{tr:'Dinlenmek',nl:'Uitrusten'},{tr:'Nefes almak',nl:'Ademen'},{tr:'İyileşmek',nl:'Beter worden'},
+{tr:'Yaralanmak',nl:'Gewond raken'},{tr:'Tedavi etmek',nl:'Behandelen'},{tr:'Seyahat etmek',nl:'Reizen'},
+{tr:'Gezmek',nl:'Rondkijken'},{tr:'Tatile gitmek',nl:'Op vakantie gaan'},{tr:'Kamp yapmak',nl:'Kamperen'},
+{tr:'Balık tutmak',nl:'Vissen'},{tr:'Bahçeyle uğraşmak',nl:'Tuinieren'},{tr:'Alışveriş yapmak',nl:'Winkelen'},
+{tr:'Başvuru yapmak',nl:'Solliciteren'},{tr:'Kayıt olmak',nl:'Inschrijven'},{tr:'Mezun olmak',nl:'Afstuderen'},
+{tr:'Evlenmek',nl:'Trouwen'},{tr:'Doğmak',nl:'Geboren worden'},{tr:'Ölmek',nl:'Overlijden'},
+{tr:'Büyümek',nl:'Opgroeien'},{tr:'Değişmek',nl:'Veranderen'},{tr:'Gelişmek',nl:'Ontwikkelen'},
+{tr:'İlerlemek',nl:'Vooruitgaan'},{tr:'Fark etmek',nl:'Merken'},{tr:'Araştırmak',nl:'Onderzoeken'},
+{tr:'Keşfetmek',nl:'Ontdekken'},{tr:'İcat etmek',nl:'Uitvinden'},{tr:'Göstermek',nl:'Tonen'},
+{tr:'Anlatmak',nl:'Vertellen'},{tr:'Sormak',nl:'Vragen'},{tr:'Cevaplamak',nl:'Antwoorden'},
+{tr:'Açıklamak',nl:'Uitleggen'},{tr:'Tercüme etmek',nl:'Vertalen'},{tr:'Söylemek',nl:'Zeggen'}
+],
+bijvoeglijk:[
+{tr:'Güzel',nl:'Mooi'},{tr:'İyi',nl:'Goed'},{tr:'Kötü',nl:'Slecht'},{tr:'Büyük',nl:'Groot'},
+{tr:'Küçük',nl:'Klein'},{tr:'Yeni',nl:'Nieuw'},{tr:'Eski',nl:'Oud'},{tr:'Sıcak',nl:'Warm'},
+{tr:'Soğuk',nl:'Koud'},{tr:'Mutlu',nl:'Blij'},{tr:'Üzgün',nl:'Verdrietig'},{tr:'Yorgun',nl:'Moe'},
+{tr:'Hızlı',nl:'Snel'},{tr:'Yavaş',nl:'Langzaam'},{tr:'Uzun',nl:'Lang'},{tr:'Kısa',nl:'Kort'},
+{tr:'Kalın',nl:'Dik'},{tr:'İnce',nl:'Dun'},{tr:'Ağır',nl:'Zwaar'},{tr:'Hafif',nl:'Licht'},
+{tr:'Sert',nl:'Hard'},{tr:'Yumuşak',nl:'Zacht'},{tr:'Pürüzsüz',nl:'Glad'},{tr:'Pütürlü',nl:'Ruw'},
+{tr:'Parlak',nl:'Glanzend'},{tr:'Mat',nl:'Mat'},{tr:'Şeffaf',nl:'Doorzichtig'},{tr:'Renkli',nl:'Kleurrijk'},
+{tr:'Kırmızı',nl:'Rood'},{tr:'Mavi',nl:'Blauw'},{tr:'Yeşil',nl:'Groen'},{tr:'Sarı',nl:'Geel'},
+{tr:'Turuncu',nl:'Oranje'},{tr:'Mor',nl:'Paars'},{tr:'Pembe',nl:'Roze'},{tr:'Beyaz',nl:'Wit'},
+{tr:'Siyah',nl:'Zwart'},{tr:'Gri',nl:'Grijs'},{tr:'Kahverengi',nl:'Bruin'},{tr:'Altın',nl:'Goud'},
+{tr:'Gümüş',nl:'Zilver'},{tr:'Lacivert',nl:'Marineblauw'},{tr:'Koyu',nl:'Donker'},{tr:'Açık (renk)',nl:'Licht (kleur)'},
+{tr:'Pastel',nl:'Pastel'},{tr:'Canlı',nl:'Levendig'},{tr:'Soluk',nl:'Bleek'},{tr:'Temiz',nl:'Schoon'},
+{tr:'Kirli',nl:'Vuil'},{tr:'Düzenli',nl:'Geordend'},{tr:'Dağınık',nl:'Rommelig'},{tr:'Geniş',nl:'Ruim'},
+{tr:'Dar',nl:'Smal'},{tr:'Derin',nl:'Diep'},{tr:'Sığ',nl:'Ondiep'},{tr:'Yuvarlak',nl:'Rond'},
+{tr:'Oval',nl:'Ovaal'},{tr:'Sivri',nl:'Puntig'},{tr:'Düz (şekil)',nl:'Vlak'},{tr:'Eğri',nl:'Krom'},
+{tr:'Dikey',nl:'Verticaal'},{tr:'Yatay',nl:'Horizontaal'},{tr:'Tatlı',nl:'Zoet'},{tr:'Ekşi',nl:'Zuur'},
+{tr:'Acı',nl:'Bitter'},{tr:'Tuzlu',nl:'Zout'},{tr:'Baharatlı',nl:'Pittig'},{tr:'Kremsi',nl:'Romig'},
+{tr:'Çıtır',nl:'Krokant'},{tr:'Taze',nl:'Vers'},{tr:'Bayat',nl:'Niet vers'},{tr:'Pişmiş',nl:'Gaar'},
+{tr:'Akıllı',nl:'Slim'},{tr:'Aptal',nl:'Dom'},{tr:'Bilge',nl:'Wijs'},{tr:'Cahil',nl:'Onwetend'},
+{tr:'Deneyimli',nl:'Ervaren'},{tr:'Yetenekli',nl:'Getalenteerd'},{tr:'Çalışkan',nl:'Ijverig'},
+{tr:'Tembel',nl:'Lui'},{tr:'Dikkatli',nl:'Voorzichtig'},{tr:'Dikkatsiz',nl:'Onvoorzichtig'},
+{tr:'Sabırlı',nl:'Geduldig'},{tr:'Sabırsız',nl:'Ongeduldig'},{tr:'Cesur',nl:'Dapper'},
+{tr:'Korkak',nl:'Laf'},{tr:'Nazik',nl:'Vriendelijk'},{tr:'Kaba',nl:'Onbeleefd'},
+{tr:'Dürüst',nl:'Eerlijk'},{tr:'Güvenilir',nl:'Betrouwbaar'},{tr:'Sadık',nl:'Trouw'},
+{tr:'Cömert',nl:'Vrijgevig'},{tr:'Cimri',nl:'Gierig'},{tr:'Kibar',nl:'Beleefd'},
+{tr:'Mütevazi',nl:'Bescheiden'},{tr:'Kibirli',nl:'Arrogant'},{tr:'Hırslı',nl:'Ambitieus'},
+{tr:'Kararlı',nl:'Vastberaden'},{tr:'Esnek',nl:'Flexibel'},{tr:'Katı',nl:'Rigide'},
+{tr:'Meraklı',nl:'Nieuwsgierig'},{tr:'Romantik',nl:'Romantisch'},{tr:'Pragmatik',nl:'Pragmatisch'},
+{tr:'Gerçekçi',nl:'Realistisch'},{tr:'Karamsar',nl:'Pessimistisch'},{tr:'İyimser',nl:'Optimistisch'},
+{tr:'Sakin',nl:'Rustig'},{tr:'Heyecanlı',nl:'Enthousiast'},{tr:'Endişeli',nl:'Bezorgd'},
+{tr:'Stresli',nl:'Gestrest'},{tr:'Neşeli',nl:'Vrolijk'},{tr:'Sıkılmış',nl:'Verveeld'},
+{tr:'Sevecen',nl:'Liefdevol'},{tr:'Sıcakkanlı',nl:'Hartelijk'},{tr:'Resmi',nl:'Formeel'},
+{tr:'Gayri resmi',nl:'Informeel'},{tr:'Profesyonel',nl:'Professioneel'},{tr:'Verimli',nl:'Efficiënt'},
+{tr:'Üretken',nl:'Productief'},{tr:'Modern',nl:'Modern'},{tr:'Geleneksel',nl:'Traditioneel'},
+{tr:'Klasik',nl:'Klassiek'},{tr:'Tarihi',nl:'Historisch'},{tr:'Kültürel',nl:'Cultureel'},
+{tr:'Popüler',nl:'Populair'},{tr:'Nadir',nl:'Zeldzaam'},{tr:'Yaygın',nl:'Veelvoorkomend'},
+{tr:'Benzersiz',nl:'Uniek'},{tr:'Sıradan',nl:'Gewoon'},{tr:'Olağandışı',nl:'Ongewoon'},
+{tr:'Özel',nl:'Bijzonder'},{tr:'Genel',nl:'Algemeen'},{tr:'Spesifik',nl:'Specifiek'},
+{tr:'Detaylı',nl:'Gedetailleerd'},{tr:'Basit',nl:'Eenvoudig'},{tr:'Karmaşık',nl:'Complex'},
+{tr:'Açık (anlaşılır)',nl:'Duidelijk'},{tr:'Belirsiz',nl:'Onduidelijk'},{tr:'Doğal',nl:'Natuurlijk'},
+{tr:'Yapay',nl:'Kunstmatig'},{tr:'Organik',nl:'Biologisch'},{tr:'Sentetik',nl:'Synthetisch'}
+]
+};
+
+// ─── SENTENCES ────────────────────────────────────────────────────────────────
+const sentences=[
+{tr:'Bu kitap çok ilginç.',nl:'Dit boek is heel interessant.'},{tr:'Bugün hava çok güzel.',nl:'Het weer is vandaag erg mooi.'},
+{tr:'Türkçe öğrenmek eğlenceli.',nl:'Turks leren is leuk.'},{tr:'Her gün biraz çalışıyorum.',nl:'Ik oefen elke dag een beetje.'},
+{tr:'Ailem çok önemli.',nl:'Mijn familie is erg belangrijk.'},{tr:'Kahvaltıda ne yersin?',nl:'Wat eet je bij het ontbijt?'},
+{tr:'Marketten ekmek aldım.',nl:'Ik heb brood gekocht in de winkel.'},{tr:'Arkadaşımla buluştum.',nl:'Ik heb mijn vriend ontmoet.'},
+{tr:'Bu yemek lezzetli.',nl:'Dit eten is heerlijk.'},{tr:'Sabah erken kalktım.',nl:'Ik stond vroeg op.'},
+{tr:'İki çay lütfen.',nl:'Twee thee graag.'},{tr:'Nerede oturuyorsunuz?',nl:'Waar woont u?'},
+{tr:'İstanbul çok büyük bir şehir.',nl:'Istanbul is een heel grote stad.'},{tr:'Annem çok iyi yemek yapar.',nl:'Mijn moeder kookt erg lekker.'},
+{tr:'Bugün işe geç kaldım.',nl:'Ik was vandaag te laat op het werk.'},{tr:'Benim adım Tamer.',nl:'Mijn naam is Tamer.'},
+{tr:'Türkiye\'ye gitmek istiyorum.',nl:'Ik wil naar Turkije gaan.'},{tr:'Bu gece ne yiyeceğiz?',nl:'Wat eten we vanavond?'},
+{tr:'Kardeşim üniversitede okuyor.',nl:'Mijn broer of zus studeert aan de universiteit.'},{tr:'Çok acıktım.',nl:'Ik heb heel veel honger.'},
+{tr:'Babam her sabah gazete okur.',nl:'Mijn vader leest elke ochtend de krant.'},{tr:'Bu ay çok para harcadım.',nl:'Ik heb deze maand veel geld uitgegeven.'},
+{tr:'Sınavdan geçtim!',nl:'Ik ben geslaagd voor mijn examen!'},{tr:'Hava yağmurlu.',nl:'Het is regenachtig.'},
+{tr:'Su içmek sağlıklı.',nl:'Water drinken is gezond.'},{tr:'Annemin doğum günü yarın.',nl:'Moeders verjaardag is morgen.'},
+{tr:'Şimdi ne yapıyorsun?',nl:'Wat doe je nu?'},{tr:'Türkçe bilmek faydalı.',nl:'Turks kennen is nuttig.'},
+{tr:'Dükkân kaçta açılıyor?',nl:'Hoe laat gaat de winkel open?'},{tr:'Yemek hazır.',nl:'Het eten is klaar.'},
+{tr:'Büyükbabam çok hikaye biliyor.',nl:'Mijn opa kent veel verhalen.'},{tr:'Bugün çok yoruldum.',nl:'Ik ben vandaag erg moe geworden.'},
+{tr:'Merhaba! Nasılsın?',nl:'Hoi! Hoe gaat het met je?'},{tr:'Çok güzel bir gün.',nl:'Een hele mooie dag.'},
+{tr:'Çay mı kahve mi istersin?',nl:'Wil je thee of koffie?'},{tr:'Kardeşimle iyi geçiniyorum.',nl:'Ik kan goed opschieten met mijn broer of zus.'},
+{tr:'Bu ödev zor.',nl:'Dit huiswerk is moeilijk.'},{tr:'Doktor randevum var.',nl:'Ik heb een doktersafspraak.'},
+{tr:'Elma sever misin?',nl:'Houd je van appels?'},{tr:'Eşim çok çalışkan.',nl:'Mijn partner is erg ijverig.'},
+{tr:'Teşekkürler, çok naziksiniz.',nl:'Dankjewel, u bent erg vriendelijk.'},{tr:'Bu iş zaman alıyor.',nl:'Dit werk kost tijd.'},
+{tr:'Çocuklar bahçede oynuyor.',nl:'De kinderen spelen in de tuin.'},{tr:'Saat kaç?',nl:'Hoe laat is het?'},
+{tr:'Sebze yemek sağlıklı.',nl:'Groente eten is gezond.'},{tr:'Annem ve babam İstanbul\'da.',nl:'Mijn moeder en vader zijn in Istanbul.'},
+{tr:'Bu hafta çok meşgulüm.',nl:'Ik ben deze week erg druk.'},{tr:'İyi bir gün geçir!',nl:'Fijne dag!'},
+{tr:'Sabah kahvaltısı önemli.',nl:'Het ontbijt is belangrijk.'},{tr:'Çocuğum okula başladı.',nl:'Mijn kind is begonnen op school.'},
+{tr:'Bu dükkânda ne satıyorlar?',nl:'Wat verkopen ze in deze winkel?'},{tr:'Torunum çok sevimli.',nl:'Mijn kleinkind is heel schattig.'},
+{tr:'Özür dilerim, geç kaldım.',nl:'Sorry, ik ben te laat.'},{tr:'Portakal suyu içer misin?',nl:'Drink je sinaasappelsap?'},
+{tr:'Babam emekli oldu.',nl:'Mijn vader is gepensioneerd.'},{tr:'Türkiye\'de ne zaman tatil yaptın?',nl:'Wanneer was je op vakantie in Turkije?'},
+{tr:'Taze meyve severim.',nl:'Ik houd van vers fruit.'},{tr:'Bu film çok güzel.',nl:'Deze film is heel mooi.'},
+{tr:'Lütfen biraz bekleyin.',nl:'Wacht even alstublieft.'},{tr:'Çay için oturur musunuz?',nl:'Gaat u zitten voor thee?'},
+{tr:'Bu yol nereye gidiyor?',nl:'Waar leidt deze weg naartoe?'},{tr:'Hoşça kal, görüşürüz.',nl:'Dag, tot ziens.'},
+{tr:'Bu dükkân çok pahalı.',nl:'Deze winkel is erg duur.'},{tr:'Peynir ve ekmek severim.',nl:'Ik houd van kaas en brood.'},
+{tr:'Ailen nasıl?',nl:'Hoe gaat het met je familie?'},{tr:'Bu sokak çok kalabalık.',nl:'Deze straat is erg druk.'},
+{tr:'Günaydın! Nasıl uyudun?',nl:'Goedemorgen! Hoe heb je geslapen?'},{tr:'Faturayı kim ödeyecek?',nl:'Wie betaalt de rekening?'},
+{tr:'Bu çorba çok lezzetli.',nl:'Deze soep is erg lekker.'},{tr:'Kardeşim evlendi.',nl:'Mijn broer of zus is getrouwd.'},
+{tr:'Otobüs durağı nerede?',nl:'Waar is de bushalte?'},{tr:'Evet, anlıyorum.',nl:'Ja, ik begrijp het.'},
+{tr:'Bu hafta sonu ne yapıyorsun?',nl:'Wat doe je dit weekend?'},{tr:'Dondurma severim.',nl:'Ik houd van ijs.'},
+{tr:'Ailemiz birlikte yemek yiyor.',nl:'Onze familie eet samen.'},{tr:'Belki yarın görüşürüz.',nl:'Misschien zien we elkaar morgen.'},
+{tr:'Bu araba yeni mi?',nl:'Is deze auto nieuw?'},{tr:'Izgara tavuk severim.',nl:'Ik houd van gegrilde kip.'},
+{tr:'Büyükannem çok şefkatli.',nl:'Mijn oma is erg liefdevol.'},{tr:'Hayır, bilmiyorum.',nl:'Nee, ik weet het niet.'},
+{tr:'Çok zor bir sınav.',nl:'Een heel moeilijk examen.'},{tr:'Kahve mi istersiniz?',nl:'Wilt u koffie?'},
+{tr:'Dayım çok komik.',nl:'Mijn oom is heel grappig.'},{tr:'Bu bina çok eski.',nl:'Dit gebouw is heel oud.'},
+{tr:'Marketin açılış saati kaç?',nl:'Hoe laat gaat de supermarkt open?'},{tr:'Bu salata çok taze.',nl:'Deze salade is heel vers.'},
+{tr:'Halamin çocukları çok tatlı.',nl:'De kinderen van mijn tante zijn heel schattig.'},{tr:'Dün ne yaptın?',nl:'Wat heb je gisteren gedaan?'},
+{tr:'İyi geceler!',nl:'Goedenacht!'},{tr:'Bal çay lütfen.',nl:'Thee met honing alsjeblieft.'},
+{tr:'Ailem beni seviyor.',nl:'Mijn familie houdt van mij.'},{tr:'Uçak kaçta kalkıyor?',nl:'Hoe laat vertrekt het vliegtuig?'},
+{tr:'Bu ev çok rahat.',nl:'Dit huis is heel comfortabel.'},{tr:'Makarna yapmayı severim.',nl:'Ik hou van pasta maken.'},
+{tr:'Erkek kardeşim doktor.',nl:'Mijn broer is dokter.'},{tr:'Kütüphane nerede?',nl:'Waar is de bibliotheek?'},
+{tr:'Lütfen yavaş konuş.',nl:'Spreek alsjeblieft langzaam.'},{tr:'Bu araba çok hızlı.',nl:'Deze auto is heel snel.'},
+{tr:'Taze meyve suyu içiyorum.',nl:'Ik drink vers vruchtensap.'},{tr:'Anneannem çok iyi.',nl:'Mijn oma is heel goed.'},
+{tr:'Nasıl yardımcı olabilirim?',nl:'Hoe kan ik helpen?'},{tr:'Bu bilgisayar yavaş.',nl:'Deze computer is traag.'},
+{tr:'Baklava çok tatlı.',nl:'Baklava is heel zoet.'},{tr:'Kuzenlerim İstanbul\'da.',nl:'Mijn neven en nichten zijn in Istanbul.'},
+{tr:'Bugün güneşli.',nl:'Het is vandaag zonnig.'},{tr:'Her şey yolunda.',nl:'Alles gaat goed.'},
+{tr:'Bu pilav nefis.',nl:'Deze rijst is heerlijk.'},{tr:'Torunum çok akıllı.',nl:'Mijn kleinkind is heel slim.'},
+{tr:'Ablamın düğünü yakında.',nl:'De bruiloft van mijn grote zus is binnenkort.'},{tr:'Tren istasyonu nerede?',nl:'Waar is het treinstation?'},
+{tr:'Affedersiniz, Türkçem az.',nl:'Excuseer mij, mijn Turks is beperkt.'},{tr:'Bu şehir çok tarihi.',nl:'Deze stad is heel historisch.'},
+{tr:'Ailemle pikniğe gittik.',nl:'Ik ging picknicken met mijn familie.'},{tr:'Şimdi başlıyoruz.',nl:'Nu beginnen we.'},
+{tr:'Zeytinyağlı yemekler sağlıklı.',nl:'Met olijfolie bereid voedsel is gezond.'},{tr:'Bu renk çok güzel.',nl:'Deze kleur is heel mooi.'},
+{tr:'Yolculuk uzun sürdü.',nl:'De reis duurde lang.'},{tr:'Tamam, anlıyorum!',nl:'Oké, ik begrijp het!'},
+{tr:'Kahvaltıda çay içerim.',nl:'Ik drink thee bij het ontbijt.'},{tr:'Kardeşlerim çok sevimli.',nl:'Mijn broers en zussen zijn heel lief.'},
+{tr:'Bu koltuk çok rahat.',nl:'Deze stoel is heel comfortabel.'},{tr:'Yoğurt taze mi?',nl:'Is de yoghurt vers?'},
+{tr:'Bisikletle işe gidiyorum.',nl:'Ik ga met de fiets naar het werk.'},{tr:'Bu müzik çok güzel.',nl:'Deze muziek is heel mooi.'},
+{tr:'Amcam çok güçlü.',nl:'Mijn oom is heel sterk.'},{tr:'Tatilde dinlendim.',nl:'Ik heb gerust tijdens de vakantie.'},
+{tr:'Bu tarif kolay.',nl:'Dit recept is makkelijk.'},{tr:'Kuzenimle oynadım.',nl:'Ik heb gespeeld met mijn neef of nicht.'}
+];
+
+// ─── STORIES ─────────────────────────────────────────────────────────────────
+// 10 story templates × 50 iterations = 500 stories
+const storyTemplates=[
+{
+  titleFn:(n)=>`Verhaal ${n}: Kahvaltı Vakti – Het Ontbijt`,
+  bodyFn:(n)=>`{Bugün|Vandaag} {sabah|ochtend} {saat|om} ${6+Math.floor(n%5)}:00'de {kalktım|stond ik op}. {Mutfağa|Naar de keuken} {gidip|gegaan en} {kahvaltı|ontbijt} {hazırladım|bereid}. {Masaya|Op tafel} {ekmek|brood}, {peynir|kaas}, {bal|honing} ve {çay|thee} {koydum|gezet}. {Aile|Familie} {üyeleri|leden} {birer birer|één voor één} {geldi|kwamen}. ${n%3===0?'{Annem|Mijn moeder}':'{Babam|Mijn vader}'} "${n%2===0?'Günaydın':'Merhaba'}!" {dedi|zei}. {Birlikte|Samen} {keyifli|gezellig} {bir sabah|een ochtend} {geçirdik|doorgebracht}.`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Markette Alışveriş – Winkelen`,
+  bodyFn:(n)=>`{Annem|Mijn moeder} {ile|met} {markete|naar de supermarkt} {gittik|gingen we}. {Liste|Lijst} {hazırlamıştık|hadden we klaar}. {Sebzeler|Groenten}, {meyveler|fruit} ve {ekmek|brood} {aldık|kochten we}. ${n%2===0?'{Meyve|Fruit} {bölümünde|afdeling} {taze|verse} {çilek|aardbeien} {bulduk|vonden we}.':'{Kasap|De slager} {tezgâhında|aan de toonbank} {tavuk|kip} {seçtik|kozen we}.'} {Kasada|Aan de kassa} {sıra|in de rij} {bekledik|wachtten we}. {Eve|Naar huis} {yüklenmiş|beladen} {döndük|keerden we terug}.`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Okuldaki İlk Gün – Eerste Schooldag`,
+  bodyFn:(n)=>`{Bugün|Vandaag} {okula|naar school} {ilk|voor de eerste} {kez|keer} {gittim|ging ik}. {Yeni|Nieuwe} {çanta|tas} ve {defterler|schriften} {vardı|had ik}. {Sınıfa|In de klas} {girince|bij binnenkomst} {öğretmen|de leraar} "{n%2===0?'Hoş geldiniz':'Merhaba}'" {dedi|zei}. {Yanıma|Naast me} {oturan|zittende} {çocuk|kind} {adını|zijn naam} {söyledi|zei}. {Öğleden|Na de middag} {sonra|} {oyun|spel} {oynadık|speelden we}. {Eve|Naar huis} {dönerken|bij terugkeer} {çok|erg} {mutlu|blij} {hissettim|voelde ik me}.`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Hafta Sonu Gezisi – Weekenduitje`,
+  bodyFn:(n)=>`{Bu|Dit} {hafta sonu|weekend} {ailemle|met mijn familie} {geziye|op uitje} {çıktık|gingen we}. ${n%2===0?'{Sahile|Naar het strand} {gittik|gingen we}. {Deniz|De zee} {mavi|blauw} ve {temizdi|schoon was het}.':'{Ormana|Naar het bos} {yürüyüşe|wandelen} {çıktık|gingen we}. {Havalar|Het weer} {güzeldi|was mooi}.'} {Yanımıza|Mee namen we} {yiyecekler|eten} ve {içecekler|drinken} {aldık|}. {Piknik|Picknick} {yaparak|makend} {öğle|middag} {yemeği|maaltijd} {yedik|aten we}. {Eve|Naar huis} {yorgun|moe} {ama|maar} {mutlu|blij} {döndük|keerden we terug}.`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Dil Öğrenme – Turks Leren`,
+  bodyFn:(n)=>`{Türkçe|Turks} {öğrenmeye|te leren} {karar verdim|heb ik besloten}. {Her|Elke} {gün|dag} ${n%3===0?'yarım':'bir'} {saat|uur} {çalışıyorum|studeer ik}. {Önce|Eerst} {alfabe|alfabet} {öğrendim|leerde ik}. {Sonra|Daarna} {kelimeler|woorden} {ezberledim|memoriseerde ik}. {Şimdi|Nu} {cümleler|zinnen} {kurabiliyorum|kan ik maken}. {Türk|Turkse} {dizileri|series} {izleyerek|kijkend naar} {pratik|oefening} {yapıyorum|doe ik}. {Bir gün|Op een dag} {akıcı|vloeiend} {Türkçe|Turks} {konuşacağım|zal ik spreken}!`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Türk Mutfağı – Turkse Keuken`,
+  bodyFn:(n)=>`{Annem|Mijn moeder} {bugün|vandaag} ${n%3===0?'{menemen|eieren met tomaat}':n%3===1?'{mercimek çorbası|linzensoep}':'{börek|börek}'} {yapıyordu|maakte}. {Yardım etmek|Helpen} {istedim|wilde ik}. {Malzemeleri|Ingrediënten} {hazırladım|bereidde ik voor}. {Yavaşça|Langzaam} {pişirdik|kookten we}. {Koku|De geur} {muhteşemdi|was heerlijk}. {Masaya|Aan tafel} {oturup|gezeten} {beraber|samen} {yedik|aten we}. {Türk|Turkse} {mutfağı|keuken} {en güzel|het lekkerste} {yemekleri|eten} {sunar|biedt}!`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: İstanbul Macerası – Avontuur in Istanbul`,
+  bodyFn:(n)=>`{İstanbul'a|Naar Istanbul} {ilk kez|voor de eerste keer} {geldim|kwam ik}. {Boğaz|De Bosporus} {görünce|bij het zien} {heyecanlandım|was ik opgewonden}. ${n%3===0?'{Kapalıçarşı|De Grote Bazaar}':n%3===1?'{Topkapı Sarayı|Het Topkapi Paleis}':'{Ayasofya|De Hagia Sophia}'} {ziyaret ettim|bezocht ik}. {Sokaklarda|Op de straten} {simit|ringbrood} {satıcıları|verkopers} {vardı|waren er}. {Akşam|s Avonds} {Boğaz|Bosporus} {üzerinde|over} {tekne|boot} {turu|tour} {yaptım|maakte ik}. {İstanbul|Istanbul} {kalbimde|in mijn hart} {kalacak|zal blijven}!`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Sağlıklı Yaşam – Gezond Leven`,
+  bodyFn:(n)=>`{Sağlıklı|Gezond} {yaşamak için|om te leven} {alışkanlıklar|gewoontes} {edindim|heb ik aangenomen}. {Sabahları|s Ochtends} ${n%2===0?'30 dakika yürüyüş yapıyorum':'bisiklete biniyorum'}. {Öğünlerimde|Bij mijn maaltijden} {bol|veel} {sebze|groenten} ve {meyve|fruit} {tüketiyorum|consumeer ik}. {Her gün|Elke dag} {en az|minimaal} {iki litre|twee liter} {su|water} {içiyorum|drink ik}. {Gece|s Nachts} {yeterince|voldoende} {uyuyorum|slaap ik}. {Bu|Deze} {alışkanlıklar|gewoontes} {hayatımı|mijn leven} {değiştirdi|hebben veranderd}!`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Komşularla İlişkiler – Burenrelaties`,
+  bodyFn:(n)=>`{Komşularımla|Met mijn buren} {iyi|goede} {ilişkiler|relaties} {kurarım|onderhoud ik}. ${n%2===0?'{Bayramlarda|Op feestdagen} {tatlı|snoep} {götürürüm|breng ik}.':'{Yardıma|Om hulp} {ihtiyaçları olduğunda|wanneer ze nodig hebben} {koşarım|ren ik ernaartoe}.'} {Kapı komşum|Mijn buurvrouw} {yaşlı|oud} {bir hanım|een mevrouw} {dir|}. {Pazardan|Van de markt} {alışveriş yaparken|boodschappen doen} {onun ihtiyaçlarını da|haar benodigdheden ook} {alırım|koop ik}. {Komşuluk|Burenrelaties} {güzel bir şey|iets moois} {bence|vind ik}.`
+},
+{
+  titleFn:(n)=>`Verhaal ${n}: Tatil Planları – Vakantieplannen`,
+  bodyFn:(n)=>`{Bu yıl|Dit jaar} {tatilimi|mijn vakantie} ${n%3===0?'{Kapadokya\'da|in Cappadocië}':n%3===1?'{Antalya\'da|in Antalya}':'{Ege\'de|aan de Egeïsche Zee}'} {geçireceğim|ga ik doorbrengen}. {Rezervasyon|Reservering} {yaptım|heb ik gemaakt}. ${n%2===0?'{Sıcak hava|Het warme weer} ve {güzel sahiller|mooie stranden} {bekliyorum|verwacht ik}.':'{Tarihi yerler|Historische plekken} {gezmek istiyorum|wil ik bezoeken}.'} {Valizimi|Mijn koffer} {hazırlamaya başladım|begon ik voor te bereiden}. {Tatil günlerini|De vakantiedagen} {sabırsızlıkla|ongeduldig} {bekliyorum|wacht ik op}!`
+}
+];
+
+const stories=Array.from({length:500},(_,i)=>{
+  const tpl=storyTemplates[i%storyTemplates.length];
+  return {title:tpl.titleFn(i+1), text:tpl.bodyFn(i+1)};
+});
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let wLang='tr-nl', sLang='tr-nl', curCat='basis', curWPage=1, curSPage=1;
+let learnedWords=new Set(), qScore=0, qTotal=0, curQ=null, qMode='click';
+const PER_PAGE=30;
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function speak(text,lang){
+  if(!text)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang||'tr-TR'; u.rate=0.8;
+  window.speechSynthesis.speak(u);
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='quiz') genQ();
+}
+
+// ─── WORDS ────────────────────────────────────────────────────────────────────
+function renderCats(){
+  const labels={basis:'Basis',getallen:'Getallen',eten:'Eten',familie:'Familie',dagelijks:'Dagelijks',werkwoorden:'Werkwoorden',bijvoeglijk:'Bijvoeglijk'};
+  document.getElementById('catRow').innerHTML=Object.keys(vocabulary).map(c=>
+    `<button class="cat-btn${c===curCat?' active':''}" onclick="pickCat('${c}')">${labels[c]}</button>`
+  ).join('');
+}
+
+function pickCat(c){curCat=c;curWPage=1;renderCats();renderWords();}
+function setWordLang(l){
+  wLang=l;
+  document.getElementById('wLangTR').classList.toggle('active',l==='tr-nl');
+  document.getElementById('wLangNL').classList.toggle('active',l==='nl-tr');
+  renderWords();
+}
+
+function renderWords(){
+  const words=vocabulary[curCat]||[];
+  const start=(curWPage-1)*PER_PAGE;
+  const page=words.slice(start,start+PER_PAGE);
+  document.getElementById('wordGrid').innerHTML=page.map((w,i)=>{
+    const front=wLang==='tr-nl'?w.tr:w.nl;
+    const back=wLang==='tr-nl'?w.nl:w.tr;
+    const idx=start+i;
+    const safetr=esc(w.tr);
+    return `<div class="word-card" id="wc${idx}" onclick="flipCard(${idx})">
+      <button class="play-btn" onclick="event.stopPropagation();speak('${safetr}','tr-TR')">🔊</button>
+      <div class="wc-front"><div class="word-text">${front}</div><div class="word-hint">Klik om te zien</div></div>
+      <div class="wc-back"><div class="word-text">${back}</div><div class="word-hint">${front}</div></div>
+    </div>`;
+  }).join('');
+  renderPag('wordPag',words.length,curWPage,p=>{curWPage=p;renderWords();});
+  document.getElementById('totalCount').textContent=Object.values(vocabulary).flat().length;
+}
+
+function flipCard(idx){
+  const card=document.getElementById('wc'+idx);
+  card.classList.toggle('flipped');
+  const words=vocabulary[curCat];
+  if(words[idx]){
+    const key=words[idx].tr+'|'+words[idx].nl;
+    if(!learnedWords.has(key)){learnedWords.add(key);updProgress();}
+  }
+}
+
+// ─── SENTENCES ────────────────────────────────────────────────────────────────
+function setSentLang(l){
+  sLang=l;
+  document.getElementById('sLangTR').classList.toggle('active',l==='tr-nl');
+  document.getElementById('sLangNL').classList.toggle('active',l==='nl-tr');
+  renderSents();
+}
+
+function renderSents(){
+  const start=(curSPage-1)*PER_PAGE;
+  const page=sentences.slice(start,start+PER_PAGE);
+  document.getElementById('sentList').innerHTML=page.map(s=>{
+    const main=sLang==='tr-nl'?s.tr:s.nl;
+    const trans=sLang==='tr-nl'?s.nl:s.tr;
+    const lang=sLang==='tr-nl'?'tr-TR':'nl-NL';
+    return `<div class="sent-card">
+      <div class="sent-main">${main}<button class="audio-btn" onclick="speak('${esc(main)}','${lang}')">🔊</button></div>
+      <div class="sent-trans">${trans}</div>
+    </div>`;
+  }).join('');
+  renderPag('sentPag',sentences.length,curSPage,p=>{curSPage=p;renderSents();});
+}
+
+// ─── STORIES ─────────────────────────────────────────────────────────────────
+function renderStorySel(){
+  document.getElementById('storySel').innerHTML=stories.map((s,i)=>
+    `<option value="${i}">${s.title}</option>`
+  ).join('');
+}
+
+function renderStory(idx){
+  idx=Math.max(0,Math.min(stories.length-1,idx));
+  document.getElementById('storySel').value=idx;
+  const story=stories[idx];
+  const html=story.text.replace(/\{([^|{}]+)\|([^|{}]+)\}/g,(_,tr,nl)=>
+    `<span class="cw" onclick="showTip(event,'${esc(tr)}','${esc(nl)}')">${tr}</span>`
+  );
+  document.getElementById('storyBox').innerHTML=`
+    <h2 class="story-title">${story.title}</h2>
+    <div class="story-body">${html}
+      <button class="audio-btn" onclick="speakStory(${idx})" style="float:right;font-size:1.4em;margin-top:8px">🔊</button>
+    </div>
+    <div class="story-nav">
+      ${idx>0?`<button onclick="renderStory(${idx-1})">← Vorige</button>`:''}
+      <span style="padding:10px 8px;color:#6b6b6b;font-size:.85em">${idx+1} / ${stories.length}</span>
+      ${idx<stories.length-1?`<button onclick="renderStory(${idx+1})">Volgende →</button>`:''}
+    </div>`;
+}
+
+function speakStory(i){
+  const clean=stories[i].text.replace(/\{([^|{}]+)\|[^|{}]+\}/g,'$1');
+  speak(clean,'tr-TR');
+}
+
+let tipTimeout=null;
+function showTip(e,tr,nl){
+  e.stopPropagation();
+  document.querySelectorAll('.tooltip').forEach(t=>t.remove());
+  if(tipTimeout)clearTimeout(tipTimeout);
+  const tip=document.createElement('div');
+  tip.className='tooltip';
+  tip.innerHTML=`<strong>${tr}</strong> = ${nl}<br><button class="audio-btn" onclick="event.stopPropagation();speak('${esc(tr)}','tr-TR')" style="color:#fff">🔊</button>`;
+  document.body.appendChild(tip);
+  const r=e.target.getBoundingClientRect();
+  const left=Math.min(r.left, window.innerWidth-230);
+  tip.style.cssText=`left:${left}px;top:${r.bottom+window.scrollY+6}px`;
+  tipTimeout=setTimeout(()=>tip.remove(),4000);
+  const rm=()=>{tip.remove();document.removeEventListener('click',rm);};
+  document.addEventListener('click',rm);
+}
+
+// ─── QUIZ ─────────────────────────────────────────────────────────────────────
+function setMode(m){
+  qMode=m;
+  document.getElementById('modeClick').classList.toggle('active',m==='click');
+  document.getElementById('modeType').classList.toggle('active',m==='type');
+  genQ();
+}
+
+function genQ(){
+  const all=Object.values(vocabulary).flat();
+  curQ=all[Math.floor(Math.random()*all.length)];
+  document.getElementById('quizQ').textContent=`Wat betekent "${curQ.tr}"?`;
+  document.getElementById('nextBtn').style.display='none';
+
+  if(qMode==='click'){
+    const wrong=all.filter(w=>w.nl!==curQ.nl).sort(()=>Math.random()-.5).slice(0,3).map(w=>w.nl);
+    const opts=[...wrong,curQ.nl].sort(()=>Math.random()-.5);
+    document.getElementById('quizBody').innerHTML=`<div class="quiz-opts">${
+      opts.map(o=>`<button class="quiz-opt" onclick="checkClick('${esc(o)}')">${o}</button>`).join('')
+    }</div>`;
+  } else {
+    document.getElementById('quizBody').innerHTML=`<div class="type-area">
+      <input id="ti" class="type-input" type="text" placeholder="Typ de Nederlandse vertaling…"
+        onkeydown="if(event.key==='Enter')checkType()">
+      <div class="type-feedback" id="tf"></div>
+      <button class="btn-primary" style="margin-top:8px" onclick="checkType()">Controleer</button>
+    </div>`;
+    setTimeout(()=>{const el=document.getElementById('ti');if(el)el.focus();},80);
+  }
+}
+
+function checkClick(ans){
+  qTotal++;
+  document.querySelectorAll('.quiz-opt').forEach(o=>{
+    o.disabled=true;
+    if(o.textContent===curQ.nl) o.classList.add('correct');
+    else if(o.textContent===ans) o.classList.add('incorrect');
+  });
+  if(ans===curQ.nl)qScore++;
+  document.getElementById('scoreDisp').textContent=`Score: ${qScore} / ${qTotal}`;
+  document.getElementById('nextBtn').style.display='';
+}
+
+function checkType(){
+  const el=document.getElementById('ti');
+  const fb=document.getElementById('tf');
+  if(!el||!curQ)return;
+  const ans=el.value.trim().toLowerCase();
+  const cor=curQ.nl.toLowerCase();
+  qTotal++;
+  const ok=ans===cor||(ans.length>3&&cor.includes(ans));
+  if(ok){qScore++;el.classList.add('correct');fb.style.color='#4a5f47';fb.innerHTML=`✓ Goed! <strong>${curQ.nl}</strong>`;}
+  else{el.classList.add('incorrect');fb.style.color='#6b4a3f';fb.innerHTML=`✗ Fout. Antwoord: <strong>${curQ.nl}</strong>`;}
+  el.disabled=true;
+  document.getElementById('scoreDisp').textContent=`Score: ${qScore} / ${qTotal}`;
+  document.getElementById('nextBtn').style.display='';
+}
+
+function nextQ(){genQ();}
+
+// ─── PROGRESS ─────────────────────────────────────────────────────────────────
+function updProgress(){
+  const total=Object.values(vocabulary).flat().length;
+  const pct=Math.round((learnedWords.size/total)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('learnedCount').textContent=learnedWords.size;
+}
+
+// ─── PAGINATION ───────────────────────────────────────────────────────────────
+function renderPag(id,total,cur,onChange){
+  const el=document.getElementById(id);
+  const pages=Math.ceil(total/PER_PAGE);
+  if(pages<=1){el.innerHTML='';return;}
+  const btns=[];
+  const go=p=>`onclick="(${onChange})(${p})"`;
+  if(cur>1) btns.push(`<button class="pg-btn" ${go(cur-1)}>‹</button>`);
+  const MAX=7;
+  let s=Math.max(1,cur-Math.floor(MAX/2));
+  let e=Math.min(pages,s+MAX-1);
+  if(e-s<MAX-1)s=Math.max(1,e-MAX+1);
+  if(s>1){btns.push(`<button class="pg-btn" ${go(1)}>1</button>`);if(s>2)btns.push('<span class="pg-dots">…</span>');}
+  for(let i=s;i<=e;i++) btns.push(`<button class="pg-btn${i===cur?' active':''}" ${go(i)}>${i}</button>`);
+  if(e<pages){if(e<pages-1)btns.push('<span class="pg-dots">…</span>');btns.push(`<button class="pg-btn" ${go(pages)}>${pages}</button>`);}
+  if(cur<pages) btns.push(`<button class="pg-btn" ${go(cur+1)}>›</button>`);
+  el.innerHTML=btns.join('');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  renderCats();
+  renderWords();
+  renderSents();
+  renderStorySel();
+  renderStory(0);
+  genQ();
+  updProgress();
+  document.getElementById('totalCount').textContent=Object.values(vocabulary).flat().length;
+});
+</script>
+</body>
+</html>
