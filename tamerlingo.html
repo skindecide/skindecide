@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamerlingo 🐒</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #58cc02;
+  --green-dk: #46a302;
+  --green-bg: #d7ffb8;
+  --blue: #1cb0f6;
+  --blue-dk: #1899d6;
+  --red: #ff4b4b;
+  --red-bg: #ffdfe0;
+  --yellow: #ffc800;
+  --yellow-dk: #e6a700;
+  --purple: #a560f8;
+  --orange: #ff9600;
+  --gray: #afafaf;
+  --gray-light: #e5e5e5;
+  --gray-bg: #f7f7f7;
+  --text: #3c3c3c;
+  --text-light: #777;
+  --white: #ffffff;
+  --border: #e5e5e5;
+  --shadow: 0 4px 0 rgba(0,0,0,0.15);
+  --shadow-sm: 0 2px 0 rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --monkey: #c8660d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ─────────────────────────────── */
+.app-header {
+  background: var(--white);
+  border-bottom: 3px solid var(--border);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-monkey {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+  animation: monkeyWiggle 3s ease-in-out infinite;
+}
+
+@keyframes monkeyWiggle {
+  0%,100% { transform: rotate(0deg); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(8deg); }
+  60% { transform: rotate(-5deg); }
+  80% { transform: rotate(5deg); }
+}
+
+.logo-text {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.7rem;
+  background: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gray-bg);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  border: 2px solid var(--border);
+}
+
+.stat-pill .icon { font-size: 1.1rem; }
+.stat-pill .val { color: var(--text); }
+
+.streak-pill { border-color: var(--orange); }
+.streak-pill .val { color: var(--orange); }
+.xp-pill { border-color: var(--purple); }
+.xp-pill .val { color: var(--purple); }
+.heart-pill { border-color: var(--red); }
+.heart-pill .val { color: var(--red); }
+
+/* ── LAYOUT ─────────────────────────────── */
+.app-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  padding: 32px 20px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ─────────────────────────────── */
+.sidebar {
+  position: sticky;
+  top: 90px;
+}
+
+.monkey-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.big-monkey {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 8px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.monkey-name {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--monkey);
+}
+
+.monkey-speech {
+  background: var(--green-bg);
+  border: 2px solid var(--green);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-dk);
+  margin-top: 12px;
+  position: relative;
+}
+
+.monkey-speech::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: var(--green);
+}
+
+.progress-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  background: var(--gray-light);
+  border-radius: 999px;
+  height: 16px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green) 0%, #80e000 100%);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 999px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  transition: all 0.2s;
+  font-family: 'Nunito', sans-serif;
+  text-align: left;
+  width: 100%;
+  border: 2px solid transparent;
+}
+
+.nav-item:hover {
+  background: var(--gray-light);
+  color: var(--text);
+}
+
+.nav-item.active {
+  background: #ddf4c1;
+  color: var(--green-dk);
+  border-color: var(--green);
+}
+
+.nav-item .nav-icon { font-size: 1.3rem; }
+
+/* ── MAIN CONTENT ─────────────────────────── */
+.main-content {
+  min-width: 0;
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── SECTION HEADER ─────────────────────── */
+.section-header {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-icon { font-size: 2.5rem; }
+
+.section-title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ── MODE TOGGLE ─────────────────────────── */
+.mode-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  background: var(--white);
+  padding: 6px;
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--text-light);
+}
+
+.mode-tab.active {
+  background: var(--green);
+  color: var(--white);
+  box-shadow: 0 3px 0 var(--green-dk);
+  transform: translateY(-1px);
+}
+
+.mode-tab:not(.active):hover {
+  background: var(--gray-light);
+  color: var(--text);
+}
+
+/* ── CATEGORIES ─────────────────────────── */
+.cat-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.cat-btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 3px solid var(--border);
+  background: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.cat-btn:hover { border-color: var(--green); color: var(--green-dk); }
+.cat-btn.active { background: var(--green); color: var(--white); border-color: var(--green-dk); box-shadow: 0 3px 0 var(--green-dk); }
+
+/* ── LANG TOGGLE ─────────────────────────── */
+.lang-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.lang-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 3px solid var(--border);
+  background: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-light);
+}
+
+.lang-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue-dk); box-shadow: 0 3px 0 var(--blue-dk); }
+
+/* ── WORD CARDS ─────────────────────────── */
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.word-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 24px 16px 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+  position: relative;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.word-card:hover { transform: translateY(-3px); box-shadow: 0 7px 0 rgba(0,0,0,0.12); }
+.word-card:active { transform: translateY(2px); box-shadow: var(--shadow-sm); }
+
+.word-card.learned { border-color: var(--green); background: #f0fce8; }
+.word-card.flipped { border-color: var(--blue); background: #e8f7ff; }
+.word-card.flipped .card-hint { color: var(--blue); }
+
+.card-front { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.card-back  { display: none; flex-direction: column; align-items: center; gap: 6px; }
+.word-card.flipped .card-front { display: none; }
+.word-card.flipped .card-back  { display: flex; }
+
+.card-word {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.card-hint {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-learned-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.word-card.learned .card-learned-badge { opacity: 1; }
+
+.card-audio {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--gray-light);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.card-audio:hover { background: var(--blue); transform: scale(1.1); }
+
+/* ── TYPING WORD MODE ─────────────────────── */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.type-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+
+.type-card.correct { border-color: var(--green); background: #f0fce8; }
+.type-card.incorrect { border-color: var(--red); background: #fff0f0; }
+.type-card.skipped { border-color: var(--gray); background: var(--gray-bg); }
+
+.type-prompt {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.type-sub { font-size: 0.75rem; color: var(--text-light); font-family: 'Nunito', sans-serif; font-weight: 600; }
+
+.type-input-wrap { position: relative; }
+
+.type-input {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--gray-bg);
+}
+
+.type-input:focus { border-color: var(--blue); background: var(--white); }
+.type-card.correct .type-input { border-color: var(--green); background: #d7ffb8; color: var(--green-dk); }
+.type-card.incorrect .type-input { border-color: var(--red); background: #ffdfe0; color: var(--red); }
+
+.type-check-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--green);
+  border: none;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: white;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.type-check-btn:hover { background: var(--green-dk); }
+
+.type-feedback {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 8px;
+  min-height: 18px;
+}
+
+.type-feedback.ok { color: var(--green-dk); }
+.type-feedback.err { color: var(--red); }
+
+/* ── SENTENCES ─────────────────────────── */
+.sent-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+
+.sent-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+
+.sent-card:hover { border-color: var(--blue); }
+.sent-card.correct { border-color: var(--green); background: #f0fce8; }
+.sent-card.incorrect { border-color: var(--red); background: #fff0f0; }
+
+.sent-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.sent-text {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.audio-btn {
+  background: var(--gray-light);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.audio-btn:hover { background: var(--blue); transform: scale(1.05); }
+
+.sent-trans { color: var(--text-light); font-size: 0.9rem; font-weight: 600; }
+
+.sent-type-wrap { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+
+.sent-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--gray-bg);
+}
+
+.sent-input:focus { border-color: var(--blue); background: var(--white); }
+.sent-card.correct .sent-input { border-color: var(--green); background: #d7ffb8; }
+.sent-card.incorrect .sent-input { border-color: var(--red); background: #ffdfe0; }
+
+.sent-submit {
+  padding: 10px 16px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 3px 0 var(--green-dk);
+  white-space: nowrap;
+}
+
+.sent-submit:hover { background: var(--green-dk); transform: translateY(-1px); }
+.sent-submit:active { transform: translateY(2px); box-shadow: none; }
+
+.sent-feedback { font-size: 0.8rem; font-weight: 700; margin-top: 6px; min-height: 16px; }
+.sent-feedback.ok { color: var(--green-dk); }
+.sent-feedback.err { color: var(--red); }
+
+/* ── STORIES ─────────────────────────── */
+.story-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.story-select {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: var(--white);
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.story-nav-btn {
+  padding: 12px 20px;
+  background: var(--white);
+  border: 3px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.story-nav-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+.story-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 36px 40px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.story-box-title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 3px dashed var(--border);
+}
+
+.story-body {
+  font-size: 1.1rem;
+  line-height: 2.2;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tr-word {
+  color: var(--blue);
+  font-weight: 800;
+  cursor: pointer;
+  border-bottom: 2px dashed var(--blue);
+  transition: all 0.15s;
+  display: inline;
+  position: relative;
+  padding: 2px 3px;
+  border-radius: 4px;
+}
+
+.tr-word:hover {
+  background: #e8f7ff;
+  border-bottom-style: solid;
+  color: var(--blue-dk);
+}
+
+.tr-word.revealed {
+  background: var(--green-bg);
+  color: var(--green-dk);
+  border-bottom-color: var(--green);
+}
+
+.word-bubble {
+  position: absolute;
+  background: var(--text);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: popIn 0.15s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  to   { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+.word-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--text);
+  border-bottom: none;
+}
+
+.story-audio-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--blue);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 3px 0 var(--blue-dk);
+}
+
+.story-audio-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--blue-dk); }
+
+/* ── QUIZ ─────────────────────────── */
+.quiz-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 3px solid var(--border);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.quiz-mascot { font-size: 3.5rem; margin-bottom: 8px; display: block; }
+
+.quiz-q {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 28px;
+  background: var(--gray-bg);
+  padding: 16px 24px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border);
+}
+
+.quiz-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.quiz-opt {
+  padding: 16px 20px;
+  background: var(--white);
+  border: 3px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-opt:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-bg); color: var(--green-dk); box-shadow: 0 3px 0 var(--green-dk); }
+.quiz-opt.incorrect { border-color: var(--red); background: var(--red-bg); color: var(--red); box-shadow: 0 3px 0 darkred; }
+.quiz-opt:disabled { cursor: default; }
+
+.quiz-type-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.quiz-input {
+  width: 100%;
+  max-width: 440px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.2s;
+  background: var(--gray-bg);
+}
+
+.quiz-input:focus { border-color: var(--blue); background: var(--white); }
+.quiz-input.correct { border-color: var(--green); background: var(--green-bg); color: var(--green-dk); }
+.quiz-input.incorrect { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+
+.quiz-submit-btn {
+  padding: 14px 36px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--green-dk);
+  transition: all 0.2s;
+}
+
+.quiz-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--green-dk); }
+.quiz-submit-btn:active { transform: translateY(2px); box-shadow: none; }
+
+.quiz-feedback { font-size: 1rem; font-weight: 700; min-height: 24px; margin-bottom: 4px; }
+.quiz-feedback.ok { color: var(--green-dk); }
+.quiz-feedback.err { color: var(--red); }
+
+.quiz-score-bar {
+  background: var(--gray-bg);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-weight: 700;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+}
+
+.score-good { color: var(--green-dk); font-size: 1.1rem; }
+.score-total { color: var(--text); }
+
+.next-btn {
+  padding: 14px 36px;
+  background: var(--yellow);
+  color: var(--text);
+  border: none;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--yellow-dk);
+  transition: all 0.2s;
+  margin-top: 16px;
+  display: none;
+}
+
+.next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--yellow-dk); }
+
+/* ── PAGINATION ─────────────────────────── */
+.pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.page-btn {
+  padding: 8px 14px;
+  background: var(--white);
+  border: 3px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  min-width: 40px;
+  transition: all 0.2s;
+}
+
+.page-btn:hover { border-color: var(--green); color: var(--green-dk); }
+.page-btn.active { background: var(--green); color: white; border-color: var(--green-dk); box-shadow: 0 2px 0 var(--green-dk); }
+
+/* ── XP TOAST ─────────────────────────── */
+.xp-toast {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: var(--purple);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(165, 96, 248, 0.4);
+  animation: toastAnim 2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes toastAnim {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media (max-width: 820px) {
+  .app-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; display: none; }
+  .quiz-opts { grid-template-columns: 1fr; }
+  .story-box { padding: 24px 20px; }
+}
+
+/* ── CELEBRATION ─────────────────────────── */
+.celebrate {
+  animation: celebrateAnim 0.5s ease;
+}
+
+@keyframes celebrateAnim {
+  0%,100% { transform: scale(1); }
+  25% { transform: scale(1.1) rotate(-3deg); }
+  50% { transform: scale(1.15) rotate(3deg); }
+  75% { transform: scale(1.05) rotate(-1deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-monkey">🐒</span>
+      <span class="logo-text">Tamerlingo</span>
+    </div>
+    <div class="header-stats">
+      <div class="stat-pill streak-pill">
+        <span class="icon">🔥</span>
+        <span class="val" id="streakVal">1</span>
+      </div>
+      <div class="stat-pill xp-pill">
+        <span class="icon">⚡</span>
+        <span class="val" id="xpVal">0</span> XP
+      </div>
+      <div class="stat-pill heart-pill">
+        <span class="icon">❤️</span>
+        <span class="val" id="heartVal">5</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="monkey-card">
+      <span class="big-monkey">🐒</span>
+      <div class="monkey-name">Tamer de Aap</div>
+      <div class="monkey-speech" id="monkeySpeech">Hoi! Laten we Turks leren! 🇹🇷</div>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-label">📚 Voortgang</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-info">
+        <span id="learnedCount">0</span> / <span id="totalCount">0</span> woorden
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <button class="nav-item active" onclick="showSection('words',this)">
+        <span class="nav-icon">📝</span> Woorden
+      </button>
+      <button class="nav-item" onclick="showSection('sentences',this)">
+        <span class="nav-icon">💬</span> Zinnen
+      </button>
+      <button class="nav-item" onclick="showSection('stories',this)">
+        <span class="nav-icon">📖</span> Verhalen
+      </button>
+      <button class="nav-item" onclick="showSection('quiz',this)">
+        <span class="nav-icon">🎯</span> Quiz
+      </button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- MOBILE NAV -->
+    <div class="mode-bar" style="margin-bottom:24px;" id="mobileNav">
+      <button class="mode-tab active" onclick="showSection('words',this)">📝 Woorden</button>
+      <button class="mode-tab" onclick="showSection('sentences',this)">💬 Zinnen</button>
+      <button class="mode-tab" onclick="showSection('stories',this)">📖 Verhalen</button>
+      <button class="mode-tab" onclick="showSection('quiz',this)">🎯 Quiz</button>
+    </div>
+
+    <!-- ── WOORDEN ── -->
+    <section id="words" class="section active">
+      <div class="section-header">
+        <span class="section-icon">📝</span>
+        <div>
+          <div class="section-title">Woorden</div>
+          <div class="section-sub">Leer Turkse woorden door te klikken of te typen</div>
+        </div>
+      </div>
+
+      <div class="mode-bar" id="wordModeBar">
+        <button class="mode-tab active" onclick="setWordMode('flip',this)">🃏 Kaartvlippen</button>
+        <button class="mode-tab" onclick="setWordMode('type',this)">⌨️ Typen</button>
+      </div>
+
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setWordLang('tr-nl',this)">🇹🇷 Turks → 🇳🇱 NL</button>
+        <button class="lang-btn" onclick="setWordLang('nl-tr',this)">🇳🇱 NL → 🇹🇷 Turks</button>
+      </div>
+
+      <div class="cat-bar" id="catBar"></div>
+
+      <div id="wordContainer"></div>
+      <div class="pagination" id="wordPag"></div>
+    </section>
+
+    <!-- ── ZINNEN ── -->
+    <section id="sentences" class="section">
+      <div class="section-header">
+        <span class="section-icon">💬</span>
+        <div>
+          <div class="section-title">Zinnen</div>
+          <div class="section-sub">Lees, luister en typ de vertaling</div>
+        </div>
+      </div>
+
+      <div class="mode-bar">
+        <button class="mode-tab active" onclick="setSentMode('read',this)">👁️ Lezen</button>
+        <button class="mode-tab" onclick="setSentMode('type',this)">⌨️ Typen</button>
+      </div>
+
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setSentLang('tr-nl',this)">🇹🇷 Turks → 🇳🇱 NL</button>
+        <button class="lang-btn" onclick="setSentLang('nl-tr',this)">🇳🇱 NL → 🇹🇷 Turks</button>
+      </div>
+
+      <div class="sent-list" id="sentList"></div>
+      <div class="pagination" id="sentPag"></div>
+    </section>
+
+    <!-- ── VERHALEN ── -->
+    <section id="stories" class="section">
+      <div class="section-header">
+        <span class="section-icon">📖</span>
+        <div>
+          <div class="section-title">Verhalen</div>
+          <div class="section-sub">Klik op blauwe woorden voor de vertaling</div>
+        </div>
+      </div>
+
+      <div class="story-toolbar">
+        <select class="story-select" id="storySelect" onchange="renderStory(+this.value)"></select>
+        <button class="story-nav-btn" id="prevStoryBtn" onclick="renderStory(Math.max(0,currentStory-1))">← Vorige</button>
+        <button class="story-nav-btn" id="nextStoryBtn" onclick="renderStory(Math.min(stories.length-1,currentStory+1))">Volgende →</button>
+      </div>
+
+      <div class="story-box" id="storyBox"></div>
+    </section>
+
+    <!-- ── QUIZ ── -->
+    <section id="quiz" class="section">
+      <div class="section-header">
+        <span class="section-icon">🎯</span>
+        <div>
+          <div class="section-title">Quiz</div>
+          <div class="section-sub">Test je kennis van Turkse woorden</div>
+        </div>
+      </div>
+
+      <div class="mode-bar">
+        <button class="mode-tab active" onclick="setQuizMode('click',this)">🖱️ Klikken</button>
+        <button class="mode-tab" onclick="setQuizMode('type',this)">⌨️ Typen</button>
+      </div>
+
+      <div class="quiz-wrap">
+        <span class="quiz-mascot">🐒</span>
+        <div class="quiz-q" id="quizQ">Laden…</div>
+        <div id="quizBody"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <div class="quiz-score-bar">
+          <span class="score-good">✅ <span id="quizCorrect">0</span></span>
+          <span>|</span>
+          <span class="score-total">❌ <span id="quizWrong">0</span></span>
+          <span>|</span>
+          <span>📊 <span id="quizTotal">0</span> vragen</span>
+        </div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuiz()">Volgende →</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ================================================================
+// DATA
+// ================================================================
+const vocabulary = {
+basis:[
+  {tr:'Merhaba',nl:'Hallo'},{tr:'Günaydın',nl:'Goedemorgen'},{tr:'İyi akşamlar',nl:'Goedenavond'},
+  {tr:'İyi geceler',nl:'Goedenacht'},{tr:'Hoşça kal',nl:'Vaarwel'},{tr:'Görüşürüz',nl:'Tot ziens'},
+  {tr:'Hoş geldin',nl:'Welkom'},{tr:'Teşekkür ederim',nl:'Dank je wel'},{tr:'Çok teşekkürler',nl:'Heel erg bedankt'},
+  {tr:'Rica ederim',nl:'Graag gedaan'},{tr:'Lütfen',nl:'Alsjeblieft'},{tr:'Evet',nl:'Ja'},
+  {tr:'Hayır',nl:'Nee'},{tr:'Belki',nl:'Misschien'},{tr:'Tamam',nl:'Oké'},
+  {tr:'Anlıyorum',nl:'Ik begrijp het'},{tr:'Anlamıyorum',nl:'Ik begrijp het niet'},{tr:'Bilmiyorum',nl:'Ik weet het niet'},
+  {tr:'İsminiz ne?',nl:'Wat is uw naam?'},{tr:'Benim adım',nl:'Mijn naam is'},
+  {tr:'Nasılsın?',nl:'Hoe gaat het?'},{tr:'İyiyim',nl:'Goed'},{tr:'Fena değil',nl:'Niet slecht'},
+  {tr:'Kötüyüm',nl:'Slecht'},{tr:'Özür dilerim',nl:'Het spijt me'},{tr:'Pardon',nl:'Pardon'},
+  {tr:'Şimdi',nl:'Nu'},{tr:'Sonra',nl:'Later'},{tr:'Önce',nl:'Eerst'},
+  {tr:'Burada',nl:'Hier'},{tr:'Orada',nl:'Daar'},{tr:'Nerede?',nl:'Waar?'},
+  {tr:'Ne zaman?',nl:'Wanneer?'},{tr:'Neden?',nl:'Waarom?'},{tr:'Nasıl?',nl:'Hoe?'},
+  {tr:'Kim?',nl:'Wie?'},{tr:'Ne?',nl:'Wat?'},{tr:'Hangisi?',nl:'Welke?'},
+  {tr:'Kaç tane?',nl:'Hoeveel?'},{tr:'Çok',nl:'Veel'},{tr:'Az',nl:'Weinig'},
+  {tr:'Hepsi',nl:'Alles'},{tr:'Hiçbir şey',nl:'Niets'},{tr:'Bir şey',nl:'Iets'},
+  {tr:'Doğru',nl:'Juist'},{tr:'Yanlış',nl:'Fout'},{tr:'Büyük',nl:'Groot'},
+  {tr:'Küçük',nl:'Klein'},{tr:'Yeni',nl:'Nieuw'},{tr:'Eski',nl:'Oud'},
+  {tr:'Hızlı',nl:'Snel'},{tr:'Yavaş',nl:'Langzaam'},{tr:'Kolay',nl:'Makkelijk'},
+  {tr:'Zor',nl:'Moeilijk'},{tr:'Sıcak',nl:'Warm'},{tr:'Soğuk',nl:'Koud'},
+  {tr:'Uzun',nl:'Lang'},{tr:'Kısa',nl:'Kort'},{tr:'Yüksek',nl:'Hoog'},
+  {tr:'Alçak',nl:'Laag'},{tr:'Güçlü',nl:'Sterk'},{tr:'Zayıf',nl:'Zwak'},
+  {tr:'Temiz',nl:'Schoon'},{tr:'Kirli',nl:'Vuil'},{tr:'Sessiz',nl:'Stil'},
+  {tr:'Mutlu',nl:'Blij'},{tr:'Üzgün',nl:'Verdrietig'},{tr:'Sinirli',nl:'Boos'},
+  {tr:'Korkmuş',nl:'Bang'},{tr:'Yorgun',nl:'Moe'},{tr:'Enerjik',nl:'Energiek'},
+  {tr:'Aç',nl:'Hongerig'},{tr:'Tok',nl:'Verzadigd'},{tr:'Hasta',nl:'Ziek'},
+  {tr:'Sağlıklı',nl:'Gezond'},{tr:'Hazır',nl:'Klaar'},{tr:'Bekle',nl:'Wacht'},
+  {tr:'Gel',nl:'Kom'},{tr:'Git',nl:'Ga'},{tr:'Dur',nl:'Stop'},
+  {tr:'Bak',nl:'Kijk'},{tr:'Dinle',nl:'Luister'},{tr:'Konuş',nl:'Praat'},
+  {tr:'Yardım et',nl:'Help'},{tr:'Tekrar',nl:'Opnieuw'},{tr:'Daha yavaş',nl:'Langzamer'},
+  {tr:'Devam et',nl:'Ga door'},{tr:'Başla',nl:'Begin'},{tr:'Bitir',nl:'Klaar maken'},
+  {tr:'Kapat',nl:'Sluit'},{tr:'Ver',nl:'Geef'},{tr:'Al',nl:'Neem'},
+  {tr:'Sat',nl:'Verkoop'},{tr:'Öde',nl:'Betaal'},{tr:'Seç',nl:'Kies'},
+  {tr:'Sorun yok',nl:'Geen probleem'},{tr:'Tabii ki',nl:'Natuurlijk'},{tr:'Kesinlikle',nl:'Zeker'},
+  {tr:'Harika',nl:'Geweldig'},{tr:'Mükemmel',nl:'Perfect'},{tr:'Süper',nl:'Super'},
+  {tr:'Berbat',nl:'Vreselijk'},{tr:'Şanslı',nl:'Fortuinlijk'},{tr:'Umut',nl:'Hoop'},
+  {tr:'Sabır',nl:'Geduld'},{tr:'Cesur',nl:'Dapper'},{tr:'Akıllı',nl:'Slim'},
+  {tr:'Komik',nl:'Grappig'},{tr:'Ciddi',nl:'Serieus'},{tr:'Nazik',nl:'Vriendelijk'},
+  {tr:'Kaba',nl:'Onbeleefd'},{tr:'Dürüst',nl:'Eerlijk'},{tr:'Gerçek',nl:'Waarheid'},
+  {tr:'Önemli',nl:'Belangrijk'},{tr:'Gerekli',nl:'Noodzakelijk'},{tr:'Yasak',nl:'Verboden'},
+  {tr:'Ücretsiz',nl:'Gratis'},{tr:'Pahalı',nl:'Duur'},{tr:'Ucuz',nl:'Goedkoop'},
+  {tr:'Fiyat',nl:'Prijs'},{tr:'İndirim',nl:'Korting'},{tr:'Hediye',nl:'Cadeau'},
+  {tr:'Tebrikler',nl:'Gefeliciteerd'},{tr:'İyi şanslar',nl:'Veel succes'},{tr:'Geçmiş olsun',nl:'Beterschap'},
+  {tr:'Güle güle',nl:'Tot ziens'},{tr:'Yarın görüşürüz',nl:'Tot morgen'},{tr:'İyi tatiller',nl:'Fijne vakantie'},
+  {tr:'İyi yolculuklar',nl:'Goede reis'},{tr:'Katılıyorum',nl:'Ik ben het eens'},{tr:'Katılmıyorum',nl:'Ik ben het oneens'},
+  {tr:'İlginç',nl:'Interessant'},{tr:'Sıkıcı',nl:'Saai'},{tr:'Şaşırtıcı',nl:'Verrassend'},
+  {tr:'Garip',nl:'Raar'},{tr:'Normal',nl:'Normaal'},{tr:'Acil',nl:'Dringend'},
+  {tr:'Yardım!',nl:'Help!'},{tr:'Polis',nl:'Politie'},{tr:'Hastane',nl:'Ziekenhuis'},
+  {tr:'Yakın',nl:'Dichtbij'},{tr:'Uzak',nl:'Ver weg'},{tr:'Sola',nl:'Links'},
+  {tr:'Sağa',nl:'Rechts'},{tr:'Düz git',nl:'Rechtdoor'},{tr:'Geri',nl:'Terug'},
+  {tr:'İleri',nl:'Vooruit'},{tr:'Yukarı',nl:'Omhoog'},{tr:'Aşağı',nl:'Omlaag'},
+  {tr:'Sabah',nl:'Ochtend'},{tr:'Öğlen',nl:'Middag'},{tr:'Akşam',nl:'Avond'},
+  {tr:'Gece',nl:'Nacht'},{tr:'Bugün',nl:'Vandaag'},{tr:'Dün',nl:'Gisteren'},
+  {tr:'Yarın',nl:'Morgen'},{tr:'Hemen',nl:'Meteen'},{tr:'Sık sık',nl:'Vaak'},
+  {tr:'Bazen',nl:'Soms'},{tr:'Her zaman',nl:'Altijd'},{tr:'Hiçbir zaman',nl:'Nooit'},
+  {tr:'Sadece',nl:'Alleen maar'},{tr:'Ve',nl:'En'},{tr:'Ama',nl:'Maar'},
+  {tr:'Çünkü',nl:'Omdat'},{tr:'Eğer',nl:'Als'},{tr:'İçin',nl:'Voor'},
+  {tr:'İle',nl:'Met'},{tr:'Olmadan',nl:'Zonder'},{tr:'Hakkında',nl:'Over'},
+  {tr:'Aslında',nl:'Eigenlijk'},{tr:'Özellikle',nl:'Vooral'},{tr:'Genellikle',nl:'Gewoonlijk'},
+  {tr:'Neyse',nl:'Hoe dan ook'},{tr:'Galiba',nl:'Waarschijnlijk'},{tr:'Sanırım',nl:'Ik denk dat'},
+  {tr:'Eminim',nl:'Ik weet zeker'},{tr:'Fark ettim',nl:'Ik merkte op'},{tr:'Hatırladım',nl:'Ik herinner me'},
+  {tr:'Unuttum',nl:'Ik ben vergeten'},{tr:'Acaba',nl:'Zou het...'},{tr:'Maalesef',nl:'Helaas'},
+  {tr:'Neyse ki',nl:'Gelukkig'},{tr:'Tabii',nl:'Uiteraard'},{tr:'Yani',nl:'Dat wil zeggen'},
+  {tr:'Sanki',nl:'Alsof'},{tr:'Gibi',nl:'Zoals'},{tr:'Kadar',nl:'Tot/Zo...als'},
+  {tr:'Rağmen',nl:'Hoewel'},{tr:'Hem...hem de',nl:'Zowel...als'},{tr:'Ya...ya da',nl:'Of...of'}
+],
+getallen:[
+  {tr:'Sıfır',nl:'Nul'},{tr:'Bir',nl:'Één'},{tr:'İki',nl:'Twee'},{tr:'Üç',nl:'Drie'},
+  {tr:'Dört',nl:'Vier'},{tr:'Beş',nl:'Vijf'},{tr:'Altı',nl:'Zes'},{tr:'Yedi',nl:'Zeven'},
+  {tr:'Sekiz',nl:'Acht'},{tr:'Dokuz',nl:'Negen'},{tr:'On',nl:'Tien'},{tr:'On bir',nl:'Elf'},
+  {tr:'On iki',nl:'Twaalf'},{tr:'On üç',nl:'Dertien'},{tr:'On dört',nl:'Veertien'},
+  {tr:'On beş',nl:'Vijftien'},{tr:'On altı',nl:'Zestien'},{tr:'On yedi',nl:'Zeventien'},
+  {tr:'On sekiz',nl:'Achttien'},{tr:'On dokuz',nl:'Negentien'},{tr:'Yirmi',nl:'Twintig'},
+  {tr:'Otuz',nl:'Dertig'},{tr:'Kırk',nl:'Veertig'},{tr:'Elli',nl:'Vijftig'},
+  {tr:'Altmış',nl:'Zestig'},{tr:'Yetmiş',nl:'Zeventig'},{tr:'Seksen',nl:'Tachtig'},
+  {tr:'Doksan',nl:'Negentig'},{tr:'Yüz',nl:'Honderd'},{tr:'İki yüz',nl:'Tweehonderd'},
+  {tr:'Bin',nl:'Duizend'},{tr:'On bin',nl:'Tienduizend'},{tr:'Bir milyon',nl:'Één miljoen'},
+  {tr:'Yarım',nl:'Half'},{tr:'Çeyrek',nl:'Kwart'},{tr:'Üçte bir',nl:'Eenderde'},
+  {tr:'İlk',nl:'Eerste'},{tr:'İkinci',nl:'Tweede'},{tr:'Üçüncü',nl:'Derde'},
+  {tr:'Dördüncü',nl:'Vierde'},{tr:'Beşinci',nl:'Vijfde'},{tr:'Altıncı',nl:'Zesde'},
+  {tr:'Yedinci',nl:'Zevende'},{tr:'Sekizinci',nl:'Achtste'},{tr:'Dokuzuncu',nl:'Negende'},
+  {tr:'Onuncu',nl:'Tiende'},{tr:'Son',nl:'Laatste'},{tr:'Tek',nl:'Oneven'},
+  {tr:'Çift',nl:'Even'},{tr:'Artı',nl:'Plus'},{tr:'Eksi',nl:'Min'},
+  {tr:'Çarpı',nl:'Maal'},{tr:'Bölü',nl:'Gedeeld door'},{tr:'Eşit',nl:'Gelijk aan'},
+  {tr:'Toplam',nl:'Totaal'},{tr:'Yaklaşık',nl:'Ongeveer'},{tr:'Tam olarak',nl:'Precies'},
+  {tr:'En az',nl:'Minimaal'},{tr:'En fazla',nl:'Maximaal'},{tr:'Ortalama',nl:'Gemiddeld'},
+  {tr:'Sayı',nl:'Getal'},{tr:'Rakam',nl:'Cijfer'},{tr:'Hesap',nl:'Berekening'},
+  {tr:'Tane',nl:'Stuk'},{tr:'Birkaç',nl:'Een paar'},{tr:'Pek çok',nl:'Vele'},
+  {tr:'Bir buçuk',nl:'Anderhalf'},{tr:'İki buçuk',nl:'Tweeënhalf'},{tr:'Negatif',nl:'Negatief'},
+  {tr:'Pozitif',nl:'Positief'},{tr:'Kare',nl:'Kwadraat'},{tr:'Karekök',nl:'Vierkantswortel'},
+  {tr:'Sonsuz',nl:'Oneindig'},{tr:'Yüzde',nl:'Procent'},{tr:'Oran',nl:'Verhouding'},
+  {tr:'İstatistik',nl:'Statistiek'},{tr:'Grafik',nl:'Grafiek'},{tr:'Tablo',nl:'Tabel'},
+  {tr:'Ölçü',nl:'Maat'},{tr:'Ağırlık',nl:'Gewicht'},{tr:'Uzunluk',nl:'Lengte'},
+  {tr:'Genişlik',nl:'Breedte'},{tr:'Yükseklik',nl:'Hoogte'},{tr:'Alan',nl:'Oppervlak'},
+  {tr:'Hacim',nl:'Volume'},{tr:'Açı',nl:'Hoek'},{tr:'Derece',nl:'Graad'},
+  {tr:'Kilometre',nl:'Kilometer'},{tr:'Metre',nl:'Meter'},{tr:'Santimetre',nl:'Centimeter'},
+  {tr:'Kilogram',nl:'Kilogram'},{tr:'Gram',nl:'Gram'},{tr:'Litre',nl:'Liter'},
+  {tr:'Saniye',nl:'Seconde'},{tr:'Dakika',nl:'Minuut'},{tr:'Saat',nl:'Uur'},
+  {tr:'Gün',nl:'Dag'},{tr:'Hafta',nl:'Week'},{tr:'Ay',nl:'Maand'},
+  {tr:'Yıl',nl:'Jaar'},{tr:'Yüz yıl',nl:'Eeuw'},{tr:'Sıcaklık',nl:'Temperatuur'},
+  {tr:'Celsius',nl:'Celsius'},{tr:'Hız',nl:'Snelheid'},{tr:'Mesafe',nl:'Afstand'},
+  {tr:'Nüfus',nl:'Bevolking'},{tr:'Üçgen',nl:'Driehoek'},{tr:'Dörtgen',nl:'Vierhoek'},
+  {tr:'Daire',nl:'Cirkel'},{tr:'Elips',nl:'Ellips'},{tr:'Silindir',nl:'Cilinder'},
+  {tr:'Küre',nl:'Bol'},{tr:'Dikdörtgen',nl:'Rechthoek'},{tr:'Çevre',nl:'Omtrek'},
+  {tr:'Koordinat',nl:'Coördinaat'},{tr:'Veri',nl:'Data'},{tr:'Olasılık',nl:'Kans'},
+  {tr:'Denklem',nl:'Vergelijking'},{tr:'Değişken',nl:'Variabele'},{tr:'Fonksiyon',nl:'Functie'},
+  {tr:'Logaritma',nl:'Logaritme'},{tr:'Matris',nl:'Matrix'},{tr:'Vektör',nl:'Vector'},
+  {tr:'Küme',nl:'Verzameling'},{tr:'Formül',nl:'Formule'},{tr:'Kural',nl:'Regel'},
+  {tr:'Adım',nl:'Stap'},{tr:'Sonuç',nl:'Resultaat'},{tr:'Hata',nl:'Fout'},
+  {tr:'Kontrol',nl:'Controle'},{tr:'İspat',nl:'Bewijs'},{tr:'Teorem',nl:'Stelling'},
+  {tr:'Yirmi bir',nl:'Eenentwintig'},{tr:'Yirmi beş',nl:'Vijfentwintig'},{tr:'Otuz beş',nl:'Vijfendertig'},
+  {tr:'Kırk beş',nl:'Vijfenveertig'},{tr:'Elli beş',nl:'Vijfenvijftig'},{tr:'Yüz bin',nl:'Honderdduizend'},
+  {tr:'İki milyon',nl:'Twee miljoen'},{tr:'Düzine',nl:'Dozijn'},{tr:'Çift (paar)',nl:'Paar'},
+  {tr:'Onluk',nl:'Tiental'},{tr:'Yüzlük',nl:'Honderdtal'},{tr:'Binlik',nl:'Duizendtal'},
+  {tr:'Basamak',nl:'Decimaal'},{tr:'Ondalık',nl:'Decimaal getal'},{tr:'Kesir',nl:'Breuk'},
+  {tr:'Payda',nl:'Noemer'},{tr:'Pay',nl:'Teller'},{tr:'Bütün',nl:'Geheel getal'},
+  {tr:'Çift haneli',nl:'Tweecijferig'},{tr:'Üç haneli',nl:'Driecijferig'},{tr:'Dört haneli',nl:'Viercijferig'},
+  {tr:'Negatif sayı',nl:'Negatief getal'},{tr:'Pozitif sayı',nl:'Positief getal'},{tr:'Rasyonel',nl:'Rationeel'},
+  {tr:'İrrasyonel',nl:'Irrationeel'},{tr:'Gerçel sayı',nl:'Reëel getal'},{tr:'Asal sayı',nl:'Priemgetal'},
+  {tr:'Bölünebilir',nl:'Deelbaar'},{tr:'Katı',nl:'Veelvoud'},{tr:'Bölen',nl:'Deler'}
+],
+eten:[
+  {tr:'Su',nl:'Water'},{tr:'Ekmek',nl:'Brood'},{tr:'Çay',nl:'Thee'},{tr:'Kahve',nl:'Koffie'},
+  {tr:'Süt',nl:'Melk'},{tr:'Yumurta',nl:'Ei'},{tr:'Peynir',nl:'Kaas'},{tr:'Tereyağı',nl:'Boter'},
+  {tr:'Bal',nl:'Honing'},{tr:'Reçel',nl:'Jam'},{tr:'Et',nl:'Vlees'},{tr:'Tavuk',nl:'Kip'},
+  {tr:'Balık',nl:'Vis'},{tr:'Domates',nl:'Tomaat'},{tr:'Salatalık',nl:'Komkommer'},
+  {tr:'Soğan',nl:'Ui'},{tr:'Sarımsak',nl:'Knoflook'},{tr:'Patates',nl:'Aardappel'},
+  {tr:'Havuç',nl:'Wortel'},{tr:'Ispanak',nl:'Spinazie'},{tr:'Marul',nl:'Sla'},
+  {tr:'Biber',nl:'Paprika'},{tr:'Patlıcan',nl:'Aubergine'},{tr:'Kabak',nl:'Courgette'},
+  {tr:'Mantar',nl:'Champignon'},{tr:'Maydanoz',nl:'Peterselie'},{tr:'Nane',nl:'Munt'},
+  {tr:'Elma',nl:'Appel'},{tr:'Armut',nl:'Peer'},{tr:'Muz',nl:'Banaan'},
+  {tr:'Portakal',nl:'Sinaasappel'},{tr:'Limon',nl:'Citroen'},{tr:'Çilek',nl:'Aardbei'},
+  {tr:'Üzüm',nl:'Druif'},{tr:'Karpuz',nl:'Watermeloen'},{tr:'Kavun',nl:'Meloen'},
+  {tr:'Şeftali',nl:'Perzik'},{tr:'Kiraz',nl:'Kers'},{tr:'Kayısı',nl:'Abrikoos'},
+  {tr:'Erik',nl:'Pruim'},{tr:'İncir',nl:'Vijg'},{tr:'Nar',nl:'Granaatappel'},
+  {tr:'Kivi',nl:'Kiwi'},{tr:'Ananas',nl:'Ananas'},{tr:'Mango',nl:'Mango'},
+  {tr:'Ceviz',nl:'Walnoot'},{tr:'Fındık',nl:'Hazelnoot'},{tr:'Badem',nl:'Amandel'},
+  {tr:'Fıstık',nl:'Pinda'},{tr:'Antep fıstığı',nl:'Pistache'},{tr:'Pirinç',nl:'Rijst'},
+  {tr:'Makarna',nl:'Pasta'},{tr:'Un',nl:'Meel'},{tr:'Şeker',nl:'Suiker'},
+  {tr:'Tuz',nl:'Zout'},{tr:'Kimyon',nl:'Komijn'},{tr:'Tarçın',nl:'Kaneel'},
+  {tr:'Zencefil',nl:'Gember'},{tr:'Zeytinyağı',nl:'Olijfolie'},{tr:'Sirke',nl:'Azijn'},
+  {tr:'Salça',nl:'Tomatenpuree'},{tr:'Ketçap',nl:'Ketchup'},{tr:'Mayonez',nl:'Mayonaise'},
+  {tr:'Hardal',nl:'Mosterd'},{tr:'Sos',nl:'Saus'},{tr:'Çorba',nl:'Soep'},
+  {tr:'Salata',nl:'Salade'},{tr:'Pilav',nl:'Rijst (gekookt)'},{tr:'Kebap',nl:'Kebab'},
+  {tr:'Köfte',nl:'Gehaktbal'},{tr:'Döner',nl:'Döner'},{tr:'Lahmacun',nl:'Turks pizza'},
+  {tr:'Pide',nl:'Pide-brood'},{tr:'Börek',nl:'Börek'},{tr:'Dolma',nl:'Gevulde groente'},
+  {tr:'Humus',nl:'Hummus'},{tr:'Cacık',nl:'Tzatziki'},{tr:'Ayran',nl:'Yoghurtdrank'},
+  {tr:'Şarap',nl:'Wijn'},{tr:'Bira',nl:'Bier'},{tr:'Meyve suyu',nl:'Vruchtensap'},
+  {tr:'Limonata',nl:'Limonade'},{tr:'Gazlı su',nl:'Bruisend water'},{tr:'Sütlaç',nl:'Rijstpudding'},
+  {tr:'Baklava',nl:'Baklava'},{tr:'Lokum',nl:'Turks fruit'},{tr:'Dondurma',nl:'Roomijs'},
+  {tr:'Pasta',nl:'Taart'},{tr:'Kek',nl:'Cake'},{tr:'Kurabiye',nl:'Koekje'},
+  {tr:'Çikolata',nl:'Chocolade'},{tr:'Kahvaltı',nl:'Ontbijt'},{tr:'Öğle yemeği',nl:'Lunch'},
+  {tr:'Akşam yemeği',nl:'Avondeten'},{tr:'Tatlı',nl:'Dessert'},{tr:'Ana yemek',nl:'Hoofdgerecht'},
+  {tr:'Tabak',nl:'Bord'},{tr:'Kase',nl:'Kom'},{tr:'Kaşık',nl:'Lepel'},
+  {tr:'Çatal',nl:'Vork'},{tr:'Bıçak',nl:'Mes'},{tr:'Bardak',nl:'Glas'},
+  {tr:'Fincan',nl:'Kopje'},{tr:'Şişe',nl:'Fles'},{tr:'Tencere',nl:'Pan'},
+  {tr:'Tava',nl:'Koekenpan'},{tr:'Fırın',nl:'Oven'},{tr:'Buzdolabı',nl:'Koelkast'},
+  {tr:'Kızartmak',nl:'Bakken'},{tr:'Pişirmek',nl:'Koken'},{tr:'Haşlamak',nl:'Koken in water'},
+  {tr:'Izgara',nl:'Grillen'},{tr:'Karıştırmak',nl:'Mengen'},{tr:'Kesmek',nl:'Snijden'},
+  {tr:'Doğramak',nl:'Hakken'},{tr:'Soylamak',nl:'Schillen'},{tr:'Servis etmek',nl:'Serveren'},
+  {tr:'Tarif',nl:'Recept'},{tr:'Malzeme',nl:'Ingrediënt'},{tr:'Porsiyon',nl:'Portie'},
+  {tr:'Vejetaryen',nl:'Vegetarisch'},{tr:'Vegan',nl:'Veganistisch'},{tr:'Glutensiz',nl:'Glutenvrij'},
+  {tr:'Organik',nl:'Biologisch'},{tr:'Taze',nl:'Vers'},{tr:'Dondurulmuş',nl:'Diepgevroren'},
+  {tr:'Lezzetli',nl:'Lekker'},{tr:'Tatsız',nl:'Smakeloos'},{tr:'Tatlı (tat)',nl:'Zoet'},
+  {tr:'Ekşi',nl:'Zuur'},{tr:'Acı',nl:'Bitter'},{tr:'Tuzlu',nl:'Zout (smaak)'},
+  {tr:'Baharatlı',nl:'Pittig'},{tr:'Kremsi',nl:'Romig'},{tr:'Çıtır',nl:'Krokant'},
+  {tr:'Sulu',nl:'Sappig'},{tr:'Yağlı',nl:'Vettig'},{tr:'Pişmiş',nl:'Gaar'},
+  {tr:'Çiğ',nl:'Rauw'},{tr:'Haşlanmış',nl:'Gekookt'},{tr:'Kızarmış',nl:'Geroosterd'},
+  {tr:'Tam yağlı',nl:'Volle vet'},{tr:'Laktozsuz',nl:'Lactosevrij'},{tr:'Hazır yemek',nl:'Kant-en-klaar'}
+],
+familie:[
+  {tr:'Anne',nl:'Moeder'},{tr:'Baba',nl:'Vader'},{tr:'Kardeş',nl:'Broer/Zus'},{tr:'Çocuk',nl:'Kind'},
+  {tr:'Aile',nl:'Familie'},{tr:'Dede',nl:'Opa'},{tr:'Nine',nl:'Oma'},{tr:'Torun',nl:'Kleinkind'},
+  {tr:'Oğul',nl:'Zoon'},{tr:'Kız',nl:'Dochter'},{tr:'Abla',nl:'Grote zus'},{tr:'Ağabey',nl:'Grote broer'},
+  {tr:'Eş',nl:'Partner'},{tr:'Koca',nl:'Man'},{tr:'Karı',nl:'Vrouw'},{tr:'Nişanlı',nl:'Verloofde'},
+  {tr:'Sevgili',nl:'Vriend(in)'},{tr:'Bekar',nl:'Single'},{tr:'Evli',nl:'Getrouwd'},{tr:'Boşanmış',nl:'Gescheiden'},
+  {tr:'Amca',nl:'Oom (vaders broer)'},{tr:'Hala',nl:'Tante (vaders zus)'},{tr:'Dayı',nl:'Oom (moeders broer)'},
+  {tr:'Teyze',nl:'Tante (moeders zus)'},{tr:'Kuzen',nl:'Neef/Nicht'},{tr:'Yeğen',nl:'Neef/Nicht (kind)'},
+  {tr:'Kayınpeder',nl:'Schoonvader'},{tr:'Kayınvalide',nl:'Schoonmoeder'},{tr:'Gelin',nl:'Schoondochter'},
+  {tr:'Damat',nl:'Schoonzoon'},{tr:'Baldız',nl:'Schoonzus'},{tr:'Enişte',nl:'Zwager'},
+  {tr:'Akraba',nl:'Verwant'},{tr:'Soy',nl:'Afkomst'},{tr:'Soyağacı',nl:'Stamboom'},
+  {tr:'Nesil',nl:'Generatie'},{tr:'Atalar',nl:'Voorouders'},{tr:'İkiz',nl:'Tweeling'},
+  {tr:'Tek çocuk',nl:'Enig kind'},{tr:'İlk doğan',nl:'Eerstgeborene'},{tr:'Üvey baba',nl:'Stiefvader'},
+  {tr:'Üvey anne',nl:'Stiefmoeder'},{tr:'Üvey kardeş',nl:'Stiefbroer/zus'},{tr:'Evlat edinilmiş',nl:'Geadopteerd'},
+  {tr:'Doğum günü',nl:'Verjaardag'},{tr:'Yıldönümü',nl:'Jubileum'},{tr:'Nişan',nl:'Verloving'},
+  {tr:'Düğün',nl:'Bruiloft'},{tr:'Nikâh',nl:'Huwelijk'},{tr:'Boşanma',nl:'Scheiding'},
+  {tr:'Cenaze',nl:'Begrafenis'},{tr:'Yas',nl:'Rouw'},{tr:'Kutlama',nl:'Viering'},
+  {tr:'Bayram',nl:'Feestdag'},{tr:'Sünnet',nl:'Besnijdenis'},{tr:'Kına gecesi',nl:'Hennaavond'},
+  {tr:'Arkadaş',nl:'Vriend'},{tr:'Yakın arkadaş',nl:'Goede vriend'},{tr:'İş arkadaşı',nl:'Collega'},
+  {tr:'Komşu',nl:'Buurman'},{tr:'Misafir',nl:'Gast'},{tr:'Ev sahibi',nl:'Gastheer'},
+  {tr:'Bebek',nl:'Baby'},{tr:'Küçük çocuk',nl:'Peuter'},{tr:'Ergen',nl:'Tiener'},
+  {tr:'Genç',nl:'Jongere'},{tr:'Yetişkin',nl:'Volwassene'},{tr:'Yaşlı',nl:'Bejaarde'},
+  {tr:'Emekli',nl:'Gepensioneerde'},{tr:'Hamile',nl:'Zwanger'},{tr:'Yeni doğan',nl:'Pasgeborene'},
+  {tr:'Bebek arabası',nl:'Kinderwagen'},{tr:'Oyuncak',nl:'Speelgoed'},{tr:'Büyümek',nl:'Opgroeien'},
+  {tr:'Evlenmek',nl:'Trouwen'},{tr:'Doğmak',nl:'Geboren worden'},{tr:'Ölmek',nl:'Overlijden'},
+  {tr:'Sevmek',nl:'Liefhebben'},{tr:'Özlemek',nl:'Missen'},{tr:'Korumak',nl:'Beschermen'},
+  {tr:'Paylaşmak',nl:'Delen'},{tr:'Birlikte',nl:'Samen'},{tr:'Sorumluluk',nl:'Verantwoordelijkheid'},
+  {tr:'Sevgi',nl:'Liefde'},{tr:'Saygı',nl:'Respect'},{tr:'Güven',nl:'Vertrouwen'},
+  {tr:'Sadakat',nl:'Loyaliteit'},{tr:'Aile değerleri',nl:'Familiewaarden'},{tr:'Gelenek',nl:'Traditie'},
+  {tr:'Büyükanne',nl:'Oma'},{tr:'Büyükbaba',nl:'Opa'},{tr:'Erkek torun',nl:'Kleinzoon'},
+  {tr:'Kız torun',nl:'Kleindochter'},{tr:'Aile üyesi',nl:'Familielid'},{tr:'Uzak akraba',nl:'Verre verwant'},
+  {tr:'Kız kardeş',nl:'Zus'},{tr:'Erkek kardeş',nl:'Broer'},{tr:'Kayınbirader',nl:'Zwager (man)'},
+  {tr:'Görümce',nl:'Schoonzus (man)'},{tr:'Ortanca',nl:'Middelste kind'},{tr:'Son doğan',nl:'Jongste kind'},
+  {tr:'Piç',nl:'Buitenechtelijk kind'},{tr:'Vasi',nl:'Voogd'},{tr:'Evlat',nl:'Geadopteerd kind'},
+  {tr:'Aile toplantısı',nl:'Familiebijeenkomst'},{tr:'Piknik',nl:'Picknick'},{tr:'Tatil',nl:'Vakantie'},
+  {tr:'Desteklemek',nl:'Ondersteunen'},{tr:'Affetmek',nl:'Vergeven'},{tr:'Uzlaşmak',nl:'Verzoenen'},
+  {tr:'Şımartmak',nl:'Verwennen'},{tr:'Övmek',nl:'Complimenteren'},{tr:'Azarlamak',nl:'Berispen'},
+  {tr:'Terbiye etmek',nl:'Opvoeden'},{tr:'Bakım',nl:'Zorg'},{tr:'Bağlılık',nl:'Gehechtheid'},
+  {tr:'Mahremiyet',nl:'Privacy'},{tr:'Görenek',nl:'Gewoontes'},{tr:'Büyükler',nl:'Ouderen (familie)'}
+],
+dagelijks:[
+  {tr:'Ev',nl:'Huis'},{tr:'Araba',nl:'Auto'},{tr:'Okul',nl:'School'},{tr:'İş',nl:'Werk'},
+  {tr:'Para',nl:'Geld'},{tr:'Kapı',nl:'Deur'},{tr:'Pencere',nl:'Raam'},{tr:'Masa',nl:'Tafel'},
+  {tr:'Sandalye',nl:'Stoel'},{tr:'Koltuk',nl:'Fauteuil'},{tr:'Kanepe',nl:'Bank'},{tr:'Yatak',nl:'Bed'},
+  {tr:'Yastık',nl:'Kussen'},{tr:'Battaniye',nl:'Deken'},{tr:'Dolap',nl:'Kast'},{tr:'Raf',nl:'Plank'},
+  {tr:'Mutfak',nl:'Keuken'},{tr:'Banyo',nl:'Badkamer'},{tr:'Tuvalet',nl:'Toilet'},{tr:'Salon',nl:'Woonkamer'},
+  {tr:'Yatak odası',nl:'Slaapkamer'},{tr:'Balkon',nl:'Balkon'},{tr:'Bahçe',nl:'Tuin'},{tr:'Garaj',nl:'Garage'},
+  {tr:'Anahtar',nl:'Sleutel'},{tr:'Kilit',nl:'Slot'},{tr:'Zil',nl:'Bel'},{tr:'Posta kutusu',nl:'Brievenbus'},
+  {tr:'Ampul',nl:'Gloeilamp'},{tr:'Lamba',nl:'Lamp'},{tr:'Priz',nl:'Stopcontact'},{tr:'Şarj cihazı',nl:'Oplader'},
+  {tr:'Telefon',nl:'Telefoon'},{tr:'Bilgisayar',nl:'Computer'},{tr:'Tablet',nl:'Tablet'},{tr:'Televizyon',nl:'Televisie'},
+  {tr:'Uzaktan kumanda',nl:'Afstandsbediening'},{tr:'Radyo',nl:'Radio'},{tr:'Kulaklık',nl:'Koptelefoon'},
+  {tr:'Hoparlör',nl:'Luidspreker'},{tr:'Fotoğraf makinesi',nl:'Camera'},{tr:'Printer',nl:'Printer'},
+  {tr:'Çamaşır makinesi',nl:'Wasmachine'},{tr:'Bulaşık makinesi',nl:'Vaatwasser'},{tr:'Süpürge',nl:'Stofzuiger'},
+  {tr:'Deterjan',nl:'Wasmiddel'},{tr:'Sabun',nl:'Zeep'},{tr:'Şampuan',nl:'Shampoo'},
+  {tr:'Diş macunu',nl:'Tandpasta'},{tr:'Diş fırçası',nl:'Tandenborstel'},{tr:'Havlu',nl:'Handdoek'},
+  {tr:'Tuvalet kâğıdı',nl:'Toiletpapier'},{tr:'Ayna',nl:'Spiegel'},{tr:'Tarak',nl:'Kam'},
+  {tr:'Parfüm',nl:'Parfum'},{tr:'Deodorant',nl:'Deodorant'},{tr:'Krem',nl:'Crème'},
+  {tr:'Makyaj',nl:'Make-up'},{tr:'Gözlük',nl:'Bril'},{tr:'Saat (kol)',nl:'Horloge'},
+  {tr:'Cüzdan',nl:'Portemonnee'},{tr:'Çanta',nl:'Tas'},{tr:'Sırt çantası',nl:'Rugzak'},
+  {tr:'Şemsiye',nl:'Paraplu'},{tr:'Eldiven',nl:'Handschoenen'},{tr:'Atkı',nl:'Sjaal'},
+  {tr:'Bere',nl:'Muts'},{tr:'Güneş gözlüğü',nl:'Zonnebril'},{tr:'Kemer',nl:'Riem'},
+  {tr:'Cep telefonu',nl:'Mobiele telefoon'},{tr:'Şifre',nl:'Wachtwoord'},{tr:'Uygulama',nl:'App'},
+  {tr:'İnternet',nl:'Internet'},{tr:'Wi-Fi',nl:'Wifi'},{tr:'E-posta',nl:'E-mail'},
+  {tr:'Mesaj',nl:'Bericht'},{tr:'Sosyal medya',nl:'Sociale media'},{tr:'Fotoğraf',nl:'Foto'},
+  {tr:'Müzik',nl:'Muziek'},{tr:'Film',nl:'Film'},{tr:'Dizi',nl:'Serie'},
+  {tr:'Oyun',nl:'Spel'},{tr:'Kitap',nl:'Boek'},{tr:'Dergi',nl:'Tijdschrift'},
+  {tr:'Gazete',nl:'Krant'},{tr:'Haber',nl:'Nieuws'},{tr:'Hava durumu',nl:'Weer'},
+  {tr:'Takvim',nl:'Kalender'},{tr:'Ajanda',nl:'Agenda'},{tr:'Alarm',nl:'Alarm'},
+  {tr:'Tatil',nl:'Vakantie'},{tr:'Hafta sonu',nl:'Weekend'},{tr:'İzin',nl:'Verlof'},
+  {tr:'Maaş',nl:'Salaris'},{tr:'Fatura',nl:'Rekening'},{tr:'Kira',nl:'Huur'},
+  {tr:'Kredi kartı',nl:'Creditcard'},{tr:'Banka',nl:'Bank'},{tr:'ATM',nl:'Geldautomaat'},
+  {tr:'Tasarruf',nl:'Spaargeld'},{tr:'Harcama',nl:'Uitgave'},{tr:'Bütçe',nl:'Budget'},
+  {tr:'Vergi',nl:'Belasting'},{tr:'Sigorta',nl:'Verzekering'},{tr:'Alışveriş',nl:'Winkelen'},
+  {tr:'Market',nl:'Supermarkt'},{tr:'Manav',nl:'Groenteman'},{tr:'Kasap',nl:'Slager'},
+  {tr:'Fırın',nl:'Bakker'},{tr:'Eczane',nl:'Apotheek'},{tr:'Kuaför',nl:'Kapper'},
+  {tr:'Postane',nl:'Postkantoor'},{tr:'Belediye',nl:'Gemeente'},{tr:'Adliye',nl:'Rechtbank'},
+  {tr:'Karakol',nl:'Politiebureau'},{tr:'İtfaiye',nl:'Brandweer'},{tr:'Park',nl:'Park'},
+  {tr:'Meydan',nl:'Plein'},{tr:'Cadde',nl:'Laan'},{tr:'Sokak',nl:'Straat'},
+  {tr:'Köprü',nl:'Brug'},{tr:'Tünel',nl:'Tunnel'},{tr:'Kavşak',nl:'Kruispunt'},
+  {tr:'Trafik ışığı',nl:'Verkeerslicht'},{tr:'Yaya geçidi',nl:'Zebrapad'},{tr:'Kaldırım',nl:'Stoep'},
+  {tr:'Bisiklet yolu',nl:'Fietspad'},{tr:'Otobüs',nl:'Bus'},{tr:'Tren',nl:'Trein'},
+  {tr:'Metro',nl:'Metro'},{tr:'Uçak',nl:'Vliegtuig'},{tr:'Gemi',nl:'Schip'},
+  {tr:'Bisiklet',nl:'Fiets'},{tr:'Motosiklet',nl:'Motor'},{tr:'Taksi',nl:'Taxi'},
+  {tr:'Havalimanı',nl:'Luchthaven'},{tr:'Tren istasyonu',nl:'Treinstation'},{tr:'Otogar',nl:'Busstation'},
+  {tr:'Bilet',nl:'Kaartje'},{tr:'Pasaport',nl:'Paspoort'},{tr:'Vize',nl:'Visum'},
+  {tr:'Otel',nl:'Hotel'},{tr:'Rezervasyon',nl:'Reservering'},{tr:'Check-in',nl:'Inchecken'}
+],
+werkwoorden:[
+  {tr:'Olmak',nl:'Zijn'},{tr:'Yapmak',nl:'Doen'},{tr:'Gitmek',nl:'Gaan'},
+  {tr:'Gelmek',nl:'Komen'},{tr:'Görmek',nl:'Zien'},{tr:'Yemek',nl:'Eten'},
+  {tr:'İçmek',nl:'Drinken'},{tr:'Uyumak',nl:'Slapen'},{tr:'Okumak',nl:'Lezen'},
+  {tr:'Yazmak',nl:'Schrijven'},{tr:'Konuşmak',nl:'Praten'},{tr:'Dinlemek',nl:'Luisteren'},
+  {tr:'Düşünmek',nl:'Denken'},{tr:'Anlamak',nl:'Begrijpen'},{tr:'Öğrenmek',nl:'Leren'},
+  {tr:'Öğretmek',nl:'Onderwijzen'},{tr:'Çalışmak',nl:'Werken'},{tr:'Oynamak',nl:'Spelen'},
+  {tr:'Koşmak',nl:'Rennen'},{tr:'Yürümek',nl:'Lopen'},{tr:'Oturmak',nl:'Zitten'},
+  {tr:'Kalkmak',nl:'Opstaan'},{tr:'Durmak',nl:'Stoppen'},{tr:'Beklemek',nl:'Wachten'},
+  {tr:'Aramak',nl:'Zoeken'},{tr:'Bulmak',nl:'Vinden'},{tr:'Almak',nl:'Nemen'},
+  {tr:'Vermek',nl:'Geven'},{tr:'Tutmak',nl:'Vasthouden'},{tr:'Bırakmak',nl:'Loslaten'},
+  {tr:'Açmak',nl:'Openen'},{tr:'Kapatmak',nl:'Sluiten'},{tr:'Başlamak',nl:'Beginnen'},
+  {tr:'Bitirmek',nl:'Beëindigen'},{tr:'Devam etmek',nl:'Doorgaan'},{tr:'Dönmek',nl:'Terugkeren'},
+  {tr:'Uçmak',nl:'Vliegen'},{tr:'Yüzmek',nl:'Zwemmen'},{tr:'Çizmek',nl:'Tekenen'},
+  {tr:'Boyamak',nl:'Schilderen'},{tr:'Şarkı söylemek',nl:'Zingen'},{tr:'Dans etmek',nl:'Dansen'},
+  {tr:'Fotoğraf çekmek',nl:'Fotograferen'},{tr:'Pişirmek',nl:'Koken'},{tr:'Temizlemek',nl:'Schoonmaken'},
+  {tr:'Tamir etmek',nl:'Repareren'},{tr:'İnşa etmek',nl:'Bouwen'},{tr:'Satmak',nl:'Verkopen'},
+  {tr:'Satın almak',nl:'Kopen'},{tr:'Kiralamak',nl:'Huren'},{tr:'Ödemek',nl:'Betalen'},
+  {tr:'Kazanmak',nl:'Verdienen'},{tr:'Kaybetmek',nl:'Verliezen'},{tr:'Seçmek',nl:'Kiezen'},
+  {tr:'Değiştirmek',nl:'Veranderen'},{tr:'Kontrol etmek',nl:'Controleren'},{tr:'Onaylamak',nl:'Goedkeuren'},
+  {tr:'Reddetmek',nl:'Weigeren'},{tr:'Kabul etmek',nl:'Accepteren'},{tr:'Davet etmek',nl:'Uitnodigen'},
+  {tr:'Ziyaret etmek',nl:'Bezoeken'},{tr:'Karşılamak',nl:'Ontvangen'},{tr:'Yardım etmek',nl:'Helpen'},
+  {tr:'Desteklemek',nl:'Ondersteunen'},{tr:'Korumak',nl:'Beschermen'},{tr:'Kurtarmak',nl:'Redden'},
+  {tr:'Uyarmak',nl:'Waarschuwen'},{tr:'Hatırlatmak',nl:'Herinneren'},{tr:'Unutmak',nl:'Vergeten'},
+  {tr:'Planlamak',nl:'Plannen'},{tr:'Organize etmek',nl:'Organiseren'},{tr:'Hazırlamak',nl:'Voorbereiden'},
+  {tr:'Teslim etmek',nl:'Afleveren'},{tr:'Göndermek',nl:'Sturen'},{tr:'Paylaşmak',nl:'Delen'},
+  {tr:'Birleştirmek',nl:'Samenvoegen'},{tr:'Ayırmak',nl:'Scheiden'},{tr:'Sıralamak',nl:'Sorteren'},
+  {tr:'Saymak',nl:'Tellen'},{tr:'Hesaplamak',nl:'Berekenen'},{tr:'Ölçmek',nl:'Meten'},
+  {tr:'Denemek',nl:'Proberen'},{tr:'Başarmak',nl:'Slagen'},{tr:'Vazgeçmek',nl:'Opgeven'},
+  {tr:'Rekabet etmek',nl:'Concurreren'},{tr:'İşbirliği yapmak',nl:'Samenwerken'},{tr:'Anlaşmak',nl:'Akkoord gaan'},
+  {tr:'Tartışmak',nl:'Discussiëren'},{tr:'Şikâyet etmek',nl:'Klagen'},{tr:'Övmek',nl:'Prijzen'},
+  {tr:'Eleştirmek',nl:'Bekritiseren'},{tr:'Affetmek',nl:'Vergeven'},{tr:'Özür dilemek',nl:'Verontschuldigen'},
+  {tr:'Teşekkür etmek',nl:'Bedanken'},{tr:'Kutlamak',nl:'Vieren'},{tr:'Ağlamak',nl:'Huilen'},
+  {tr:'Gülmek',nl:'Lachen'},{tr:'Şaşırmak',nl:'Verbazen'},{tr:'Korkmak',nl:'Bang zijn'},
+  {tr:'Sevinmek',nl:'Blij zijn'},{tr:'Üzülmek',nl:'Verdrietig zijn'},{tr:'Sinirlenmek',nl:'Boos worden'},
+  {tr:'Sakinleşmek',nl:'Kalmeren'},{tr:'Rahatlamak',nl:'Ontspannen'},{tr:'Yorulmak',nl:'Moe worden'},
+  {tr:'Dinlenmek',nl:'Uitrusten'},{tr:'Nefes almak',nl:'Ademen'},{tr:'Hapşırmak',nl:'Niezen'},
+  {tr:'Öksürmek',nl:'Hoesten'},{tr:'İyileşmek',nl:'Beter worden'},{tr:'Tedavi etmek',nl:'Behandelen'},
+  {tr:'Yolculuk etmek',nl:'Reizen'},{tr:'Gezmek',nl:'Rondkijken'},{tr:'Tatile gitmek',nl:'Op vakantie gaan'},
+  {tr:'Kamp yapmak',nl:'Kamperen'},{tr:'Balık tutmak',nl:'Vissen'},{tr:'Bahçeyle uğraşmak',nl:'Tuinieren'},
+  {tr:'Alışveriş yapmak',nl:'Winkelen'},{tr:'Başvuru yapmak',nl:'Aanvragen'},{tr:'Kayıt olmak',nl:'Inschrijven'},
+  {tr:'Mezun olmak',nl:'Afstuderen'},{tr:'Emekli olmak',nl:'Pensioneren'},{tr:'Evlenmek',nl:'Trouwen'},
+  {tr:'Büyümek',nl:'Opgroeien'},{tr:'Değişmek',nl:'Veranderen'},{tr:'Gelişmek',nl:'Ontwikkelen'},
+  {tr:'Fark etmek',nl:'Opmerken'},{tr:'Gözlemlemek',nl:'Observeren'},{tr:'Analiz etmek',nl:'Analyseren'},
+  {tr:'Araştırmak',nl:'Onderzoeken'},{tr:'Keşfetmek',nl:'Ontdekken'},{tr:'Icat etmek',nl:'Uitvinden'},
+  {tr:'Okuduğunu anlamak',nl:'Begrijpend lezen'},{tr:'Konuşma yapmak',nl:'Een speech houden'},
+  {tr:'Sunum yapmak',nl:'Presenteren'},{tr:'Müzik dinlemek',nl:'Muziek luisteren'},
+  {tr:'Egzersiz yapmak',nl:'Sporten'},{tr:'Dua etmek',nl:'Bidden'},
+  {tr:'Çalışmak (ders)',nl:'Studeren'},{tr:'Prova yapmak',nl:'Repeteren'},
+  {tr:'Film izlemek',nl:'Film kijken'},{tr:'Kitap okumak',nl:'Boek lezen'}
+],
+bijvoeglijk:[
+  {tr:'Güzel',nl:'Mooi'},{tr:'Çirkin',nl:'Lelijk'},{tr:'İyi',nl:'Goed'},{tr:'Kötü',nl:'Slecht'},
+  {tr:'Büyük',nl:'Groot'},{tr:'Küçük',nl:'Klein'},{tr:'Yeni',nl:'Nieuw'},{tr:'Eski',nl:'Oud'},
+  {tr:'Sıcak',nl:'Warm'},{tr:'Soğuk',nl:'Koud'},{tr:'Mutlu',nl:'Blij'},{tr:'Üzgün',nl:'Verdrietig'},
+  {tr:'Hızlı',nl:'Snel'},{tr:'Yavaş',nl:'Langzaam'},{tr:'Uzun',nl:'Lang'},{tr:'Kısa',nl:'Kort'},
+  {tr:'Kalın',nl:'Dik'},{tr:'İnce',nl:'Dun'},{tr:'Ağır',nl:'Zwaar'},{tr:'Hafif',nl:'Licht'},
+  {tr:'Sert',nl:'Hard'},{tr:'Yumuşak',nl:'Zacht'},{tr:'Pürüzsüz',nl:'Glad'},{tr:'Pütürlü',nl:'Ruw'},
+  {tr:'Parlak',nl:'Glanzend'},{tr:'Mat',nl:'Mat'},{tr:'Şeffaf',nl:'Doorzichtig'},
+  {tr:'Kırmızı',nl:'Rood'},{tr:'Mavi',nl:'Blauw'},{tr:'Yeşil',nl:'Groen'},{tr:'Sarı',nl:'Geel'},
+  {tr:'Turuncu',nl:'Oranje'},{tr:'Mor',nl:'Paars'},{tr:'Pembe',nl:'Roze'},{tr:'Beyaz',nl:'Wit'},
+  {tr:'Siyah',nl:'Zwart'},{tr:'Gri',nl:'Grijs'},{tr:'Kahverengi',nl:'Bruin'},{tr:'Altın',nl:'Goud'},
+  {tr:'Gümüş',nl:'Zilver'},{tr:'Koyu',nl:'Donker'},{tr:'Açık (renk)',nl:'Licht (kleur)'},{tr:'Canlı',nl:'Levendig'},
+  {tr:'Temiz',nl:'Schoon'},{tr:'Kirli',nl:'Vuil'},{tr:'Düzenli',nl:'Geordend'},{tr:'Dağınık',nl:'Rommelig'},
+  {tr:'Geniş',nl:'Breed'},{tr:'Dar',nl:'Smal'},{tr:'Derin',nl:'Diep'},{tr:'Sığ',nl:'Ondiep'},
+  {tr:'Yuvarlak',nl:'Rond'},{tr:'Kare (şekil)',nl:'Vierkant'},{tr:'Sivri',nl:'Scherp'},{tr:'Düz',nl:'Vlak'},
+  {tr:'Tatlı (tat)',nl:'Zoet'},{tr:'Ekşi',nl:'Zuur'},{tr:'Acı',nl:'Bitter'},{tr:'Tuzlu',nl:'Zout'},
+  {tr:'Baharatlı',nl:'Pittig'},{tr:'Kremsi',nl:'Romig'},{tr:'Çıtır',nl:'Krokant'},{tr:'Sulu',nl:'Sappig'},
+  {tr:'Akıllı',nl:'Slim'},{tr:'Aptal',nl:'Dom'},{tr:'Bilge',nl:'Wijs'},{tr:'Deneyimli',nl:'Ervaren'},
+  {tr:'Yetenekli',nl:'Getalenteerd'},{tr:'Çalışkan',nl:'Ijverig'},{tr:'Tembel',nl:'Lui'},
+  {tr:'Dikkatli',nl:'Voorzichtig'},{tr:'Dikkatsiz',nl:'Onvoorzichtig'},{tr:'Sabırlı',nl:'Geduldig'},
+  {tr:'Sabırsız',nl:'Ongeduldig'},{tr:'Cesur',nl:'Dapper'},{tr:'Korkak',nl:'Laf'},
+  {tr:'Nazik',nl:'Vriendelijk'},{tr:'Kaba',nl:'Onbeleefd'},{tr:'Dürüst',nl:'Eerlijk'},
+  {tr:'Güvenilir',nl:'Betrouwbaar'},{tr:'Sadık',nl:'Trouw'},{tr:'Cömert',nl:'Vrijgevig'},
+  {tr:'Cimri',nl:'Gierig'},{tr:'Kibar',nl:'Beleefd'},{tr:'Saygılı',nl:'Respectvol'},
+  {tr:'Mütevazi',nl:'Bescheiden'},{tr:'Kibirli',nl:'Arrogant'},{tr:'Hırslı',nl:'Ambitieus'},
+  {tr:'Kararlı',nl:'Vastberaden'},{tr:'Esnek',nl:'Flexibel'},{tr:'Meraklı',nl:'Nieuwsgierig'},
+  {tr:'Romantik',nl:'Romantisch'},{tr:'Pragmatik',nl:'Pragmatisch'},{tr:'İdealist',nl:'Idealistisch'},
+  {tr:'Gerçekçi',nl:'Realistisch'},{tr:'Karamsar',nl:'Pessimistisch'},{tr:'İyimser',nl:'Optimistisch'},
+  {tr:'Sakin',nl:'Rustig'},{tr:'Heyecanlı',nl:'Enthousiast'},{tr:'Endişeli',nl:'Bezorgd'},
+  {tr:'Stresli',nl:'Gestrest'},{tr:'Rahatlamış',nl:'Ontspannen'},{tr:'Neşeli',nl:'Vrolijk'},
+  {tr:'Modern',nl:'Modern'},{tr:'Geleneksel',nl:'Traditioneel'},{tr:'Klasik',nl:'Klassiek'},
+  {tr:'Tarihi',nl:'Historisch'},{tr:'Kültürel',nl:'Cultureel'},{tr:'Evrensel',nl:'Universeel'},
+  {tr:'Popüler',nl:'Populair'},{tr:'Nadir',nl:'Zeldzaam'},{tr:'Yaygın',nl:'Veelvoorkomend'},
+  {tr:'Benzersiz',nl:'Uniek'},{tr:'Sıradan',nl:'Gewoon'},{tr:'Olağandışı',nl:'Ongewoon'},
+  {tr:'Verimli',nl:'Efficiënt'},{tr:'Verimsiz',nl:'Inefficiënt'},{tr:'Üretken',nl:'Productief'},
+  {tr:'Sürdürülebilir',nl:'Duurzaam'},{tr:'Çevre dostu',nl:'Milieuvriendelijk'},{tr:'Eğlenceli',nl:'Leuk'},
+  {tr:'Sıkıcı',nl:'Saai'},{tr:'İlginç',nl:'Interessant'},{tr:'Şaşırtıcı',nl:'Verrassend'},
+  {tr:'Garip',nl:'Raar'},{tr:'Normal',nl:'Normaal'},{tr:'Özel',nl:'Bijzonder'},
+  {tr:'Tehlikeli',nl:'Gevaarlijk'},{tr:'Güvenli',nl:'Veilig'},{tr:'Sessiz',nl:'Stil'},
+  {tr:'Gürültülü',nl:'Lawaaierig'},{tr:'Pahalı',nl:'Duur'},{tr:'Ucuz',nl:'Goedkoop'},
+  {tr:'Taze',nl:'Vers'},{tr:'Bayat',nl:'Oud (niet vers)'},{tr:'Rahat',nl:'Comfortabel'},
+  {tr:'Nahoş',nl:'Onaangenaam'},{tr:'Hoş',nl:'Aangenaam'},{tr:'Cazip',nl:'Aantrekkelijk'},
+  {tr:'İtici',nl:'Afstotend'},{tr:'Açık fikirli',nl:'Open-minded'},{tr:'Dar kafalı',nl:'Bekrompen'},
+  {tr:'Medeni',nl:'Beschaafd'},{tr:'Kaba saba',nl:'Grof'},{tr:'Zarif',nl:'Elegant'},
+  {tr:'Şişman',nl:'Dik (persoon)'},{tr:'Zayıf (beden)',nl:'Slank'},{tr:'Kaslı',nl:'Gespierd'}
+]
+};
+
+const sentences = [
+  {tr:'Bu kitap çok ilginç.',nl:'Dit boek is heel interessant.',cat:'basis'},
+  {tr:'Bugün hava çok güzel.',nl:'Het weer is vandaag erg mooi.',cat:'dagelijks'},
+  {tr:'Türkçe öğrenmek eğlenceli.',nl:'Turks leren is leuk.',cat:'basis'},
+  {tr:'Her gün biraz çalışıyorum.',nl:'Ik oefen elke dag een beetje.',cat:'dagelijks'},
+  {tr:'Ailem çok önemli.',nl:'Mijn familie is erg belangrijk.',cat:'familie'},
+  {tr:'Kahvaltıda ne yersin?',nl:'Wat eet je bij het ontbijt?',cat:'eten'},
+  {tr:'Marketten ekmek aldım.',nl:'Ik heb brood gekocht in de winkel.',cat:'dagelijks'},
+  {tr:'Arkadaşımla buluştum.',nl:'Ik heb mijn vriend ontmoet.',cat:'familie'},
+  {tr:'Bu yemek lezzetli.',nl:'Dit eten is heerlijk.',cat:'eten'},
+  {tr:'Sabah erken kalktım.',nl:'Ik stond vroeg op in de ochtend.',cat:'dagelijks'},
+  {tr:'İki çay lütfen.',nl:'Twee thee graag.',cat:'eten'},
+  {tr:'Nerede oturuyorsunuz?',nl:'Waar woont u?',cat:'basis'},
+  {tr:'İstanbul çok büyük bir şehir.',nl:'Istanbul is een hele grote stad.',cat:'dagelijks'},
+  {tr:'Annem çok iyi yemek yapar.',nl:'Mijn moeder kookt erg lekker.',cat:'familie'},
+  {tr:'Bugün işe geç kaldım.',nl:'Ik was vandaag te laat op het werk.',cat:'dagelijks'},
+  {tr:'Benim adım Tamer.',nl:'Mijn naam is Tamer.',cat:'basis'},
+  {tr:'Türkiye\'ye gitmek istiyorum.',nl:'Ik wil naar Turkije gaan.',cat:'dagelijks'},
+  {tr:'Bu gece ne yiyeceğiz?',nl:'Wat eten we vanavond?',cat:'eten'},
+  {tr:'Kardeşim üniversitede okuyor.',nl:'Mijn broer studeert aan de universiteit.',cat:'familie'},
+  {tr:'Lütfen kapıyı açar mısın?',nl:'Kun je de deur opendoen alsjeblieft?',cat:'basis'},
+  {tr:'Çok acıktım.',nl:'Ik heb heel veel honger.',cat:'eten'},
+  {tr:'Babam her sabah gazete okur.',nl:'Mijn vader leest elke ochtend de krant.',cat:'familie'},
+  {tr:'Bu ay çok para harcadım.',nl:'Ik heb deze maand veel geld uitgegeven.',cat:'dagelijks'},
+  {tr:'Sınavdan geçtim!',nl:'Ik ben geslaagd voor mijn examen!',cat:'basis'},
+  {tr:'Hava yağmurlu.',nl:'Het is regenachtig.',cat:'dagelijks'},
+  {tr:'Su içmek sağlıklı.',nl:'Water drinken is gezond.',cat:'eten'},
+  {tr:'Annemin doğum günü yarın.',nl:'Moeders verjaardag is morgen.',cat:'familie'},
+  {tr:'Şimdi ne yapıyorsun?',nl:'Wat doe je nu?',cat:'basis'},
+  {tr:'Dükkân kaçta açılıyor?',nl:'Hoe laat gaat de winkel open?',cat:'dagelijks'},
+  {tr:'Yemek hazır.',nl:'Het eten is klaar.',cat:'eten'},
+  {tr:'Büyükbabam çok hikaye biliyor.',nl:'Mijn opa kent veel verhalen.',cat:'familie'},
+  {tr:'Bugün çok yoruldum.',nl:'Ik ben vandaag erg moe geworden.',cat:'dagelijks'},
+  {tr:'Merhaba! Nasılsın?',nl:'Hoi! Hoe gaat het met je?',cat:'basis'},
+  {tr:'Çay mı kahve mi istersin?',nl:'Wil je thee of koffie?',cat:'eten'},
+  {tr:'Kardeşimle iyi geçiniyorum.',nl:'Ik kan goed opschieten met mijn broer.',cat:'familie'},
+  {tr:'Bu ödev zor.',nl:'Dit huiswerk is moeilijk.',cat:'dagelijks'},
+  {tr:'Doktor randevum var.',nl:'Ik heb een doktersafspraak.',cat:'dagelijks'},
+  {tr:'Elma sever misin?',nl:'Houd je van appels?',cat:'eten'},
+  {tr:'Eşim çok çalışkan.',nl:'Mijn partner is erg ijverig.',cat:'familie'},
+  {tr:'Teşekkürler, çok naziksiniz.',nl:'Dankjewel, u bent erg vriendelijk.',cat:'basis'},
+  {tr:'Bu iş zaman alıyor.',nl:'Dit werk kost tijd.',cat:'dagelijks'},
+  {tr:'Çocuklar bahçede oynuyor.',nl:'De kinderen spelen in de tuin.',cat:'familie'},
+  {tr:'Saat kaç?',nl:'Hoe laat is het?',cat:'dagelijks'},
+  {tr:'Sebze yemek sağlıklı.',nl:'Groente eten is gezond.',cat:'eten'},
+  {tr:'Annem ve babam İstanbul\'da.',nl:'Mijn moeder en vader zijn in Istanbul.',cat:'familie'},
+  {tr:'Bu hafta çok meşgulüm.',nl:'Ik ben deze week erg druk.',cat:'dagelijks'},
+  {tr:'İyi bir gün geçir!',nl:'Fijne dag!',cat:'basis'},
+  {tr:'Sabah kahvaltısı önemli.',nl:'Het ontbijt is belangrijk.',cat:'eten'},
+  {tr:'Çocuğum okula başladı.',nl:'Mijn kind is begonnen op school.',cat:'familie'},
+  {tr:'Bu dükkânda ne satıyorlar?',nl:'Wat verkopen ze in deze winkel?',cat:'dagelijks'},
+  {tr:'Hangi et istersiniz?',nl:'Welk vlees wilt u?',cat:'eten'},
+  {tr:'Torunum çok sevimli.',nl:'Mijn kleinkind is heel schattig.',cat:'familie'},
+  {tr:'Postane nerede?',nl:'Waar is het postkantoor?',cat:'dagelijks'},
+  {tr:'Özür dilerim, geç kaldım.',nl:'Sorry, ik ben te laat.',cat:'basis'},
+  {tr:'Portakal suyu içer misin?',nl:'Drink je sinaasappelsap?',cat:'eten'},
+  {tr:'Babam emekli oldu.',nl:'Mijn vader is gepensioneerd.',cat:'familie'},
+  {tr:'Telefon numarasını verir misin?',nl:'Kun je je telefoonnummer geven?',cat:'dagelijks'},
+  {tr:'Bugün market alışverişi yapacağım.',nl:'Ik ga vandaag boodschappen doen.',cat:'dagelijks'},
+  {tr:'Taze meyve severim.',nl:'Ik houd van vers fruit.',cat:'eten'},
+  {tr:'Annem çok sağlıklı.',nl:'Mijn moeder is erg gezond.',cat:'familie'},
+  {tr:'Bu film çok güzel.',nl:'Deze film is heel mooi.',cat:'dagelijks'},
+  {tr:'Lütfen biraz bekleyin.',nl:'Wacht even alstublieft.',cat:'basis'},
+  {tr:'Çay için oturur musunuz?',nl:'Gaat u zitten voor thee?',cat:'eten'},
+  {tr:'Çocuklar çok gürültülü.',nl:'De kinderen zijn erg lawaaierig.',cat:'familie'},
+  {tr:'Hoşça kal, görüşürüz.',nl:'Dag, tot ziens.',cat:'basis'},
+  {tr:'Bu dükkân çok pahalı.',nl:'Deze winkel is erg duur.',cat:'dagelijks'},
+  {tr:'Peynir ve ekmek severim.',nl:'Ik hou van kaas en brood.',cat:'eten'},
+  {tr:'Ailen nasıl?',nl:'Hoe gaat het met je familie?',cat:'familie'},
+  {tr:'Günaydın! Nasıl uyudun?',nl:'Goedemorgen! Hoe heb je geslapen?',cat:'basis'},
+  {tr:'Bu çorba çok lezzetli.',nl:'Deze soep is erg lekker.',cat:'eten'},
+  {tr:'Kardeşim evlendi.',nl:'Mijn broer is getrouwd.',cat:'familie'},
+  {tr:'Otobus durağı nerede?',nl:'Waar is de bushalte?',cat:'dagelijks'},
+  {tr:'Evet, anlıyorum.',nl:'Ja, ik begrijp het.',cat:'basis'},
+  {tr:'Dondurma severim.',nl:'Ik hou van ijs.',cat:'eten'},
+  {tr:'Ailemiz birlikte yemek yiyor.',nl:'Onze familie eet samen.',cat:'familie'},
+  {tr:'Bu araba yeni mi?',nl:'Is deze auto nieuw?',cat:'dagelijks'},
+  {tr:'Izgara tavuk severim.',nl:'Ik hou van gegrilde kip.',cat:'eten'},
+  {tr:'Büyükannem çok şefkatli.',nl:'Mijn oma is erg liefdevol.',cat:'familie'},
+  {tr:'Hayır, bilmiyorum.',nl:'Nee, ik weet het niet.',cat:'basis'},
+  {tr:'Kahve mi istersiniz?',nl:'Wilt u koffie?',cat:'eten'},
+  {tr:'Dayım çok komik.',nl:'Mijn oom is heel grappig.',cat:'familie'},
+  {tr:'Tamam, anlıyorum!',nl:'Oké, ik begrijp het!',cat:'basis'},
+  {tr:'Bu salata çok taze.',nl:'Deze salade is heel vers.',cat:'eten'},
+  {tr:'Halamin çocukları çok tatlı.',nl:'De kinderen van mijn tante zijn heel schattig.',cat:'familie'},
+  {tr:'İyi geceler!',nl:'Goedenacht!',cat:'basis'},
+  {tr:'Bal çay lütfen.',nl:'Thee met honing alsjeblieft.',cat:'eten'},
+  {tr:'Ailem beni seviyor.',nl:'Mijn familie houdt van mij.',cat:'familie'},
+  {tr:'Uçak kaçta kalkıyor?',nl:'Hoe laat vertrekt het vliegtuig?',cat:'dagelijks'},
+  {tr:'Bu ev çok rahat.',nl:'Dit huis is heel comfortabel.',cat:'dagelijks'},
+  {tr:'Makarna yapmayı severim.',nl:'Ik hou van pasta maken.',cat:'eten'},
+  {tr:'Erkek kardeşim doktor.',nl:'Mijn broer is dokter.',cat:'familie'},
+  {tr:'Lütfen yavaş konuş.',nl:'Spreek alsjeblieft langzaam.',cat:'basis'},
+  {tr:'Taze meyve suyu içiyorum.',nl:'Ik drink vers vruchtensap.',cat:'eten'},
+  {tr:'Anneannem çok iyi.',nl:'Mijn oma is heel goed.',cat:'familie'},
+  {tr:'Baklava çok tatlı.',nl:'Baklava is heel zoet.',cat:'eten'},
+  {tr:'Kuzenlerim İstanbul\'da.',nl:'Mijn neven zijn in Istanbul.',cat:'familie'},
+  {tr:'Bugün güneşli.',nl:'Het is vandaag zonnig.',cat:'dagelijks'},
+  {tr:'Her şey yolunda.',nl:'Alles gaat goed.',cat:'basis'},
+  {tr:'Bu pilav nefis.',nl:'Deze rijst is heerlijk.',cat:'eten'},
+  {tr:'Torunum çok akıllı.',nl:'Mijn kleinkind is heel slim.',cat:'familie'},
+  {tr:'Bu koltuk rahat.',nl:'Deze stoel is comfortabel.',cat:'dagelijks'},
+  {tr:'Yoğurt taze mi?',nl:'Is de yoghurt vers?',cat:'eten'},
+  {tr:'Ablamın düğünü yakında.',nl:'De bruiloft van mijn grote zus is binnenkort.',cat:'familie'},
+  {tr:'Affedersiniz, Türkçem az.',nl:'Excuseer mij, mijn Turks is beperkt.',cat:'basis'},
+  {tr:'Zeytinyağlı yiyecekler sağlıklı.',nl:'Met olijfolie bereid voedsel is gezond.',cat:'eten'},
+  {tr:'Ailemle pikniğe gittik.',nl:'Ik ging picknicken met mijn familie.',cat:'familie'},
+  {tr:'Şimdi başlıyoruz.',nl:'Nu beginnen we.',cat:'basis'},
+  {tr:'Bu şehir çok tarihi.',nl:'Deze stad is heel historisch.',cat:'dagelijks'},
+  {tr:'Bu çok güzel bir fotoğraf.',nl:'Dit is een heel mooie foto.',cat:'dagelijks'},
+  {tr:'Nerede yemek yiyebiliriz?',nl:'Waar kunnen we eten?',cat:'dagelijks'},
+  {tr:'Bu kaç para?',nl:'Hoeveel kost dit?',cat:'dagelijks'},
+  {tr:'Türkçe konuşuyor musunuz?',nl:'Spreekt u Turks?',cat:'basis'},
+  {tr:'Biraz Türkçe biliyorum.',nl:'Ik spreek een beetje Turks.',cat:'basis'},
+  {tr:'Tekrar söyler misiniz?',nl:'Kunt u dat herhalen?',cat:'basis'},
+  {tr:'Daha yavaş lütfen.',nl:'Langzamer alsjeblieft.',cat:'basis'},
+  {tr:'Bu kelime ne demek?',nl:'Wat betekent dit woord?',cat:'basis'},
+  {tr:'Anlamadım.',nl:'Ik begreep het niet.',cat:'basis'},
+  {tr:'Çok güzel söylediniz.',nl:'U zei het heel mooi.',cat:'basis'},
+  {tr:'Türkçe çok zor.',nl:'Turks is heel moeilijk.',cat:'basis'},
+  {tr:'Ama çok eğlenceli!',nl:'Maar heel leuk!',cat:'basis'},
+  {tr:'Her gün daha iyiyim.',nl:'Elke dag ben ik beter.',cat:'basis'},
+  {tr:'Pratik yapmak şart.',nl:'Oefening is noodzakelijk.',cat:'basis'},
+  {tr:'Sabah jimnastiği yapıyorum.',nl:'Ik doe ochtendsport.',cat:'dagelijks'},
+  {tr:'Her gece 8 saat uyuyorum.',nl:'Ik slaap elke nacht 8 uur.',cat:'dagelijks'},
+  {tr:'İş toplantım var.',nl:'Ik heb een werkvergadering.',cat:'dagelijks'},
+  {tr:'Treni kaçırdım.',nl:'Ik heb de trein gemist.',cat:'dagelijks'},
+  {tr:'Randevuyu unuttum.',nl:'Ik ben de afspraak vergeten.',cat:'dagelijks'},
+  {tr:'Yarın sınav var.',nl:'Morgen is er een examen.',cat:'dagelijks'},
+  {tr:'Bu ödev ne zaman?',nl:'Wanneer is dit huiswerk?',cat:'dagelijks'},
+  {tr:'Internete bağlanamıyorum.',nl:'Ik kan geen verbinding maken met het internet.',cat:'dagelijks'},
+  {tr:'Şarj olmadı.',nl:'De batterij is leeg.',cat:'dagelijks'},
+  {tr:'Hava çok soğuk bugün.',nl:'Het is vandaag erg koud.',cat:'dagelijks'},
+  {tr:'Yağmur yağıyor.',nl:'Het regent.',cat:'dagelijks'},
+  {tr:'Kar yağıyor!',nl:'Het sneeuwt!',cat:'dagelijks'},
+  {tr:'Güneş çıktı.',nl:'De zon komt tevoorschijn.',cat:'dagelijks'},
+  {tr:'Rüzgar çok kuvvetli.',nl:'De wind is erg sterk.',cat:'dagelijks'},
+  {tr:'Hava tahmini nedir?',nl:'Wat is de weersvoorspelling?',cat:'dagelijks'},
+  {tr:'Bugün serinlemek lazım.',nl:'Vandaag is het nodig af te koelen.',cat:'dagelijks'}
+];
+
+const storyTemplates = [
+  {
+    title:(n)=>`Verhaal ${n}: Kahvaltı Vakti (Ontbijttijd)`,
+    text:(n)=>`{Bugün|Vandaag} {sabah|ochtend} {erken|vroeg} {kalktım|stond ik op}. {Mutfağa|Naar de keuken} {gidip|gegaan} {kahvaltı|ontbijt} {hazırladım|bereidde ik}. {Masaya|Op tafel} {ekmek|brood}, {peynir|kaas} ve {çay|thee} {koydum|zette ik}. {Babam|Mijn vader} {da|ook} {geldi|kwam}. "{Günaydın|Goedemorgen}!" {dedi|zei hij}. {Birlikte|Samen} {güzel|gezellig} {bir|een} {sabah|ochtend} {geçirdik|brachten we door}.`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Markette (In de Supermarkt)`,
+    text:(n)=>`{Annem|Mijn moeder} {ile|met} {markete|naar de supermarkt} {gittik|gingen we}. {Liste|Lijst} {hazırlamıştık|hadden we klaargemaakt}. {Sebzeler|Groenten}, {meyveler|fruit}, {ekmek|brood} ve {süt|melk} {aldık|kochten we}. {Kasada|Aan de kassa} {sıra|rij} {beklediik|wachtten we}. {Eve|Naar huis} {dönerken|bij terugkeer} {hava|het weer} {güzeldi|was mooi}. {Çok|Erg} {yorulduk|werden we moe} {ama|maar} {mutluyduk|waren we blij}.`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Okuldaki Gün (Een Dag op School)`,
+    text:(n)=>`{Okula|Naar school} {erken|vroeg} {gittim|ging ik}. {Sınıfta|In de klas} {arkadaşlarım|mijn vrienden} {bekliyordu|wachtten}. {Öğretmen|De leraar} {ders|les} {anlattı|legde uit}. {Öğle|Middag} {arasında|pauze} {çorba|soep} {yedim|at ik}. {Öğleden|Na de middag} {sonra|} {ödev|huiswerk} {yaptık|maakten we}. {Eve|Naar huis} {dönerken|teruggaand} {çok|erg} {şey|dingen} {öğrendiğimi|dat ik geleerd had} {hissettim|voelde ik}.`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Hafta Sonu Gezisi (Weekenduitje)`,
+    text:(n)=>`{Bu|Dit} {hafta sonu|weekend} {ailemle|met mijn familie} {geziye|op uitje} {çıktık|gingen we}. {Parka|Naar het park} {gittik|gingen we}. {Hava|Het weer} {güneşliydi|was zonnig}. {Yanımıza|Mee namen we} {yiyecekler|eten} {aldık|namen we}. {Piknik|Picknick} {yaparak|makend} {eğlendik|vermaakten we ons}. {Çocuklar|De kinderen} {koştu|renden}. {Akşama|s Avonds} {kadar|tot} {orada|daar} {kaldık|bleven we}.`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Dil Öğrenme (Taal Leren)`,
+    text:(n)=>`{Türkçe|Turks} {öğrenmeye|te leren} {karar|besluit} {verdim|nam ik}. {Her|Elke} {gün|dag} {çalışıyorum|studeer ik}. {Önce|Eerst} {alfabe|alfabet} {öğrendim|leerde ik}. {Sonra|Daarna} {kelimeler|woorden} {ezberledim|memoriseerde ik}. {Şimdi|Nu} {cümleler|zinnen} {kurabiliyorum|kan ik maken}. {Türk|Turkse} {dizileri|series} {izleyerek|kijkend} {pratik|oefening} {yapıyorum|doe ik}. {Harika|Geweldig} {bir|een} {his|gevoel}!`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Türk Mutfağı (Turkse Keuken)`,
+    text:(n)=>`{Annem|Mijn moeder} {bugün|vandaag} {menemen|roerei} {yapıyordu|maakte}. {Yardım|Helpen} {etmek|te} {istedim|wilde ik}. {Domates|Tomaten}, {biber|paprika} ve {yumurta|eieren} {hazırladım|bereidde ik}. {Alevde|Op het vuur} {pişirdik|kookten we}. {Koku|De geur} {muhteşemdi|was heerlijk}. {Birlikte|Samen} {yedik|aten we}. {Türk|Turkse} {mutfağı|keuken} {en güzeli|de lekkerste}!`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: İstanbul Macerası (Istanbul Avontuur)`,
+    text:(n)=>`{İstanbul'a|Naar Istanbul} {geldim|kwam ik}. {Boğaz|De Bosporus} {görünce|bij het zien} {heyecanlandım|raakte ik opgewonden}. {Kapalıçarşı|De Grote Bazaar} {ziyaret|bezocht} {ettim|ik}. {Simit|Ringbrood} {yedim|at ik}. {Akşam|s Avonds} {tekne|boot} {turu|tour} {yaptım|maakte ik}. {Şehrin|Van de stad} {ışıkları|de lichten} {harikaydi|waren geweldig}. {İstanbul|Istanbul} {kalbimde|in mijn hart} {kalacak|zal blijven}!`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Sağlıklı Yaşam (Gezond Leven)`,
+    text:(n)=>`{Sağlıklı|Gezond} {yaşamak|leven} {için|om} {alışkanlıklar|gewoontes} {edindim|heb ik}. {Sabahları|s Ochtends} {yürüyüş|wandeling} {yapıyorum|doe ik}. {Bol|Veel} {sebze|groenten} {yiyorum|eet ik}. {Su|Water} {içiyorum|drink ik}. {Şeker|Suiker} {az|weinig} {yiyorum|eet ik}. {Her gece|Elke nacht} {erken|vroeg} {uyuyorum|slaap ik}. {Bu|Deze} {alışkanlıklar|gewoontes} {hayatımı|mijn leven} {değiştirdi|hebben veranderd}!`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Komşularla (Met de Buren)`,
+    text:(n)=>`{Komşularımla|Met mijn buren} {iyi|goede} {ilişkiler|relaties} {kuruyorum|bouw ik op}. {Bayramlarda|Op feestdagen} {tatlı|snoep} {götürürüm|breng ik}. {Kapı|Deur} {komşum|buurvrouw} {yaşlı|oud}. {Alışveriş|Boodschappen} {yaparken|doen} {onun|haar} {ihtiyaçlarını|behoeften} da {alırım|koop ik}. {Komşuluk|Burenrelaties} {güzel|mooi} {bir|een} {şey|iets}. {Birlikte|Samen} {daha|meer} {güçlüyüz|zijn we sterk}.`
+  },
+  {
+    title:(n)=>`Verhaal ${n}: Tatil Planları (Vakantieplannen)`,
+    text:(n)=>`{Bu yıl|Dit jaar} {tatilimi|mijn vakantie} {güzel|mooi} {bir|een} {yerde|plek} {geçireceğim|ga ik doorbrengen}. {Rezervasyon|Reservering} {yaptım|heb ik gemaakt}. {Valizimi|Mijn koffer} {hazırladım|heb ik ingepakt}: {yüzme|zwem} {mayosu|pak}, {güneş|zon} {gözlüğü|bril}. {Tatil|Vakantie} {günlerini|de dagen} {sabırsızlıkla|ongeduldig} {bekliyorum|wacht ik op}!`
+  }
+];
+
+const stories = Array.from({length:500},(_,i)=>{
+  const t = storyTemplates[i % storyTemplates.length];
+  return {title:t.title(i+1), text:t.text(i+1)};
+});
+
+// ================================================================
+// STATE
+// ================================================================
+let wordMode='flip', wordLang='tr-nl', wordCat='basis', wordPage=1;
+let sentMode='read', sentLang='tr-nl', sentPage=1;
+let currentStory=0;
+let quizMode='click', quizQuestion=null, qScore=0, qWrong=0, qTotal=0;
+let xp=0, streak=1, hearts=5;
+let learnedWords=new Set();
+const PER_PAGE=24;
+
+const monkeyPhrases=[
+  'Hoi! Laten we Turks leren! 🇹🇷',
+  'Super gedaan! Nog een? 🐒',
+  'Je bent een taalwonder! ⭐',
+  'Merhaba! Ga zo door! 💪',
+  'Türkçe = super gaaf! 🎉',
+  'Ik geloof in jou! 🐒❤️',
+  'Elke dag een beetje beter!',
+  'Je doet het fantastisch! 🌟',
+  'Oefenen = leren! 💡',
+  'Tamer de Aap is trots! 🏆'
+];
+
+// ================================================================
+// UTILS
+// ================================================================
+function speakWord(text, lang='tr-TR'){
+  try {
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang=lang; u.rate=0.85;
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+function addXP(n){
+  xp+=n;
+  document.getElementById('xpVal').textContent=xp;
+  showToast(`+${n} XP ⚡`);
+  updateMonkey();
+}
+
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='xp-toast';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2100);
+}
+
+function updateMonkey(){
+  const el=document.getElementById('monkeySpeech');
+  el.textContent=monkeyPhrases[Math.floor(Math.random()*monkeyPhrases.length)];
+  el.classList.add('celebrate');
+  setTimeout(()=>el.classList.remove('celebrate'),600);
+}
+
+function updateProgress(){
+  const all=Object.values(vocabulary).flat();
+  const pct=(learnedWords.size/all.length*100).toFixed(1);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('learnedCount').textContent=learnedWords.size;
+  document.getElementById('totalCount').textContent=all.length;
+}
+
+function renderPag(id, total, cur, cb){
+  const el=document.getElementById(id);
+  const pages=Math.ceil(total/PER_PAGE);
+  if(pages<=1){el.innerHTML='';return;}
+  let html='';
+  if(cur>1) html+=`<button class="page-btn" onclick="(${cb})(${cur-1})">‹</button>`;
+  const maxB=7, start=Math.max(1,cur-3), end=Math.min(pages,start+maxB-1);
+  if(start>1){html+=`<button class="page-btn" onclick="(${cb})(1)">1</button>`;if(start>2)html+='<span style="padding:6px">…</span>';}
+  for(let i=start;i<=end;i++) html+=`<button class="page-btn ${i===cur?'active':''}" onclick="(${cb})(${i})">${i}</button>`;
+  if(end<pages){if(end<pages-1)html+='<span style="padding:6px">…</span>';html+=`<button class="page-btn" onclick="(${cb})(${pages})">${pages}</button>`;}
+  if(cur<pages) html+=`<button class="page-btn" onclick="(${cb})(${cur+1})">›</button>`;
+  el.innerHTML=html;
+}
+
+// ================================================================
+// NAVIGATION
+// ================================================================
+function showSection(id, btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  // sidebar nav
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  // mobile nav
+  document.querySelectorAll('#mobileNav .mode-tab').forEach(b=>b.classList.remove('active'));
+  if(btn){
+    btn.classList.add('active');
+    // sync sidebar & mobile
+    const idx=['words','sentences','stories','quiz'].indexOf(id);
+    document.querySelectorAll('.nav-item')[idx]?.classList.add('active');
+    document.querySelectorAll('#mobileNav .mode-tab')[idx]?.classList.add('active');
+  }
+  if(id==='quiz') generateQuiz();
+}
+
+// ================================================================
+// WORDS
+// ================================================================
+function initCatBar(){
+  const labels={basis:'🗣️ Basis',getallen:'🔢 Getallen',eten:'🍎 Eten',familie:'👨‍👩‍👧 Familie',dagelijks:'🏠 Dagelijks',werkwoorden:'⚡ Werkwoorden',bijvoeglijk:'🎨 Bijvoeglijk'};
+  document.getElementById('catBar').innerHTML=Object.keys(vocabulary).map(c=>
+    `<button class="cat-btn ${c===wordCat?'active':''}" onclick="selectCat('${c}')">${labels[c]}</button>`
+  ).join('');
+}
+
+function selectCat(cat){
+  wordCat=cat; wordPage=1;
+  document.querySelectorAll('.cat-btn').forEach(b=>{b.classList.toggle('active',b.textContent.includes(cat.slice(0,3)));});
+  initCatBar();
+  renderWords();
+}
+
+function setWordMode(mode, btn){
+  wordMode=mode;
+  document.querySelectorAll('#wordModeBar .mode-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  wordPage=1;
+  renderWords();
+}
+
+function setWordLang(lang, btn){
+  wordLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  wordPage=1;
+  renderWords();
+}
+
+function renderWords(page){
+  if(page) wordPage=page;
+  const words=vocabulary[wordCat];
+  const start=(wordPage-1)*PER_PAGE;
+  const pageWords=words.slice(start,start+PER_PAGE);
+
+  if(wordMode==='flip'){
+    document.getElementById('wordContainer').innerHTML=`<div class="word-grid">${pageWords.map((w,i)=>{
+      const front=wordLang==='tr-nl'?w.tr:w.nl;
+      const back=wordLang==='tr-nl'?w.nl:w.tr;
+      const key=w.tr+'|'+w.nl;
+      const learned=learnedWords.has(key);
+      return `<div class="word-card ${learned?'learned':''}" id="wc_${start+i}" onclick="flipWordCard(this,${start+i},'${wordCat}')">
+        <button class="card-audio" onclick="event.stopPropagation();speakWord('${w.tr.replace(/'/g,"\\'").replace(/"/g,'&quot;')}','tr-TR')">🔊</button>
+        <span class="card-learned-badge">✅</span>
+        <div class="card-front"><div class="card-word">${front}</div><div class="card-hint">Klik om te zien</div></div>
+        <div class="card-back"><div class="card-word">${back}</div><div class="card-hint">${front}</div></div>
+      </div>`;
+    }).join('')}</div>`;
+  } else {
+    document.getElementById('wordContainer').innerHTML=`<div class="type-grid">${pageWords.map((w,i)=>{
+      const prompt=wordLang==='tr-nl'?w.tr:w.nl;
+      const answer=wordLang==='tr-nl'?w.nl:w.tr;
+      const lang=wordLang==='tr-nl'?'nl-NL':'tr-TR';
+      return `<div class="type-card" id="tc_${start+i}">
+        <div class="type-prompt">
+          <span>${prompt}</span>
+          <button class="card-audio" onclick="speakWord('${w.tr.replace(/'/g,"\\'").replace(/"/g,'&quot;')}','tr-TR')" style="position:static;width:28px;height:28px;font-size:0.8rem;">🔊</button>
+        </div>
+        <div class="type-sub">${wordLang==='tr-nl'?'Typ de Nederlandse vertaling':'Typ de Turkse vertaling'}</div>
+        <div class="type-input-wrap">
+          <input class="type-input" type="text" placeholder="Typ hier…" 
+            onkeydown="if(event.key==='Enter')checkWordType(this,${start+i},'${wordCat}')"
+            data-answer="${answer.replace(/"/g,'&quot;')}">
+          <button class="type-check-btn" onclick="checkWordType(this.previousElementSibling,${start+i},'${wordCat}')">✓</button>
+        </div>
+        <div class="type-feedback" id="tf_${start+i}"></div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  renderPag('wordPag', words.length, wordPage, 'renderWords');
+  updateProgress();
+}
+
+function flipWordCard(card, idx, cat){
+  card.classList.toggle('flipped');
+  const w=vocabulary[cat][idx];
+  const key=w.tr+'|'+w.nl;
+  if(!learnedWords.has(key)){
+    learnedWords.add(key);
+    card.classList.add('learned');
+    updateProgress();
+    addXP(5);
+  }
+}
+
+function checkWordType(input, idx, cat){
+  const card=document.getElementById('tc_'+idx);
+  const fb=document.getElementById('tf_'+idx);
+  const ans=input.dataset.answer;
+  const val=input.value.trim().toLowerCase();
+  const correct=ans.toLowerCase();
+  const w=vocabulary[cat][idx];
+  const key=w.tr+'|'+w.nl;
+
+  if(val===correct || (correct.includes(val) && val.length>3)){
+    card.classList.add('correct');
+    fb.className='type-feedback ok';
+    fb.textContent='✓ Goed! '+ans;
+    input.disabled=true;
+    if(!learnedWords.has(key)){learnedWords.add(key);updateProgress();addXP(10);}
+  } else {
+    card.classList.remove('correct');
+    card.classList.add('incorrect');
+    fb.className='type-feedback err';
+    fb.textContent='✗ Antwoord: '+ans;
+    if(hearts>0){hearts--;document.getElementById('heartVal').textContent=hearts;}
+  }
+}
+
+// ================================================================
+// SENTENCES
+// ================================================================
+function setSentMode(mode, btn){
+  sentMode=mode;
+  document.querySelectorAll('#sentences .mode-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  sentPage=1;
+  renderSentences();
+}
+
+function setSentLang(lang, btn){
+  sentLang=lang;
+  document.querySelectorAll('#sentences .lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  sentPage=1;
+  renderSentences();
+}
+
+function renderSentences(page){
+  if(page) sentPage=page;
+  const start=(sentPage-1)*PER_PAGE;
+  const pageSents=sentences.slice(start,start+PER_PAGE);
+
+  document.getElementById('sentList').innerHTML=pageSents.map((s,i)=>{
+    const main=sentLang==='tr-nl'?s.tr:s.nl;
+    const trans=sentLang==='tr-nl'?s.nl:s.tr;
+    const spLang=sentLang==='tr-nl'?'tr-TR':'nl-NL';
+    const ansLang=sentLang==='tr-nl'?'nl':'tr';
+    if(sentMode==='read'){
+      return `<div class="sent-card">
+        <div class="sent-top">
+          <div class="sent-text">${main}</div>
+          <button class="audio-btn" onclick="speakWord('${main.replace(/'/g,"\\'").replace(/"/g,'&quot;')}','${spLang}')">🔊</button>
+        </div>
+        <div class="sent-trans">${trans}</div>
+      </div>`;
+    } else {
+      const promptText=sentLang==='tr-nl'?s.tr:s.nl;
+      const answerText=sentLang==='tr-nl'?s.nl:s.tr;
+      return `<div class="sent-card" id="sc_${start+i}">
+        <div class="sent-top">
+          <div class="sent-text">${promptText}</div>
+          <button class="audio-btn" onclick="speakWord('${promptText.replace(/'/g,"\\'").replace(/"/g,'&quot;')}','${spLang}')">🔊</button>
+        </div>
+        <div class="sent-type-wrap">
+          <input class="sent-input" type="text" placeholder="${sentLang==='tr-nl'?'Typ de Nederlandse vertaling…':'Typ de Turkse vertaling…'}"
+            onkeydown="if(event.key==='Enter')checkSent(this,${start+i},'${answerText.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')"
+            data-answer="${answerText.replace(/"/g,'&quot;')}">
+          <button class="sent-submit" onclick="checkSent(this.previousElementSibling,${start+i},'${answerText.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Controleer</button>
+        </div>
+        <div class="sent-feedback" id="sf_${start+i}"></div>
+      </div>`;
+    }
+  }).join('');
+
+  renderPag('sentPag', sentences.length, sentPage, 'renderSentences');
+}
+
+function checkSent(input, idx, answer){
+  const card=document.getElementById('sc_'+idx);
+  const fb=document.getElementById('sf_'+idx);
+  const val=input.value.trim().toLowerCase();
+  const ans=input.dataset.answer.toLowerCase();
+  const words=ans.split(' ');
+  const correctWords=val.split(' ').filter(w=>words.includes(w)).length;
+  const ratio=correctWords/words.length;
+
+  if(ratio>=0.7){
+    card.classList.add('correct');
+    fb.className='sent-feedback ok';
+    fb.textContent='✓ Uitstekend! '+input.dataset.answer;
+    input.disabled=true;
+    addXP(15);
+  } else {
+    card.classList.add('incorrect');
+    fb.className='sent-feedback err';
+    fb.textContent='✗ Antwoord: '+input.dataset.answer;
+    if(hearts>0){hearts--;document.getElementById('heartVal').textContent=hearts;}
+  }
+}
+
+// ================================================================
+// STORIES
+// ================================================================
+function initStorySelect(){
+  document.getElementById('storySelect').innerHTML=stories.map((s,i)=>`<option value="${i}">${s.title}</option>`).join('');
+}
+
+let activeBubble=null;
+
+function renderStory(idx){
+  currentStory=idx;
+  document.getElementById('storySelect').value=idx;
+  document.getElementById('prevStoryBtn').disabled=idx===0;
+  document.getElementById('nextStoryBtn').disabled=idx===stories.length-1;
+
+  const story=stories[idx];
+  const bodyHTML=story.text.replace(/\{([^|{}]+)\|([^|{}]+)\}/g,(m,tr,nl)=>{
+    const safeTr=tr.replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+    const safeNl=nl.replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+    return `<span class="tr-word" onclick="showWordBubble(event,'${safeTr}','${safeNl}')">${tr}</span>`;
+  });
+
+  document.getElementById('storyBox').innerHTML=`
+    <button class="story-audio-btn" onclick="speakStoryText(${idx})">🔊 Voorlezen</button>
+    <div class="story-box-title">${story.title}</div>
+    <div class="story-body">${bodyHTML}</div>
+  `;
+}
+
+function showWordBubble(e, tr, nl){
+  e.stopPropagation();
+  // Remove existing bubble
+  if(activeBubble) activeBubble.remove();
+
+  const span=e.currentTarget;
+  span.classList.add('revealed');
+
+  const bubble=document.createElement('div');
+  bubble.className='word-bubble';
+  bubble.innerHTML=`<strong>${tr}</strong> = ${nl} <button onclick="event.stopPropagation();speakWord('${tr.replace(/'/g,"\\'")}','tr-TR')" style="background:none;border:none;cursor:pointer;color:white;font-size:0.9rem;margin-left:6px;">🔊</button>`;
+  document.body.appendChild(bubble);
+  activeBubble=bubble;
+
+  // Position above the word
+  const rect=span.getBoundingClientRect();
+  const bw=Math.max(160, bubble.offsetWidth||180);
+  let left=rect.left+rect.width/2+window.scrollX;
+  let top=rect.top+window.scrollY-bubble.offsetHeight-12;
+
+  // Keep in viewport
+  left=Math.max(bw/2+8, Math.min(left, window.innerWidth+window.scrollX-bw/2-8));
+  if(top<window.scrollY+8) top=rect.bottom+window.scrollY+8;
+
+  bubble.style.left=left+'px';
+  bubble.style.top=top+'px';
+  bubble.style.transform='translateX(-50%)';
+
+  addXP(2);
+
+  // Auto-remove after 4s
+  const timer=setTimeout(()=>{bubble.remove();if(activeBubble===bubble)activeBubble=null;},4000);
+  bubble._timer=timer;
+}
+
+document.addEventListener('click', ()=>{
+  if(activeBubble){clearTimeout(activeBubble._timer);activeBubble.remove();activeBubble=null;}
+});
+
+function speakStoryText(idx){
+  const clean=stories[idx].text.replace(/\{([^|{}]+)\|([^|{}]+)\}/g,'$1');
+  speakWord(clean,'tr-TR');
+}
+
+// ================================================================
+// QUIZ
+// ================================================================
+function setQuizMode(mode, btn){
+  quizMode=mode;
+  document.querySelectorAll('#quiz .mode-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  generateQuiz();
+}
+
+function generateQuiz(){
+  const all=Object.values(vocabulary).flat();
+  quizQuestion=all[Math.floor(Math.random()*all.length)];
+  document.getElementById('quizQ').textContent=`Wat betekent "${quizQuestion.tr}"?`;
+  document.getElementById('quizFeedback').textContent='';
+  document.getElementById('nextBtn').style.display='none';
+
+  if(quizMode==='click'){
+    const wrong=all.filter(w=>w.nl!==quizQuestion.nl).sort(()=>Math.random()-.5).slice(0,3).map(w=>w.nl);
+    const opts=[...wrong,quizQuestion.nl].sort(()=>Math.random()-.5);
+    document.getElementById('quizBody').innerHTML=`<div class="quiz-opts">${
+      opts.map(o=>`<button class="quiz-opt" onclick="checkQuizClick('${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')
+    }</div>`;
+  } else {
+    document.getElementById('quizBody').innerHTML=`
+      <div class="quiz-type-area">
+        <input id="quizInput" class="quiz-input" type="text" placeholder="Typ de vertaling…"
+          onkeydown="if(event.key==='Enter')checkQuizType()">
+        <button class="quiz-submit-btn" onclick="checkQuizType()">Controleer</button>
+      </div>`;
+    setTimeout(()=>document.getElementById('quizInput')?.focus(),80);
+  }
+}
+
+function checkQuizClick(ans){
+  qTotal++;
+  document.querySelectorAll('.quiz-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.trim()===quizQuestion.nl) b.classList.add('correct');
+    else if(b.textContent.trim()===ans) b.classList.add('incorrect');
+  });
+  const fb=document.getElementById('quizFeedback');
+  if(ans===quizQuestion.nl){
+    qScore++; fb.className='quiz-feedback ok'; fb.textContent='✓ Geweldig! Goed antwoord! 🎉';
+    addXP(20); updateStreak();
+  } else {
+    qWrong++; fb.className='quiz-feedback err'; fb.textContent=`✗ Fout. Het was: ${quizQuestion.nl}`;
+    if(hearts>0){hearts--;document.getElementById('heartVal').textContent=hearts;}
+  }
+  updateScoreBar();
+  document.getElementById('nextBtn').style.display='block';
+}
+
+function checkQuizType(){
+  const input=document.getElementById('quizInput');
+  if(!input) return;
+  qTotal++;
+  const val=input.value.trim().toLowerCase();
+  const correct=quizQuestion.nl.toLowerCase();
+  const fb=document.getElementById('quizFeedback');
+  if(val===correct||(correct.includes(val)&&val.length>3)){
+    qScore++; input.classList.add('correct'); fb.className='quiz-feedback ok';
+    fb.textContent='✓ Uitstekend! 🐒'; addXP(25); updateStreak();
+  } else {
+    qWrong++; input.classList.add('incorrect'); fb.className='quiz-feedback err';
+    fb.textContent=`✗ Antwoord: ${quizQuestion.nl}`;
+    if(hearts>0){hearts--;document.getElementById('heartVal').textContent=hearts;}
+  }
+  input.disabled=true;
+  updateScoreBar();
+  document.getElementById('nextBtn').style.display='block';
+}
+
+function nextQuiz(){ generateQuiz(); }
+
+function updateScoreBar(){
+  document.getElementById('quizCorrect').textContent=qScore;
+  document.getElementById('quizWrong').textContent=qWrong;
+  document.getElementById('quizTotal').textContent=qTotal;
+}
+
+function updateStreak(){
+  streak++;
+  document.getElementById('streakVal').textContent=streak;
+}
+
+// ================================================================
+// INIT
+// ================================================================
+function init(){
+  initCatBar();
+  renderWords();
+  renderSentences();
+  initStorySelect();
+  renderStory(0);
+  generateQuiz();
+  updateProgress();
+  updateTotalCount();
+}
+
+function updateTotalCount(){
+  document.getElementById('totalCount').textContent=Object.values(vocabulary).flat().length;
+}
+
+window.onload=init;
+</script>
+</body>
+</html>
