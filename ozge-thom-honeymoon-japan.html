@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özge & Thom's Honeymoon in Japan 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush:    #f2d4ce;
+  --rose:     #c97b7b;
+  --deep:     #8b3a3a;
+  --cream:    #faf6f1;
+  --warm:     #f5ede3;
+  --sand:     #e8d9c8;
+  --ink:      #2c2118;
+  --muted:    #7a6a60;
+  --gold:     #b8893a;
+  --sage:     #7a9e8a;
+  --sky:      #6b9bb8;
+  --night:    #1c1410;
+  --sakura:   #e8b4b8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--night);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+/* Soft gradient blobs */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,123,123,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(232,180,184,.15) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(184,137,58,.08) 0%, transparent 60%);
+}
+
+/* Floating hearts / petals */
+.float {
+  position: absolute;
+  font-size: 1.1rem;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: .7; }
+  90%  { opacity: .5; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+.hero-names {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 2px 40px rgba(201,123,123,.5);
+  animation: fadeUp 1s ease both;
+}
+.hero-names .amp {
+  color: var(--sakura);
+  font-size: .85em;
+}
+.hero-heart {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin: .8rem 0;
+  animation: fadeUp 1s .2s ease both;
+  display: block;
+}
+.hero-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  color: rgba(255,255,255,.8);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s .3s ease both;
+}
+.hero-jp {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: rgba(255,255,255,.3);
+  letter-spacing: .4em;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 1s .4s ease both;
+}
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 1s .6s ease both;
+}
+.hstat {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: .8rem 1.4rem;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+.hstat-n {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: var(--sakura);
+  line-height: 1;
+  display: block;
+}
+.hstat-l {
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+.hero-safety {
+  margin-top: 2rem;
+  background: rgba(122,158,138,.15);
+  border: 1px solid rgba(122,158,138,.3);
+  border-radius: 10px;
+  padding: .7rem 1.4rem;
+  font-size: .82rem;
+  color: rgba(255,255,255,.65);
+  animation: fadeUp 1s .8s ease both;
+  display: inline-block;
+}
+.hero-safety .check { color: #a8d5b5; margin-right: .4rem; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── LETTER INTRO ── */
+.letter {
+  background: var(--warm);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.letter-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 4px;
+  padding: 3rem;
+  box-shadow: 0 8px 40px rgba(44,33,24,.06);
+  position: relative;
+}
+.letter-inner::before {
+  content: '💌';
+  font-size: 2rem;
+  position: absolute;
+  top: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.letter-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--rose);
+  margin-bottom: 1rem;
+}
+.letter-body {
+  font-size: .95rem;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.letter-body strong { color: var(--ink); font-weight: 700; }
+.letter-sig {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  color: var(--rose);
+  margin-top: 1.5rem;
+}
+
+/* ── SAFETY BANNER ── */
+.safety-bar {
+  background: var(--sage);
+  color: #fff;
+  padding: 1.2rem 2rem;
+  text-align: center;
+}
+.safety-bar-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: .88rem;
+  line-height: 1.7;
+}
+.safety-bar-inner strong { font-weight: 700; }
+.safety-bar-inner .warn { background: rgba(255,255,255,.15); border-radius: 6px; padding: .1rem .5rem; font-size: .8rem; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 2px solid var(--blush);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display:none; }
+.nav-inner {
+  display: flex;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.nav-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 1rem .85rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color .2s, border-color .2s;
+}
+.nav-btn:hover { color: var(--rose); border-color: var(--rose); }
+.nav-btn.main { color: var(--deep); }
+
+/* ── OVERVIEW ── */
+.overview {
+  background: var(--blush);
+  padding: 4rem 2rem;
+}
+.overview-inner { max-width: 860px; margin: 0 auto; }
+.section-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.4rem;
+  color: var(--deep);
+  margin-bottom: .3rem;
+}
+.section-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  font-size: .95rem;
+}
+.ov-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.ov-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  box-shadow: 0 2px 12px rgba(139,58,58,.07);
+  border-top: 3px solid var(--sand);
+}
+.ov-card.main-stop { border-top-color: var(--rose); }
+.ov-card.gem-stop  { border-top-color: var(--sky); }
+.ov-card.nature-stop { border-top-color: var(--sage); }
+.ov-card-days {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rose);
+  line-height: 1;
+}
+.ov-card-city {
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--ink);
+  margin: .2rem 0;
+}
+.ov-card-theme {
+  font-size: .78rem;
+  color: var(--muted);
+}
+.ov-badge {
+  display: inline-block;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .15rem .45rem;
+  border-radius: 20px;
+  margin-top: .4rem;
+}
+.badge-main   { background: rgba(201,123,123,.15); color: var(--deep); }
+.badge-gem    { background: rgba(107,155,184,.15); color: var(--sky); }
+.badge-nature { background: rgba(122,158,138,.15); color: var(--sage); }
+
+/* ── STOP BLOCK ── */
+.stop {
+  padding: 4rem 2rem;
+  border-bottom: 1px solid var(--sand);
+}
+.stop:nth-child(odd) { background: var(--cream); }
+.stop:nth-child(even) { background: var(--warm); }
+.stop-inner { max-width: 820px; margin: 0 auto; }
+
+.stop-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--sand);
+  flex-wrap: wrap;
+}
+.stop-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: .3rem;
+}
+.stop-label.gem { color: var(--sky); }
+.stop-label.nature { color: var(--sage); }
+.stop-label.spirit { color: #8b6abd; }
+.stop-label.island { color: var(--gold); }
+
+.stop-city {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.stop-city-jp {
+  font-size: .9rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: .2rem;
+  font-family: 'Playfair Display', serif;
+}
+.stop-nights-bubble {
+  background: var(--rose);
+  color: #fff;
+  border-radius: 50px;
+  padding: .6rem 1.2rem;
+  text-align: center;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.stop-nights-bubble.gem { background: var(--sky); }
+.stop-nights-bubble.nature { background: var(--sage); }
+.stop-nights-bubble.spirit { background: #8b6abd; }
+.stop-nights-bubble.island { background: var(--gold); }
+.snb-n {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  line-height: 1;
+  display: block;
+}
+.snb-l {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .8;
+}
+
+/* Hotel card */
+.hotel {
+  background: var(--night);
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1.8rem;
+  border-left: 4px solid var(--gold);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.hotel-emoji { font-size: 1.6rem; flex-shrink: 0; margin-top: .1rem; }
+.hotel-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .25rem;
+}
+.hotel-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.hotel-why {
+  font-size: .87rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Day rows */
+.days { display: flex; flex-direction: column; gap: 0; }
+.day {
+  display: grid;
+  grid-template-columns: 65px 1fr;
+  border-bottom: 1px solid rgba(44,33,24,.06);
+  padding: 1.3rem 0;
+}
+.day:last-child { border: none; }
+
+.day-num-col {
+  padding-right: .8rem;
+  border-right: 2px solid var(--blush);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-top: .15rem;
+}
+.day-num-lbl {
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  display: block;
+}
+.day-num-big {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.4rem;
+  color: rgba(44,33,24,.1);
+  line-height: 1;
+  display: block;
+}
+
+.day-content { padding-left: 1.2rem; }
+.day-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .4rem;
+}
+.day-desc {
+  font-size: .91rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: .65rem;
+}
+.day-desc strong { color: var(--ink); }
+
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .6rem; }
+.chip {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .2rem .6rem;
+  border-radius: 20px;
+}
+.chip-see  { background: rgba(184,137,58,.12); color: var(--gold); }
+.chip-eat  { background: rgba(201,123,123,.12); color: var(--deep); }
+.chip-tip  { background: rgba(122,158,138,.12); color: var(--sage); }
+.chip-gem  { background: rgba(107,155,184,.12); color: var(--sky); }
+.chip-love { background: rgba(232,180,184,.25); color: var(--rose); }
+
+.infobox {
+  font-size: .86rem;
+  line-height: 1.7;
+  padding: .6rem .9rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: .4rem;
+}
+.infobox-food { background: rgba(201,123,123,.07); border-left: 3px solid var(--rose); }
+.infobox-warn { background: rgba(184,137,58,.07); border-left: 3px solid var(--gold); }
+.infobox-safe { background: rgba(122,158,138,.08); border-left: 3px solid var(--sage); }
+.infobox strong { font-weight: 700; }
+.infobox-food strong { color: var(--deep); }
+.infobox-warn strong { color: #8a6820; }
+.infobox-safe strong { color: var(--sage); }
+
+/* Train banner */
+.train {
+  background: var(--sand);
+  padding: .9rem 2rem;
+  text-align: center;
+}
+.train-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: .8rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.train-inner .city { font-weight: 700; color: var(--ink); }
+.train-inner .arrow { color: var(--rose); font-size: 1.1rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--night);
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  color: rgba(255,255,255,.55);
+}
+.footer-hearts {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  color: var(--sakura);
+  display: block;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.08); } }
+footer h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: .8rem;
+}
+footer p { font-size: .9rem; line-height: 1.9; max-width: 540px; margin: 0 auto .5rem; }
+.footer-tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+  gap: .8rem;
+  max-width: 820px;
+  margin: 2.5rem auto 0;
+  text-align: left;
+}
+.footer-tip {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.footer-tip-icon { font-size: 1.2rem; margin-bottom: .4rem; }
+.footer-tip-title {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .3rem;
+}
+.footer-tip p { font-size: .82rem; color: rgba(255,255,255,.6); margin: 0; line-height: 1.6; }
+
+.footer-note {
+  margin-top: 3rem;
+  font-size: .72rem;
+  letter-spacing: .15em;
+  color: rgba(255,255,255,.2);
+}
+
+/* Scroll fade */
+.fade-in { opacity:0; transform:translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+.fade-in.vis { opacity:1; transform:none; }
+
+@media(max-width:600px){
+  .stop-head { flex-direction:column; }
+  .day { grid-template-columns:50px 1fr; }
+  .day-num-big { font-size:1.8rem; }
+  .hero-stats { gap:1rem; }
+  .letter-inner { padding:2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating petals & hearts -->
+<div class="float" style="left:8%;animation-duration:12s;animation-delay:0s;">🌸</div>
+<div class="float" style="left:22%;animation-duration:9s;animation-delay:2s;font-size:.8rem;">💕</div>
+<div class="float" style="left:40%;animation-duration:14s;animation-delay:1s;">🌸</div>
+<div class="float" style="left:58%;animation-duration:10s;animation-delay:3s;font-size:.7rem;">✨</div>
+<div class="float" style="left:72%;animation-duration:11s;animation-delay:0.5s;">🌸</div>
+<div class="float" style="left:88%;animation-duration:8s;animation-delay:4s;font-size:.9rem;">💕</div>
+<div class="float" style="left:33%;animation-duration:15s;animation-delay:5s;font-size:.7rem;">🌺</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-names">Özge <span class="amp">&</span> Thom</div>
+    <span class="hero-heart">💍</span>
+    <div class="hero-sub">Honeymoon in Japan</div>
+    <div class="hero-jp">日本 · 三週間の新婚旅行</div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">21</span><span class="hstat-l">Dagen samen</span></div>
+      <div class="hstat"><span class="hstat-n">9</span><span class="hstat-l">Bestemmingen</span></div>
+      <div class="hstat"><span class="hstat-n">∞</span><span class="hstat-l">Herinneringen</span></div>
+    </div>
+    <div class="hero-safety">
+      <span class="check">✅</span>
+      <strong>Veiligheidscheck geslaagd</strong> — Japan: Level 1 (laagste risiconiveau) · Alle bestemmingen veilig voor 2026
+    </div>
+  </div>
+</div>
+
+<!-- PERSOONLIJKE BRIEF -->
+<div class="letter">
+  <div class="letter-inner">
+    <div class="letter-greeting">Lieve Özge & Thom,</div>
+    <div class="letter-body">
+      Jullie beginnen als getrouwd stel aan de meest bijzondere reis die Japan te bieden heeft. <strong>Niet de standaard Golden Route</strong> die iedereen doet — maar een route die steden, bergen, eilanden, spirituele plekken en geheime parels combineert. Op jullie tempo. Met ruimte voor spontaniteit, late ochtenden in de ryokan en déjeuners die twee uur duren omdat het te lekker is.
+      <br><br>
+      Japan is <strong>één van de veiligste landen ter wereld</strong> — ideaal voor een honeymoon. Lage criminaliteit, betrouwbaar openbaar vervoer, en een cultuur die gastvrijheid in het DNA heeft zitten. Alles in dit document is gecheckt op veiligheid, actualiteit en of het echt de moeite waard is.
+      <br><br>
+      Ga genieten. Van elkaar, van de matcha, van het uitzicht op Fuji, van stilte in een klooster en chaos op Dotonbori. Dit is jullie reis. 🌸
+    </div>
+    <div class="letter-sig">Met liefde, jullie reisplanner 💌</div>
+  </div>
+</div>
+
+<!-- SAFETY BANNER -->
+<div class="safety-bar">
+  <div class="safety-bar-inner">
+    🛡️ <strong>Veiligheidscheck 2026:</strong> Japan heeft het laagste risiconiveau (Level 1) van het US State Department. Geen visum nodig voor Nederlanders (t/m 90 dagen). Alle 9 bestemmingen zijn veilig. Let op: <span class="warn">⚠️ Hiroshima Kasteel hoofdtoren gesloten na maart 2026 voor renovatie</span> · <span class="warn">⚠️ Owakudani (Hakone) soms gesloten bij verhoogde vulkanische activiteit — check vooraf</span> · <span class="warn">⚠️ Drinken op straat verboden in Shibuya na 18:00</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="overview fade-in">
+  <div class="overview-inner">
+    <div class="section-title">De route 🗺️</div>
+    <div class="section-sub">8 nachten in de grote drie, 13 nachten voor de rest van Japan</div>
+    <div class="ov-cards">
+      <div class="ov-card main-stop">
+        <div class="ov-card-days">3</div>
+        <div class="ov-card-city">🗼 Tokyo</div>
+        <div class="ov-card-theme">Stad, teamLab, Harajuku</div>
+        <span class="ov-badge badge-main">Verplicht</span>
+      </div>
+      <div class="ov-card nature-stop">
+        <div class="ov-card-days">2</div>
+        <div class="ov-card-city">🗻 Hakone</div>
+        <div class="ov-card-theme">Fuji, onsen, ryokan</div>
+        <span class="ov-badge badge-nature">Natuur</span>
+      </div>
+      <div class="ov-card main-stop">
+        <div class="ov-card-days">3</div>
+        <div class="ov-card-city">⛩️ Kyoto</div>
+        <div class="ov-card-theme">Tempels, geisha, Nara</div>
+        <span class="ov-badge badge-main">Verplicht</span>
+      </div>
+      <div class="ov-card main-stop">
+        <div class="ov-card-days">2</div>
+        <div class="ov-card-city">🏙️ Osaka</div>
+        <div class="ov-card-theme">Dotonbori, Kobe beef</div>
+        <span class="ov-badge badge-main">Verplicht</span>
+      </div>
+      <div class="ov-card gem-stop">
+        <div class="ov-card-days">1</div>
+        <div class="ov-card-city">🕯️ Koyasan</div>
+        <div class="ov-card-theme">Tempelovernachting</div>
+        <span class="ov-badge badge-gem">Uniek</span>
+      </div>
+      <div class="ov-card gem-stop">
+        <div class="ov-card-days">2</div>
+        <div class="ov-card-city">☮️ Hiroshima</div>
+        <div class="ov-card-theme">Peace Park + Miyajima</div>
+        <span class="ov-badge badge-gem">Hidden gem</span>
+      </div>
+      <div class="ov-card gem-stop">
+        <div class="ov-card-days">1</div>
+        <div class="ov-card-city">🎨 Naoshima</div>
+        <div class="ov-card-theme">Kusama, zee, kunst</div>
+        <span class="ov-badge badge-gem">Kunsteiland</span>
+      </div>
+      <div class="ov-card gem-stop">
+        <div class="ov-card-days">3</div>
+        <div class="ov-card-city">🍜 Fukuoka + Beppu</div>
+        <div class="ov-card-theme">Yatai, Yufuin, hellen</div>
+        <span class="ov-badge badge-gem">Kyushu</span>
+      </div>
+      <div class="ov-card nature-stop">
+        <div class="ov-card-days">3</div>
+        <div class="ov-card-city">🏔️ Kanazawa + Takayama</div>
+        <div class="ov-card-theme">Edo, UNESCO, bergryokan</div>
+        <span class="ov-badge badge-nature">Japanse Alpen</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#tokyo" class="nav-btn main">🗼 Tokyo</a>
+    <a href="#hakone" class="nav-btn">🗻 Hakone</a>
+    <a href="#kyoto" class="nav-btn main">⛩️ Kyoto</a>
+    <a href="#osaka" class="nav-btn main">🏙️ Osaka</a>
+    <a href="#koyasan" class="nav-btn">🕯️ Koyasan</a>
+    <a href="#hiroshima" class="nav-btn">☮️ Hiroshima</a>
+    <a href="#naoshima" class="nav-btn">🎨 Naoshima</a>
+    <a href="#fukuoka" class="nav-btn">🍜 Fukuoka</a>
+    <a href="#kanazawa" class="nav-btn">🏔️ Kanazawa</a>
+  </div>
+</nav>
+
+<!-- ══ TOKYO ══ -->
+<div class="stop fade-in" id="tokyo">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label">Stop 01 · Verplicht</div>
+      <div class="stop-city">Tokyo</div>
+      <div class="stop-city-jp">東京 — de stad die nooit slaapt</div>
+    </div>
+    <div class="stop-nights-bubble"><span class="snb-n">3</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🏨</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Candeo Hotels Tokyo Roppongi ★★★★</div>
+      <div class="hotel-why">Dé keuze voor een honeymoon: rooftop glazen onsen met panoramisch uitzicht over de skyline van Tokyo — perfect voor een romantische avond. Midden in Roppongi, ideale ligging. Budget-optie: Andon Ryokan in Asakusa (traditioneel, intiem, geweldig). Luxe: Andaz Tokyo Toranomon Hills.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">1</span></div>
+      <div class="day-content">
+        <div class="day-title">Aankomst + Senso-ji + Shibuya bij nacht</div>
+        <div class="day-desc">Aankomst op Haneda of Narita. Inchecken en even uitrusten van de vlucht. Eerste avond: <strong>Senso-ji Tempel</strong> in Asakusa — bij lantaarnlicht is het onvergetelijk romantisch. Daarna: <strong>Shibuya Crossing</strong> bij nacht, de neonlichten van Kabukicho. Jullie eerste indruk van Tokyo is er meteen eentje voor het leven. 💫</div>
+        <div class="chips"><span class="chip chip-see">Senso-ji bij nacht</span><span class="chip chip-love">Eerste avond samen!</span><span class="chip chip-tip">Konbini-ervaring: ga naar 7-Eleven voor snacks</span></div>
+        <div class="infobox infobox-food">🍜 <strong>Eten:</strong> Ichiran Ramen — individuele ramen-hokjes, rustig en heerlijk. Perfecte eerste maaltijd na de vlucht.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">2</span></div>
+      <div class="day-content">
+        <div class="day-title">Harajuku + teamLab Planets + Golden Gai</div>
+        <div class="day-desc"><strong>Meiji Jingu</strong> tempel — stille bosoase midden in de stad, heerlijk rustig samen wandelen. <strong>Takeshita Street</strong> in Harajuku: kawaii chaos, vintage shops, crepes. Middag: <strong>teamLab Planets</strong> in Toyosu — interactieve digitale kunstinstallaties. Super romantisch en viraal op TikTok/Instagram. 's Avonds: <strong>Golden Gai</strong> in Shinjuku, piepkleine bars in steegjes.</div>
+        <div class="chips"><span class="chip chip-see">Meiji Jingu</span><span class="chip chip-see">teamLab Planets</span><span class="chip chip-love">Romantisch!</span><span class="chip chip-tip">teamLab: weken vooraf boeken!</span></div>
+        <div class="infobox infobox-food">🥐 <strong>Eten:</strong> Crepes op Takeshita Street. Avond: izakaya in Golden Gai (elke bar heeft een ander concept — verlies jezelf erin).</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">3</span></div>
+      <div class="day-content">
+        <div class="day-title">Yanaka hidden gem + Shibuya Sky zonsondergang</div>
+        <div class="day-desc"><strong>Yanaka</strong> — het meest traditionele buurtje van Tokyo. Smalle steegjes, katten, oude bakkers. Bijna geen toeristen. Heerlijk om samen door te slenteren. Middag: Akihabara. Avond: <strong>Shibuya Sky</strong> voor zonsondergang — 360° uitzicht over de skyline. Een van de meest indrukwekkende momenten van de hele trip. Vooraf boeken!</div>
+        <div class="chips"><span class="chip chip-gem">Yanaka wijk</span><span class="chip chip-see">Shibuya Sky</span><span class="chip chip-love">Zonsondergang samen 🌅</span><span class="chip chip-tip">Shibuya Sky: boek 'sunset' tijdslot</span></div>
+        <div class="infobox infobox-food">🍱 <strong>Eten:</strong> Soba bij een lokale zaak in Yanaka. Avond: tonkatsu in een gezellige Shibuya-zaak.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Tokyo</span><span class="arrow">🚄 →</span><span class="city">Hakone</span><span>| Romancekar trein (Odakyu) 1u45 · ±¥2.400 · Hakone Free Pass dekt alles op het eiland</span></div></div>
+
+<!-- ══ HAKONE ══ -->
+<div class="stop fade-in" id="hakone">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label nature">Stop 02 · Natuur & Onsen</div>
+      <div class="stop-city">Hakone</div>
+      <div class="stop-city-jp">箱根 — Fuji, dampende kraters & jullie eerste ryokan</div>
+    </div>
+    <div class="stop-nights-bubble nature"><span class="snb-n">2</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">♨️</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf — perfect voor een honeymoon</div>
+      <div class="hotel-name">Ryokan Gora Kadan ★★★★★ of Hakone Ginyu</div>
+      <div class="hotel-why">Jullie eerste traditionele ryokan: slapen op een futon, kimono/yukata aantrekken, privé-onsen in de kamer, kaiseki-diner met 10+ gangen. Dit is het meest romantische overnachting van de hele trip. Budget-optie: Hakone Tent (gezellige sfeer, mooie gemeenschappelijke onsen). Vroeg boeken — populair het hele jaar.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">4</span></div>
+      <div class="day-content">
+        <div class="day-title">Vulkaan, kabelbaan & Lake Ashi</div>
+        <div class="day-desc">De <strong>Hakone Round Course</strong>: kabelbaan, ropeway, boot — allemaal in één dag. <strong>Owakudani</strong> dampende vulkaankrater, zit dramatisch aan te kijken. Eet de beroemde zwarte eieren (kuro-tamago). <strong>Lake Ashi</strong> bootrit met bij mooi weer Fuji-uitzicht. Aankomst ryokan: onsen in de kamer, yukata aan, kaiseki-diner. Het meest Japanse gevoel dat je kunt hebben. 🏔️</div>
+        <div class="chips"><span class="chip chip-see">Owakudani krater</span><span class="chip chip-see">Lake Ashi</span><span class="chip chip-love">Privé-onsen samen 🛁</span><span class="chip chip-tip">Owakudani: check status vooraf</span></div>
+        <div class="infobox infobox-food">🥚 <strong>Eten:</strong> Zwarte eieren bij de krater. Kaiseki-diner in de ryokan — dit is jullie romantische diner #1.</div>
+        <div class="infobox infobox-safe" style="margin-top:.4rem">✅ <strong>Veilig:</strong> Owakudani is veilig te bezoeken maar kan bij verhoogde activiteit tijdelijk gesloten worden. Check de <a href="https://www.hakone.or.jp" style="color:var(--sage);">Hakone-website</a> van tevoren.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">5</span></div>
+      <div class="day-content">
+        <div class="day-title">Chureito Pagoda bij zonsopkomst ✨</div>
+        <div class="day-desc">Vroeg op! Dagtripje naar <strong>Kawaguchiko</strong>: de <strong>Chureito Pagoda</strong> met Fuji op de achtergrond voor zonsopkomst. Een van de meest gedeelde foto's van Japan — viraal op elk social platform. Vóór 07:30 bijna alleen. Daarna terug richting Shinkansen naar Kyoto.</div>
+        <div class="chips"><span class="chip chip-see">Chureito Pagoda</span><span class="chip chip-love">Mooiste foto van de trip 📸</span><span class="chip chip-tip">Vóór 07:30 = bijna alleen!</span></div>
+        <div class="infobox infobox-food">☕ <strong>Eten:</strong> Soba met Fuji-uitzicht in een bergrestaurantje bij het meer.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Hakone (Odawara)</span><span class="arrow">🚄 →</span><span class="city">Kyoto</span><span>| Shinkansen 1u40 · ±¥7.200</span></div></div>
+
+<!-- ══ KYOTO ══ -->
+<div class="stop fade-in" id="kyoto">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label">Stop 03 · Verplicht</div>
+      <div class="stop-city">Kyoto</div>
+      <div class="stop-city-jp">京都 — oud Japan op zijn mooiste</div>
+    </div>
+    <div class="stop-nights-bubble"><span class="snb-n">3</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🏯</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Kanamean Nishitomiya Ryokan of Hotel Granvia Kyoto</div>
+      <div class="hotel-why">Kanamean is een intieme ryokan met slechts 7 suites, pal in Higashiyama — op loopafstand van alle hoogtepunten. Hotel Granvia staat direct op het station, ideaal voor dagtrips. Budget: Piece Hostel Sanjo. Tip: verblijf in Higashiyama voor de beste sfeer.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">6</span></div>
+      <div class="day-content">
+        <div class="day-title">Fushimi Inari vroeg + Gion geisha-district</div>
+        <div class="day-desc"><strong>05:30</strong> naar Fushimi Inari Taisha — duizenden rode torii-poorten op de berg. Loop zo ver mogelijk omhoog: na het derde station wordt het magisch stil en bijna mysterieus. Na 09:00 extreem druk. Middag: <strong>Gion</strong> — historisch geisha-district. Loop Hanamikoji Street in de late middag: echte kans op een geisha-glimp. Avond: Nishiki Markt.</div>
+        <div class="chips"><span class="chip chip-see">Fushimi Inari</span><span class="chip chip-see">Gion</span><span class="chip chip-love">Vroeg = magisch voor jullie tweeën 🌅</span><span class="chip chip-tip">Vóór 07:00 = bijna niemand</span></div>
+        <div class="infobox infobox-food">🍡 <strong>Eten:</strong> Matcha-alles op de Nishiki Markt. Kaiseki in Gion (Kikunoi Honten — ver vooraf reserveren).</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">7</span></div>
+      <div class="day-content">
+        <div class="day-title">Arashiyama bamboebos + Kinkaku-ji</div>
+        <div class="day-desc"><strong>06:30</strong> naar het bamboebos — 30 minuten later stroomt het vol. <strong>Tenryu-ji</strong> tempel. Sagano Romantic Train door de kloof (vooraf boeken!). Middag: <strong>Kinkaku-ji</strong> Gouden Paviljoen. Avond: Philosopher's Path (heerlijke wandeling langs het kanaal) en Nanzen-ji tempel.</div>
+        <div class="chips"><span class="chip chip-see">Bamboo Grove</span><span class="chip chip-see">Kinkaku-ji</span><span class="chip chip-gem">Otagi Nenbutsuji tempel</span><span class="chip chip-love">Sagano Romantic Train 🚂</span></div>
+        <div class="infobox infobox-food">🎋 <strong>Eten:</strong> Tofu-kaiseki bij Shoraian in het bos langs de rivier. Matcha soft-serve in Arashiyama.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">8</span></div>
+      <div class="day-content">
+        <div class="day-title">Kimono + Kiyomizudera + Nara dagtrip 🦌</div>
+        <div class="day-desc">Huur een <strong>kimono</strong> bij Yumeyakata en wandel door Higashiyama. Vroeg naar <strong>Kiyomizudera</strong> op de berg, terug via <strong>Ninenzaka & Sannenzaka</strong> — pittoreske stenen paden, sfeervol en viraal op Instagram. Middag: dagtrip naar <strong>Nara</strong> (45 min): heilige vrije herten die je letterlijk groeten, de enorme <strong>Todai-ji</strong> Boeddha.</div>
+        <div class="chips"><span class="chip chip-love">Kimono samen 👘</span><span class="chip chip-see">Kiyomizudera</span><span class="chip chip-see">Nara herten</span><span class="chip chip-tip">Hertenkoekjes kopen = TikTok goud 🦌</span></div>
+        <div class="infobox infobox-food">🍵 <strong>Eten:</strong> Yatsuhashi rijstkoekjes op Sannenzaka. Avond: izakaya langs de rivier in Pontocho-steeg.</div>
+        <div class="infobox infobox-warn" style="margin-top:.4rem">⚠️ <strong>Let op:</strong> Herten zien er schattig uit maar kunnen bijten en aan tassen trekken — wees voorzichtig met tassen en zakken!</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Kyoto</span><span class="arrow">🚄 →</span><span class="city">Osaka</span><span>| Shinkansen 15 min of lokale trein 40 min · ±¥1.400</span></div></div>
+
+<!-- ══ OSAKA ══ -->
+<div class="stop fade-in" id="osaka">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label">Stop 04 · Verplicht</div>
+      <div class="stop-city">Osaka</div>
+      <div class="stop-city-jp">大阪 — eten, eten en nog meer eten</div>
+    </div>
+    <div class="stop-nights-bubble"><span class="snb-n">2</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🏙️</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Cross Hotel Osaka of Dormy Inn Namba</div>
+      <div class="hotel-why">Verblijf in Namba/Shinsaibashi — alles op loopafstand. Dormy Inn heeft altijd een onsen op het dak. Ideale uitvalsbasis voor Kobe en de stad zelf. Budget: Namba Hostel Inn.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">9</span></div>
+      <div class="day-content">
+        <div class="day-title">Kobe Beef dagtrip + Dotonbori</div>
+        <div class="day-desc">Ochtend: trein naar <strong>Kobe</strong> (30 min) voor de beroemde <strong>Kobe-beef</strong> lunch bij Steak Land of Mouriya — dit is het culinaire hoogtepunt van de trip. A5-wagyu, geroosterd voor jullie ogen. Terug: <strong>Dotonbori</strong> met het Glico-bord, reuze krabben, takoyaki en neonlichten. Dit is het Osaka-gevoel in pure vorm.</div>
+        <div class="chips"><span class="chip chip-eat">Kobe Beef A5 🥩</span><span class="chip chip-see">Dotonbori</span><span class="chip chip-love">Culinair hoogtepunt!</span></div>
+        <div class="infobox infobox-food">🥩 <strong>Eten:</strong> Kobe-beef lunch ±¥6.000–9.000 p.p. Avond: takoyaki + okonomiyaki in Dotonbori. Kushi-katsu op Hozenji Yokocho-steeg.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">10</span></div>
+      <div class="day-content">
+        <div class="day-title">Osaka Kasteel + Shinsekai + Nightlife</div>
+        <div class="day-desc"><strong>Osaka Kasteel</strong> met prachtige parktuinen. Middag: <strong>Shinsekai</strong> — retro, gek, iconisch. Amerika Mura voor vintage. Avond: Osaka heeft het beste nachtleven buiten Tokyo — laat jullie meestromen met de chaos van Dotonbori.</div>
+        <div class="chips"><span class="chip chip-see">Osaka Kasteel</span><span class="chip chip-gem">Shinsekai wijk</span><span class="chip chip-tip">Tsutenkaku toren in Shinsekai = retro-icoon</span></div>
+        <div class="infobox infobox-food">🦑 <strong>Eten:</strong> Avontuurlijk? Probeer fugu (kogelvis) bij een restaurant in Dotonbori. Anders: yakiniku-BBQ voor twee.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Osaka (Namba)</span><span class="arrow">🚃 →</span><span class="city">Koyasan</span><span>| Nankai Koya Lijn + kabelbaan · 2u · ±¥1.600 · Nankai Pass aanbevolen</span></div></div>
+
+<!-- ══ KOYASAN ══ -->
+<div class="stop fade-in" id="koyasan">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label spirit">Stop 05 · Spiritueel · Nergens anders zo</div>
+      <div class="stop-city">Koyasan</div>
+      <div class="stop-city-jp">高野山 — een nacht slapen bij de monniken</div>
+    </div>
+    <div class="stop-nights-bubble spirit"><span class="snb-n">1</span><span class="snb-l">Nacht</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🕯️</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf — de meest bijzondere nacht</div>
+      <div class="hotel-name">Shukubo Ekoin of Fukuchiin Tempel</div>
+      <div class="hotel-why">Koyasan heeft 50+ tempels die gasten ontvangen als shukubo (tempel-logeerplaats). Jullie slapen op tatami, eten shojin ryori (boeddhistische maaltijden) en wonen vroeg 's ochtends de gebedsceremonie bij. Ekoin en Fukuchiin hebben privé-onsen. Dit bestaat nergens anders. Vroeg boeken — beperkt beschikbaar!</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">11</span></div>
+      <div class="day-content">
+        <div class="day-title">Okunoin bij lantaarnlicht + ochtendgebed monniken</div>
+        <div class="day-desc">Aankomst, inchecken in de tempel. Middag: <strong>Kongobuji</strong> — hoofdkwartier van het Shingon-boeddhisme. Avond: wandel samen door <strong>Okunoin begraafplaats</strong> bij lantaarnlicht — 200.000 graftombes tussen eeuwenoude ceders. Compleet stil, enorm mysterieus. Eén van de meest onvergetelijke ervaringen van Japan. Volgende ochtend <strong>06:00</strong>: gebedsceremonie van de monniken bijwonen. Daarna door naar Hiroshima.</div>
+        <div class="chips"><span class="chip chip-see">Okunoin begraafplaats</span><span class="chip chip-see">Kongobuji tempel</span><span class="chip chip-love">Meest unieke nacht van de trip 🕯️</span><span class="chip chip-tip">Avond-wandeling: niet te missen!</span></div>
+        <div class="infobox infobox-food">🍃 <strong>Eten:</strong> Shojin Ryori — volledig veganistische boeddhistische maaltijd in 10 gangen. Prachtig gepresenteerd, meditatief.</div>
+        <div class="infobox infobox-warn" style="margin-top:.4rem">⚠️ <strong>Let op:</strong> Tempel-etiquette: stil zijn, geen alcohol in de kamers, op tijd voor maaltijden. Reserveer ver van tevoren!</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Koyasan</span><span class="arrow">🚄 →</span><span class="city">Hiroshima</span><span>| Kabelbaan + Nankai + Shinkansen · ±4u · ±¥11.000</span></div></div>
+
+<!-- ══ HIROSHIMA ══ -->
+<div class="stop fade-in" id="hiroshima">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label gem">Stop 06 · Geschiedenis + Eiland</div>
+      <div class="stop-city">Hiroshima & Miyajima</div>
+      <div class="stop-city-jp">広島 · 宮島 — vrede en het drijvende torii</div>
+    </div>
+    <div class="stop-nights-bubble gem"><span class="snb-n">2</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">☮️</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Hotel Granvia Hiroshima of Rihga Royal Hotel</div>
+      <div class="hotel-why">Direct bij het station, 10 minuten van het Peace Park. Optie: slaap 1 nacht op Miyajima zelf bij Ryokan Iwaso — na 17:00 zijn alle dagbezoekers weg en heb je het eiland vrijwel voor jullie zelf. Onvergetelijk romantisch.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">12</span></div>
+      <div class="day-content">
+        <div class="day-title">Peace Memorial Park & Museum</div>
+        <div class="day-desc"><strong>Peace Memorial Park</strong> — het A-Bomb Dome (UNESCO World Heritage), het Children's Peace Monument en het indrukwekkende museum (neem echt 2 uur). Emotioneel maar ontzettend belangrijk om te zien. Middag: de herboren, bruisende stad Hiroshima verkennen.</div>
+        <div class="chips"><span class="chip chip-see">Peace Memorial</span><span class="chip chip-see">A-Bomb Dome UNESCO</span><span class="chip chip-tip">Museum: plan 2 uur · maandag gesloten (winter)</span></div>
+        <div class="infobox infobox-food">🍋 <strong>Eten:</strong> Hiroshima-okonomiyaki — gelaagd met yakisoba, anders dan Osaka-stijl. Probeer bij Nagata-ya.</div>
+        <div class="infobox infobox-warn" style="margin-top:.4rem">⚠️ <strong>Update 2026:</strong> Hiroshima Kasteel hoofdtoren is gesloten voor renovatie. De tuinen en het terrein zijn nog te bezoeken.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">13</span></div>
+      <div class="day-content">
+        <div class="day-title">Miyajima — het drijvende torii bij vloed 🌊</div>
+        <div class="day-desc">Veerboot (25 min) naar <strong>Miyajima eiland</strong>. <strong>Itsukushima Shrine</strong> met het iconische torii-poort in zee — bij vloed lijkt het te drijven, bij eb kun je ernaartoe lopen. <strong>Check de getijden vooraf!</strong> <strong>Mount Misen</strong> wandelen of kabelbaan voor panoramisch uitzicht. Heilige herten lopen ook hier vrij rond.</div>
+        <div class="chips"><span class="chip chip-see">Drijvend torii</span><span class="chip chip-see">Itsukushima Shrine</span><span class="chip chip-gem">Mount Misen top</span><span class="chip chip-love">Mooiste foto van de trip 📸</span></div>
+        <div class="infobox infobox-food">🦪 <strong>Eten:</strong> Gegrilde oesters aan een stokje op de haven. Momiji-manju (esdoornblad-cakejes) meenemen als souvenir.</div>
+        <div class="infobox infobox-tip" style="background:rgba(107,155,184,.07);border-left:3px solid var(--sky);padding:.6rem .9rem;font-size:.86rem;margin-top:.4rem;">💡 <strong>Tip getijden:</strong> Check tideforecast.com of jidai.co.jp/tide voor de exacte tijden. Vloed = drijvend torii = best voor foto's.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Hiroshima</span><span class="arrow">🚄 →</span><span class="city">Naoshima</span><span>| Shinkansen naar Okayama + ferry via Uno Port · ±2u30 · ±¥7.500</span></div></div>
+
+<!-- ══ NAOSHIMA ══ -->
+<div class="stop fade-in" id="naoshima">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label island">Stop 07 · Kunsteiland · Viraal op Instagram & TikTok</div>
+      <div class="stop-city">Naoshima</div>
+      <div class="stop-city-jp">直島 — het meest bijzondere eiland van Japan</div>
+    </div>
+    <div class="stop-nights-bubble island"><span class="snb-n">1</span><span class="snb-l">Nacht</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🎨</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf — slapen in een museum</div>
+      <div class="hotel-name">Benesse House Museum Hotel ★★★★★ of Naoshima Youth Hostel</div>
+      <div class="hotel-why">Benesse House is tegelijk museum en hotel — jullie slapen omringd door originele werken van wereldberoemde kunstenaars in een gebouw van architect Tadao Ando. Het ultieme honeymoon-verblijf op het eiland. Budget: Naoshima Youth Hostel. Huur een fiets bij aankomst — het eiland is compact en perfect voor fietsen.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">14</span></div>
+      <div class="day-content">
+        <div class="day-title">Yayoi Kusama, Chichu Museum & kustfietsen 🎨</div>
+        <div class="day-desc">Naoshima is een klein eiland dat volledig gewijd is aan hedendaagse kunst. <strong>Chichu Art Museum</strong> — Tadao Ando architectuur, Monet, James Turrell (lichtinstallaties die je in trance brengen). Vooraf boeken! <strong>Yayoi Kusama's gele pompoen</strong> aan zee — dé foto van het eiland en viraal op elk platform. <strong>Art House Project</strong>: kunstinstallaties in verlaten vissersdorpjes. Fietsen langs de kust bij zonsondergang. 💛</div>
+        <div class="chips"><span class="chip chip-see">Chichu Museum</span><span class="chip chip-love">Kusama pompoen foto 🎃</span><span class="chip chip-gem">Art House Project</span><span class="chip chip-tip">Chichu: verplicht vooraf boeken</span></div>
+        <div class="infobox infobox-food">🐟 <strong>Eten:</strong> Verse vis bij lokale eetgelegenheden in het dorp Honmura. Weinig opties op het eiland — check openingstijden.</div>
+        <div class="infobox infobox-warn" style="margin-top:.4rem">⚠️ <strong>Let op:</strong> Musea zijn maandag gesloten. 's Avonds weinig transport — fiets is de oplossing. Huur bij aankomst veer.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Naoshima</span><span class="arrow">🚄 →</span><span class="city">Fukuoka</span><span>| Ferry + Shinkansen (Okayama → Hakata) · ±3u · ±¥9.000</span></div></div>
+
+<!-- ══ FUKUOKA ══ -->
+<div class="stop fade-in" id="fukuoka">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label gem">Stop 08 · Kyushu · Japan's meest ontspannen stad</div>
+      <div class="stop-city">Fukuoka + Beppu</div>
+      <div class="stop-city-jp">福岡 · 別府 — streetfood, Ghibli-dorp & hellende onsens</div>
+    </div>
+    <div class="stop-nights-bubble gem"><span class="snb-n">3</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🍜</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Hakata Tokyu REI Hotel + 1 nacht Beppu Nagomitsuki Ryokan</div>
+      <div class="hotel-why">2 nachten in Fukuoka bij Hakata Station — wandelafstand van de yatai-kraampjes langs de rivier. 1 nacht in Beppu bij Nagomitsuki Ryokan met privé-onsen in de kamer (ideaal na een dag langs de hellen). Veilig en uitstekend beoordeeld.</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">15</span></div>
+      <div class="day-content">
+        <div class="day-title">Fukuoka — Dazaifu + Yatai-kraampjes bij nacht</div>
+        <div class="day-desc">Dagtrip naar <strong>Dazaifu Tenmangu</strong> heiligdom (30 min, prachtig). <strong>Canal City</strong> voor winkelen. Avond: <strong>Nakasu yatai</strong> — kraampjes langs de rivier. Je eet tonkotsu ramen en drinkt bier op krukjes naast vreemden die vrienden worden. Dit is de meest iconische Fukuoka-ervaring en viral op TikTok. 🏮</div>
+        <div class="chips"><span class="chip chip-see">Dazaifu Tenmangu</span><span class="chip chip-love">Yatai bij nacht samen 🏮</span><span class="chip chip-tip">Yatai open vanaf 18:00</span></div>
+        <div class="infobox infobox-food">🍜 <strong>Eten:</strong> Tonkotsu ramen bij Ichiran of Shin-Shin — Fukuoka is de geboorteplaats. Mentaiko (gekruide kabeljauweitjes) als snack meenemen.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">16</span></div>
+      <div class="day-content">
+        <div class="day-title">Yufuin — het Ghibli-dorpje 🌿</div>
+        <div class="day-desc">Trein met de legendarische <strong>Yufuin no Mori</strong> (groene retro-trein, vooraf boeken!). Dit sprookjesachtige bergstadje heeft de sfeer van Studio Ghibli's Spirited Away: mist, berghelling, kleine cafés, ambachtswinkels en <strong>Kinrin Lake</strong>. Minder toeristen dan Kyoto, mooier dan verwacht. Terug naar Fukuoka voor de avond of doorrijden naar Beppu.</div>
+        <div class="chips"><span class="chip chip-see">Kinrin Lake</span><span class="chip chip-love">Ghibli-sfeer samen 🌿</span><span class="chip chip-gem">Yufuin Floral Village</span><span class="chip chip-tip">Yufuin no Mori trein: weken vooraf boeken!</span></div>
+        <div class="infobox infobox-food">🧁 <strong>Eten:</strong> Cream puffs bij B-speak (wachtrij maar het is het waard). Lokale soba in een bergrestaurantje.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">17</span></div>
+      <div class="day-content">
+        <div class="day-title">Beppu — de 8 hellen van kokend water 🔥</div>
+        <div class="day-desc">Trein naar <strong>Beppu</strong> (1 uur). De <strong>Jigoku (Hells) tour</strong>: 8 unieke kokende bronnen van kobaltblauw tot bloederood. Spectaculair en viral op TikTok. Niet voor erin te liggen — wel voor verbijsterd naar te kijken. Daarna: wél in een gewone onsen stappen. Overnacht in Beppu ryokan met privé-onsen.</div>
+        <div class="chips"><span class="chip chip-see">Beppu Jigoku Hells</span><span class="chip chip-love">Privé-onsen avond 🛁</span><span class="chip chip-gem">Umi Jigoku (kobaltblauw)</span><span class="chip chip-tip">Combinatieticket hellen: ±¥2.200</span></div>
+        <div class="infobox infobox-food">🥚 <strong>Eten:</strong> Onsen tamago (zacht ei gekookt in de bronnen). Beppu cold noodles. Onsen pudding — lokale specialiteit.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="city">Fukuoka (Hakata)</span><span class="arrow">✈️/🚄 →</span><span class="city">Kanazawa</span><span>| Vlucht Fukuoka → Komatsu ±1u (makkelijkst) of Shinkansen ±4-5u · ±¥15.000</span></div></div>
+
+<!-- ══ KANAZAWA ══ -->
+<div class="stop fade-in" id="kanazawa">
+<div class="stop-inner">
+  <div class="stop-head">
+    <div>
+      <div class="stop-label nature">Stop 09 · Japanse Alpen · Afsluiter</div>
+      <div class="stop-city">Kanazawa + Takayama</div>
+      <div class="stop-city-jp">金沢 · 高山 — Kyoto zonder de massa, Alpen zonder de drukte</div>
+    </div>
+    <div class="stop-nights-bubble nature"><span class="snb-n">3</span><span class="snb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-emoji">🏔️</div>
+    <div>
+      <div class="hotel-label">Jullie verblijf</div>
+      <div class="hotel-name">Hotel UAN Kanazawa + Ryokan Asunaro (Takayama)</div>
+      <div class="hotel-why">2 nachten in Kanazawa bij Hotel UAN — centraal, modern, uitstekend beoordeeld. 1 nacht in Takayama bij Ryokan Asunaro — viraal op sociale media, privé-onsen, Hida-beef kaiseki-diner. De perfecte slotnacht van jullie honeymoon. Vroeg boeken!</div>
+    </div>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">18</span></div>
+      <div class="day-content">
+        <div class="day-title">Kanazawa — Kenroku-en tuin + Goud-ijs 💛</div>
+        <div class="day-desc"><strong>Kenroku-en</strong> — een van Japan's drie mooiste tuinen, prachtig in elk seizoen. <strong>Higashi Chaya-gai</strong> — het meest intact bewaard geisha-district buiten Kyoto, maar zonder de massa's toeristen. <strong>Omicho Vismarkt</strong> voor verse Japanse Zee-vis. Kanazawa is de bladgoud-hoofdstad van Japan: eet het viral <strong>goud-soft-serve ijsje</strong> — jullie Instagram-moment! ✨</div>
+        <div class="chips"><span class="chip chip-see">Kenroku-en tuin</span><span class="chip chip-see">Higashi Chaya</span><span class="chip chip-love">Goud-ijs samen 🍦✨</span><span class="chip chip-gem">21st Century Museum</span></div>
+        <div class="infobox infobox-food">🍣 <strong>Eten:</strong> Verse sushi bij Omicho Markt — Japanse Zee-vis (krab, garnaal, zeeëgel). Avond: sake-proeverij in de Higashi Chaya wijk.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">19</span></div>
+      <div class="day-content">
+        <div class="day-title">Takayama Edo-straatjes + Shirakawa-go UNESCO-dorp</div>
+        <div class="day-desc">Trein naar <strong>Takayama</strong> (2 uur). <strong>Sanmachi Suji</strong> — perfectly bewaarde Edo-straatjes met sake-brouwerijen. Bus naar <strong>Shirakawa-go</strong> (50 min) — UNESCO-dorp met gigantische rietgedekte boerderijen in een bergdal. Een van de meest gefotografeerde dorpen van Japan. Terug voor de ultieme slotnacht in jullie bergryokan.</div>
+        <div class="chips"><span class="chip chip-see">Sanmachi Suji</span><span class="chip chip-see">Shirakawa-go UNESCO</span><span class="chip chip-love">Slotnacht bergryokan 🏔️</span><span class="chip chip-gem">Sake-proeverij Funasaka</span></div>
+        <div class="infobox infobox-food">🥩 <strong>Eten:</strong> Hida-beef (lokale wagyu) in Takayama. Kaiseki-diner in Ryokan Asunaro — jullie laatste romantische diner van de honeymoon.</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num-col"><span class="day-num-lbl">Dag</span><span class="day-num-big">20–21</span></div>
+      <div class="day-content">
+        <div class="day-title">Terugreis — tot de volgende keer, Japan 🌸</div>
+        <div class="day-desc">Shinkansen Takayama → Nagoya → Tokyo (±4 uur). Laatste avond in Tokyo — een late sushi-omakase als ultieme afsluiter? Vlucht van <strong>Haneda</strong> (dichter bij Tokyo, ±35 min) of Narita (±70 min). Check van welk vliegveld jullie vlucht vertrekt. Laatste konbini-run, laatste ramen, en dan: huiswaarts met tassen vol matcha, sake en herinneringen.</div>
+        <div class="chips"><span class="chip chip-love">Tot ziens, Japan 🌸</span><span class="chip chip-tip">Bagage sturen via Yamato Transport naar vliegveld</span><span class="chip chip-gem">Laatste omakase sushi als afsluiter</span></div>
+        <div class="infobox infobox-warn">⚠️ <strong>Vliegveld:</strong> Bewaar 2.5–3 uur buffer. Haneda (HND) is dichter bij de stad dan Narita (NRT). Check welk vliegveld jullie ticket vermeldt!</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-hearts">💕</span>
+  <h3>Özge & Thom — Japan Honeymoon</h3>
+  <p>21 dagen, 9 bestemmingen, één avontuur. Van de chaos van Tokyo tot de stilte van Koyasan, van het drijvende torii tot het goud-ijsje van Kanazawa — dit is jullie reis.</p>
+  <p style="font-size:.82rem;color:rgba(255,255,255,.3);margin-top:.5rem;">Alle bestemmingen zijn veilig gecheckt · Level 1 reisadvies · Geen visum nodig voor Nederlanders</p>
+
+  <div class="footer-tips">
+    <div class="footer-tip">
+      <div class="footer-tip-icon">🚄</div>
+      <div class="footer-tip-title">Transport</div>
+      <p>Koop losse Shinkansen-tickets via Klook. Suica-kaart voor metro's. JR Pass voor deze route niet voordelig.</p>
+    </div>
+    <div class="footer-tip">
+      <div class="footer-tip-icon">📱</div>
+      <div class="footer-tip-title">Internet</div>
+      <p>eSIM kopen via Airalo vóór vertrek. Altijd nodig voor Google Maps, Hyperdia en vertaalfunctie.</p>
+    </div>
+    <div class="footer-tip">
+      <div class="footer-tip-icon">💴</div>
+      <div class="footer-tip-title">Cash</div>
+      <p>Haal yen op bij 7-Eleven ATM. Veel ryokans, tempels en kleine zaakjes zijn cash-only.</p>
+    </div>
+    <div class="footer-tip">
+      <div class="footer-tip-icon">🧳</div>
+      <div class="footer-tip-title">Bagage</div>
+      <p>Stuur koffers met Yamato Transport van hotel naar hotel (±¥1.500). Ideaal bij ryokan-oversten.</p>
+    </div>
+    <div class="footer-tip">
+      <div class="footer-tip-icon">💰</div>
+      <div class="footer-tip-title">Budget</div>
+      <p>Middenklasse: ±€5.500–7.500 p.p. all-in. Ryokan-nachten zijn duurder maar kaiseki-diner incl.</p>
+    </div>
+    <div class="footer-tip">
+      <div class="footer-tip-icon">💍</div>
+      <div class="footer-tip-title">Honeymoon tip</div>
+      <p>Vertel hotels dat jullie op huwelijksreis zijn — vaak krijg je een upgrade, welkomstdrankje of extra decoratie.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">Özge & Thom's Honeymoon Guide · Japan 2026 · Veiligheid gecheckt · Samengesteld met liefde 💕</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
