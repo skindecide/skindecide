@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özge & Thom — Japan Honeymoon 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush:   #f0d5cc;
+  --rose:    #c47a6e;
+  --deep:    #7a3028;
+  --cream:   #faf7f3;
+  --warm:    #f4ece2;
+  --sand:    #e5d5c0;
+  --ink:     #1e1510;
+  --muted:   #6e5c52;
+  --gold:    #b8893a;
+  --sage:    #6b8f76;
+  --sky:     #5a8fa8;
+  --night:   #130e0a;
+  --sakura:  #dfa8a8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Josefin Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:15px;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;background:var(--night);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;text-align:center;padding:3rem 2rem;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 85%,rgba(196,122,110,.25) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 15%,rgba(223,168,168,.15) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(184,137,58,.07) 0%,transparent 60%);
+}
+.hero-float{position:absolute;animation:floatUp linear infinite;opacity:0;font-size:1rem;}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0;}10%{opacity:.6;}90%{opacity:.4;}100%{transform:translateY(-5vh) rotate(360deg);opacity:0;}}
+.hero-content{position:relative;z-index:2;max-width:680px;}
+.hero-script{font-family:'Great Vibes',cursive;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--sakura);letter-spacing:.1em;margin-bottom:.5rem;animation:fadeUp .9s ease both;}
+.hero-names{font-family:'Great Vibes',cursive;font-size:clamp(4rem,12vw,8.5rem);color:#fff;line-height:1;text-shadow:0 4px 60px rgba(196,122,110,.5);animation:fadeUp .9s .15s ease both;margin-bottom:.5rem;}
+.hero-amp{color:var(--sakura);}
+.hero-icon{font-size:2rem;display:block;margin:.8rem auto;animation:fadeUp .9s .3s ease both;}
+.hero-sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:clamp(1rem,2vw,1.5rem);color:rgba(255,255,255,.75);margin-bottom:.5rem;animation:fadeUp .9s .4s ease both;}
+.hero-dates{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2.5rem;animation:fadeUp .9s .5s ease both;}
+.hero-stats{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .65s ease both;}
+.hstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.7rem 1.2rem;text-align:center;backdrop-filter:blur(8px);}
+.hstat-n{font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--sakura);line-height:1;display:block;}
+.hstat-l{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.hero-safe{margin-top:2rem;background:rgba(107,143,118,.15);border:1px solid rgba(107,143,118,.3);border-radius:8px;padding:.6rem 1.2rem;font-size:.75rem;color:rgba(255,255,255,.6);display:inline-block;animation:fadeUp .9s .8s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── ROUTE STRIP ── */
+.route-strip{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.07);padding:.9rem 2rem;overflow-x:auto;scrollbar-width:none;position:relative;z-index:2;}
+.route-strip::-webkit-scrollbar{display:none;}
+.route-inner{display:flex;align-items:center;gap:.4rem;max-width:900px;margin:0 auto;width:max-content;}
+.rleg{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap;}
+.rleg.focus{color:var(--gold);}
+.rarr{color:rgba(255,255,255,.2);font-size:.8rem;}
+
+/* ── LETTER ── */
+.letter-wrap{background:var(--warm);padding:4rem 2rem;}
+.letter-box{max-width:620px;margin:0 auto;background:#fff;padding:2.5rem 2.5rem 2rem;box-shadow:0 6px 40px rgba(30,21,16,.06);position:relative;border-top:3px solid var(--sakura);}
+.letter-box::before{content:'💌';font-size:1.8rem;position:absolute;top:-1.2rem;left:50%;transform:translateX(-50%);}
+.letter-hi{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--rose);margin-bottom:.8rem;}
+.letter-body{font-family:'Libre Baskerville',serif;font-size:.9rem;line-height:1.9;color:var(--muted);}
+.letter-body strong{color:var(--ink);}
+.letter-sig{font-family:'Great Vibes',cursive;font-size:1.4rem;color:var(--rose);margin-top:1.2rem;}
+
+/* ── SAFETY BAR ── */
+.safe-bar{background:var(--sage);color:#fff;padding:1rem 2rem;text-align:center;}
+.safe-bar p{font-size:.8rem;line-height:1.7;max-width:860px;margin:0 auto;}
+.safe-bar strong{font-weight:700;}
+.warn-pill{background:rgba(255,255,255,.15);border-radius:4px;padding:.1rem .5rem;font-size:.72rem;}
+
+/* ── BUDGET STRIP ── */
+.budget-strip{background:var(--ink);color:var(--cream);padding:3rem 2rem;}
+.budget-inner{max-width:820px;margin:0 auto;}
+.budget-title{font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--sakura);margin-bottom:.3rem;}
+.budget-sub{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:2rem;}
+.budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+.budget-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1rem;}
+.budget-card-icon{font-size:1.3rem;margin-bottom:.4rem;}
+.budget-card-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.budget-card-amt{font-size:1.2rem;font-weight:600;color:#fff;}
+.budget-card-sub{font-size:.75rem;color:rgba(255,255,255,.45);margin-top:.2rem;line-height:1.5;}
+.budget-total{margin-top:1.5rem;background:rgba(196,122,110,.15);border:1px solid rgba(196,122,110,.3);border-radius:8px;padding:1.2rem 1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.bt-label{font-family:'Libre Baskerville',serif;font-style:italic;font-size:1rem;color:rgba(245,240,232,.7);}
+.bt-amt{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--sakura);}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--blush);overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;max-width:940px;margin:0 auto;padding:0 .5rem;}
+.nav-a{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:.85rem .75rem;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s;}
+.nav-a:hover{color:var(--rose);border-color:var(--rose);}
+.nav-a.key{color:var(--deep);}
+
+/* ── SECTION ── */
+.sec{padding:4rem 2rem;border-bottom:1px solid var(--sand);}
+.sec:nth-child(odd){background:var(--cream);}
+.sec:nth-child(even){background:var(--warm);}
+.sec-inner{max-width:840px;margin:0 auto;}
+
+/* ── STOP HEADER ── */
+.stop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px dashed var(--sand);flex-wrap:wrap;}
+.stop-meta{}
+.stop-tag{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.3rem;}
+.stop-tag.green{color:var(--sage);}
+.stop-tag.blue{color:var(--sky);}
+.stop-tag.gold{color:var(--gold);}
+.stop-city{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;color:var(--ink);line-height:1.1;}
+.stop-en{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.9rem;color:var(--muted);margin-top:.2rem;}
+.stop-dates{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);margin-top:.3rem;}
+.nights-bubble{background:var(--deep);color:#fff;border-radius:50px;padding:.55rem 1.1rem;text-align:center;min-width:72px;flex-shrink:0;}
+.nights-bubble.green{background:var(--sage);}
+.nights-bubble.blue{background:var(--sky);}
+.nights-bubble.gold{background:var(--gold);}
+.nb-n{font-family:'Great Vibes',cursive;font-size:2rem;line-height:1;display:block;}
+.nb-l{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;}
+
+/* Hotel */
+.hotel{background:var(--night);color:#fff;border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:1.8rem;border-left:4px solid var(--gold);display:flex;gap:1rem;align-items:flex-start;}
+.hotel-ico{font-size:1.5rem;flex-shrink:0;}
+.hotel-lbl{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.hotel-name{font-size:1rem;font-weight:600;margin-bottom:.25rem;}
+.hotel-budget{font-size:.8rem;color:var(--gold);font-weight:600;margin-bottom:.2rem;}
+.hotel-why{font-size:.83rem;color:rgba(255,255,255,.6);line-height:1.65;font-style:italic;}
+.hotel-link{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.3rem;}
+
+/* Experiences */
+.exp-title{font-size:.68rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);margin-bottom:.8rem;margin-top:1.6rem;}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem;margin-bottom:1.2rem;}
+.exp-item{background:#fff;border-radius:6px;padding:.7rem .9rem;border-left:3px solid var(--blush);display:flex;gap:.6rem;align-items:flex-start;}
+.exp-item.book{border-left-color:var(--rose);}
+.exp-item.love{border-left-color:var(--sakura);}
+.exp-item.tip{border-left-color:var(--gold);}
+.exp-ico{font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+.exp-text{font-size:.82rem;line-height:1.55;color:var(--muted);}
+.exp-text strong{color:var(--ink);display:block;font-size:.83rem;margin-bottom:.1rem;}
+.exp-badge{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:inline-block;padding:.12rem .4rem;border-radius:3px;margin-top:.2rem;}
+.badge-book{background:rgba(196,122,110,.15);color:var(--deep);}
+.badge-love{background:rgba(223,168,168,.2);color:var(--rose);}
+.badge-tip{background:rgba(184,137,58,.12);color:var(--gold);}
+
+/* Infoboxes */
+.infobox{font-size:.84rem;line-height:1.7;padding:.6rem .9rem;border-radius:0 6px 6px 0;margin-top:.5rem;}
+.infobox-food{background:rgba(196,122,110,.07);border-left:3px solid var(--rose);}
+.infobox-warn{background:rgba(184,137,58,.08);border-left:3px solid var(--gold);}
+.infobox-tip{background:rgba(107,143,118,.07);border-left:3px solid var(--sage);}
+.infobox strong{font-weight:700;}
+.infobox-food strong{color:var(--deep);}
+.infobox-warn strong{color:#7a5c10;}
+.infobox-tip strong{color:var(--sage);}
+
+/* Train banner */
+.train{background:var(--sand);padding:.8rem 2rem;text-align:center;}
+.train-inner{max-width:840px;margin:0 auto;font-size:.75rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+.train-city{font-weight:700;color:var(--ink);}
+.train-arr{color:var(--rose);}
+
+/* ── APPS SECTION ── */
+.apps-wrap{background:var(--ink);color:#fff;padding:4rem 2rem;}
+.apps-inner{max-width:840px;margin:0 auto;}
+.apps-title{font-family:'Great Vibes',cursive;font-size:2.4rem;color:var(--sakura);margin-bottom:.3rem;}
+.apps-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem;}
+.app-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem;}
+.app-card:hover{border-color:rgba(223,168,168,.4);}
+.app-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem;}
+.app-ico{font-size:1.6rem;}
+.app-name{font-size:.88rem;font-weight:600;color:#fff;}
+.app-cat{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+.app-desc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.6;}
+.app-must{display:inline-block;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(196,122,110,.2);color:var(--sakura);border-radius:3px;padding:.1rem .4rem;margin-top:.4rem;}
+
+/* ── EXPERIENCES ── */
+.special-exp{background:var(--blush);padding:3.5rem 2rem;}
+.special-inner{max-width:840px;margin:0 auto;}
+.special-title{font-family:'Great Vibes',cursive;font-size:2.4rem;color:var(--deep);margin-bottom:.3rem;}
+.special-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;}
+.special-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.scard{background:#fff;border-radius:10px;padding:1.2rem;box-shadow:0 2px 12px rgba(122,48,40,.06);}
+.scard-ico{font-size:1.8rem;margin-bottom:.5rem;}
+.scard-title{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;}
+.scard-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.scard-book{font-size:.68rem;font-weight:700;color:var(--rose);margin-top:.5rem;display:block;}
+
+/* ── FOOTER ── */
+footer{background:var(--night);color:rgba(255,255,255,.5);padding:4rem 2rem;text-align:center;}
+footer .sig{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--sakura);display:block;margin-bottom:.8rem;animation:pulse 2.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+footer h3{font-family:'Great Vibes',cursive;font-size:2rem;color:#fff;margin-bottom:.8rem;}
+footer p{font-size:.85rem;line-height:1.9;max-width:520px;margin:0 auto .4rem;}
+.footer-tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.7rem;max-width:840px;margin:2.5rem auto 0;text-align:left;}
+.ftip{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:.9rem;}
+.ftip-ico{font-size:1.1rem;margin-bottom:.35rem;}
+.ftip-t{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.ftip p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55;margin:0;}
+.footer-note{margin-top:3rem;font-size:.65rem;letter-spacing:.15em;color:rgba(255,255,255,.15);}
+
+/* Scroll fade */
+.fi{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;}
+.fi.vis{opacity:1;transform:none;}
+
+@media(max-width:600px){
+  .stop-head{flex-direction:column;}
+  .hero-names{font-size:clamp(3.5rem,14vw,6rem);}
+  .budget-total{flex-direction:column;}
+  .sec{padding:3rem 1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="hero-float" style="left:7%;animation-duration:11s;animation-delay:0s;">🌸</div>
+<div class="hero-float" style="left:20%;animation-duration:8s;animation-delay:2.5s;font-size:.75rem;">💕</div>
+<div class="hero-float" style="left:38%;animation-duration:13s;animation-delay:1s;">🌸</div>
+<div class="hero-float" style="left:55%;animation-duration:9s;animation-delay:3.5s;font-size:.7rem;">✨</div>
+<div class="hero-float" style="left:70%;animation-duration:12s;animation-delay:.5s;">🌸</div>
+<div class="hero-float" style="left:85%;animation-duration:10s;animation-delay:4s;font-size:.85rem;">💕</div>
+<div class="hero-float" style="left:48%;animation-duration:14s;animation-delay:6s;font-size:.6rem;">🌺</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-script">Japan Honeymoon 2026</div>
+    <div class="hero-names">Özge <span class="hero-amp">&</span> Thom</div>
+    <span class="hero-icon">💍</span>
+    <div class="hero-sub">21 dagen door het mooiste land ter wereld</div>
+    <div class="hero-dates">25 september — 15 oktober 2026</div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">18</span><span class="hstat-l">Reisdagen</span></div>
+      <div class="hstat"><span class="hstat-n">7</span><span class="hstat-l">Steden</span></div>
+      <div class="hstat"><span class="hstat-n">🍂</span><span class="hstat-l">Herfstbladeren</span></div>
+    </div>
+    <div class="hero-safe">✅ <strong>Veiligheidscheck geslaagd</strong> — alle bestemmingen Level 1, Japan is een van 's werelds veiligste landen</div>
+  </div>
+  <!-- Route strip inside hero -->
+  <div class="route-strip" style="position:absolute;bottom:0;left:0;right:0;">
+    <div class="route-inner">
+      <span class="rleg">Osaka</span><span class="rarr">›</span>
+      <span class="rleg">Wakayama</span><span class="rarr">›</span>
+      <span class="rleg">Kyoto</span><span class="rarr">›</span>
+      <span class="rleg">Nakasendo Trail</span><span class="rarr">›</span>
+      <span class="rleg">Nagano</span><span class="rarr">›</span>
+      <span class="rleg">Kanazawa</span><span class="rarr">›</span>
+      <span class="rleg">Hakone</span><span class="rarr">›</span>
+      <span class="rleg focus">Tokyo</span>
+    </div>
+  </div>
+</div>
+
+<!-- LETTER -->
+<div class="letter-wrap">
+  <div class="letter-box fi">
+    <div class="letter-hi">Lieve Özge & Thom,</div>
+    <div class="letter-body">
+      Jullie hebben 18 vrije reisdagen gevuld met precies de goede mix: oud Japan, natuur, cultuur, avontuur en momenten van pure rust. Van de sumo-ring tot de sake-kroegen, van de Nakasendo-pelgrimsroute tot de daio-wasabi boerderij — dit wordt een honeymoon die jullie de rest van jullie leven navertellen.<br><br>
+      De route begint in het bruisende <strong>Osaka</strong>, slingert via het spirituele <strong>Koyasan</strong> naar het tijdloze <strong>Kyoto</strong>. Dan door de bergen over de historische <strong>Nakasendo-route</strong>, omhoog naar de Japanse Alpen in <strong>Nagano</strong>, door het elegante <strong>Kanazawa</strong>, langs <strong>Hakone</strong> met Fuji-uitzicht, en afsluiten in het chaotisch-prachtige <strong>Tokyo</strong>. <strong>Oktober is perfect</strong>: herfstbladeren in de bergen, aangenaam weer, geen regenseizoen.<br><br>
+      Vergeet niet: vertel elk hotel dat jullie op honeymoon zijn 💕 Je krijgt bijna altijd een upgrade, welkomstdrankje of extra decoratie. Jullie verdienen het.
+    </div>
+    <div class="letter-sig">Met liefde en confetti 💌</div>
+  </div>
+</div>
+
+<!-- SAFETY -->
+<div class="safe-bar">
+  <p>🛡️ <strong>Veiligheid:</strong> Japan staat in de top 3 veiligste landen ter wereld. Level 1 reisadvies (laagste risico). Alle bestemmingen in dit plan zijn volledig veilig voor 2026. Let op: <span class="warn-pill">⚠️ Sumo-tickets MAANDEN vooraf boeken</span> · <span class="warn-pill">⚠️ Koyasan shukubo: minimaal 3 maanden van tevoren</span> · <span class="warn-pill">⚠️ Kamikochi sluit op 15 november — oktober is perfect</span></p>
+</div>
+
+<!-- BUDGET -->
+<div class="budget-strip fi">
+  <div class="budget-inner">
+    <div class="budget-title">Het budget 💴</div>
+    <div class="budget-sub">Oktober 2026 · 2 personen · 21 dagen</div>
+    <div class="budget-grid">
+      <div class="budget-card">
+        <div class="budget-card-icon">✈️</div>
+        <div class="budget-card-label">Vluchten (2×)</div>
+        <div class="budget-card-amt">±€2.000</div>
+        <div class="budget-card-sub">KLM direct AMS→HND of JAL. Oktober = geen peak seizoen, goede prijs.</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-icon">🏨</div>
+        <div class="budget-card-label">Hotels (18 nachten)</div>
+        <div class="budget-card-amt">±€4.200</div>
+        <div class="budget-card-sub">Mix van hotels, ryokans (diner+ontbijt incl.) en tempel-verblijf.</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-icon">🚄</div>
+        <div class="budget-card-label">Transport (2×)</div>
+        <div class="budget-card-amt">±€550</div>
+        <div class="budget-card-sub">Shinkansen losse tickets + metro's + bussen + Suica-card.</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-icon">🍜</div>
+        <div class="budget-card-label">Eten & drinken</div>
+        <div class="budget-card-amt">±€2.500</div>
+        <div class="budget-card-sub">Incl. Kobe beef, sake, omakase sushi afsluiter. ±€60/dag voor 2.</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-icon">🎟️</div>
+        <div class="budget-card-label">Activiteiten</div>
+        <div class="budget-card-amt">±€600</div>
+        <div class="budget-card-sub">Sumo, teamLab, Shibuya Sky, kabelbanen, tempels, workshops.</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-icon">🛍️</div>
+        <div class="budget-card-label">Souvenirs & overig</div>
+        <div class="budget-card-amt">±€500</div>
+        <div class="budget-card-sub">Sake, matcha, ceramiek, kimono-accessories, onverwacht.</div>
+      </div>
+    </div>
+    <div class="budget-total">
+      <div>
+        <div class="bt-label">Totaal voor Özge & Thom samen</div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:.2rem;">Middenklasse · incl. vluchten · excl. trouwringen 💍</div>
+      </div>
+      <div class="bt-amt">±€10.350</div>
+    </div>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:.8rem;">Zuiniger (budget hotels): ±€7.500 · Luxe (meer ryokans, upgrades): ±€14.000+</p>
+  </div>
+</div>
+
+<!-- SPECIALE ERVARINGEN -->
+<div class="special-exp fi">
+  <div class="special-inner">
+    <div class="special-title">Speciale ervaringen 🎌</div>
+    <div class="special-sub">Dit zijn de dingen die jullie nergens anders doen — ver vooraf boeken!</div>
+    <div class="special-cards">
+      <div class="scard">
+        <div class="scard-ico">🤼</div>
+        <div class="scard-title">Sumo worstelen</div>
+        <div class="scard-desc">Het Autumn Basho-toernooi is in september in Tokyo, het November Basho in november — helaas net buiten jullie data. Maar: bezoek een sumo-morgensessie (keiko). Via Klook of een lokale gids te boeken. Authentiek én minder druk.</div>
+        <span class="scard-book">📅 Boek 3-6 maanden vooraf via Klook</span>
+      </div>
+      <div class="scard">
+        <div class="scard-ico">⚔️</div>
+        <div class="scard-title">Samurai Workshop</div>
+        <div class="scard-desc">Kanazawa is de perfecte plek: bezoek het Nagamachi Samurai District én boek een bokken-zwaardvechtworkshop bij Samurai Kembu Theater of Kanazawa Samurai Experience. Kimono aan, bokken in de hand — TikTok-materiaal 💪</div>
+        <span class="scard-book">📅 Boek vooraf via Klook of Airbnb Experiences</span>
+      </div>
+      <div class="scard">
+        <div class="scard-ico">🍵</div>
+        <div class="scard-title">Theeceremonie</div>
+        <div class="scard-desc">In Kyoto: Urasenke School (de meest authentieke) of En tea ceremony in Gion (modern, meer uitleg). Beide duren 1-2 uur en inclusief matcha-bereiding. Kimono aan optioneel. Prachtig huwelijkscadeau aan jezelf.</div>
+        <span class="scard-book">📅 Boek via Viator of direct bij Urasenke</span>
+      </div>
+      <div class="scard">
+        <div class="scard-ico">💆</div>
+        <div class="scard-title">Japanse massage</div>
+        <div class="scard-desc">Echte Japanse shiatsu-massage: Hakone of Kyoto zijn de beste plekken. Bij de meeste ryokans kun je een in-room massage boeken. Alternatief: Solaniwa Onsen in Osaka heeft een prachtig spa-complex.</div>
+        <span class="scard-book">📅 Boek via het hotel of ter plaatse</span>
+      </div>
+      <div class="scard">
+        <div class="scard-ico">🍶</div>
+        <div class="scard-title">Sake downen</div>
+        <div class="scard-desc">Fushimi in Kyoto (sake-wijk, meerdere brouwerijen te bezoeken), Takayama's Sanmachi Suji (sake-brouwerij Funasaka), of Nishi-no-kura in Kanazawa. Proef lokale varietanten — nihonshu (warm in herfst!) is compleet anders dan supermarkt-sake.</div>
+        <span class="scard-book">📅 Geen boeking nodig — gewoon lopen!</span>
+      </div>
+      <div class="scard">
+        <div class="scard-ico">🏎️</div>
+        <div class="scard-title">Mario Kart (Tokyo)</div>
+        <div class="scard-desc">MariCar in Tokyo: in Mario-kostuum door de straten van Tokyo rijden. Absoluut viraal op TikTok. Boek tijdslot vooraf op de MariCar website. Let op: rijbewijs vereist + internationaal rijbewijs meenemen!</div>
+        <span class="scard-book">📅 Book via maricar.com — weken vooraf</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#osaka" class="nav-a key">🏙️ Osaka</a>
+    <a href="#wakayama" class="nav-a">🕯️ Koyasan</a>
+    <a href="#kyoto" class="nav-a key">⛩️ Kyoto</a>
+    <a href="#nakasendo" class="nav-a">🌿 Nakasendo</a>
+    <a href="#nagano" class="nav-a">🏔️ Nagano</a>
+    <a href="#kanazawa" class="nav-a">🏯 Kanazawa</a>
+    <a href="#hakone" class="nav-a">🗻 Hakone</a>
+    <a href="#tokyo" class="nav-a key">🗼 Tokyo</a>
+    <a href="#apps" class="nav-a" style="color:var(--gold);">📱 Apps</a>
+  </div>
+</nav>
+
+<!-- ══════════ OSAKA 25-27 SEP ══════════ -->
+<div class="sec fi" id="osaka">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag">Stop 01 · Verplicht</div>
+      <div class="stop-city">Osaka 大阪</div>
+      <div class="stop-en">Japan's foodhoofdstad — eten, chaos & cultuur</div>
+      <div class="stop-dates">25 – 27 september · dag 1–3</div>
+    </div>
+    <div class="nights-bubble"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🏨</div>
+    <div>
+      <div class="hotel-lbl">Honeymoon hotel — Aanbeveling</div>
+      <div class="hotel-name">Cross Hotel Osaka ★★★★ — Dotonbori View Room</div>
+      <div class="hotel-budget">±€130–200/nacht</div>
+      <div class="hotel-why">Rechtstreeks uitzicht op het Glico-bord vanuit de kamer. Om de hoek van Dotonbori, Shinsaibashi Shopping Street en de metro. Soundproofed kamers. Vertel bij boeking dat jullie op honeymoon zijn — vaak een gratis upgrade. Budget: The Bridge Hotel Shinsaibashi (gratis ramen elke avond!). Luxe: Swissotel Nankai Osaka (rooftop pool).</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 1 — Aankomst + Dotonbori</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🏯</div><div class="exp-text"><strong>Osaka Castle + Shitenno-ji</strong>Let op: het kasteelgebouw (toren) is beschikbaar, tuinen prachtig voor herfstbladeren. Shitenno-ji (Japans oudste tempel) erna.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🌇</div><div class="exp-text"><strong>Umeda Sky Building</strong>Floating Garden Observatory: 360° uitzicht bij zonsondergang. Romantisch én viraal. Boek sunset-slot vooraf.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🦑</div><div class="exp-text"><strong>Dotonbori + Glico-bord</strong>Foto bij het Glico-bord. Takoyaki bij Aizuya. Kushi-katsu op Hozenji Yokocho steeg.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 2 — Kobe Beef + Kuromon</div>
+  <div class="exp-grid">
+    <div class="exp-item book"><div class="exp-ico">🥩</div><div class="exp-text"><strong>Kobe dagtrip — Beef!</strong>30 min trein. Steak Land Kobe of Mouriya voor A5-wagyu. Kitano-cho wijk. <span class="exp-badge badge-book">Reserveer vooraf!</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🐙</div><div class="exp-text"><strong>Kuromon Ichiba Market</strong>Osaka's keuken: verse zeevruchten, wagyu-sticks, tamagoyaki. Goed voor snacklunch.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🍶</div><div class="exp-text"><strong>Sake sessie avond</strong>Izakaya in Namba of Dotonbori — bestel tasting-set van 3 lokale sake varianten.</div></div>
+  </div>
+
+  <div class="infobox infobox-food">🍜 <strong>Must-eat Osaka:</strong> Takoyaki (octopusballen) · Okonomiyaki (hartige pannenkoek) · Kushi-katsu (gegrilde stokjes) · Kobe beef · Tonkotsu ramen</div>
+  <div class="infobox infobox-tip" style="margin-top:.5rem;">💡 <strong>Honeymoon tip:</strong> Vertel Cross Hotel dat jullie op huwelijksreis zijn — bijna altijd gratis welkomstdrankje of kamerversiering.</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Osaka (Namba)</span><span class="train-arr">→</span><span class="train-city">Koyasan</span><span>| Nankai Koya Lijn + kabelbaan · 2u · ±¥1.600 · Nankai Pass aanbevolen</span></div></div>
+
+<!-- ══════════ WAKAYAMA / KOYASAN 27 SEP ══════════ -->
+<div class="sec fi" id="wakayama">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag blue">Stop 02 · Spiritueel · Uniek</div>
+      <div class="stop-city">Koyasan & Kumano Kodo 高野山</div>
+      <div class="stop-en">Slapen bij monniken + heilige pelgrimsroute</div>
+      <div class="stop-dates">27 – 28 september · dag 3–4</div>
+    </div>
+    <div class="nights-bubble blue"><span class="nb-n">1</span><span class="nb-l">Nacht</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🕯️</div>
+    <div>
+      <div class="hotel-lbl">Tempel-verblijf — de meest bijzondere nacht van de trip</div>
+      <div class="hotel-name">Shukubo Ekoin ★★★★ of Fukuchiin Tempel</div>
+      <div class="hotel-budget">±€180–260/nacht (diner + ontbijt incl.)</div>
+      <div class="hotel-why">Jullie slapen op tatami, eten shojin ryori (boeddhistische maaltijden) en wonen de ochtendgebedsceremonie bij. Ekoin en Fukuchiin zijn de meest indrukwekkende opties met privé-onsen. Boek 3+ maanden vooraf — snel vol. Zeg dat jullie op honeymoon zijn: sommige tempels versieren dan jullie kamer.</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 3 — Koyasan + Kumano Kodo</div>
+  <div class="exp-grid">
+    <div class="exp-item book"><div class="exp-ico">⛰️</div><div class="exp-text"><strong>Kumano Kodo pelgrimsroute</strong>UNESCO-wandelroute. Kies het Nakahechi-gedeelte (2-4 uur). Eindigt bij Kumano Nachi Taisha (waterval + tempel). Vervoer via bus. <span class="exp-badge badge-book">Boek bustickets vooraf</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">🪦</div><div class="exp-text"><strong>Okunoin begraafplaats bij lantaarnlicht</strong>200.000 graftombes tussen eeuwenoude ceders. 's Avonds met lantaarns verlicht. Stil, mysterieus, onvergetelijk.</div></div>
+    <div class="exp-item><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Kongobuji Tempel</strong>Hoofdkwartier van het Shingon-boeddhisme. Prachtige karesansui (Zen) rotsentuin.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🙏</div><div class="exp-text"><strong>06:00 Ochtendgebed</strong>Bijwonen van de dagelijkse ceremonie van de monniken. Vroeg opstaan is het waard. Eén van de meest indrukwekkende momenten van de reis.</div></div>
+  </div>
+
+  <div class="infobox infobox-food">🍃 <strong>Eten:</strong> Shojin Ryori — volledig veganistisch boeddhistisch 10-gangendiner, prachtig gepresenteerd. Meditatief en verrassend lekker. Ontbijt ook inbegrepen.</div>
+  <div class="infobox infobox-warn" style="margin-top:.5rem;">⚠️ <strong>Let op:</strong> Tempel-etiquette: stilte, geen alcohol, op tijd voor maaltijden. Boek 3+ maanden vooraf. Kumano Nachi Taisha: 133 treden omhoog — goed schoeisel meenemen.</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Koyasan</span><span class="train-arr">→</span><span class="train-city">Kyoto</span><span>| Nankai + Shinkansen of express trein · ±2u30 · ±¥5.000</span></div></div>
+
+<!-- ══════════ KYOTO 28 SEP – 2 OKT ══════════ -->
+<div class="sec fi" id="kyoto">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag">Stop 03 · Verplicht</div>
+      <div class="stop-city">Kyoto 京都</div>
+      <div class="stop-en">Tempels, geisha's, bamboe & de perfecte theeceremonie</div>
+      <div class="stop-dates">28 september – 2 oktober · dag 4–8</div>
+    </div>
+    <div class="nights-bubble"><span class="nb-n">4</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🏯</div>
+    <div>
+      <div class="hotel-lbl">Honeymoon hotel — Aanbeveling</div>
+      <div class="hotel-name">Gion Hatanaka Ryokan ★★★★★ of Cross Hotel Kyoto</div>
+      <div class="hotel-budget">Gion Hatanaka: ±€350–500/nacht · Cross Hotel: ±€130–180/nacht</div>
+      <div class="hotel-why">Gion Hatanaka ligt pal in het geisha-district, op loopafstand van Nene-no-Michi en Yasaka Shrine. Kaiseki-diner + ontbijt incl. — de ultieme Kyoto honeymoon. Cross Hotel Kyoto staat op Pontocho-dori, vol met restaurants, dicht bij Gion. Budget: Piece Hostel Sanjo. Luxe: Four Seasons Kyoto of Park Hyatt Kyoto (Higashiyama).</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 4 — Fushimi Inari + Gion</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Fushimi Inari Taisha</strong>Vóór 06:30 — bijna niemand. Loop zo ver mogelijk omhoog. <span class="exp-badge badge-love">Vroeg = magisch</span></div></div>
+    <div class="exp-item"><div class="exp-ico">👘</div><div class="exp-text"><strong>Gion district + Hanamikoji Street</strong>Late middag: kans op echte geisha. Avond: Kohaku Bar (op de lijst!) — boek vooraf.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🍶</div><div class="exp-text"><strong>Kohaku Bar</strong>Exclusieve sake & Japanse whisky bar in Gion. Reserveer vooraf — klein en gewild. Hét romantische drankje van de trip.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 5 — Arashiyama</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🎋</div><div class="exp-text"><strong>Bamboo Grove</strong>Vóór 07:00. Tenryu-ji tempel daarna. Hozugawa River Boat Ride (op de lijst!): 16 km drijven door de kloof, 2 uur. <span class="exp-badge badge-book">Boek vooraf via Hozugawa Kudari</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🚣</div><div class="exp-text"><strong>Hozugawa River Boat Ride</strong>Van Kameoka naar Arashiyama, 2 uur. Bootmensen roeien en navigeren door de snelstromende rivier. Spectaculair in herfstkleuren.</div></div>
+    <div class="exp-item"><div class="exp-ico">🌿</div><div class="exp-text"><strong>Kodai-ji tempel + bamboetuin</strong>Minder druk dan Arashiyama, prachtige tuin, bijzondere nachtverlichting (illuminatie) in oktober.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 6 — Kiyomizudera + Kimono + Nara</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">⛪</div><div class="exp-text"><strong>Kiyomizudera</strong>Vroeg. Terug via Ninenzaka & Sannenzaka. <span class="exp-badge badge-love">Herfstbladeren hier = magisch</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">👘</div><div class="exp-text"><strong>Kimono huren</strong>Yumeyakata of Maiko Studio — lopen door Higashiyama in kimono. Instagramgoud.</div></div>
+    <div class="exp-item book"><div class="exp-ico">🦌</div><div class="exp-text"><strong>Nara dagtrip</strong>Todai-ji Boeddha + vrije herten. 45 min trein. <span class="exp-badge badge-book">Hertenkoekjes kopen = TikTok-moment</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🏯</div><div class="exp-text"><strong>Kyoto Gosho Palace + Gyoen Garden</strong>Paleis (gratis), prachtig stadspark, herfstbladeren begin oktober al zichtbaar.</div></div>
+    <div class="exp-item"><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Hokan-ji (Yasaka Pagoda)</strong>Iconische 5-verdiepingspagode in Higashiyama — de meest gefotografeerde pagode van Kyoto.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 7 — Tempel-dag</div>
+  <div class="exp-grid">
+    <div class="exp-item book"><div class="exp-ico">🍵</div><div class="exp-text"><strong>Theeceremonie</strong>Urasenke School (authentiekst) of Maikoya Gion (meer uitleg + kimono optie). 1-2 uur. <span class="exp-badge badge-book">Reserveer 1+ maand vooraf</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🌿</div><div class="exp-text"><strong>Enkoji tempel + bamboetuin</strong>Noord-Kyoto. Rustiger dan Arashiyama bamboe. Prachtige Japanse tuin met vijver. Oktober = herfstbladeren.</div></div>
+    <div class="exp-item"><div class="exp-ico">⛪</div><div class="exp-text"><strong>Ginkaku-ji (Zilveren Paviljoen)</strong>Beroemde tempel met Japanse zandtuin. Loop via Philosopher's Path ernaartoe.</div></div>
+    <div class="exp-item"><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Eifuku-ji tempel</strong>Klein, verborgen, bijna geen toeristen. Prachtig esdoorn-perk dat in oktober rood kleurt.</div></div>
+  </div>
+
+  <div class="infobox infobox-food">🍡 <strong>Must-eat Kyoto:</strong> Yatsuhashi rijstkoekjes · Matcha soft-serve · Kaiseki-diner · Tofu in Arashiyama · Sake in Fushimi (Gekkeikan brouwerij, dagtrip 20 min)</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Kyoto</span><span class="train-arr">→</span><span class="train-city">Nagoya</span><span>| Shinkansen 35 min · dan trein naar Nagiso (Nakasendo) · totaal ±2u · ±¥5.500</span></div></div>
+
+<!-- ══════════ NAKASENDO 2-4 OKT ══════════ -->
+<div class="sec fi" id="nakasendo">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag green">Stop 04 · Natuur + Cultuur</div>
+      <div class="stop-city">Nakasendo Trail 中山道</div>
+      <div class="stop-en">Tsumago · Narai-juku · Historische pelgrimsroute</div>
+      <div class="stop-dates">2 – 4 oktober · dag 8–10</div>
+    </div>
+    <div class="nights-bubble green"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🌿</div>
+    <div>
+      <div class="hotel-lbl">Verblijf langs de route</div>
+      <div class="hotel-name">Fujioto Ryokan (Tsumago) of Echigoya (Narai-juku)</div>
+      <div class="hotel-budget">±€150–250/nacht (kaiseki incl.)</div>
+      <div class="hotel-why">Tsumago heeft meerdere kleine familiegestuurde ryokans en minshuku (gasthuizen). Fujioto is de best beoordeelde. Narai-juku heeft Echigoya, een authentiek Edo-herberg. Beide dorpen verbieden auto's na 17:00 — 's avonds heb je het voor jezelf. Sprookjesachtig in herfstsfeer.</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 8-9 — De wandeling</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🌄</div><div class="exp-text"><strong>Tsumago post-dorp</strong>Het best bewaard Edo-periode dorp van Japan. Auto's verboden. Bij nacht: lantaarns. Oktober = herfstbladeren op de bergen.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🥾</div><div class="exp-text"><strong>Nakasendo wandeling (Tsumago→Magome)</strong>8 km, 3-4 uur, door bossen en bergpassen. Een van de mooiste wandelingen van Japan. Stuur je bagage vooruit via de bagageservice (¥1.500).</div></div>
+    <div class="exp-item"><div class="exp-ico">🏘️</div><div class="exp-text"><strong>Narai-juku</strong>Langst bewaarde post-stad langs de Nakasendo. Lacquerware-winkels, sake-brouwerijen, Edo-gevels. Minder toeristen dan Tsumago.</div></div>
+    <div class="exp-item tip"><div class="exp-ico">🎒</div><div class="exp-text"><strong>Bagage sturen</strong>Yamato Transport of de lokale bagageservice stuurt je koffer van dorp naar dorp (±¥1.500). Wandel met een lichte dagrugzak. <span class="exp-badge badge-tip">Tip: regel dit de avond ervoor</span></div></div>
+  </div>
+
+  <div class="infobox infobox-food">🍡 <strong>Must-eat Nakasendo:</strong> Gohei-mochi (rijststokjes met walnootsaus) · Sanzoku-yaki (kip gegrild op hout) · Lokale miso-soep bij het ryokan-ontbijt</div>
+  <div class="infobox infobox-tip" style="margin-top:.5rem;">💡 <strong>Honeymoon tip:</strong> Vraag je ryokan om een bento-lunch voor de wandeling te bereiden — ze doen dit vaak voor stellen op speciale gelegenheden.</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Narai-juku</span><span class="train-arr">→</span><span class="train-city">Nagano</span><span>| Lokale trein · ±1u15 · ±¥1.200</span></div></div>
+
+<!-- ══════════ NAGANO 4-7 OKT ══════════ -->
+<div class="sec fi" id="nagano">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag green">Stop 05 · Japanse Alpen</div>
+      <div class="stop-city">Nagano & Omgeving 長野</div>
+      <div class="stop-en">Aap-onsens · Daio wasabi · Kamikochi · Matsumoto</div>
+      <div class="stop-dates">4 – 7 oktober · dag 10–13</div>
+    </div>
+    <div class="nights-bubble green"><span class="nb-n">3</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🏔️</div>
+    <div>
+      <div class="hotel-lbl">Verblijf — combineer stad + natuur</div>
+      <div class="hotel-name">Ryokan Fujiya (Nagano stad) of Hotel Sierra Yudanaka (bij de apen)</div>
+      <div class="hotel-budget">±€150–220/nacht</div>
+      <div class="hotel-why">Ryokan Fujiya in Nagano stad: centraal, onsen, goede ligging voor dagtrips. Hotel Sierra in Yudanaka Onsen (vlakbij de Snow Monkeys): traditionele ryokan met directe toegang naar het apen-heiligdom. Tip: 1 nacht in Yudanaka voor de apen-ervaring, 2 nachten in Nagano stad.</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 10 — Aankomst + Zenko-ji + Togakushi</div>
+  <div class="exp-grid">
+    <div class="exp-item"><div class="exp-ico">⛪</div><div class="exp-text"><strong>Zenko-ji Tempel</strong>Een van Japan's belangrijkste boeddhistische tempels. De ondergrondse tunnel (±¥500) in het pikdonker — touch the key of enlightenment!</div></div>
+    <div class="exp-item love"><div class="exp-ico">🌲</div><div class="exp-text"><strong>Togakushi Shrine</strong>Mysterieuze bergshrine omgeven door eeuwenoude cederbomen. Duizend jaar oud. 2.000 meter hoog. Oktober: herfstbladeren spectaculair.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 11 — Snow Monkeys + Onsen</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🐒</div><div class="exp-text"><strong>Jigokudani Monkey Park</strong>Wilde Japanse makaken die in een hete onsen zitten. Viraal op TikTok en Instagram. Trein + bus + wandeling 30 min. <span class="exp-badge badge-love">Meest iconische dier-moment van Japan</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">♨️</div><div class="exp-text"><strong>Avond: Yudanaka Onsen</strong>Na de apen: soaking in een onsen in het bergdorp. Jullie eigen privé-onsen in het ryokan. Perfect einde van de dag.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 12 — Kamikochi + Matsumoto</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🏞️</div><div class="exp-text"><strong>Kamikochi</strong>Nationaal park in de Japanse Alpen. Azusa-rivier, Kappa-brug, bergpanorama. Bussen lopen tot 15 november. Oktober = beste herfstkleurentijd. <span class="exp-badge badge-love">Een van Japan's mooiste plekken</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🏯</div><div class="exp-text"><strong>Matsumoto dagtrip</strong>Matsumoto Kasteel (één van Japan's 12 originele kastelen, 16e eeuw). Prachtig zwart kasteel weerspiegeld in de burgwal.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🌾</div><div class="exp-text"><strong>Daio Wasabi Farm</strong>De grootste wasabi-boerderij ter wereld. Gratis entree. Eet verse wasabi-ijs. Viraal op TikTok. 20 min van Matsumoto.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 13 — Takayama dagtrip</div>
+  <div class="exp-grid">
+    <div class="exp-item"><div class="exp-ico">🏘️</div><div class="exp-text"><strong>Takayama Old Town</strong>Sanmachi Suji — Edo-straatjes, sake-brouwerijen, ambachtswinkels. Sake-proeverij bij Funasaka.</div></div>
+    <div class="exp-item"><div class="exp-ico">🏡</div><div class="exp-text"><strong>Hida Folk Village</strong>Openluchtmuseum: gassho-zukuri boerderijen met rietgedekte daken te betreden. Herfstbladeren eromheen.</div></div>
+  </div>
+
+  <div class="infobox infobox-food">🥩 <strong>Must-eat Nagano:</strong> Soba (Nagano is beroemd om zijn buckwheat soba) · Oyaki (gevulde gestoomde broodjes) · Hida-beef in Takayama · Wasabi-ijs op de boerderij</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Nagano</span><span class="train-arr">→</span><span class="train-city">Kanazawa</span><span>| Shinkansen Hakutaka · 1u · ±¥6.500</span></div></div>
+
+<!-- ══════════ KANAZAWA 7-9 OKT ══════════ -->
+<div class="sec fi" id="kanazawa">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag blue">Stop 06 · Verborgen parel</div>
+      <div class="stop-city">Kanazawa 金沢</div>
+      <div class="stop-en">Samurai district · Goud-ijs · Kenroku-en</div>
+      <div class="stop-dates">7 – 9 oktober · dag 13–15</div>
+    </div>
+    <div class="nights-bubble blue"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🏯</div>
+    <div>
+      <div class="hotel-lbl">Aanbevolen verblijf</div>
+      <div class="hotel-name">Hotel UAN Kanazawa ★★★★ of Kanazawa Hakuchoro Ryokan</div>
+      <div class="hotel-budget">UAN: ±€110–160/nacht · Hakuchoro: ±€220–320/nacht</div>
+      <div class="hotel-why">UAN is centraal, modern, uitstekend beoordeeld en op loopafstand van Kenroku-en. Hakuchoro is een stijlvolle ryokan vlakbij het Higashi Chaya-geisha-district. Beide zijn perfect voor een honeymoon in Kanazawa. Zeg altijd dat jullie op huwelijksreis zijn!</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 13-14 — Kanazawa</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🌿</div><div class="exp-text"><strong>Kenroku-en tuin</strong>Één van Japan's drie beroemdste tuinen. Oktober: begin herfstbladeren. <span class="exp-badge badge-love">Prachtig voor foto's</span></div></div>
+    <div class="exp-item book"><div class="exp-ico">⚔️</div><div class="exp-text"><strong>Samurai Workshop</strong>Nagamachi Samurai District wandelen + bokken-zwaardvechtles bij Kanazawa Samurai Experience. <span class="exp-badge badge-book">Boek vooraf</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">🏮</div><div class="exp-text"><strong>Higashi Chaya District</strong>Meest intact bewaard geisha-wijk buiten Kyoto. Avond: geishadansperformance soms beschikbaar.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🍦</div><div class="exp-text"><strong>Bladgoud-soft-serve ijs</strong>Kanazawa is de bladgoud-hoofdstad van Japan. Goud-ijs eten is het meest virale moment van Kanazawa.</div></div>
+    <div class="exp-item"><div class="exp-ico">🏯</div><div class="exp-text"><strong>Kanazawa Castle Park</strong>Gratis toegang tot het kasteelpark. Oktober: herfstbladeren rondom de muren.</div></div>
+    <div class="exp-item book"><div class="exp-ico">🏔️</div><div class="exp-text"><strong>Shirakawa-go dagtrip</strong>UNESCO-dorp met rietgedekte gassho-boerderijen. Bus 50 min. <span class="exp-badge badge-book">Bus vooraf boeken: Nohi Bus</span></div></div>
+  </div>
+
+  <div class="infobox infobox-food">🦀 <strong>Must-eat Kanazawa:</strong> Verse sushi bij Omicho Markt (Japanse Zee-krab, uni, garnaal) · Jibu-ni (lokale stoofpot) · Sake-proeverij in Higashi Chaya</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Kanazawa</span><span class="train-arr">→</span><span class="train-city">Hakone</span><span>| Shinkansen naar Odawara + Odakyu · totaal ±4u · ±¥12.000</span></div></div>
+
+<!-- ══════════ HAKONE 9-11 OKT ══════════ -->
+<div class="sec fi" id="hakone">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag green">Stop 07 · Natuur + Onsen</div>
+      <div class="stop-city">Hakone 箱根</div>
+      <div class="stop-en">Fuji, piratenschip, kabelbaan & privé-onsen</div>
+      <div class="stop-dates">9 – 11 oktober · dag 15–17</div>
+    </div>
+    <div class="nights-bubble green"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">♨️</div>
+    <div>
+      <div class="hotel-lbl">Honeymoon ryokan — dé romantische nacht</div>
+      <div class="hotel-name">Hakone Ginyu ★★★★★ of Kinnotake Tonosawa (Adults-only)</div>
+      <div class="hotel-budget">±€400–700/nacht (kaiseki diner + ontbijt incl.)</div>
+      <div class="hotel-why">Hakone Ginyu: alle kamers met privé-terras en privé-onsen, uitzicht over de berggordel. Kaiseki-diner met lokale bergzeevruchten. Kinnotake Tonosawa: adults-only, ultiem intiem, elke kamer met privé-onsen-terras en koffiemachine. Oktober: herfstbladeren rondom het ryokan. Budget-optie: Yama No Chaya (±€200, privé-onsen, charmant).</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 15 — Piratenschip + Kabelbaan</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">⛵</div><div class="exp-text"><strong>Piratenschip op Lake Ashi</strong>Hakone Sightseeing Cruise met het iconische piratenschip. Bij helder weer: Fuji-uitzicht. <span class="exp-badge badge-love">Romanisch op het dek</span></div></div>
+    <div class="exp-item"><div class="exp-ico">🚡</div><div class="exp-text"><strong>Hakone Ropeway kabelbaan</strong>Via Owakudani (vulkaankrater, rook overal). Kuro-tamago (zwarte eieren) eten bij de krater.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🍵</div><div class="exp-text"><strong>Amazake-jaya theehuis</strong>Historisch 400-jaar-oud theehuis langs de Hakone Tokaido. Amazake (zoete rijstthee) drinken met uitzicht op de bergpas.</div></div>
+    <div class="exp-item"><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Kuzuryu Shrine</strong>Klein dragon-heiligdom op een uitgestrekt vlak. Verborgen langs de kasteelroute. Mooi in herfstsfeer.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 16 — Fuji dagtrip + rust</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🗻</div><div class="exp-text"><strong>Lake Kawaguchi + Lake Yamanaka</strong>Vroeg voor Fuji-uitzicht. Chureito Pagoda (voor zonsopgang = geen mensen). Kawaguchi meer voor reflectie-foto's.</div></div>
+    <div class="exp-item love"><div class="exp-ico">💆</div><div class="exp-text"><strong>Massage in het ryokan</strong>Boek in-room shiatsu-massage bij aankomst. Na de wandeldag: perfecte slotnacht in Hakone.</div></div>
+  </div>
+
+  <div class="infobox infobox-food">🥚 <strong>Must-eat Hakone:</strong> Kuro-tamago (zwarte eieren bij vulkaan) · Kaiseki-diner in ryokan · Amazake bij het historische theehuis</div>
+  <div class="infobox infobox-warn" style="margin-top:.5rem;">⚠️ <strong>Let op:</strong> Owakudani ropeway soms gesloten bij vulkanische activiteit. Check hakone.or.jp van tevoren. Fuji is in oktober vaak bewolkt — ga zo vroeg mogelijk voor de beste kans.</div>
+</div>
+</div>
+
+<div class="train"><div class="train-inner"><span class="train-city">Hakone (Odawara)</span><span class="train-arr">→</span><span class="train-city">Tokyo</span><span>| Romancekar of Shinkansen · 1u-1u30 · ±¥2.400</span></div></div>
+
+<!-- ══════════ TOKYO 11-15 OKT ══════════ -->
+<div class="sec fi" id="tokyo">
+<div class="sec-inner">
+  <div class="stop-head">
+    <div class="stop-meta">
+      <div class="stop-tag">Stop 08 · Afsluiter</div>
+      <div class="stop-city">Tokyo 東京</div>
+      <div class="stop-en">Neon, cultuur, Kamakura & de perfecte laatste avond</div>
+      <div class="stop-dates">11 – 15 oktober · dag 17–21</div>
+    </div>
+    <div class="nights-bubble"><span class="nb-n">4</span><span class="nb-l">Nachten</span></div>
+  </div>
+
+  <div class="hotel">
+    <div class="hotel-ico">🗼</div>
+    <div>
+      <div class="hotel-lbl">Honeymoon hotel Tokyo — Aanbeveling</div>
+      <div class="hotel-name">Hoshinoya Tokyo ★★★★★ of Andaz Tokyo Toranomon Hills</div>
+      <div class="hotel-budget">Hoshinoya: ±€350–600/nacht · Andaz: ±€280–450/nacht</div>
+      <div class="hotel-why">Hoshinoya Tokyo is een stadsryokan — tatami-vloeren, yukata, onsen op het dak, midden in de stad. Meerdere gasten noemen het hun honeymoon-highlight. Andaz heeft een legendaire rooftop bar en Tokyu Views. Budget: Andon Ryokan (Asakusa, traditioneel, ±€120). Midden: Candeo Hotels Roppongi (rooftop glazen onsen, ±€180).</div>
+    </div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 17 — Asakusa + Shibuya</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">⛪</div><div class="exp-text"><strong>Sensoji Tempel + Asakusa</strong>Vroeg — voor 08:00 bijna alleen. Nakamise shopping street. Rickshaw-rit optioneel.</div></div>
+    <div class="exp-item love"><div class="exp-ico">🌆</div><div class="exp-text"><strong>Shibuya Sky</strong>Sunset-tijdslot boeken! 360° dak-uitzicht. <span class="exp-badge badge-book">Vooraf boeken via Klook</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">🚦</div><div class="exp-text"><strong>Shibuya Crossing</strong>Groot en druk — mooi voor foto's. 's Avonds ook vanuit Starbucks op de eerste verdieping te bewonderen.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 18 — Harajuku + teamLab + Vintage</div>
+  <div class="exp-grid">
+    <div class="exp-item book"><div class="exp-ico">🎨</div><div class="exp-text"><strong>teamLab Planets (Toyosu)</strong>Digitale kunst-installaties, immersief en viraal. Boek weken vooraf! <span class="exp-badge badge-book">Verplicht vooraf boeken!</span></div></div>
+    <div class="exp-item love"><div class="exp-ico">👟</div><div class="exp-text"><strong>Shibuya Vintage Sports Store</strong>Recobros of Ragtag Shibuya: Tokyo's beste vintage sportswear. Thom-moment 👟</div></div>
+    <div class="exp-item"><div class="exp-ico">🌸</div><div class="exp-text"><strong>Meiji Jingu + Harajuku</strong>Bosshrine, Takeshita Street chaos, crepes. Omotesando daarna voor architectuur-winkelen.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 19 — Kamakura dagtrip + Dokaiku</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🗿</div><div class="exp-text"><strong>Kamakura dagtrip</strong>Grote Boeddha (Kotoku-in), Tsurugaoka Hachimangu Shrine, stranddorp. 1u trein. Oktober = perfect weer.</div></div>
+    <div class="exp-item book"><div class="exp-ico">🏎️</div><div class="exp-text"><strong>Dokaiku car meet</strong>Tokyo's beroemde Daikoku Parking Area car meet — supercars, JDM-classics, 's nachts. Check datum op Instagram @daikoku_pa. Taxi ernaar toe.</div></div>
+    <div class="exp-item"><div class="exp-ico">🗼</div><div class="exp-text"><strong>Tokyo Tower</strong>Zonsondergang, klassieke skyline. Minder druk dan Skytree, meer iconic qua gevoel.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 20 — Akihabara + Nikko optioneel</div>
+  <div class="exp-grid">
+    <div class="exp-item"><div class="exp-ico">🎮</div><div class="exp-text"><strong>Akihabara</strong>Elektronicakwartier, anime-winkels, retro game stores, maid-cafés. Thom-dag 🎮</div></div>
+    <div class="exp-item book"><div class="exp-ico">🏎️</div><div class="exp-text"><strong>Mario Kart</strong>MariCar.com — in Mario-kostuum door Tokyo rijden. Internationaal rijbewijs verplicht. <span class="exp-badge badge-book">Boek via maricar.com</span></div></div>
+    <div class="exp-item"><div class="exp-ico">⛩️</div><div class="exp-text"><strong>Nikko dagtrip (optioneel)</strong>Toshogu Shrine, Kegon Falls, Chuzenji Lake. 2u trein. Prachtig in oktober-herfst maar tijdsintensief.</div></div>
+  </div>
+
+  <div class="exp-title">🗓️ Dag 21 — Laatste dag + thuisvlucht</div>
+  <div class="exp-grid">
+    <div class="exp-item love"><div class="exp-ico">🍣</div><div class="exp-text"><strong>Omakase sushi afsluiter</strong>Boek een sushi-omakase als laatste diner. Shimbashi of Ginza voor de beste keuze. <span class="exp-badge badge-love">Jullie laatste romantische diner</span></div></div>
+    <div class="exp-item tip"><div class="exp-ico">✈️</div><div class="exp-text"><strong>Thuisvlucht</strong>Haneda (HND) = 35 min metro. Narita (NRT) = 70 min. Check jullie ticket! Bewaar 2.5-3 uur buffer. <span class="exp-badge badge-tip">Suica-card meenemen als souvenir</span></div></div>
+  </div>
+
+  <div class="infobox infobox-food">🍜 <strong>Must-eat Tokyo:</strong> Ichiran Ramen · Tsukiji ontbijt-sushi · Conveyor sushi bij Sushiro · Wagyu-shabu-shabu · Omakase afsluiter</div>
+</div>
+</div>
+
+<!-- ══════════ APPS ══════════ -->
+<div class="apps-wrap fi" id="apps">
+  <div class="apps-inner">
+    <div class="apps-title">Apps voor onderweg 📱</div>
+    <div class="apps-sub">Download deze VOOR vertrek — sommige vereisen een Nederlands account om in te stellen</div>
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🗺️</div><div><div class="app-name">Google Maps</div><div class="app-cat">Navigatie · #1 must-have</div></div></div>
+        <div class="app-desc">Werkt perfect voor treinen, metro's én wandelroutes in Japan. Toont zelfs welk treinrijtuig je in moet. Sla je stops vooraf op als lijst.</div>
+        <span class="app-must">⭐ Absoluut verplicht</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🌐</div><div><div class="app-name">Google Translate</div><div class="app-cat">Taal · #2 must-have</div></div></div>
+        <div class="app-desc">Camera-modus: houd je telefoon boven Japanse tekst en zie de vertaling live. Ideaal voor menu's, borden en verpakkingen. Download Japans offline!</div>
+        <span class="app-must">⭐ Absoluut verplicht</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🚄</div><div><div class="app-name">Japan Travel by Navitime</div><div class="app-cat">Treinplanning</div></div></div>
+        <div class="app-desc">Beste app voor treinroutes plannen (ook maanden vooruit). Toont kosten, rijtijden, overstappen. Beter dan Google Maps voor landelijke routes en bussen.</div>
+        <span class="app-must">⭐ Sterk aanbevolen</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">💳</div><div><div class="app-name">Suica (Apple/Google Wallet)</div><div class="app-cat">OV-betalen</div></div></div>
+        <div class="app-desc">Digitale OV-chipkaart voor alle metro's, treinen en bussen in Japan. Betaal ook bij convenience stores. Stel in vóór vertrek via Apple Wallet (Welcome Suica).</div>
+        <span class="app-must">⭐ Absoluut verplicht</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">📡</div><div><div class="app-name">Airalo (eSIM)</div><div class="app-cat">Internet</div></div></div>
+        <div class="app-desc">Koop een Japan eSIM voor vertrek. 10-20GB voor 30 dagen. Activeer bij landing. Geen gedoe met SIM-wisselings. Zonder internet werkt niets.</div>
+        <span class="app-must">⭐ Koop VOOR vertrek</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🍽️</div><div><div class="app-name">Tabelog</div><div class="app-cat">Restaurants vinden</div></div></div>
+        <div class="app-desc">Japan's beste restaurant-reviewsite (als Yelp, maar accurater). Zoek op wijk + type keuken. Scores boven 3.5 = uitstekend, boven 4.0 = zeldzaam goed.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🎟️</div><div><div class="app-name">Klook</div><div class="app-cat">Activiteiten boeken</div></div></div>
+        <div class="app-desc">Boek tickets voor teamLab, Shibuya Sky, kabelbanen, Sumo-sessies, theeceremonie en meer. Vaak goedkoper dan de deur + geen wachtrij.</div>
+        <span class="app-must">⭐ Sterk aanbevolen</span>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">💬</div><div><div class="app-name">LINE</div><div class="app-cat">Communicatie Japan</div></div></div>
+        <div class="app-desc">Japan's WhatsApp. Restaurants, hotels en lokale services communiceren via LINE. Maak een account aan — sommige reserveringen gaan via LINE-bericht.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🚨</div><div><div class="app-name">Safety Tips / NHK World</div><div class="app-cat">Veiligheid</div></div></div>
+        <div class="app-desc">Japan heeft aardbevingen. Safety Tips geeft real-time alerts. NHK World biedt Engelse noodinfo. Beide gratis. Zet geluid aan!</div>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">💴</div><div><div class="app-name">Currency Converter Plus</div><div class="app-cat">Valuta</div></div></div>
+        <div class="app-desc">Live yen-wisselkoers. Werkt ook offline (slaat laatste koers op). Handig bij markten en cash-betaling. 1 euro ≈ ¥160 (check vóór vertrek).</div>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🧳</div><div><div class="app-name">Ecbo Cloak</div><div class="app-cat">Bagage bewaren</div></div></div>
+        <div class="app-desc">Reserveer bagageopslag bij cafés, winkels en stationslockers. Ideaal op uitcheckdag of wanneer je met een zware koffer wil sightseeen.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-header"><div class="app-ico">🚕</div><div><div class="app-name">GO Taxi</div><div class="app-cat">Taxi Japan</div></div></div>
+        <div class="app-desc">Uber werkt maar is beperkt in Japan. GO Taxi is het lokale alternatief — beschikbaar in bijna alle steden. Koppel een betaalmethode vooraf.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="sig">💕</span>
+  <h3>Özge & Thom — Japan 2026</h3>
+  <p>18 dagen, 8 bestemmingen, ontelbare herinneringen. Van sumo tot sake, van piratenschip tot bamboebos — dit is jullie honeymoon.</p>
+  <p style="font-size:.78rem;color:rgba(255,255,255,.25);margin-top:.4rem;">✅ Alle bestemmingen veilig gecheckt · Oktober = perfecte timing · Herfstbladeren in de bergen</p>
+
+  <div class="footer-tips">
+    <div class="ftip"><div class="ftip-ico">🚄</div><div class="ftip-t">Transport</div><p>Losse Shinkansen-tickets via Klook. Suica-card voor alles lokaal. JR Pass voor deze route niet voordelig.</p></div>
+    <div class="ftip"><div class="ftip-ico">💴</div><div class="ftip-t">Cash</div><p>Haal yen op bij 7-Eleven ATM. Ryokans, tempels en kleine restaurants zijn vaak cash-only.</p></div>
+    <div class="ftip"><div class="ftip-ico">🧳</div><div class="ftip-t">Bagage</div><p>Yamato Transport stuurt koffers van hotel naar hotel (±¥1.500). Ideaal op de Nakasendo-dag.</p></div>
+    <div class="ftip"><div class="ftip-ico">💍</div><div class="ftip-t">Honeymoon tip</div><p>Zeg bij elk hotel dat jullie op huwelijksreis zijn — bijna altijd upgrade of welkomstdrankje.</p></div>
+    <div class="ftip"><div class="ftip-ico">📅</div><div class="ftip-t">Boek nu al</div><p>Koyasan (3+ mnd), teamLab (weken), Shibuya Sky (weken), Sumo (maanden), ryokans (zo snel mogelijk).</p></div>
+    <div class="ftip"><div class="ftip-ico">🌸</div><div class="ftip-t">Oktober tip</div><p>Takayama + Nagano herfstbladeren: begin oktober. Kyoto + Tokyo: eind oktober–november. Jullie timing is perfect!</p></div>
+  </div>
+  <div class="footer-note">Özge & Thom's Japan Honeymoon Guide · 25 sep – 15 okt 2026 · Samengesteld met liefde 💕</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+  },{threshold:.07});
+  document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
