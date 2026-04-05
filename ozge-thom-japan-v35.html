@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özge & Thom — Japan Honeymoon 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{--blush:#f0d5cc;--rose:#c47a6e;--deep:#7a3028;--cream:#faf7f3;--warm:#f4ece2;--sand:#e5d5c0;--ink:#1e1510;--muted:#6e5c52;--gold:#b8893a;--sage:#6b8f76;--sky:#5a8fa8;--night:#130e0a;--sakura:#dfa8a8;--warn:#c8891a;--ok:#4a8f5a;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Josefin Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:15px;}
+.hero{min-height:100vh;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding:3rem 2rem;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 15% 85%,rgba(196,122,110,.25) 0%,transparent 55%),radial-gradient(ellipse 70% 50% at 85% 15%,rgba(223,168,168,.15) 0%,transparent 55%);}
+.fp{position:absolute;animation:floatUp linear infinite;opacity:0;font-size:1rem;}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0;}10%{opacity:.6;}90%{opacity:.4;}100%{transform:translateY(-5vh) rotate(360deg);opacity:0;}}
+.hc{position:relative;z-index:2;max-width:680px;}
+.h-script{font-family:'Great Vibes',cursive;font-size:clamp(.9rem,2vw,1.3rem);color:var(--sakura);letter-spacing:.1em;margin-bottom:.4rem;animation:fu .9s ease both;}
+.h-names{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,10vw,7.5rem);color:#fff;line-height:1;text-shadow:0 4px 60px rgba(196,122,110,.5);animation:fu .9s .1s ease both;}
+.h-amp{color:var(--sakura);}
+.h-icon{font-size:1.8rem;display:block;margin:.6rem auto;animation:fu .9s .2s ease both;}
+.h-sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:clamp(.9rem,2vw,1.4rem);color:rgba(255,255,255,.75);margin-bottom:.4rem;animation:fu .9s .3s ease both;}
+.h-dates{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;animation:fu .9s .4s ease both;}
+.h-stats{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:fu .9s .55s ease both;}
+.hs{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.6rem 1rem;text-align:center;}
+.hs-n{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sakura);line-height:1;display:block;}
+.hs-l{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+@keyframes fu{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--blush);overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;max-width:980px;margin:0 auto;padding:0 .3rem;}
+.nav-a{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.8rem .7rem;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s;}
+.nav-a:hover,.nav-a.act{color:var(--rose);border-color:var(--rose);}
+.nav-a.key{color:var(--deep);}
+.city{padding:3.5rem 1.5rem;border-bottom:2px solid var(--sand);}
+.city:nth-child(odd){background:var(--cream);}
+.city:nth-child(even){background:var(--warm);}
+.ci{max-width:860px;margin:0 auto;}
+.city-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px dashed var(--sand);flex-wrap:wrap;}
+.city-tag{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.25rem;}
+.city-tag.g{color:var(--sage);}.city-tag.b{color:var(--sky);}.city-tag.gold{color:var(--gold);}
+.city-name{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--ink);line-height:1.1;}
+.city-sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.85rem;color:var(--muted);margin-top:.2rem;}
+.city-dates-str{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand);margin-top:.2rem;}
+.nb{background:var(--deep);color:#fff;border-radius:40px;padding:.5rem 1rem;text-align:center;min-width:70px;flex-shrink:0;}
+.nb.g{background:var(--sage);}.nb.b{background:var(--sky);}.nb.gold{background:var(--gold);}
+.nb-n{font-family:'Great Vibes',cursive;font-size:1.9rem;line-height:1;display:block;}
+.nb-l{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;}
+.hotel{background:var(--night);color:#fff;border-radius:8px;padding:1rem 1.3rem;margin-bottom:1.5rem;border-left:4px solid var(--gold);display:flex;gap:.9rem;align-items:flex-start;}
+.h-ico{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+.h-lbl{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.h-name{font-size:.95rem;font-weight:700;margin-bottom:.2rem;}
+.h-price{font-size:.78rem;color:var(--gold);font-weight:600;margin-bottom:.18rem;}
+.h-why{font-size:.8rem;color:rgba(255,255,255,.58);line-height:1.6;font-style:italic;}
+.day-block{margin-bottom:1.4rem;border:1px solid var(--sand);border-radius:10px;overflow:hidden;background:#fff;}
+.day-header{background:var(--deep);color:#fff;padding:.7rem 1.1rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.day-header.g{background:var(--sage);}.day-header.b{background:var(--sky);}.day-header.gold{background:var(--gold);}
+.day-num{font-family:'Great Vibes',cursive;font-size:1.5rem;color:rgba(255,255,255,.8);line-height:1;}
+.day-title{font-size:.88rem;font-weight:700;color:#fff;flex:1;padding:0 .5rem;}
+.day-date{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;}
+.day-body{padding:1rem 1.1rem;}
+.notice{display:flex;gap:.5rem;padding:.5rem .8rem;border-radius:6px;margin-bottom:.7rem;font-size:.78rem;line-height:1.5;align-items:flex-start;}
+.notice.warn{background:rgba(200,137,26,.1);border:1px solid rgba(200,137,26,.3);color:#7a5010;}
+.notice.ok{background:rgba(74,143,90,.08);border:1px solid rgba(74,143,90,.3);color:#2a6038;}
+.notice.info{background:rgba(90,143,168,.08);border:1px solid rgba(90,143,168,.3);color:#2a5068;}
+.notice.danger{background:rgba(180,50,30,.08);border:1px solid rgba(180,50,30,.3);color:#7a1010;}
+.notice-ico{font-size:1rem;flex-shrink:0;margin-top:.05rem;}
+.notice strong{font-weight:700;}
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:.9rem;}
+.tl-item{display:grid;grid-template-columns:58px 1fr;gap:0;}
+.tl-left{padding:.55rem .6rem .55rem 0;border-right:2px solid var(--blush);text-align:right;}
+.tl-time{font-size:.62rem;font-weight:700;color:var(--rose);letter-spacing:.05em;display:block;}
+.tl-dur{font-size:.55rem;color:var(--muted);display:block;margin-top:.1rem;}
+.tl-right{padding:.55rem 0 .55rem .9rem;}
+.tl-name{font-size:.88rem;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
+.tl-desc{font-size:.78rem;color:var(--muted);line-height:1.55;margin-top:.15rem;}
+.tl-tag{font-size:.52rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.12rem .38rem;border-radius:3px;}
+.tag-eat{background:rgba(196,122,110,.12);color:var(--deep);}
+.tag-see{background:rgba(184,137,58,.1);color:var(--gold);}
+.tag-book{background:rgba(90,143,168,.12);color:var(--sky);}
+.tag-love{background:rgba(223,168,168,.2);color:var(--rose);}
+.tag-move{background:rgba(100,100,100,.08);color:#555;}
+.tag-free{background:rgba(107,143,118,.1);color:var(--sage);}
+.tl-item.move .tl-left{border-right-color:var(--sand);}
+.tl-item.move .tl-name{color:var(--muted);}
+.tl-item.move .tl-time{color:var(--muted);}
+.tl-sep{height:1px;background:var(--sand);margin:.2rem 0 .2rem 58px;}
+.food-box{background:rgba(196,122,110,.06);border-left:3px solid var(--rose);border-radius:0 6px 6px 0;padding:.55rem .8rem;font-size:.8rem;line-height:1.65;margin-bottom:.7rem;}
+.food-box strong{color:var(--deep);font-weight:700;}
+.backlog{background:rgba(184,137,58,.06);border:1px solid rgba(184,137,58,.2);border-radius:8px;padding:.8rem 1rem;margin-bottom:.9rem;}
+.backlog-title{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.backlog-item{font-size:.78rem;color:var(--muted);padding:.22rem 0;display:flex;gap:.5rem;align-items:baseline;line-height:1.45;}
+.backlog-item::before{content:'○';color:var(--gold);font-size:.65rem;flex-shrink:0;}
+.backlog-day{font-size:.65rem;color:var(--rose);font-weight:700;margin-left:.3rem;white-space:nowrap;}
+.checklist-wrap{background:var(--ink);color:#fff;border-radius:0 0 10px 10px;padding:1rem 1.1rem;}
+.cl-title{font-size:.62rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;}
+.cl-grid{display:flex;flex-direction:column;gap:.35rem;}
+.cl-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.78rem;line-height:1.5;}
+.cl-box{width:14px;height:14px;border:1.5px solid rgba(255,255,255,.3);border-radius:3px;flex-shrink:0;margin-top:.15rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;}
+.cl-box:hover{border-color:var(--sakura);}
+.cl-box.checked{background:var(--sage);border-color:var(--sage);}
+.cl-box.checked::after{content:'✓';font-size:.6rem;color:#fff;}
+.cl-text{color:rgba(255,255,255,.7);}
+.cl-text strong{color:#fff;font-weight:600;}
+.cl-text .urgent{color:var(--sakura);font-size:.7rem;font-weight:700;}
+.cl-text .soon{color:var(--gold);font-size:.7rem;}
+.tbanner{background:var(--sand);padding:.7rem 1.5rem;text-align:center;}
+.tbanner-inner{max-width:860px;margin:0 auto;font-size:.75rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+.tc{font-weight:700;color:var(--ink);}.ta{color:var(--rose);}
+.safe-bar{background:var(--sage);color:#fff;padding:.9rem 1.5rem;text-align:center;}
+.safe-bar p{font-size:.78rem;line-height:1.7;max-width:860px;margin:0 auto;}
+.wp{background:rgba(255,255,255,.15);border-radius:4px;padding:.1rem .45rem;font-size:.7rem;}
+.budget{background:var(--ink);color:#fff;padding:3rem 1.5rem;}
+.budget-inner{max-width:860px;margin:0 auto;}
+.budget-title{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sakura);margin-bottom:.25rem;}
+.budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin-top:1.2rem;}
+.bc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.9rem;}
+.bc-ico{font-size:1.2rem;margin-bottom:.35rem;}
+.bc-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.bc-amt{font-size:1.1rem;font-weight:700;color:#fff;}
+.bc-pp{font-size:.72rem;color:var(--sakura);font-weight:600;margin-top:.1rem;}
+.bc-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.15rem;line-height:1.5;}
+.budget-total{margin-top:1.2rem;background:rgba(196,122,110,.15);border:1px solid rgba(196,122,110,.3);border-radius:8px;padding:1rem 1.3rem;}
+.bt-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.bt-row:last-child{border-bottom:none;padding-top:.7rem;margin-top:.3rem;}
+.bt-l{font-size:.82rem;color:rgba(245,240,232,.6);}
+.bt-a{font-size:.95rem;font-weight:700;color:#fff;}
+.bt-a.highlight{font-family:'Great Vibes',cursive;font-size:1.8rem;color:var(--sakura);}
+.bt-remaining{margin-top:1rem;background:rgba(107,143,118,.15);border:1px solid rgba(107,143,118,.3);border-radius:8px;padding:.9rem 1.3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.br-l{font-size:.82rem;color:rgba(245,240,232,.6);}
+.br-a{font-family:'Great Vibes',cursive;font-size:2rem;color:#8fd4a0;}
+.activities-list{background:var(--night);color:#fff;padding:3rem 1.5rem;}
+.al-inner{max-width:860px;margin:0 auto;}
+.al-title{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sakura);margin-bottom:.2rem;}
+.al-sub{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.5rem;}
+.al-section{margin-bottom:1.5rem;}
+.al-section-title{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.al-item{display:grid;grid-template-columns:1fr auto auto;gap:.5rem 1rem;align-items:baseline;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.78rem;}
+.al-item:last-child{border-bottom:none;}
+.al-name{color:rgba(255,255,255,.8);}
+.al-price{color:var(--gold);font-weight:700;white-space:nowrap;}
+.al-badge{font-size:.55rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .38rem;border-radius:3px;white-space:nowrap;}
+.badge-book{background:rgba(90,143,168,.2);color:#7ac8e8;}
+.badge-free{background:rgba(107,143,118,.15);color:#8fd4a0;}
+.badge-res{background:rgba(196,122,110,.2);color:var(--sakura);}
+.apps{background:var(--night);padding:3rem 1.5rem;}
+.apps-inner{max-width:860px;margin:0 auto;}
+.apps-title{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sakura);margin-bottom:.2rem;}
+.apps-sub{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.5rem;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem;}
+.ac{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.9rem;}
+.ac-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;}
+.ac-ico{font-size:1.5rem;}.ac-name{font-size:.85rem;font-weight:700;color:#fff;}
+.ac-cat{font-size:.53rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.ac-desc{font-size:.76rem;color:rgba(255,255,255,.5);line-height:1.55;}
+.ac-must{display:inline-block;font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(196,122,110,.2);color:var(--sakura);border-radius:3px;padding:.1rem .38rem;margin-top:.35rem;}
+footer{background:var(--night);color:rgba(255,255,255,.5);padding:3.5rem 1.5rem;text-align:center;}
+footer .sig{font-family:'Great Vibes',cursive;font-size:2.8rem;color:var(--sakura);display:block;margin-bottom:.6rem;animation:pulse 2.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+footer h3{font-family:'Great Vibes',cursive;font-size:1.8rem;color:#fff;margin-bottom:.6rem;}
+footer p{font-size:.83rem;line-height:1.9;max-width:500px;margin:0 auto .4rem;}
+.footer-tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.65rem;max-width:860px;margin:2rem auto 0;text-align:left;}
+.ft{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:.85rem;}
+.ft-ico{font-size:1rem;margin-bottom:.3rem;}
+.ft-t{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.22rem;}
+.ft p{font-size:.75rem;color:rgba(255,255,255,.47);line-height:1.55;margin:0;}
+.fn{margin-top:2.5rem;font-size:.62rem;letter-spacing:.12em;color:rgba(255,255,255,.14);}
+.fi{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+.fi.vis{opacity:1;transform:none;}
+@media(max-width:600px){.city-head{flex-direction:column;}.tl-item{grid-template-columns:50px 1fr;}.day-header{flex-direction:column;align-items:flex-start;}.city,.apps,.budget,.activities-list{padding:2.5rem 1rem;}.al-item{grid-template-columns:1fr auto;}.al-badge{display:none;}}
+</style>
+</head>
+<body>
+<div class="fp" style="left:8%;animation-duration:11s;animation-delay:0s;">🌸</div>
+<div class="fp" style="left:22%;animation-duration:8s;animation-delay:2.5s;font-size:.75rem;">💕</div>
+<div class="fp" style="left:40%;animation-duration:13s;animation-delay:1s;">🌸</div>
+<div class="fp" style="left:62%;animation-duration:9s;animation-delay:3.5s;font-size:.7rem;">✨</div>
+<div class="fp" style="left:80%;animation-duration:12s;animation-delay:.5s;">🌸</div>
+<div class="fp" style="left:90%;animation-duration:10s;animation-delay:4s;font-size:.85rem;">💕</div>
+
+<div class="hero">
+  <div class="hc">
+    <div class="h-script">Japan Honeymoon 2026</div>
+    <div class="h-names">Özge <span class="h-amp">&</span> Thom</div>
+    <span class="h-icon">💍</span>
+    <div class="h-sub">21 dagen door het mooiste land ter wereld</div>
+    <div class="h-dates">✈️ Aankomst KIX 24 sep 12:35 &nbsp;·&nbsp; Vertrek NRT 14 okt 23:05</div>
+    <div class="h-stats">
+      <div class="hs"><span class="hs-n">20</span><span class="hs-l">Reisdagen</span></div>
+      <div class="hs"><span class="hs-n">8</span><span class="hs-l">Steden</span></div>
+      <div class="hs"><span class="hs-n">🍂</span><span class="hs-l">Herfst</span></div>
+      <div class="hs"><span class="hs-n">✅</span><span class="hs-l">Veilig gecheckt</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="safe-bar">
+  <p>🛡️ <strong>Veiligheidscheck 2026:</strong> Alle bestemmingen Level 1. <span class="wp">⚠️ Katsuoji: halve dag reis buiten Osaka</span> · <span class="wp">⚠️ Koyasan shukubo: 3+ maanden vooraf boeken</span> · <span class="wp">⚠️ Kamikochi sluit na 15 nov</span> · <span class="wp">⚠️ Hozugawa boot: reserveren verplicht</span> · <span class="wp">⚠️ TeamLab + Shibuya Sky: weken vooraf</span></p>
+</div>
+
+<!-- BUDGET -->
+<div class="budget fi">
+  <div class="budget-inner">
+    <div class="budget-title">Het budget 💴</div>
+    <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;">20 reisdagen · 2 personen · per persoon €6.000 max</div>
+    <div class="budget-grid">
+      <div class="bc"><div class="bc-ico">✈️</div><div class="bc-lbl">Vluchten (2×)</div><div class="bc-amt">€3.200</div><div class="bc-pp">€1.600 pp</div><div class="bc-sub">KLM direct AMS→KIX/NRT. Geboekt.</div></div>
+      <div class="bc"><div class="bc-ico">🏨</div><div class="bc-lbl">Hotels & verblijven</div><div class="bc-amt">€2.100</div><div class="bc-pp">€1.050 pp</div><div class="bc-sub">Mix hotels, ryokans, tempel, apartments. Geboekt.</div></div>
+      <div class="bc"><div class="bc-ico">🚄</div><div class="bc-lbl">Transport (pp)</div><div class="bc-amt">±€273 pp</div><div class="bc-pp">per persoon</div><div class="bc-sub">Shinkansen losse tickets, kabelbaan, lokaal OV, Suica.</div></div>
+      <div class="bc"><div class="bc-ico">🎟️</div><div class="bc-lbl">Activiteiten (pp)</div><div class="bc-amt">±€570 pp</div><div class="bc-pp">per persoon</div><div class="bc-sub">Alle must-activiteiten, teamLab, Sumo, Mario Kart, workshops.</div></div>
+    </div>
+    <div class="budget-total">
+      <div class="bt-row"><div class="bt-l">✈️ Vluchten (pp)</div><div class="bt-a">€1.600</div></div>
+      <div class="bt-row"><div class="bt-l">🏨 Hotels (pp)</div><div class="bt-a">€1.050</div></div>
+      <div class="bt-row"><div class="bt-l">🚄 Transport (pp)</div><div class="bt-a">±€273</div></div>
+      <div class="bt-row"><div class="bt-l">🎟️ Activiteiten (pp)</div><div class="bt-a">±€570</div></div>
+      <div class="bt-row"><div class="bt-l" style="font-weight:700;color:rgba(255,255,255,.9)">Subtotaal vaste kosten (pp)</div><div class="bt-a highlight">±€3.493</div></div>
+    </div>
+    <div class="bt-remaining">
+      <div><div class="br-l">💡 Budget voor eten, drinken & aankopen</div><div style="font-size:.7rem;color:rgba(255,255,255,.3);margin-top:.1rem;">per persoon · bij €6.000 max pp</div></div>
+      <div><div class="br-a">±€2.507 pp</div><div style="font-size:.68rem;color:#8fd4a0;margin-top:.1rem;">≈ €125 pp/dag voor eten + souvenirs</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#osaka" class="nav-a key">🏙️ Osaka</a>
+    <a href="#koyasan" class="nav-a">🕯️ Koyasan</a>
+    <a href="#kyoto" class="nav-a key">⛩️ Kyoto</a>
+    <a href="#nakasendo" class="nav-a">🌿 Nakasendo</a>
+    <a href="#matsumoto" class="nav-a">🏯 Matsumoto</a>
+    <a href="#takayama" class="nav-a">🏔️ Takayama</a>
+    <a href="#kanazawa" class="nav-a">🏯 Kanazawa</a>
+    <a href="#tokyo" class="nav-a key">🗼 Tokyo</a>
+    <a href="#activiteiten" class="nav-a" style="color:var(--gold);">📋 Alle activiteiten</a>
+    <a href="#apps" class="nav-a" style="color:var(--gold);">📱 Apps</a>
+  </div>
+</nav>
+
+<!-- ═══ OSAKA ═══ -->
+<div class="city fi" id="osaka">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag">Stop 01 · 2 nachten</div>
+      <div class="city-name">Osaka 大阪</div>
+      <div class="city-sub">Kasteel, eten & de eerste Japan-avond</div>
+      <div class="city-dates-str">24 – 26 september · Dag 1 & 2</div>
+    </div>
+    <div class="nb"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🏨</div>
+    <div>
+      <div class="h-lbl">Geboekt hotel</div>
+      <div class="h-name">The Rise Osaka Kitashinchi ⭐⭐⭐⭐</div>
+      <div class="h-price">24 – 26 september · 2 nachten</div>
+      <div class="h-why">Centraal in Kitashinchi. Vertel bij inchecken dat jullie op honeymoon zijn! 🧳 <strong>Yamato:</strong> Stuur koffer vandaag of morgen via receptie naar Agora Kyoto Karasuma.</div>
+    </div>
+  </div>
+
+  <!-- DAG 1 -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 1</span>
+      <span class="day-title">Aankomst KIX → Namba buurt → Dotonbori avond</span>
+      <span class="day-date">24 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">✈️</span><div><strong>Landing 12:35 KIX.</strong> Immigratie + bagage ±45–60 min. Nankai Rapi:t → Namba (35 min, ¥1.490). Aankomst hotel ±14:30–15:00. Beschikbaar: late middag en avond. Neem het rustig — jetlag slaat morgen keihard terug.</div></div>
+      <div class="notice ok"><span class="notice-ico">🧳</span><div><strong>Yamato dag 1 of 2:</strong> vraag receptie The Rise je grote koffer te sturen naar <strong>Agora Kyoto Karasuma</strong>. Doe dit zo vroeg mogelijk — levering is de volgende dag. Jullie nemen alleen een kleine tas mee naar Koyasan.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">12:35</span><span class="tl-dur">1u15</span></div><div class="tl-right"><div class="tl-name">✈️ Landing KIX + immigratie <span class="tl-tag tag-move">Vliegveld</span></div><div class="tl-desc">Suica activeren via Apple Wallet. eSIM activeren. Nankai Rapi:t ticket kopen bij Nankai-balie.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:50</span><span class="tl-dur">35 min</span></div><div class="tl-right"><div class="tl-name">🚃 Nankai Rapi:t → Namba <span class="tl-tag tag-move">¥1.490</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏨 Inchecken The Rise Osaka Kitashinchi <span class="tl-tag tag-love">Even bijkomen</span></div><div class="tl-desc">Koffer weg, douche, even uitrusten. Yamato-formulier invullen aan de balie voor koffer naar Kyoto.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">16:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">⛩️ Namba Yasaka Jinja <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Enorm leeuwenmasker-heiligdom, 5 min lopen van Namba. Rustig en indrukwekkend als eerste shrine.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏮 Shinsekai buurt <span class="tl-tag tag-see">Retro Osaka</span></div><div class="tl-desc">Jaren '50 sfeer, Tsutenkaku toren, kushikatsu kraampjes. 15 min lopen van Namba — het echte Osaka-gevoel.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">19:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🦑 Dotonbori — jullie eerste Japan-avond 💕 <span class="tl-tag tag-love">Icoon</span></div><div class="tl-desc">Foto bij het Glico-bord. Neonlichten, takoyaki, de energie van Osaka. Niet te laat opblijven — jetlag!</div></div></div>
+      </div>
+      <div class="food-box">🍜 <strong>Avond:</strong> Ichiran Ramen (troostend na de vlucht) of takoyaki Dotonbori · <strong>Snack:</strong> Kushikatsu in Shinsekai</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist dag 1 avond</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Yamato-formulier invullen</strong> bij receptie voor koffer naar Agora Kyoto Karasuma. <span class="urgent">⚡ Vandaag regelen = morgen aangekomen in Kyoto!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kleine weekendtas klaarmaken</strong> voor Koyasan (1 nacht) — grote koffer gaat morgen via Yamato.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kobe beef restaurant reserveren</strong> voor morgen diner ±16:00 in Osaka Namba — Ajinoya of teppanyaki in Shinsaibashi. <span class="urgent">⚡ Altijd reserveren!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Cash yen</strong> ophalen bij 7-Eleven ATM — houd ¥20.000+ bij je.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Bevestig <strong>Koyasan Zofukuin</strong> aankomst — check maaltijdtijden (diner ±18:00).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 2 -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 2</span>
+      <span class="day-title">Katsuoji tempel vroeg (Mino) → Osaka Castle → Shitenno-ji → Kobe beef in Osaka + avond vrij</span>
+      <span class="day-date">25 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Dag 2 is goed te doen.</strong> Katsuoji vroeg + Castle + Shitenno-ji middag + Kobe beef diner in Osaka zelf. Geen extra reistijd naar Kobe — Kobe beef is gewoon ook verkrijgbaar in Osaka. Avond rustig afsluiten in Namba.</div></div>
+      <div class="notice info"><span class="notice-ico">🗺️</span><div><strong>Logische route dag 2:</strong> Katsuoji (07:30, Mino) → terug Osaka ±11:30 → Osaka Castle → Shitenno-ji → Kobe beef diner in Osaka Namba → rustige avond.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🏯 Osaka Castle + Park <span class="tl-tag tag-see">¥600</span></div><div class="tl-desc">Opent 09:00 — wees er 08:30 aan. Kasteeltoren + park. Herfstbladeren beginnen. Plan max 1.5u voor Shitenno-ji.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">10:15</span><span class="tl-dur">20 min</span></div><div class="tl-right"><div class="tl-name">🚇 Metro → Shitenno-ji <span class="tl-tag tag-move">Chuo lijn → Tanimachi lijn</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:45</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">⛩️ Shitenno-ji Tempel <span class="tl-tag tag-see">¥300 · 593 n.Chr.</span></div><div class="tl-desc">Japan's allereerste tempel. Rustig complex. Binnenplaats open tot 16:30.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">12:00</span><span class="tl-dur">35 min</span></div><div class="tl-right"><div class="tl-name">🚄 Trein → Kobe Sannomiya <span class="tl-tag tag-move">Hankyu of JR · ¥420</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:45</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🥩 Kobe Beef lunch <span class="tl-tag tag-eat">Must-eat</span><span class="tl-tag tag-book">Gereserveerd</span></div><div class="tl-desc">Steak Land Kobe of Mouriya — A5-wagyu voor jullie ogen geroosterd. ±¥8.000–12.000 p.p. Het culinaire hoogtepunt van Osaka-regio.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">35 min</span></div><div class="tl-right"><div class="tl-name">🚄 Terug → Osaka <span class="tl-tag tag-move">Transport</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">16:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🌇 Vrije avond Namba/Dotonbori <span class="tl-tag tag-love">Osaka afsluiter</span></div><div class="tl-desc">Winkelen op Shinsaibashi, izakaya, of gewoon rondslenteren. Vroeg naar bed — morgen vroeg vertrek naar Koyasan.</div></div></div>
+      </div>
+      <div class="food-box">🍂 <strong>Ochtend:</strong> Konbini voor Katsuoji · <strong>Lunch:</strong> Soba of ramen Osaka centrum na het kasteel · <strong>Diner:</strong> Kobe Beef in Namba (gereserveerd ±16:00)</div>
+
+      <div class="backlog">
+        <div class="backlog-title">📌 Osaka optioneel — als er tijd over is</div>
+        
+        <div class="backlog-item">Umeda Sky Building — zonsondergang 360° uitzicht <span class="backlog-day">(dag 2 avond, als alternatief voor Dotonbori)</span></div>
+        <div class="backlog-item">Nakazakicho — rustig vintage buurtje, 10 min van Umeda <span class="backlog-day">(dag 2 middag na Shitenno-ji, voor het diner)</span></div>
+        <div class="backlog-item">Sumiyoshi Taisha Shrine — rustiger dan mainstream shrines <span class="backlog-day">(dag 2 ochtend i.p.v. kasteel)</span></div>
+        <div class="backlog-item">Nakanoshima — riverside park en musea <span class="backlog-day">(dag 1 middag als kort uitje)</span></div>
+        <div class="backlog-item">Minoo Park waterval — 20 min lopen van Katsuoji, ideaal te combineren als je vroeg bij Katsuoji bent <span class="backlog-day">(dag 2 ochtend, loopafstand Katsuoji)</span></div>
+        <div class="backlog-item">Round 1 Stadium — Japanse game hall <span class="backlog-day">(dag 1 of 2 avond laat, open tot middernacht)</span></div>
+      </div>
+
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 3 — Vertrek Koyasan)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kleine tas pakken</strong> voor Koyasan (1 nacht). Grote koffer is al via Yamato onderweg naar Kyoto.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Nankai Koya Lijn ticket</strong> kopen bij Namba Station of Nankai Pass meenemen (dekt trein + kabelbaan retour).</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Bevestig check-in tijdstip <strong>Zofukuin</strong> en diner-aanvangstijd (±18:00).</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Download offline kaarten Koyasan — beperkte mobiele dekking in de bergen.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Osaka (Namba)</span><span class="ta">→</span><span class="tc">Koyasan</span><span>| Nankai Koya Lijn + kabelbaan · 2u · ¥1.600 · Nankai Pass dekt retour · alleen kleine tas meenemen</span></div></div>
+
+<!-- ═══ KOYASAN ═══ -->
+<div class="city fi" id="koyasan">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag b">Stop 02 · 1 nacht</div>
+      <div class="city-name">Koyasan 高野山</div>
+      <div class="city-sub">Slapen bij monniken — kleine tas, grote koffer staat al in Kyoto</div>
+      <div class="city-dates-str">26 – 27 september · Dag 3</div>
+    </div>
+    <div class="nb b"><span class="nb-n">1</span><span class="nb-l">Nacht</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🕯️</div>
+    <div>
+      <div class="h-lbl">Geboekt tempel-verblijf</div>
+      <div class="h-name">Koyasan Shukubo Zofukuin 🛕</div>
+      <div class="h-price">26 – 27 september · 1 nacht · Diner + ontbijt inbegrepen</div>
+      <div class="h-why">Jullie grote koffer staat al in Kyoto. Reizen met kleine tas. Diner en ontbijt van de monniken inbegrepen. 🧳 <strong>Yamato:</strong> niet van toepassing — vertrek volgende dag direct naar Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header b">
+      <span class="day-num">Dag 3</span>
+      <span class="day-title">Koyasan volledig — Daimon → Garan → Okunoin → Ochtendgebed</span>
+      <span class="day-date">26 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Alles op loopafstand.</strong> Koyasan is compact — Daimon Gate, Danjo Garan, Fuginin en Okunoin liggen allemaal binnen 2 km van elkaar. Geen transport nodig. Logische route: Daimon → Garan → Fuginin → check-in → diner → Okunoin avond → ochtendgebed.</div></div>
+      <div class="notice info"><span class="notice-ico">🌅</span><div><strong>Volgende ochtend:</strong> ochtendgebed bij Zofukuin ±06:00. Na ontbijt (±07:00) pas vertrek naar Kyoto mogelijk. Aankomst Kyoto ±12:30. Dit betekent dat jullie dag 4 in Kyoto <strong>geen vroege activiteiten</strong> kunnen doen.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🚃 Trein + kabelbaan → Koyasan <span class="tl-tag tag-move">Nankai Koya Lijn</span></div><div class="tl-desc">Namba → Gokurakubashi → kabelbaan omhoog → bus naar centrum. Aankomst ±11:00.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:00</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🚪 Daimon Gate <span class="tl-tag tag-see">Gratis · Ingang Koyasan</span></div><div class="tl-desc">Imposante toegangspoort van Koyasan. Twee grote Nio-beschermergoden. Begin van de heilige berg.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">⛩️ Danjo Garan heilig complex <span class="tl-tag tag-see">¥500</span></div><div class="tl-desc">Centrale tempelcomplex van Koyasan. Konpon Daito pagode (vermiljoen-rood, indrukwekkend). Japan's grootste zandruin in Kongobuji.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:45</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏛️ Fuginin Tempel <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Kleine stille tempel, prachtige tuin. Rustig en off-the-beaten-path.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏨 Check-in Zofukuin + rust <span class="tl-tag tag-love">Yukata aan</span></div><div class="tl-desc">Inchecken, yukata aantrekken. Privé-onsen beschikbaar. Even uitrusten voor de avond.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🍃 Shojin Ryori diner <span class="tl-tag tag-eat">Inbegrepen</span></div><div class="tl-desc">Volledig veganistische 10-gangencuisine van de monniken. Meditatief en verrassend lekker.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">19:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🪦 Okunoin begraafplaats bij lantaarnlicht <span class="tl-tag tag-love">Onvergetelijk</span></div><div class="tl-desc">200.000 graftombes tussen eeuwenoude ceders. Lantaarns branden de hele nacht. Stil, mysterieus — één van de meest bijzondere ervaringen van de hele trip. 💕</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">06:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🙏 Ochtendgebed Zofukuin <span class="tl-tag tag-love">Uniek</span></div><div class="tl-desc">Dagelijkse gebedsceremonie bijwonen. Vroeg opstaan is absoluut de moeite waard. Daarna ontbijt (±07:00) en vertrek Kyoto.</div></div></div>
+      </div>
+      <div class="food-box">🍃 <strong>Alle maaltijden inbegrepen</strong> bij Zofukuin — shojin ryori diner + monniken-ontbijt</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 4 — Vertrek naar Kyoto)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Ontbijt bijwonen bij Zofukuin (±07:00) — inbegrepen en verplicht.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Treinschema checken</strong> Koyasan → Kyoto via Shin-Osaka. Vertrek ±09:30, aankomst Kyoto ±12:30.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Bevestig koffer Agora Kyoto</strong> — al aangekomen via Yamato? Bel of app het hotel.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><span class="soon">💡 Aankomsttip Kyoto:</span> dag 4 is een halve dag. Plan geen vroege activiteiten — Nishiki Market + Gion avond is perfect voor de aankomstmiddag.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Koyasan</span><span class="ta">→</span><span class="tc">Kyoto</span><span>| Kabelbaan + Nankai + Shinkansen Shin-Osaka→Kyoto · ±2u30 · ±¥4.500 · aankomst ±12:30</span></div></div>
+
+<!-- ═══ KYOTO ═══ -->
+<div class="city fi" id="kyoto">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag">Stop 03 · 4 nachten</div>
+      <div class="city-name">Kyoto 京都</div>
+      <div class="city-sub">Tempels, bamboe, geisha's & de beste theeceremonie</div>
+      <div class="city-dates-str">27 september – 1 oktober · Dag 4 t/m 7</div>
+    </div>
+    <div class="nb"><span class="nb-n">4</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🏯</div>
+    <div>
+      <div class="h-lbl">Geboekt hotel</div>
+      <div class="h-name">Agora Kyoto Karasuma ⭐⭐⭐⭐</div>
+      <div class="h-price">27 september – 1 oktober · 4 nachten · Karasuma centrum</div>
+      <div class="h-why">Grote koffer staat klaar bij aankomst (via Yamato vanuit Osaka). 🧳 <strong>Yamato avond dag 7:</strong> stuur koffer via Agora receptie naar een <strong>7-Eleven bij Matsumoto Station</strong>. Jullie reizen naar Nakasendo/Kiso met alleen een kleine tas — hands-free! Koffer ligt klaar bij aankomst Matsumoto.</div>
+    </div>
+  </div>
+
+  <!-- DAG 4 — AANKOMSTDAG -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 4</span>
+      <span class="day-title">Aankomst Kyoto (middag) → Nishiki Market → Gion + Hokan-ji → Kodai-ji avond</span>
+      <span class="day-date">27 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">🕐</span><div><strong>Aankomstdag na ochtendgebed Koyasan.</strong> Vertrek Koyasan ±09:30 → aankomst Kyoto ±12:30. Geen vroege activiteiten vandaag. Beschikbaar: middag en avond. Oost-Kyoto cluster is ideaal — alles op loopafstand.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">3u</span></div><div class="tl-right"><div class="tl-name">🚃 Koyasan → Kyoto <span class="tl-tag tag-move">Via Shin-Osaka · aankomst ±12:30</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🍡 Nishiki Market lunch <span class="tl-tag tag-eat">Gratis toegang</span></div><div class="tl-desc">Kyoto's beroemde overdekte markt. Dango, tamagoyaki, matcha-snacks. Ideaal voor lunch na de aankomst. 5 min lopen van Karasuma.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏮 Gion district verkennen <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Hanamikoji Street, Shirakawa Canal, Kennin-ji (¥500). Rustig verkennen zonder haast.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏯 Hokan-ji (Yasaka Pagoda) <span class="tl-tag tag-see">Gratis buitenkant · ¥400 binnen</span></div><div class="tl-desc">Iconische 5-verdiepingen pagode van Kyoto. Mooiste foto vanuit Ninenzaka straat eronder.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">16:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">👘 Geisha-district late middag <span class="tl-tag tag-love">Echte geisha kans</span></div><div class="tl-desc">Geisha's gaan 's avonds op pad rond 16:30–18:00. Loop langs Hanamikoji voor de beste kans op een glimp.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏮 Kodai-ji tempel <span class="tl-tag tag-see">¥600 · Oktober: illuminatie</span></div><div class="tl-desc">Prachtige tuin, kleine bamboetuin. Oktober: illuminatie 's avonds. Vlakbij Hokan-ji — loopafstand.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">19:30</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🍶 Avond Pontocho <span class="tl-tag tag-eat">Diner</span></div><div class="tl-desc">Pontocho steeg — oudste restaurantsteeg van Kyoto, langs de rivier. Tofu-restaurant of izakaya.</div></div></div>
+      </div>
+      <div class="food-box">🍡 <strong>Lunch:</strong> Nishiki Market · <strong>Diner:</strong> Pontocho izakaya of tofu-restaurant</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 5 — Fushimi Inari + Oost Kyoto)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Wekker op 05:00</strong> — Fushimi Inari Taisha vóór zonsopgang (05:30 aankomst) voor minimale drukte. Na 09:00 druk.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Theeceremonie reserveren</strong> voor dag 7 (Maikoya of Urasenke). <span class="urgent">⚡ Boek nu — snel vol in herfstseizoen!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Hozugawa Boat Ride reserveren</strong> voor dag 6 via hozugawakudari.co.jp. <span class="urgent">⚡ Verplicht reserveren!</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 5 — FUSHIMI + OOST -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 5</span>
+      <span class="day-title">Fushimi Inari vroeg → Nanzen-ji → Tenju-an → Murin-an → Kinkaku-ji</span>
+      <span class="day-date">28 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Logische route:</strong> Fushimi Inari (zuidoost, vroeg) → Keihan trein naar Nanzen-ji/Oost-Kyoto (25 min) → Murin-an → dan bus naar Noord-Kyoto voor Kinkaku-ji. Minimaal transport, maximale dekking.</div></div>
+      <div class="notice warn"><span class="notice-ico">⚠️</span><div><strong>Waarschuwing dag 5:</strong> dit is een volle dag met veel transport. Fushimi (vroeg) + Nanzen-ji cluster + Kinkaku-ji (30 min bus) is haalbaar maar vraagt een vroeg vertrek en weinig talmen. Laat Kinkaku-ji schieten als je meer wil genieten en ga er op dag 7 heen.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">05:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">⛩️ Fushimi Inari Taisha <span class="tl-tag tag-see">Gratis · Vroeg!</span><span class="tl-tag tag-love">Magisch</span></div><div class="tl-desc">Vóór zonsopgang. Loop zo ver mogelijk omhoog — hoe hoger, hoe stiller. Na 09:00 extreem druk. 2–3u voor de volledige route.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">08:00</span><span class="tl-dur">25 min</span></div><div class="tl-right"><div class="tl-name">🚃 Keihan → Keage + 10 min lopen <span class="tl-tag tag-move">Richting Nanzen-ji</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:45</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🌿 Nanzen-ji tempel <span class="tl-tag tag-see">Gratis · Suiitempel ¥500</span></div><div class="tl-desc">Grootste Zen-tempel van Kyoto. Imposante Sanmon poort. Vlakbij zijn de sub-tuinen van Tenju-an en Murin-an.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🍂 Tenju-an sub-tempel <span class="tl-tag tag-see">¥500 · Oktober: rode esdoorns</span></div><div class="tl-desc">Prachtige geheime tuin binnen Nanzen-ji complex. Oktober: vroege herfstbladeren. Rustiger dan de hoofdtempel.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🌱 Murin-an villa-tuin <span class="tl-tag tag-see">¥410 · Meiji-era tuin</span></div><div class="tl-desc">Intieme Meiji-era tuin van premier Yamagata Aritomo. Zachte stroom, mos, bergzicht. 5 min lopen van Nanzen-ji.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🍜 Lunch in Oost-Kyoto <span class="tl-tag tag-eat">Rust</span></div><div class="tl-desc">Tofu-restaurant of ramen bij Nanzen-ji. Even uitpuffen voor de middag.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">35 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus 204 → Kinkaku-ji <span class="tl-tag tag-move">Noord-Kyoto · ¥230</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:15</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏯 Kinkaku-ji (Gouden Paviljoen) <span class="tl-tag tag-see">¥500</span></div><div class="tl-desc">Gouden gebouw weerspiegeld in de vijver. Druk, maar onmisbaar. Ga door naar Ryoan-ji (15 min lopen) als je wil.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">16:00</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus terug → centrum Kyoto <span class="tl-tag tag-move">Transport</span></div></div></div>
+      </div>
+      <div class="food-box">☕ <strong>Vroeg ontbijt:</strong> konbini of hotel · <strong>Lunch:</strong> Tofu bij Nanzen-ji · <strong>Avond:</strong> Sake proeverij Fushimi of Gion izakaya</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 6 — Arashiyama)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Wekker op 05:45</strong> — Arashiyama Bamboo Grove vóór 07:00 voor minimale drukte.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Hozugawa Boat Ride bevestigen</strong> voor vandaag — vertrektijd (11:00 slot vanuit Kameoka). Trein Saga-Arashiyama → Kameoka ±10:10.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Optioneel: noteer leuke cafés en winkels langs Ninenzaka voor dag 7 ochtend.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 6 — ARASHIYAMA -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 6</span>
+      <span class="day-title">Arashiyama vroeg → Otagi Nenbutsu-ji → Hozugawa Boat Ride → Ginkaku-ji</span>
+      <span class="day-date">29 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Logische route:</strong> Bamboo Grove (Arashiyama vroeg) → Otagi Nenbutsu-ji (ook Arashiyama/Sagano, 20 min lopen) → Hozugawa Boat (Kameoka, 20 min trein) → middag Ginkaku-ji (Noord-Kyoto, 40 min bus). Geografisch efficiënt.</div></div>
+      <div class="notice warn"><span class="notice-ico">⚠️</span><div><strong>Dag 6 is ambitieus</strong> — vroeg beginnen is essentieel. Bamboo Grove + Otagi + Hozugawa Boat (2u) + Ginkaku-ji is veel. Als je merkt dat het te vol voelt: laat Ginkaku-ji voor dag 7.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">06:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🎋 Arashiyama Bamboo Grove <span class="tl-tag tag-love">Vroeg = magisch · Gratis</span></div><div class="tl-desc">Vóór 07:30 bijna alleen. Loop richting Okochi Sanso tuin. Na 08:30 stroomt het vol met dagbezoekers.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">07:15</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🌿 Tenryu-ji tempel + tuin <span class="tl-tag tag-see">¥500 · UNESCO</span></div><div class="tl-desc">Prachtige vijvertuin direct naast bamboe. Oktober: vroege herfstbladeren. Vroeg = rust.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:30</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🗿 Otagi Nenbutsu-ji tempel <span class="tl-tag tag-see">¥300 · 1.200 grappige steenbeelden</span></div><div class="tl-desc">Verborgen tempel met 1.200 unieke, grappige Rakan-beeldjes — elk anders. 20 min lopen van het bamboe-bos richting Sagano. Off-the-beaten-path parel.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">20 min</span></div><div class="tl-right"><div class="tl-name">🚃 Sagano lijn → Kameoka <span class="tl-tag tag-move">Voor de Hozugawa Boot · ¥400</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🚣 Hozugawa River Boat Ride <span class="tl-tag tag-love">Romantisch</span><span class="tl-tag tag-book">Gereserveerd · ¥4.100 pp</span></div><div class="tl-desc">16 km drijven door de kloof terug naar Arashiyama. Bootmensen navigeren snelstromend water. Oktober = herfstbladeren langs de oevers. Eén van de mooiste ervaringen van Kyoto.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🍜 Lunch Arashiyama <span class="tl-tag tag-eat">Verdiend!</span></div><div class="tl-desc">Tofu-kaiseki bij Shoraian (langs de rivier) of matcha-ijs bij een stalletje.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">15:00</span><span class="tl-dur">40 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Ginkaku-ji <span class="tl-tag tag-move">Noord-Kyoto · ¥230</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:45</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏯 Ginkaku-ji + Philosopher's Path <span class="tl-tag tag-see">¥500</span><span class="tl-tag tag-love">Romantisch</span></div><div class="tl-desc">Zilveren Paviljoen + zandtuin. Philosopher's Path: 2 km langs het kanaal richting Nanzen-ji. Oktober: begin herfstbladeren. Cafés onderweg.</div></div></div>
+      </div>
+      <div class="food-box">☕ <strong>Vroeg ontbijt:</strong> konbini of bakkerij Arashiyama · <strong>Lunch:</strong> Shoraian of matcha-ijs · <strong>Avond:</strong> Izakaya Pontocho of Fushimi sake</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 7 — Kiyomizudera + Theeceremonie + Nara)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kiyomizudera opent 06:00</strong> — vertrek hotel 05:45 voor zonsopgang. Bus 86 of 206.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Theeceremonie tijdstip bevestigen</strong> — Maikoya of Urasenke, ±10:30. Bevestig reservering.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Nara timing:</strong> Kintetsu Nara lijn (45 min). Todai-ji sluit 17:00 — vertrek Kyoto uiterlijk ±14:30.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Yamato Kyoto → Matsumoto:</strong> vraag Agora Kyoto vanavond om koffer te sturen naar <strong>7-Eleven bij Matsumoto Station</strong>. Koffer slaat Nakasendo/Kiso over. Jullie pakken hem op bij aankomst Matsumoto dag 10. Neem alleen een kleine tas mee naar Kiso. <span class="urgent">⚡ Opgeven vóór 12:00 morgenvroeg voor levering op dag 10!</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 7 — KIYOMIZUDERA + NARA -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 7</span>
+      <span class="day-title">Kiyomizudera vroeg → Ninenzaka rustig → Theeceremonie → Nara dagtrip</span>
+      <span class="day-date">30 september</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Dag 7 is nu realistisch en ontspannen.</strong> Kiyomizudera vroeg → rustige ochtend Ninenzaka/Higashiyama → theeceremonie → trein naar Nara. Geen haast. Jullie hebben tijd om te genieten zonder te rennen.</div></div>
+      <div class="notice info"><span class="notice-ico">🗺️</span><div><strong>Logische volgorde:</strong> Kiyomizudera (06:00) → ontbijt + slenter Ninenzaka/Sannenzaka (08:00) → Theeceremonie Gion (10:30) → trein Nara (12:30) → Nara Park + Todai-ji (13:30–16:30) → terug Kyoto.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">06:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">⛪ Kiyomizudera + Ninenzaka <span class="tl-tag tag-see">¥500 · Opent 06:00</span><span class="tl-tag tag-love">Zonsopgang</span></div><div class="tl-desc">Uitzicht over Kyoto bij zonsopgang. Terugloop via Ninenzaka & Sannenzaka — pittoreske stenen paden, 's ochtends bijna leeg.</div></div></div>
+        <div class="tl-sep"></div>
+        
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🪨 Ninenzaka & Sannenzaka rustig slenteren <span class="tl-tag tag-love">Ontspannen</span></div><div class="tl-desc">Na de drukte van vroeg is het nu heerlijk rustig. Ontbijt bij een kleine bakkerij, souvenirs, koffie, geen haast. Het echt genieten van Higashiyama-sfeer zonder agenda.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🍵 Theeceremonie Gion <span class="tl-tag tag-book">Gereserveerd · ±¥3.000–5.000 pp</span><span class="tl-tag tag-love">Bijzonder</span></div><div class="tl-desc">Maikoya Gion of Urasenke. Matcha-bereiding leren. ±1.5u. 10 min lopen van Ninenzaka.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">12:30</span><span class="tl-dur">50 min</span></div><div class="tl-right"><div class="tl-name">🚃 Trein → Nara <span class="tl-tag tag-move">Kintetsu Nara lijn · 45 min · ¥720</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">3u</span></div><div class="tl-right"><div class="tl-name">🦌 Nara Park + Todai-ji + Kasuga Taisha <span class="tl-tag tag-love">Herten!</span><span class="tl-tag tag-see">Todai-ji ¥600</span></div><div class="tl-desc">Nu met meer tijd! Todai-ji (sluit 17:00), Kasuga Taisha Shrine, Isuien tuin (optioneel). Hertenkoekjes kopen bij de ingang — herten zijn agressiever dan ze eruitzien 😅</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">16:45</span><span class="tl-dur">50 min</span></div><div class="tl-right"><div class="tl-name">🚃 Terug → Kyoto <span class="tl-tag tag-move">Transport · aankomst ±17:30</span></div></div></div>
+      </div>
+      <div class="food-box">☕ <strong>Ontbijt:</strong> bakkerij Ninenzaka · <strong>Lunch:</strong> Nara — Nakatanidou mochi of soba · <strong>Avond:</strong> Izakaya of sake Gion</div>
+
+      <div class="backlog">
+        <div class="backlog-title">📌 Kyoto optioneel — als er tijd over is</div>
+        <div class="backlog-item">Saiho-ji (Mossentuin) — reservering weken vooraf verplicht, magisch groen <span class="backlog-day">(dag 5 middag i.p.v. Kinkaku-ji)</span></div>
+        <div class="backlog-item">Komyo-in sub-tempel — stille Zen-tuin bij Tofuku-ji <span class="backlog-day">(dag 5 ochtend, bij Fushimi Inari cluster)</span></div>
+        <div class="backlog-item">Adashino Nenbutsu-ji — mysterieuze tempel met 8.000 stenen in Sagano <span class="backlog-day">(dag 6 ochtend, bij Otagi Nenbutsu-ji cluster)</span></div>
+        <div class="backlog-item">Arashiyama Yusei-tei gallery — intieme bamboe-theetuin <span class="backlog-day">(dag 6 bij Arashiyama cluster)</span></div>
+        <div class="backlog-item">Daigo-ji temple — prachtige vijfverdiepingen pagode, buiten centrum <span class="backlog-day">(dag 7 i.p.v. Nara, als je Nara al kent)</span></div>
+        <div class="backlog-item">Kurama-dera — bergklooster boven Kyoto per tram <span class="backlog-day">(dag 5 middag als alternatief voor Kinkaku-ji)</span></div>
+        <div class="backlog-item">Kyoto Gosho Palace + Gyoen Garden — gratis keizerlijk paleis <span class="backlog-day">(dag 4 middag als alternatief, centrum)</span></div>
+        <div class="backlog-item">Ohara dorpje — Sanzen-in tempel in bergdorpje, buiten de stad <span class="backlog-day">(dag 6 middag als alternatief voor Ginkaku-ji)</span></div>
+        <div class="backlog-item">Amanohashidate / Kayabuki no Sato — ver buiten Kyoto, bijna een dagtrip <span class="backlog-day">(alleen bij extra dag of als Nara wordt vervangen)</span></div>
+        <div class="backlog-item">Ryoan-ji Zen rotsentuin — 15 stenen, altijd maar 14 zichtbaar <span class="backlog-day">(dag 5 bij Kinkaku-ji, 15 min lopen)</span></div>
+      </div>
+
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 8 — Vertrek Nakasendo/Kiso)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Yamato Kyoto → Matsumoto (7-Eleven):</strong> Agora Kyoto stuurt koffer naar <strong>7-Eleven bij Matsumoto Station</strong>. Geef het Yamato-formulier af bij receptie vóór 12:00 vandaag. Reis naar Kiso met alleen kleine tas.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Trein Kyoto → Nagiso:</strong> Shinkansen naar Nagoya (35 min) + Chuo lijn naar Nagiso (1u30). Vertrek ±11:00 als je geen vroege Kyoto-activiteit meer doet.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Betaal hotel Agora Kyoto uit. <span class="soon">💡 Vermeld honeymoon bij checkout — soms een verrassing!</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Kyoto</span><span class="ta">→</span><span class="tc">Kiso (Nagiso)</span><span>| Shinkansen Kyoto→Nagoya (35 min) + Chuo lijn Nagoya→Nagiso (1u30) · ±2u30 · ±¥6.000 · <strong>kleine tas mee</strong> — koffer staat al onderweg naar 7-Eleven Matsumoto via Yamato</span></div></div>
+
+<!-- ═══ NAKASENDO ═══ -->
+<div class="city fi" id="nakasendo">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag g">Stop 04 · 2 nachten</div>
+      <div class="city-name">Nakasendo 中山道 · Kiso</div>
+      <div class="city-sub">Tsumago · Magome wandeling · Narai-juku</div>
+      <div class="city-dates-str">1 – 3 oktober · Dag 8 & 9</div>
+    </div>
+    <div class="nb g"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🌿</div>
+    <div>
+      <div class="h-lbl">Geboekte verblijven</div>
+      <div class="h-name">Phuong's House (1–2 okt) + Nukumorino-yado Komanoya (2–3 okt)</div>
+      <div class="h-price">Self check-in verblijven in het Kiso-dal</div>
+      <div class="h-why">🧳 <strong>Yamato:</strong> Koffer is al onderweg van Kyoto naar een <strong>7-Eleven bij Matsumoto Station</strong>. Jullie reizen hands-free door Nakasendo — alleen een kleine tas! Bij aankomst Matsumoto (dag 10) koffer ophalen bij de 7-Eleven.</div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header g">
+      <span class="day-num">Dag 8</span>
+      <span class="day-title">Aankomst Tsumago → Verkennen + diner Phuong's House</span>
+      <span class="day-date">1 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">🕐</span><div><strong>Aankomstdag.</strong> Vertrek Kyoto ±11:00, aankomst Nagiso ±13:30. Bus of taxi naar Tsumago (15 min). Laat de middag rustig verkennen — dagtoeristen zijn weg na 16:00, dan wordt het dorp magisch stil.</div></div>
+      <div class="notice ok"><span class="notice-ico">🧳</span><div><strong>Hands-free Nakasendo!</strong> Jullie grote koffer staat al onderweg naar een 7-Eleven bij Matsumoto Station (verzonden vanuit Kyoto). Jullie hebben alleen een kleine rugzak bij je. Ideaal voor de wandeling morgen.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">11:00</span><span class="tl-dur">2.5u</span></div><div class="tl-right"><div class="tl-name">🚄 Kyoto → Nagiso <span class="tl-tag tag-move">Shinkansen + Chuo lijn · aankomst ±13:30</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">15 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus/taxi → Tsumago <span class="tl-tag tag-move">±15 min · ¥250 bus</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">3u</span></div><div class="tl-right"><div class="tl-name">🏘️ Tsumago Edo-dorp verkennen <span class="tl-tag tag-see">Gratis</span><span class="tl-tag tag-love">Sprookjesachtig</span></div><div class="tl-desc">Auto's verboden. Slenteren door perfecte Edo-straatjes. Dagtoeristen zijn weg na 17:00 — dorp wordt privé en stil. Gohei-mochi snacken op straat.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">18:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🍱 Diner + rustige avond Tsumago <span class="tl-tag tag-eat">Lokaal</span></div><div class="tl-desc">Lokale bergproducten. Na het diner: lantaarns in het dorp aan. Loop nog even buiten voor de sfeer.</div></div></div>
+      </div>
+      <div class="food-box">🍡 <strong>Snack:</strong> Gohei-mochi (rijststokjes met walnootsaus) op straat · <strong>Diner:</strong> Lokaal restaurant of bij Phuong's House</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 9 — Nakasendo wandeling)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kleine rugzak klaar</strong> — grote koffer blijft bij Phuong's House. Water + snacks inpakken voor de wandeling.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Wandeling Tsumago → Magome:</strong> 8 km, ±3–4 uur. Goed wandelschoeisel verplicht. Vertrek ±08:30 voor het beste licht.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Bus Magome → Nagiso:</strong> check busschema (loopt 2–3x per dag). Of taxi (±¥3.000).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header g">
+      <span class="day-num">Dag 9</span>
+      <span class="day-title">Nakasendo wandeling Tsumago→Magome → Narai-juku → Komanoya</span>
+      <span class="day-date">2 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:30</span><span class="tl-dur">3.5u</span></div><div class="tl-right"><div class="tl-name">🥾 Nakasendo wandeling Tsumago→Magome <span class="tl-tag tag-love">Romantisch</span></div><div class="tl-desc">8 km door bossen en bergpassen. Historische post-haltes. Oktober: eerste herfstbladeren op de berghellingen. Eén van Japan's mooiste wandelingen.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏘️ Magome post-dorp + lunch <span class="tl-tag tag-eat">Verdiend!</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus + trein → Narai-juku <span class="tl-tag tag-move">Via Nagiso station</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏡 Narai-juku verkennen <span class="tl-tag tag-see">Gratis · Langste Edo post-stad</span></div><div class="tl-desc">Lacquerware-winkels, sake-brouwerijen. Rustiger dan Tsumago. Geen koffer-gedoe — die ligt al in Matsumoto!</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:30</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🏨 Check-in Nukumorino-yado Komanoya <span class="tl-tag tag-love">Warm ryokan-stijl</span></div><div class="tl-desc">Verdient rust na een wandeldag. Diner in of bij het verblijf.</div></div></div>
+      </div>
+      <div class="food-box">🥾 <strong>Ontbijt:</strong> Phuong's House · <strong>Lunch:</strong> Magome lokaal · <strong>Diner:</strong> Komanoya</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 10 — Matsumoto)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Koffer ophalen in Matsumoto:</strong> bij aankomst dag 10 → zoek de 7-Eleven bij Matsumoto Station en haal de koffer op. Yamato bewaart hem tot je er bent. Neem het adres mee (of vraag Agora Kyoto om de tracknummer).</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Eerst: koffer ophalen bij 7-Eleven Matsumoto Station</strong> — Yamato bewaart hem. Dan inchecken apartment. Kasteel daarna!</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Bevestig Matsumoto apartment self check-in procedure — code of sleutelbox?</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Kiso (Nagiso/Narai)</span><span class="ta">→</span><span class="tc">Matsumoto</span><span>| Chuo lijn · ±45 min · ±¥840 · koffer ophalen bij 7-Eleven Matsumoto Station bij aankomst</span></div></div>
+
+<!-- ═══ MATSUMOTO ═══ -->
+<div class="city fi" id="matsumoto">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag g">Stop 05 · 2 nachten</div>
+      <div class="city-name">Matsumoto 松本</div>
+      <div class="city-sub">Matsumoto Kasteel · Yohashira Shrine · Togakushi · Kamikochi</div>
+      <div class="city-dates-str">3 – 5 oktober · Dag 10 & 11</div>
+    </div>
+    <div class="nb g"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🏔️</div>
+    <div>
+      <div class="h-lbl">Geboekt verblijf</div>
+      <div class="h-name">Matsumoto Station Apartment — 5 min van station</div>
+      <div class="h-price">3 – 5 oktober · 2 nachten · Self check-in</div>
+      <div class="h-why">🧳 <strong>Yamato:</strong> Koffer ligt bij aankomst klaar bij een <strong>7-Eleven bij Matsumoto Station</strong> — ophalen bij inchecken! Avond dag 11: breng koffer naar diezelfde of andere 7-Eleven voor Yamato-levering naar <strong>Hotel Resol Trinity Kanazawa</strong>. Koffer slaat Takayama over — neem kleine tas mee voor 1 nacht.</div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header g">
+      <span class="day-num">Dag 10</span>
+      <span class="day-title">Aankomst → Matsumoto Kasteel → Yohashira Shrine → Nakamachi wijk</span>
+      <span class="day-date">3 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">🕐</span><div><strong>Aankomstdag.</strong> Vertrek Kiso ±09:30, aankomst Matsumoto ±10:15. Kasteel opent 08:30 — na inchecken apartment kun je meteen door. Alles loopafstand van station.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🚃 Kiso → Matsumoto <span class="tl-tag tag-move">Chuo lijn · aankomst ±10:15</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏠 Self check-in apartment <span class="tl-tag tag-move">Koffer neerzetten</span></div><div class="tl-desc">Code of sleutelbox. Koffer in apartment, lichte tas meenemen voor de dag.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:15</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🏯 Matsumoto Kasteel <span class="tl-tag tag-see">¥700 · Origineel 16e-eeuws</span><span class="tl-tag tag-love">Icoon</span></div><div class="tl-desc">Eén van Japan's 12 originele kastelen. Zwart kasteel weerspiegeld in de burgwal. 10 min lopen van station. Sluit 17:00.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">⛩️ Yohashira Shrine <span class="tl-tag tag-see">Gratis · 5 min van kasteel</span></div><div class="tl-desc">Rustieke Shinto-schrijn direct naast het kasteel. Mooi om even stil te staan na het kasteel-bezoek.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏘️ Nakamachi historische wijk + soba lunch <span class="tl-tag tag-eat">Matsumoto soba!</span></div><div class="tl-desc">Historische kura-warehouses, galeries. Matsumoto is beroemd om soba — zoek een lokale zaak. 10 min lopen van kasteel.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">16:30</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🌆 Rustige avond Matsumoto <span class="tl-tag tag-love">Ontspanning</span></div><div class="tl-desc">Sake-brouwerij in Nakamachi, of gewoon rustig uitrusten voor de lange dag morgen (Togakushi + Kamikochi).</div></div></div>
+      </div>
+      <div class="food-box">🍜 <strong>Lunch:</strong> Buckwheat soba Matsumoto · <strong>Avond:</strong> Izakaya of lokaal restaurant</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 11 — Togakushi + Kamikochi)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Togakushi bus schema:</strong> check vertijden van Matsumoto Station (75 min rit, weinig bussen per dag). Vroegste bus ±08:00.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Kamikochi bus:</strong> vertrekt via Shinshimashima (Matsumoto Dentetsu lijn eindpunt). Laatste bus terug ±17:00 — houd dit in de gaten!</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Yamato Matsumoto → Kanazawa:</strong> breng koffer vanavond naar een 7-Eleven in Matsumoto voor levering aan <strong>Hotel Resol Trinity Kanazawa</strong>. Koffer slaat Takayama over — neem alleen kleine tas mee. <span class="soon">💡 Vóór 21:00 inleveren bij 7-Eleven!</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header g">
+      <span class="day-num">Dag 11</span>
+      <span class="day-title">Togakushi Shrine (ochtend) → Kamikochi Japanse Alpen (middag)</span>
+      <span class="day-date">4 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice warn"><span class="notice-ico">⚠️</span><div><strong>Togakushi en Kamikochi liggen in tegenovergestelde richtingen</strong> van Matsumoto (Togakushi = noord, Kamikochi = west). Dit betekent dubbel reizen via Matsumoto. Totale reistijd: ±4u. Haalbaar als je vroeg vertrekt, maar het is een drukke dag. Alternatief: kies één van de twee en geniet meer.</div></div>
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Aanbevolen volgorde:</strong> Togakushi vroeg (ochtend, rustiger) → terug Matsumoto → Shinshimashima → bus Kamikochi (middag). Laatste bus terug uit Kamikochi ±17:00 — houd dit in de gaten.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">07:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Togakushi <span class="tl-tag tag-move">Matsumoto station · 75 min</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">⛩️ Togakushi Shrine — cederbos pad <span class="tl-tag tag-see">Gratis · Mystiek</span><span class="tl-tag tag-love">Betoverend</span></div><div class="tl-desc">Eeuwenoude sugi-ceders langs het pad naar het bovenheiligdom. Bijna geen toeristen. Oktober: herfstsfeer.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus terug → Matsumoto + Shinshimashima <span class="tl-tag tag-move">Transfer</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Kamikochi <span class="tl-tag tag-move">Via Shinshimashima · 1u · ¥2.400 retour</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏞️ Kamikochi wandeling <span class="tl-tag tag-love">Prachtigste plek regio</span></div><div class="tl-desc">Azusa-rivier, Kappa-brug, bergpanorama Japanse Alpen. Oktober = herfstbladeren. Myojin Pond voor mooiste foto's.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus terug → Matsumoto <span class="tl-tag tag-move">Let op: laatste bus!</span></div></div></div>
+      </div>
+      <div class="food-box">🌲 <strong>Ontbijt:</strong> Konbini vroeg · <strong>Snack:</strong> Togakushi soba bij de shrine · <strong>Kamikochi:</strong> bergrestaurant · <strong>Avond:</strong> Soba Matsumoto</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 12 — Wasabi Farm + Takayama)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Yamato Matsumoto → Kanazawa:</strong> koffer morgenavond (dag 11) naar 7-Eleven Matsumoto sturen — plan dit in zodat je niet vergeet!</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Daio Wasabi Farm taxi:</strong> ±¥2.500 enkele reis vanuit Matsumoto station. Vertrek ±09:00.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Limited Express Hida Matsumoto → Takayama:</strong> ±2u. Vertrek ±12:30 na wasabi-boerderij.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Matsumoto</span><span class="ta">→</span><span class="tc">Takayama</span><span>| (Via Wasabi Farm ochtend) + Limited Express Hida · ±2u · ±¥3.340</span></div></div>
+
+<!-- ═══ TAKAYAMA ═══ -->
+<div class="city fi" id="takayama">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag g">Stop 06 · 1 nacht</div>
+      <div class="city-name">Takayama 高山</div>
+      <div class="city-sub">Wasabi Farm onderweg · Sanmachi Suji · Hida Folk Village</div>
+      <div class="city-dates-str">5 – 6 oktober · Dag 12</div>
+    </div>
+    <div class="nb g"><span class="nb-n">1</span><span class="nb-l">Nacht</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🏔️</div>
+    <div>
+      <div class="h-lbl">Geboekt hotel</div>
+      <div class="h-name">Residence Hotel Takayama Station ⭐⭐⭐⭐</div>
+      <div class="h-price">5 – 6 oktober · 1 nacht · Direct bij station</div>
+      <div class="h-why">🧳 <strong>Yamato:</strong> Residence Hotel heeft een receptie — kan koffers ontvangen via Yamato (als je ze gisteren via 7-Eleven in Matsumoto hebt gestuurd). Koffer staat al in Kanazawa (via Yamato vanuit Matsumoto). In Takayama alleen met kleine tas. 🧳 Geen Yamato actie nodig vanuit Takayama.</div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header g">
+      <span class="day-num">Dag 12</span>
+      <span class="day-title">Daio Wasabi Farm (Matsumoto) → Trein → Sanmachi Suji → Hida Folk Village</span>
+      <span class="day-date">5 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Route:</strong> Wasabi Farm ochtend (Matsumoto) → trein ±12:30 → aankomst Takayama ±14:30. Sanmachi Suji + Hida Folk Village in de middag — beide op loopafstand of korte bus van het station.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:00</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🚕 Taxi → Daio Wasabi Farm <span class="tl-tag tag-move">10 km van Matsumoto · ±¥2.500</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🌾 Daio Wasabi Farm <span class="tl-tag tag-see">Gratis entree · Wereld's grootste wasabi-boerderij</span></div><div class="tl-desc">Wasabi-ijs eten (groener dan verwacht, verrassend lekker). Rondje door de velden. Fotogeniek en ontspannend.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🚃 Matsumoto → Takayama <span class="tl-tag tag-move">Limited Express Hida · 2u · ±¥3.340</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏨 Check-in Residence Hotel <span class="tl-tag tag-move">Inchecken + Yamato koffer check</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏘️ Sanmachi Suji Edo-straatjes + sake <span class="tl-tag tag-see">Gratis · Historisch</span></div><div class="tl-desc">Perfecte Edo-straatjes met sake-brouwerijen (Funasaka — gratis proeven!), ambachtswinkels, machiya-huizen. Hida-beef skewer op straat.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">10 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Hida Folk Village <span class="tl-tag tag-move">10 min · ¥210</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:15</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🏡 Hida Folk Village <span class="tl-tag tag-see">¥700 · Sluit 17:00 ⚠️</span></div><div class="tl-desc"><strong>Let op sluitingstijd 17:00!</strong> Probeer er vóór 16:30 te zijn. Gassho-zukuri rietgedekte boerderijen. Oktober: herfstbladeren rondom. Of: bewaar voor volgende ochtend als je te laat bent.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">19:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🥩 Hida-beef diner <span class="tl-tag tag-eat">Must-eat</span></div><div class="tl-desc">Lokale wagyu. Betaalbaarder dan Kobe. Sit-down of street food.</div></div></div>
+      </div>
+      <div class="food-box">🌾 <strong>Ochtend:</strong> Wasabi-ijs farm · <strong>Lunch:</strong> Treinsnack of Takayama bij aankomst · <strong>Snack:</strong> Hida-beef skewer Sanmachi · <strong>Diner:</strong> Hida-beef restaurant</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 13 — Vertrek Kanazawa)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Koffer staat al in Kanazawa</strong> — is via Yamato vanuit Matsumoto gestuurd. Geen actie nodig. Pak alleen kleine tas in voor de terugreis naar het hotel.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Trein Takayama → Kanazawa:</strong> Limited Express Hida → Toyama + Shinkansen → Kanazawa. ±2u30. Vertrek ±09:30.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Nohi Bus Shirakawa-go</strong> reserveren voor dag 14 via noritetsu.net. <span class="urgent">⚡ Snel vol op weekenden!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Samurai Workshop Kanazawa</strong> bevestigen voor dag 13 of 14 via Klook.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Thee ceremonie Kanazawa</strong> reserveren voor dag 13 of 14.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Takayama</span><span class="ta">→</span><span class="tc">Kanazawa</span><span>| Limited Express Hida → Toyama + Shinkansen · ±2u30 · ±¥5.500 · koffer via Yamato (hotel heeft receptie)</span></div></div>
+
+<!-- ═══ KANAZAWA ═══ -->
+<div class="city fi" id="kanazawa">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag b">Stop 07 · 2 nachten</div>
+      <div class="city-name">Kanazawa 金沢</div>
+      <div class="city-sub">Kenroku-en · Samurai · Goud-ijs · Thee · Shirakawa-go</div>
+      <div class="city-dates-str">6 – 8 oktober · Dag 13 & 14</div>
+    </div>
+    <div class="nb b"><span class="nb-n">2</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🏯</div>
+    <div>
+      <div class="h-lbl">Geboekt hotel</div>
+      <div class="h-name">Hotel Resol Trinity Kanazawa ⭐⭐⭐⭐</div>
+      <div class="h-price">6 – 8 oktober · 2 nachten</div>
+      <div class="h-why">🧳 <strong>Yamato dag 7 of 8:</strong> Kanazawa → Tokyo. De Hokuriku Shinkansen is ±2u30 — comfortabel genoeg om koffers gewoon mee te nemen. Of: vraag receptie koffers te sturen naar <strong>Shinjuku 1 hotel Tokyo</strong>. <strong>Bij grote koffers (160cm+): reserveer bagagerek bij Shinkansen-boeking.</strong></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header b">
+      <span class="day-num">Dag 13</span>
+      <span class="day-title">Aankomst → Kenroku-en → Kasteel → Nagamachi → Higashi Chaya → Thee ceremonie</span>
+      <span class="day-date">6 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">🕐</span><div><strong>Aankomstdag.</strong> Vertrek Takayama ±09:30, aankomst Kanazawa ±12:00. Alle must-activiteiten in centrum liggen op loopafstand. Logische route: Kenroku-en → Kasteel → Nagamachi → Higashi Chaya → Thee ceremonie.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">2.5u</span></div><div class="tl-right"><div class="tl-name">🚃 Takayama → Kanazawa <span class="tl-tag tag-move">Via Toyama · aankomst ±12:00</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏨 Check-in Hotel Resol Trinity <span class="tl-tag tag-move">Koffer check (Yamato)</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🌿 Kenroku-en tuin <span class="tl-tag tag-see">¥320 · Top-3 Japan</span><span class="tl-tag tag-love">Herfstbladeren</span></div><div class="tl-desc">Een van Japan's drie beroemdste tuinen. Oktober: eerste herfstbladeren.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🏯 Kanazawa Castle Park <span class="tl-tag tag-see">Gratis buitentuin</span></div><div class="tl-desc">Direct naast Kenroku-en. Oktober: prachtig gekleurd.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:45</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">⚔️ Nagamachi Samurai District <span class="tl-tag tag-see">Gratis · Nomura House ¥550</span></div><div class="tl-desc">Intacte samurai-wijk. Nomura Samurai House is de beste om binnen te gaan.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🍵 Thee ceremonie Higashi Chaya <span class="tl-tag tag-book">Gereserveerd · ±¥2.500 pp</span></div><div class="tl-desc">Kanazawa heeft prachtige geisha-wijk theehuizen. Thee ceremonie in traditionele setting.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">18:30</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🍦 Bladgoud-ijs + Higashi Chaya avond <span class="tl-tag tag-love">Iconic!</span></div><div class="tl-desc">Beroemde bladgoud-soft-serve. Higashi Chaya geisha-district — minder toeristen dan Gion, net zo sfeervol.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">20:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🦀 Omicho Vismarkt sushi <span class="tl-tag tag-eat">Avond</span></div><div class="tl-desc">Markt sluit vroeg — soms zijn er ook avond-kraampjes. Of: jibu-ni stoofpot bij een restaurant.</div></div></div>
+      </div>
+      <div class="food-box">🦀 <strong>Must-eat:</strong> Verse sushi Omicho · Jibu-ni stoofpot · Sake Higashi Chaya</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 14 — Samurai Workshop + Shirakawa-go)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Nohi Bus 08:05</strong> → Shirakawa-go (gereserveerd). Samurai Workshop eerst om 06:30–08:00, of na terugkomst uit Shirakawa-go.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Yamato of meenemen:</strong> beslissing nemen voor Tokyo. Shinkansen is 2u30 — koffer meenemen is prima. Of: vraag receptie morgen te sturen naar <strong>Shinjuku 1 Tokyo</strong>. <strong>Let op: grote koffers in Shinkansen — reserveer bagagerek bij de tickets!</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header b">
+      <span class="day-num">Dag 14</span>
+      <span class="day-title">Samurai Workshop → Shirakawa-go dagtrip → 21st Century Museum → Laatste Kanazawa avond</span>
+      <span class="day-date">7 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Volle dag Kanazawa.</strong> Samurai Workshop vroeg, dan Shirakawa-go (bus 09:30, 3u verblijf, terug ±14:30), dan museum + avond. Morgen pas Shinkansen naar Tokyo.</div></div>
+      <div class="notice warn"><span class="notice-ico">⚠️</span><div><strong>Dag 14 is ambitieus:</strong> Samurai Workshop (1.5u) + Shirakawa-go (heen+terug+verblijf ±4u) + museum is een volle dag. Goede planning vereist — maar alle onderdelen zijn erg de moeite waard!</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">07:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">⚔️ Samurai Workshop <span class="tl-tag tag-book">Gereserveerd · ±¥5.000 pp</span><span class="tl-tag tag-love">Couple-activiteit</span></div><div class="tl-desc">Bokken-zwaardvechtles. Kimono + harnas, vechtbewegingen leren. TikTok-materiaal!</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">50 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Shirakawa-go <span class="tl-tag tag-move">Nohi Bus · gereserveerd · ±¥1.200 pp</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:20</span><span class="tl-dur">3u</span></div><div class="tl-right"><div class="tl-name">🏡 Shirakawa-go UNESCO-dorp <span class="tl-tag tag-love">Iconisch · Gratis</span></div><div class="tl-desc">Gassho-zukuri boerderijen met rietgedekte daken. UNESCO Werelderfgoed. Oktober: vroege herfstbladeren. Boerderij betreden ¥300.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">13:30</span><span class="tl-dur">50 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus terug → Kanazawa <span class="tl-tag tag-move">Transport</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🎨 21st Century Museum of Contemporary Art <span class="tl-tag tag-see">Buitencollectie gratis · Binnen ¥1.200</span></div><div class="tl-desc">Beroemd rond museum. Het "Swimming Pool" kunstwerk is iconisch. Vlakbij Kenroku-en.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">18:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🍶 Laatste Kanazawa avond <span class="tl-tag tag-eat">Diner</span></div><div class="tl-desc">Jibu-ni stoofpot of sake-proeverij. Rustige afsluiting voor de Shinkansen-dag morgen.</div></div></div>
+      </div>
+      <div class="food-box">🏡 <strong>Lunch:</strong> Shirakawa-go boerderijrestaurant · <strong>Diner:</strong> Jibu-ni of sushi Kanazawa</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 15 — Shinkansen naar Tokyo)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Shinkansen Kanazawa → Tokyo:</strong> Hokuriku Shinkansen Kagayaki/Hakutaka · ±2u30 · ±¥14.000. Vertrek ±09:30 → aankomst Tokyo ±12:00.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Grote koffers:</strong> als 160cm+ → reserveer bagagerek achterin Shinkansen-wagon bij je treintickets. Gratis maar reservering nodig.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Shibuya Sky tijdslot</strong> voor dag 15 avond boeken. <span class="urgent">⚡ shibuyasky.jp — verkoopt snel uit!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>teamLab Planets</strong> boeken als nog niet gedaan. <span class="urgent">⚡ teamlab.art</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Fuji/Hakone weersverwachting</strong> beginnen te checken voor planning komende dagen.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tbanner"><div class="tbanner-inner"><span class="tc">Kanazawa</span><span class="ta">→</span><span class="tc">Tokyo (Shinjuku)</span><span>| Hokuriku Shinkansen Kagayaki/Hakutaka · ±2u30 · ±¥14.000 · koffers mee in trein (bagagerek reserveren bij 160cm+)</span></div></div>
+
+<!-- ═══ TOKYO ═══ -->
+<div class="city fi" id="tokyo">
+<div class="ci">
+  <div class="city-head">
+    <div>
+      <div class="city-tag">Stop 08 · 6 nachten · Grand Finale</div>
+      <div class="city-name">Tokyo 東京</div>
+      <div class="city-sub">teamLab · Fuji · Hakone · Mario Kart · Omakase afsluiter</div>
+      <div class="city-dates-str">8 – 14 oktober · Dag 15 t/m 21</div>
+    </div>
+    <div class="nb"><span class="nb-n">6</span><span class="nb-l">Nachten</span></div>
+  </div>
+  <div class="hotel">
+    <div class="h-ico">🗼</div>
+    <div>
+      <div class="h-lbl">Geboekt hotel</div>
+      <div class="h-name">Shinjuku 1 Hotel — Shinjuku</div>
+      <div class="h-price">8 – 14 oktober · 6 nachten</div>
+      <div class="h-why">Uitstekende basis in Shinjuku. Metro, Shinkansen, bussen voor Fuji/Hakone allemaal vanuit Shinjuku Station. Vertel bij inchecken dat jullie op honeymoon zijn!</div>
+    </div>
+  </div>
+
+  <!-- DAG 15 — AANKOMST -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 15</span>
+      <span class="day-title">Shinkansen aankomst → Asakusa middag → Shibuya Sky avond</span>
+      <span class="day-date">8 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice info"><span class="notice-ico">🚄</span><div><strong>Aankomstdag.</strong> Vertrek Kanazawa ±09:30, aankomst Tokyo ±12:00. Inchecken Shinjuku 1. Rustige middag — volle stad, maar geen haast vandaag.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">2.5u</span></div><div class="tl-right"><div class="tl-name">🚄 Shinkansen Kanazawa → Tokyo <span class="tl-tag tag-move">Hokuriku · aankomst ±12:00</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🏨 Check-in Shinjuku 1 <span class="tl-tag tag-move">Koffer neerzetten · even rusten</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">⛪ Asakusa + Sensoji Tempel <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Nakamise Shopping Street. Rustig verkennen. <span class="soon">💡 Sensoji is ook prachtig om 06:00 vroeg — bewaar voor een andere ochtend als je het magischer wil.</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">16:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🚇 Metro → Shibuya <span class="tl-tag tag-move">Ginza lijn</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🌆 Shibuya Sky zonsondergang <span class="tl-tag tag-book">Gereserveerd · ±¥2.000 pp</span><span class="tl-tag tag-love">360° uitzicht</span></div><div class="tl-desc">Sunset slot 17:30–18:30. Spectaculaire skyline. Eerste Tokyo-avond!</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">20:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🚦 Shibuya Crossing + avond <span class="tl-tag tag-see">Icoon · Gratis</span></div><div class="tl-desc">Drukste voetgangersoversteek ter wereld. Vanuit Starbucks boven ook te zien.</div></div></div>
+      </div>
+      <div class="food-box">🍜 <strong>Lunch:</strong> Shinjuku bij hotel · <strong>Avond:</strong> Izakaya Shibuya of ramen Golden Gai</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 16 — Hakone dagtrip)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Hakone Free Pass</strong> kopen bij Shinjuku Station (dekt alle vervoer 2 dagen). ±¥6.100 pp.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Owakudani status</strong> checken via hakone.or.jp — ropeway soms gesloten.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Fuji weersverwachting dag 17</strong> checken. Als morgen ook helder → Fuji op dag 16 meenemen (Kawaguchiko is 1u bus van Hakone).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 16 — HAKONE -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 16</span>
+      <span class="day-title">Hakone dagtrip — Kabelbaan + Amazake theehuis + Piratenschip + Onsen dagbad</span>
+      <span class="day-date">9 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Dagtrip vanuit Shinjuku.</strong> Romancekar Odakyu of Shinkansen naar Odawara (±1u15). Hakone Free Pass dekt alles. 's Avonds terug naar Shinjuku 1.</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">08:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🚃 Shinjuku → Hakone <span class="tl-tag tag-move">Romancekar Odakyu of Shinkansen · ±1u15</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:00</span><span class="tl-dur">45 min</span></div><div class="tl-right"><div class="tl-name">🚡 Kabelbaan + Hakone Ropeway Owakudani <span class="tl-tag tag-see">Inbegrepen Free Pass</span></div><div class="tl-desc">Dampende vulkaankrater. Kuro-tamago eten (¥600 voor 5 stuks — zou je leven verlengen ☺).</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🍵 Amazake-jaya theehuis <span class="tl-tag tag-eat">400 jaar oud · ±¥400</span></div><div class="tl-desc">Langs de Hakone Tokaido bergpas. Amazake (zoete rijstthee) drinken.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">13:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">⛵ Boottocht Lake Ashi <span class="tl-tag tag-love">Romantisch · Inbegrepen Free Pass</span></div><div class="tl-desc">Hakone Sightseeing Cruise. Fuji-uitzicht bij helder weer. Dek voor beste foto's.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">15:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">♨️ Onsen dagbad <span class="tl-tag tag-love">Relaxen · ±¥1.300</span></div><div class="tl-desc">Tenzan Tohji-kyo (buitenbad, prachtig) of Yunessan. Perfecte afsluiting voor de trein terug.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">18:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🚃 Terug → Tokyo Shinjuku <span class="tl-tag tag-move">Romancekar of Shinkansen</span></div></div></div>
+      </div>
+      <div class="food-box">🥚 <strong>Kuro-tamago</strong> Owakudani · <strong>Amazake</strong> theehuis · <strong>Avond:</strong> Ramen Shinjuku</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 17 — Fuji dagtrip)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Fuji weersverwachting:</strong> check windguru.cz of yr.no vroeg in de ochtend. Alleen gaan als Fuji zichtbaar is!</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Bus Shinjuku → Kawaguchiko:</strong> Keio/Fuji Express bus · ±2u · ±¥1.800. Vertrekt elke 30 min vanuit Shinjuku Bus Terminal.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Als Fuji bewolkt: alternatief plan = Meiji Jingu + Harajuku + Tokyo Tower + teamLab.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 17 — FUJI -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 17</span>
+      <span class="day-title">Mount Fuji dagtrip — Kawaguchiko + Yamanaka + Chureito Pagoda</span>
+      <span class="day-date">10 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice warn"><span class="notice-ico">⚠️</span><div><strong>Weersafhankelijk!</strong> Fuji is in oktober ±50% bewolkt. Check vroeg de ochtend van dag 17. Als bewolkt: doe Meiji Jingu + Harajuku + teamLab in plaats daarvan (teamLab werkt ook als avondactiviteit).</div></div>
+      <div class="timeline">
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">07:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus Shinjuku → Kawaguchiko <span class="tl-tag tag-move">Keio bus · ±2u · ±¥1.800</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🗻 Chureito Pagoda + Lake Kawaguchi <span class="tl-tag tag-love">Iconische foto! · Gratis</span></div><div class="tl-desc">398 treden omhoog voor de pagode — Fuji erachter. Lake Kawaguchi: reflectie-foto's. Oktober: soms herfstbladeren.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">20 min</span></div><div class="tl-right"><div class="tl-name">🚌 Bus → Lake Yamanaka <span class="tl-tag tag-move">Fuji Five Lakes bus · ±20 min</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🏔️ Lake Yamanaka + lunch <span class="tl-tag tag-eat">Gratis · Rustiger dan Kawaguchi</span></div><div class="tl-desc">Rustiger meer, ander perspectief op Fuji. Hoto-noodles (lokale specialiteit) voor lunch.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🚌 Bus terug → Tokyo Shinjuku <span class="tl-tag tag-move">Aankomst ±16:30</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🌆 Omoide Yokocho (Memory Lane) <span class="tl-tag tag-eat">Shinjuku avond</span></div><div class="tl-desc">Kleine yakitori-steegjes vlakbij Shinjuku Station. Perfecte afsluiting van een Fuji-dag.</div></div></div>
+      </div>
+      <div class="food-box">🗻 <strong>Lunch:</strong> Hoto-noodles Yamanaka · <strong>Avond:</strong> Yakitori Omoide Yokocho Shinjuku</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 18 — Meiji Jingu + Harajuku + teamLab)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>teamLab Planets tijdslot bevestigen</strong> voor vanavond — aanwezig 15 min voor aanvang. <strong>Rok of wijde broek meenemen</strong> (waden door water).</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Sumo worstelen reserveren — zoek via Klook of sumo-wrestling-experience.com. <span class="urgent">⚡ Reserveer weken vooraf!</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 18 — MEIJI + TEAMLAB -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 18</span>
+      <span class="day-title">Meiji Jingu vroeg → Harajuku → Tokyo Tower → teamLab Planets avond</span>
+      <span class="day-date">11 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Logische route:</strong> Meiji Jingu + Harajuku (naast elkaar) → Tokyo Tower (30 min metro) → teamLab Planets avond (Toyosu, 30 min metro). Geografisch efficiënt.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">07:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🌲 Meiji Jingu + Meiji Shrine bos <span class="tl-tag tag-see">Gratis · Oase in de stad</span></div><div class="tl-desc">Bosoase midden in Tokyo. Stil, groen, meditatief. Sake-vaten bij de ingang. Vroeg = rust.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🎀 Harajuku + Takeshita Street <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Crepes, kawaii fashion. Omotesando daarna voor architectuur + winkels.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">11:00</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🚇 Metro → Tokyo Tower <span class="tl-tag tag-move">Hibiya lijn</span></div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🗼 Tokyo Tower + Zojoji Tempel <span class="tl-tag tag-see">¥1.200 main deck</span></div><div class="tl-desc">Minder druk dan Skytree. Zojoji tempel aan de voet — gratis, mooi contrast met de toren.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🥊 Sumo worstelen ervaring <span class="tl-tag tag-book">Gereserveerd · ±¥4.000 pp</span></div><div class="tl-desc">Sumo-ervaring of kijken naar een keikosessie. Reserveer ver vooraf — maanden van tevoren voor de echte keiko.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🎨 teamLab Planets Toyosu <span class="tl-tag tag-book">Gereserveerd · ±¥2.400 pp</span><span class="tl-tag tag-love">Magisch</span></div><div class="tl-desc">Immersieve digitale kunst. Barevoets door water lopen, in spiegelzalen staan. Avond is het mooist. Rok of wijde broek verplicht!</div></div></div>
+      </div>
+      <div class="food-box">🥐 <strong>Ontbijt:</strong> Crepe Harajuku · <strong>Lunch:</strong> Ramen bij Tokyo Tower · <strong>Na teamLab:</strong> Sushi Toyosu markt (vlakbij)</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 19 — Akihabara + Mario Kart + Dokaiku)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Internationaal rijbewijs meenemen</strong> voor Mario Kart (MariCar). Zonder dit: geen rijden.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Dokaiku Car Meet</strong> checken via @daikoku_pa op Instagram — is er een meet vanavond?</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Ueno + Asakusa rondlopen inplannen — combineerbaar met Akihabara (zelfde oostelijk deel van Tokyo).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 19 — AKIHABARA + MARIO KART -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 19</span>
+      <span class="day-title">Asakusa vroeg → Ueno → Akihabara → Mario Kart → (Dokaiku 's nachts)</span>
+      <span class="day-date">12 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice ok"><span class="notice-ico">✅</span><div><strong>Logische route oost Tokyo:</strong> Asakusa (vroeg) → Ueno (10 min lopen) → Akihabara (20 min lopen of metro) → Mario Kart (Shibuya/Asakusa start) → Dokaiku 's nachts (Yokohama, 40 min). Alles in het oostelijke deel van de stad.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">06:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">⛪ Sensoji Tempel vroeg + Asakusa <span class="tl-tag tag-love">Lantaarnlicht · Gratis</span></div><div class="tl-desc">Bij lantaarnlicht (06:00–07:00) vrijwel niemand. Nakamise Shopping Street. Beste tijd voor foto's.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">08:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🌸 Ueno Park + Museum wijk <span class="tl-tag tag-see">Gratis park</span></div><div class="tl-desc">Ueno Park: vijvers, Toshogu shrine. Nationaal Museum optioneel (¥1.000). 15 min lopen van Asakusa.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">10:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🎮 Akihabara <span class="tl-tag tag-see">Gratis rondlopen</span></div><div class="tl-desc">Elektronicakwartier, anime-winkels, retro game stores. Super Potato voor vintage Nintendo. 20 min lopen van Ueno.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🏎️ Mario Kart (MariCar) <span class="tl-tag tag-book">Gereserveerd · ±¥5.000 pp</span><span class="tl-tag tag-love">TikTok-moment!</span></div><div class="tl-desc">In Mario-kostuum door Tokyo. Internationaal rijbewijs verplicht. Vertrekpunt Akihabara of Shibuya.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">22:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🏎️ Dokaiku Car Meet <span class="tl-tag tag-see">Als er een is! · Gratis</span></div><div class="tl-desc">Daikoku Parking Area Yokohama (40 min metro+bus). 's Nachts: supercars, JDM-classics. Check @daikoku_pa op Instagram.</div></div></div>
+      </div>
+      <div class="food-box">🍣 <strong>Ontbijt:</strong> Konbini vroeg Asakusa · <strong>Lunch:</strong> Ramen Akihabara · <strong>Avond:</strong> Gyoza of sushi na Mario Kart</div>
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 20 — Shinjuku + Shimokitazawa)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Shinjuku Gyoen</strong> opent 09:00 (¥500). Rustige ochtend in het park voor een drukke reisperiode.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Omakase sushi</strong> reserveren voor dag 21 lunch (±14:00) via Tabelog. <span class="urgent">⚡ Bel of boek via app!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>N'EX ticket reserveren</strong> voor 14 okt ±19:10 vanuit Shinjuku naar Narita. <span class="urgent">⚡ Reservering verplicht!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 Yamato: vraag hotel morgen koffers te sturen naar <strong>Narita Airport Yamato counter</strong> voor dag 21. Dan vlieg je hands-free!</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 20 — KAMAKURA -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 20</span>
+      <span class="day-title">Shinjuku Gyoen + Golden Gai → Shimokitazawa → Vrije avond</span>
+      <span class="day-date">13 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:00</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🌿 Shinjuku Gyoen — rustige ochtend <span class="tl-tag tag-see">¥500</span><span class="tl-tag tag-love">Ontspanning</span></div><div class="tl-desc">Een van Tokyo's mooiste parken. Groot genoeg om te verdwalen, rustig genoeg om bij te komen. Oktober: vroege herfstbladeren. Picknick op het gras — verdiend na 18 drukke reisdagen.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">11:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🎸 Shimokitazawa — vintage winkelen + lunch <span class="tl-tag tag-see">Gratis</span><span class="tl-tag tag-love">Boheems Tokyo</span></div><div class="tl-desc">Tokyo's coolste buurt. Vintage kledingwinkels, vinylwinkels, kleine cafés, muziekzaaltjes. Lekker rondslenteren zonder agenda. 15 min metro van Shinjuku (Odakyu lijn).</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🛍️ Ginza of Omotesando — last-minute souvenirs <span class="tl-tag tag-see">Gratis</span></div><div class="tl-desc">Ginza voor sake, matcha producten, Itoya (beste briefpapierwinkel ter wereld). Omotesando voor architectuur en flagshipstores. Jullie keuze.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">18:00</span><span class="tl-dur">vrij</span></div><div class="tl-right"><div class="tl-name">🍶 Golden Gai afsluiter — favoriete plek herhalen 💕 <span class="tl-tag tag-eat">Laatste avond</span></div><div class="tl-desc">Shinjuku's legendarische micro-kroegen. Of: ga terug naar je favoriete plek van de trip. Laatste avond in Japan — geniet er langzaam van.</div></div></div>
+      </div>
+      <div class="food-box">🌿 <strong>Lunch:</strong> Café Shimokitazawa · <strong>Avond:</strong> Golden Gai Shinjuku of de beste plek van de trip herhalen</div>
+
+      <div class="backlog">
+        <div class="backlog-title">📌 Tokyo optioneel — als er tijd over is</div>
+        <div class="backlog-item">Shibuya Vintage Sports Store (Recobros/Ragtag) <span class="backlog-day">(dag 15 of 18 bij Shibuya cluster)</span></div>
+        <div class="backlog-item">JDM tour of auto huren dagdeel <span class="backlog-day">(dag 19 of 20, combineerbaar met Dokaiku)</span></div>
+        <div class="backlog-item">Tsukiji Fish Market ontbijt <span class="backlog-day">(dag 21 ochtend — perfecte laatste ontbijt!)</span></div>
+        <div class="backlog-item">Shimokitazawa vintage winkelen <span class="backlog-day">(dag 20 vrije middag)</span></div>
+        <div class="backlog-item">Shinjuku Gyoen park <span class="backlog-day">(dag 20 vrije middag, ¥500)</span></div>
+        <div class="backlog-item">Kamakura dagtrip — Grote Boeddha + Tsurugaoka Shrine (1u trein) <span class="backlog-day">(dag 16 of 20 als je Hakone overslaat of een extra dag hebt)</span></div>
+        <div class="backlog-item">Nikko dagtrip — prachtige bergschrijnen buiten Tokyo <span class="backlog-day">(dag 20 als alternatief — volle dagtrip)</span></div>
+        <div class="backlog-item">Yokohama Chinatown + harbor <span class="backlog-day">(dag 20 middag, combineerbaar met Dokaiku)</span></div>
+        <div class="backlog-item">Sensoji vroeg bezoek <span class="backlog-day">(dag 19 06:00 — of dag 15 als je het die dag nog niet hebt gedaan)</span></div>
+      </div>
+
+      <div class="checklist-wrap">
+        <div class="cl-title">📋 Checklist voor morgen (Dag 21 — Laatste dag + Vlucht 23:05)</div>
+        <div class="cl-grid">
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>N'EX gereserveerd</strong> voor ±19:10 vanuit Shinjuku naar Narita. <span class="urgent">⚡ Reservering verplicht — aanwezig zijn!</span></div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text"><strong>Online inchecken</strong> voor de vlucht (opent 24u van tevoren). Boarding pass op telefoon.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">🧳 <strong>Koffers naar Narita</strong> via Yamato (hotel stuurt vandaag) — of meenemen in de N'EX.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Sake-flesjes in <strong>ruimbagage</strong>, niet handbagage. Koop sake ná security als je het aan boord wil.</div></div>
+          <div class="cl-item"><div class="cl-box" onclick="toggle(this)"></div><div class="cl-text">Omakase sushi bevestigd voor ±14:00 — zorg dat je om 19:00 bij het hotel bent voor N'EX.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG 21 — LAATSTE DAG -->
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-num">Dag 21</span>
+      <span class="day-title">Tsukiji ontbijt → Laatste uitstapje → Omakase Sushi → Vlucht 23:05 🌸</span>
+      <span class="day-date">14 oktober</span>
+    </div>
+    <div class="day-body">
+      <div class="notice warn"><span class="notice-ico">✈️</span><div><strong>Vlucht 23:05 NRT.</strong> N'EX vanuit Shinjuku → Narita ±80 min. Laatste N'EX ±21:44. <strong>Vertrek Shinjuku uiterlijk 19:10.</strong> Aankomst Narita ±20:30. Check-in sluit 2u voor vertrek = 21:05. Security ±45 min.</div></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">07:30</span><span class="tl-dur">1.5u</span></div><div class="tl-right"><div class="tl-name">🐟 Tsukiji Outer Market ontbijt <span class="tl-tag tag-eat">Perfecte afsluiting</span></div><div class="tl-desc">Verse sushi, tamagoyaki, tonijn-onigiri. De beste manier om een Japan-reis af te sluiten.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">09:30</span><span class="tl-dur">2u</span></div><div class="tl-right"><div class="tl-name">🎌 Laatste uitstapje Tokyo <span class="tl-tag tag-love">Jullie keuze</span></div><div class="tl-desc">Ginza souvenirs? Shinjuku Gyoen? Gewoon koffie bij een lokaal koffiehuis? Jullie keuze.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">12:00</span><span class="tl-dur">1u</span></div><div class="tl-right"><div class="tl-name">🧳 Uitchecken Shinjuku 1 <span class="tl-tag tag-move">Praktisch</span></div><div class="tl-desc">Koffers zijn al via Yamato naar Narita (of even bij bagageopslag hotel). Lichte tas mee voor de middag.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">14:00</span><span class="tl-dur">2.5u</span></div><div class="tl-right"><div class="tl-name">🍣 Omakase Sushi — de finale 💕 <span class="tl-tag tag-book">Gereserveerd · ±¥10.000–20.000 pp</span><span class="tl-tag tag-love">Laatste romantische diner</span></div><div class="tl-desc">Lunch-omakase in Ginza of Shimbashi. Chef kiest beste vis van de dag. Zoek via Tabelog (score 3.8+). 💕</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">17:30</span><span class="tl-dur">30 min</span></div><div class="tl-right"><div class="tl-name">🛍️ Laatste 7-Eleven run <span class="tl-tag tag-love">Souvenirs</span></div><div class="tl-desc">Matcha KitKat, sake, Pocky. Suica-card inleveren voor ¥500 terug — of bewaren voor de volgende keer.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item move"><div class="tl-left"><span class="tl-time">19:10</span><span class="tl-dur">80 min</span></div><div class="tl-right"><div class="tl-name">🚄 N'EX → Narita Airport <span class="tl-tag tag-move">Uiterlijk 19:10 vertrekken! · ±¥3.190</span></div><div class="tl-desc">Vanuit Shinjuku. Aankomst Narita ±20:30.</div></div></div>
+        <div class="tl-sep"></div>
+        <div class="tl-item"><div class="tl-left"><span class="tl-time">20:30</span><span class="tl-dur">2.5u</span></div><div class="tl-right"><div class="tl-name">✈️ Narita — check-in + security + gate <span class="tl-tag tag-move">Vertrek 23:05 🌸</span></div></div></div>
+      </div>
+      <div class="food-box">🐟 <strong>Ontbijt:</strong> Tsukiji Outer Market · <strong>Vroeg diner:</strong> Omakase Sushi · <strong>Gate:</strong> Konbini snacks voor in het vliegtuig</div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- ═══ ALLE ACTIVITEITEN ═══ -->
+<div class="activities-list fi" id="activiteiten">
+<div class="al-inner">
+  <div class="al-title">Alle activiteiten 📋</div>
+  <div class="al-sub">Prijzen per persoon · Reserveringsinfo · Markeer wat al geregeld is</div>
+
+  <div class="al-section">
+    <div class="al-section-title">🏙️ Osaka</div>
+    <div class="al-item"><span class="al-name">Namba Yasaka Jinja</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Shinsekai buurt</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Dotonbori avond</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Osaka Castle toren</span><span class="al-price">¥600 (±€4)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Shitenno-ji Tempel</span><span class="al-price">¥300 (±€2)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Kobe beef diner in Osaka Namba (Ajinoya / teppanyaki Shinsaibashi)</span><span class="al-price">¥8.000–12.000 (±€50–75)</span><span class="al-badge badge-book">Reserveer weken vooraf</span></div>
+    <div class="al-item"><span class="al-name">Katsuoji Temple (optioneel, Mino)</span><span class="al-price">¥400 (±€3) + OV</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Umeda Sky Building (optioneel)</span><span class="al-price">¥1.500 (±€9)</span><span class="al-badge badge-free">Geen reservering nodig</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🕯️ Koyasan</div>
+    <div class="al-item"><span class="al-name">Daimon Gate</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Danjo Garan complex</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Fuginin Tempel</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Okunoin begraafplaats avond</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Ochtendgebed Zofukuin</span><span class="al-price">Inbegrepen verblijf</span><span class="al-badge badge-res">Inbegrepen shukubo</span></div>
+    <div class="al-item"><span class="al-name">Nankai Koya trein + kabelbaan retour</span><span class="al-price">¥1.600 (±€10) of Nankai Pass</span><span class="al-badge badge-free">Kopen bij Namba Station</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">⛩️ Kyoto</div>
+    <div class="al-item"><span class="al-name">Nishiki Market</span><span class="al-price">Gratis (eten extra)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Gion district + Hanamikoji</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Hokan-ji (Yasaka Pagoda)</span><span class="al-price">Gratis buitenkant · ¥400 binnen</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Kodai-ji tempel + illuminatie</span><span class="al-price">¥600 (±€4)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Fushimi Inari Taisha</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering · Vroeg gaan!</span></div>
+    <div class="al-item"><span class="al-name">Nanzen-ji tempel</span><span class="al-price">Gratis · sub-tuinen ¥500</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Tenju-an sub-tempel</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Murin-an villa-tuin</span><span class="al-price">¥410 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Kinkaku-ji (Gouden Paviljoen)</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering · Vroeg gaan</span></div>
+    <div class="al-item"><span class="al-name">Ginkaku-ji + Philosopher's Path</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Arashiyama Bamboo Grove</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering · Vroeg!</span></div>
+    <div class="al-item"><span class="al-name">Tenryu-ji tempel + tuin</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Otagi Nenbutsu-ji</span><span class="al-price">¥300 (±€2)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Hozugawa River Boat Ride</span><span class="al-price">¥4.100 (±€26)</span><span class="al-badge badge-book">Reserveer weken vooraf!</span></div>
+    <div class="al-item"><span class="al-name">Kiyomizudera</span><span class="al-price">¥500 (±€3)</span><span class="al-badge badge-free">Geen reservering · Vroeg!</span></div>
+    <div class="al-item"><span class="al-name">Theeceremonie (Maikoya/Urasenke)</span><span class="al-price">¥3.000–5.000 (±€19–31)</span><span class="al-badge badge-book">Reserveer weken vooraf</span></div>
+    <div class="al-item"><span class="al-name">Nara dagtrip — Todai-ji + herten</span><span class="al-price">¥1.000 (±€6) + ¥720 trein retour</span><span class="al-badge badge-free">Geen reservering</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🌿 Nakasendo · Kiso</div>
+    <div class="al-item"><span class="al-name">Tsumago Edo-dorp verkennen</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Nakasendo wandeling Tsumago→Magome (8 km)</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Narai-juku Edo post-stad</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🏯 Matsumoto</div>
+    <div class="al-item"><span class="al-name">Matsumoto Kasteel</span><span class="al-price">¥700 (±€4)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Yohashira Shrine</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Togakushi Shrine + cederbos</span><span class="al-price">Gratis + bus ±¥1.500 retour</span><span class="al-badge badge-free">Geen reservering · Check busschema!</span></div>
+    <div class="al-item"><span class="al-name">Kamikochi wandeling + bus</span><span class="al-price">¥2.400 bus retour (±€15)</span><span class="al-badge badge-free">Geen reservering · Seizoengebonden</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🏔️ Takayama</div>
+    <div class="al-item"><span class="al-name">Daio Wasabi Farm</span><span class="al-price">Gratis entree + taxi ±¥2.500</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Sanmachi Suji + sake proeverij Funasaka</span><span class="al-price">Gratis (sake proeverij gratis)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Hida Folk Village</span><span class="al-price">¥700 (±€4)</span><span class="al-badge badge-free">Geen reservering · Let op sluitingstijd 17:00</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🏯 Kanazawa</div>
+    <div class="al-item"><span class="al-name">Kenroku-en tuin</span><span class="al-price">¥320 (±€2)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Kanazawa Castle Park</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Nagamachi Samurai District + Nomura House</span><span class="al-price">Gratis wijk · Nomura House ¥550 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Samurai Workshop (Kanazawa Samurai Exp.)</span><span class="al-price">±¥5.000 (±€31)</span><span class="al-badge badge-book">Reserveer weken vooraf via Klook</span></div>
+    <div class="al-item"><span class="al-name">Thee ceremonie Higashi Chaya</span><span class="al-price">±¥2.500 (±€16)</span><span class="al-badge badge-book">Reserveer dagen vooraf</span></div>
+    <div class="al-item"><span class="al-name">Higashi Chaya geisha-district + goud-ijs</span><span class="al-price">Gratis + ijs ±¥500</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Shirakawa-go dagtrip (Nohi Bus)</span><span class="al-price">¥1.200 bus retour (±€8)</span><span class="al-badge badge-book">Reserveer weken vooraf via noritetsu.net!</span></div>
+    <div class="al-item"><span class="al-name">21st Century Museum (buiten gratis)</span><span class="al-price">Gratis buiten · ¥1.200 binnen (±€8)</span><span class="al-badge badge-free">Geen reservering nodig</span></div>
+  </div>
+
+  <div class="al-section">
+    <div class="al-section-title">🗼 Tokyo</div>
+    <div class="al-item"><span class="al-name">Hakone Free Pass (2 dagen)</span><span class="al-price">¥6.100 (±€38)</span><span class="al-badge badge-book">Kopen bij Shinjuku Station (Odakyu)</span></div>
+    <div class="al-item"><span class="al-name">Hakone — kabelbaan + Owakudani</span><span class="al-price">Inbegrepen Free Pass</span><span class="al-badge badge-free">Geen extra reservering</span></div>
+    <div class="al-item"><span class="al-name">Amazake-jaya theehuis Hakone</span><span class="al-price">±¥400 (±€3)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Boottocht Lake Ashi (piratenschip)</span><span class="al-price">Inbegrepen Free Pass</span><span class="al-badge badge-free">Geen extra reservering</span></div>
+    <div class="al-item"><span class="al-name">Onsen dagbad Hakone (Tenzan)</span><span class="al-price">±¥1.300 (±€8)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Mount Fuji dagtrip — bus Shinjuku retour</span><span class="al-price">¥3.600 bus retour (±€23)</span><span class="al-badge badge-free">Geen reservering (buy at terminal)</span></div>
+    <div class="al-item"><span class="al-name">Chureito Pagoda + Lake Kawaguchi</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Lake Yamanaka</span><span class="al-price">Gratis + lokale bus</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Sensoji Tempel Asakusa</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering · Vroeg gaan!</span></div>
+    <div class="al-item"><span class="al-name">Shibuya Sky observatorium</span><span class="al-price">¥2.000 (±€13)</span><span class="al-badge badge-book">Reserveer weken vooraf via shibuyasky.jp!</span></div>
+    <div class="al-item"><span class="al-name">Shibuya Crossing</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">teamLab Planets (Toyosu)</span><span class="al-price">¥2.400–3.200 (±€15–20)</span><span class="al-badge badge-book">Reserveer weken vooraf via teamlab.art!</span></div>
+    <div class="al-item"><span class="al-name">Meiji Jingu + Meiji Shrine bos</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Harajuku + Takeshita Street</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Tokyo Tower (main deck)</span><span class="al-price">¥1.200 (±€8)</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Ueno Park + Toshogu Shrine</span><span class="al-price">Gratis park</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Akihabara rondlopen</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Geen reservering</span></div>
+    <div class="al-item"><span class="al-name">Sumo worstelen ervaring</span><span class="al-price">±¥4.000 (±€25)</span><span class="al-badge badge-book">Reserveer maanden vooraf (keiko) of weken (ervaring)</span></div>
+    <div class="al-item"><span class="al-name">Mario Kart (MariCar)</span><span class="al-price">±¥5.000 (±€31)</span><span class="al-badge badge-book">Reserveer via maricar.com · Internationaal rijbewijs!</span></div>
+    <div class="al-item"><span class="al-name">Dokaiku Car Meet Yokohama</span><span class="al-price">Gratis</span><span class="al-badge badge-free">Check @daikoku_pa Instagram</span></div>
+    <div class="al-item"><span class="al-name">Kamakura — Grote Boeddha + Shrine (optioneel)</span><span class="al-price">¥300 Boeddha + ±¥920 trein retour</span><span class="al-badge badge-free">Geen reservering · Optioneel dagtrip</span></div>
+    <div class="al-item"><span class="al-name">Omakase sushi lunch afsluiter</span><span class="al-price">¥10.000–20.000 (±€63–125)</span><span class="al-badge badge-book">Reserveer weken vooraf via Tabelog/telefoon</span></div>
+    <div class="al-item"><span class="al-name">Tsukiji Outer Market ontbijt (optioneel)</span><span class="al-price">±¥2.000 (±€13)</span><span class="al-badge badge-free">Geen reservering</span></div>
+  </div>
+</div>
+</div>
+
+<!-- APPS -->
+<div class="apps fi" id="apps">
+<div class="apps-inner">
+  <div class="apps-title">Apps — download vóór vertrek 📱</div>
+  <div class="apps-sub">Installeer en configureer THUIS — Japan-verbinding pas na aankomst</div>
+  <div class="apps-grid">
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🗺️</div><div><div class="ac-name">Google Maps</div><div class="ac-cat">Navigatie · #1</div></div></div><div class="ac-desc">Download offline kaarten per stad. Sla alle stops op in een lijst.</div><span class="ac-must">⭐ Absoluut verplicht</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🌐</div><div><div class="ac-name">Google Translate</div><div class="ac-cat">Taal · #2</div></div></div><div class="ac-desc">Camera-modus voor menu's. Download Japans OFFLINE!</div><span class="ac-must">⭐ Absoluut verplicht</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">💳</div><div><div class="ac-name">Suica (Apple Wallet)</div><div class="ac-cat">OV + betalen</div></div></div><div class="ac-desc">Stel THUIS in via Apple Wallet. Betaal ook bij convenience stores.</div><span class="ac-must">⭐ Absoluut verplicht</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">📡</div><div><div class="ac-name">Airalo (eSIM)</div><div class="ac-cat">Internet</div></div></div><div class="ac-desc">Japan eSIM kopen VOOR vertrek. 20GB/30 dagen.</div><span class="ac-must">⭐ Koop VOOR vertrek</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🚄</div><div><div class="ac-name">Japan Travel (Navitime)</div><div class="ac-cat">Treinroutes</div></div></div><div class="ac-desc">Beter dan Google Maps voor Shinkansen. Toont exacte kosten en tijden.</div><span class="ac-must">⭐ Sterk aanbevolen</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🍽️</div><div><div class="ac-name">Tabelog</div><div class="ac-cat">Restaurants</div></div></div><div class="ac-desc">Japan's beste restaurant-app. Score 3.5+ = uitstekend. 4.0+ = zeldzaam goed.</div></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🎟️</div><div><div class="ac-name">Klook</div><div class="ac-cat">Activiteiten boeken</div></div></div><div class="ac-desc">teamLab, Shibuya Sky, Samurai Workshop, workshops. Geen wachtrij.</div><span class="ac-must">⭐ Sterk aanbevolen</span></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">💬</div><div><div class="ac-name">LINE</div><div class="ac-cat">Communicatie Japan</div></div></div><div class="ac-desc">Japan's WhatsApp. Hotels en restaurants communiceren via LINE.</div></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🚨</div><div><div class="ac-name">Safety Tips (NHK)</div><div class="ac-cat">Veiligheid</div></div></div><div class="ac-desc">Real-time aardbevingsalerts. Geen paniek nodig bij kleine bevingen.</div></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">💴</div><div><div class="ac-name">Currency Converter+</div><div class="ac-cat">Valuta</div></div></div><div class="ac-desc">Live yen-koers. Werkt offline. 1 euro ≈ ¥160 (check vóór vertrek).</div></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🧳</div><div><div class="ac-name">Ecbo Cloak</div><div class="ac-cat">Bagage opslaan</div></div></div><div class="ac-desc">Bagageopslag bij lokale cafés en winkels. Ideaal op uitcheckdag.</div></div>
+    <div class="ac"><div class="ac-head"><div class="ac-ico">🚕</div><div><div class="ac-name">GO Taxi</div><div class="ac-cat">Taxi Japan</div></div></div><div class="ac-desc">Japanse Uber-alternatief. Werkt overal in Japan.</div></div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <span class="sig">💕</span>
+  <h3>Özge & Thom — Japan 2026</h3>
+  <p>20 reisdagen, 8 bestemmingen, 1 avontuur. Van tempel-slapen in Koyasan tot Mario Kart in Tokyo — dit is jullie honeymoon.</p>
+  <p style="font-size:.78rem;color:rgba(255,255,255,.25);margin-top:.4rem;">✈️ Aankomst KIX 24 sep 12:35 · Vertrek NRT 14 okt 23:05</p>
+  <div class="footer-tips">
+    <div class="ft"><div class="ft-ico">🚄</div><div class="ft-t">Transport</div><p>Losse Shinkansen-tickets via Klook of station. Suica voor lokaal. JR Pass niet voordelig voor deze route.</p></div>
+    <div class="ft"><div class="ft-ico">💴</div><div class="ft-t">Cash</div><p>7-Eleven ATM altijd betrouwbaar. Houd ¥20.000+ bij je. Ryokans en tempels zijn cash-only.</p></div>
+    <div class="ft"><div class="ft-ico">🧳</div><div class="ft-t">Bagage Yamato</div><p>Osaka→Kyoto (hotel→hotel) · <strong>Kyoto→Matsumoto (hotel→7-Eleven)</strong> · Matsumoto→Kanazawa (7-Eleven→hotel, slaat Takayama over) · Kanazawa→Tokyo (meenemen of hotel→hotel)</p></div>
+    <div class="ft"><div class="ft-ico">💍</div><div class="ft-t">Honeymoon tip</div><p>Zeg bij elk hotel dat jullie op huwelijksreis zijn — bijna altijd upgrade, drankje of kamerversiering.</p></div>
+    <div class="ft"><div class="ft-ico">📅</div><div class="ft-t">Reserveer nu</div><p>Sumo keiko (maanden!), teamLab, Shibuya Sky, Hozugawa Boot, Kobe beef, Theeceremonie, Mario Kart, Omakase.</p></div>
+    <div class="ft"><div class="ft-ico">🌸</div><div class="ft-t">Oktober kleuren</div><p>Takayama/Matsumoto kleuren vroeg oktober. Kyoto/Tokyo: eind oktober. Jullie zien beide!</p></div>
+  </div>
+  <div class="fn">Özge & Thom's Japan Honeymoon Guide · 24 sep – 14 okt 2026 · v35 · Samengesteld met liefde 💕</div>
+</footer>
+
+<script>
+function toggle(el){el.classList.toggle('checked');}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.06});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{
+  let cur='';
+  document.querySelectorAll('[id]').forEach(s=>{if(s.getBoundingClientRect().top<=120)cur=s.id;});
+  document.querySelectorAll('.nav-a').forEach(a=>{a.classList.toggle('act',a.getAttribute('href')==='#'+cur);});
+});
+</script>
+</body>
+</html>
