@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn format keuzehulp</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f3;
+      --bg-tertiary: #eeede9;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666660;
+      --text-tertiary: #999993;
+      --border-light: rgba(0,0,0,0.1);
+      --border-mid: rgba(0,0,0,0.18);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --font: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg-secondary: #252523;
+        --bg-tertiary: #2e2e2b;
+        --text-primary: #f0efe8;
+        --text-secondary: #a09f98;
+        --text-tertiary: #6e6d66;
+        --border-light: rgba(255,255,255,0.08);
+        --border-mid: rgba(255,255,255,0.15);
+      }
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .header-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      line-height: 1.55;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .q-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .q-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .opt {
+      background: var(--bg);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
+      font-family: var(--font);
+    }
+
+    .opt:hover {
+      background: var(--bg-secondary);
+    }
+
+    .opt.selected {
+      background: #ddeeff;
+      border-color: #378ADD;
+      color: #0C447C;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .opt.selected {
+        background: #0C447C;
+        border-color: #85B7EB;
+        color: #B5D4F4;
+      }
+    }
+
+    .question-block {
+      display: none;
+    }
+
+    .question-block.visible {
+      display: block;
+    }
+
+    .divider {
+      height: 0.5px;
+      background: var(--border-light);
+      margin: 1.5rem 0;
+      display: none;
+    }
+
+    .divider.visible {
+      display: block;
+    }
+
+    .result-card {
+      display: none;
+      background: var(--bg);
+      border: 0.5px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .result-card.visible {
+      display: block;
+    }
+
+    .result-header {
+      padding: 14px 16px 12px;
+      border-bottom: 0.5px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .format-badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: var(--font);
+    }
+
+    .b-tekst     { background: #EEEDFE; color: #3C3489; }
+    .b-video     { background: #FAECE7; color: #712B13; }
+    .b-carrousel { background: #E1F5EE; color: #085041; }
+    .b-poll      { background: #FAEEDA; color: #633806; }
+    .b-artikel   { background: #E6F1FB; color: #0C447C; }
+
+    @media (prefers-color-scheme: dark) {
+      .b-tekst     { background: #3C3489; color: #CECBF6; }
+      .b-video     { background: #712B13; color: #F5C4B3; }
+      .b-carrousel { background: #085041; color: #9FE1CB; }
+      .b-poll      { background: #633806; color: #FAC775; }
+      .b-artikel   { background: #0C447C; color: #B5D4F4; }
+    }
+
+    .result-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .result-body {
+      padding: 14px 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+
+    .row-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      min-width: 95px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+
+    .row-val {
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    .signal-dots {
+      display: flex;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-light);
+    }
+
+    .dot.on-purple { background: #7F77DD; }
+    .dot.on-teal   { background: #1D9E75; }
+    .dot.on-amber  { background: #BA7517; }
+    .dot.on-blue   { background: #378ADD; }
+    .dot.on-coral  { background: #D85A30; }
+
+    .tip-box {
+      background: var(--bg-secondary);
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      border-left: 2px solid var(--border-mid);
+    }
+
+    .tip-box strong {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .reset-btn {
+      margin-top: 1.2rem;
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: none;
+      border: 0.5px solid var(--border-mid);
+      border-radius: 6px;
+      padding: 7px 14px;
+      cursor: pointer;
+      display: none;
+      font-family: var(--font);
+      transition: background 0.12s;
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-secondary);
+    }
+
+    .reset-btn.visible {
+      display: inline-block;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="header">
+      <div class="header-label">LinkedIn toolkit · 2026</div>
+      <h1>Welk format past bij jouw berichtje?</h1>
+      <p>Beantwoord drie vragen en krijg direct een aanbeveling — gebaseerd op hoe het LinkedIn-algoritme formats evalueert.</p>
+    </div>
+
+    <div class="card question-block visible" id="step1">
+      <div class="q-label">Stap 1 van 3</div>
+      <div class="q-text">Wat is het doel van je berichtje?</div>
+      <div class="options">
+        <div class="opt" onclick="pick('goal','mening',this)">Mijn mening of inzicht delen</div>
+        <div class="opt" onclick="pick('goal','uitleggen',this)">Iets uitleggen of leren</div>
+        <div class="opt" onclick="pick('goal','gesprek',this)">Een gesprek starten</div>
+        <div class="opt" onclick="pick('goal','zichtbaar',this)">Zichtbaar blijven / bekend worden</div>
+        <div class="opt" onclick="pick('goal','autoriteit',this)">Diepgaande autoriteit opbouwen</div>
+      </div>
+    </div>
+
+    <div class="card question-block" id="step2">
+      <div class="q-label">Stap 2 van 3</div>
+      <div class="q-text">Hoeveel tijd heb je om het te maken?</div>
+      <div class="options">
+        <div class="opt" onclick="pick('tijd','kort',this)">15 minuten of minder</div>
+        <div class="opt" onclick="pick('tijd','middel',this)">Een half uur</div>
+        <div class="opt" onclick="pick('tijd','lang',this)">Een uur of meer</div>
+      </div>
+    </div>
+
+    <div class="card question-block" id="step3">
+      <div class="q-label">Stap 3 van 3</div>
+      <div class="q-text">Welke reactie hoop je te krijgen?</div>
+      <div class="options">
+        <div class="opt" onclick="pick('reactie','denken',this)">Mensen aan het denken zetten</div>
+        <div class="opt" onclick="pick('reactie','delen',this)">Mensen laten delen of opslaan</div>
+        <div class="opt" onclick="pick('reactie','reageren',this)">Mensen laten reageren in de comments</div>
+        <div class="opt" onclick="pick('reactie','klikken',this)">Snel veel reacties / interactie</div>
+      </div>
+    </div>
+
+    <div class="divider" id="result-divider"></div>
+
+    <div id="result-tekst" class="result-card">
+      <div class="result-header">
+        <span class="format-badge b-tekst">Tekstpost</span>
+        <span class="result-title">Schrijf een gerichte tekstpost</span>
+      </div>
+      <div class="result-body">
+        <div class="row"><div class="row-label">Waarom dit</div><div class="row-val">Puur tekst = de scherpste item-embedding. Geen ruis tussen jouw boodschap en het algoritme. Ideaal voor meningen, inzichten en discussies.</div></div>
+        <div class="row"><div class="row-label">Signaalsterkte</div><div class="signal-dots"><div class="dot on-purple"></div><div class="dot on-purple"></div><div class="dot on-purple"></div><div class="dot on-purple"></div><div class="dot"></div></div></div>
+        <div class="row"><div class="row-label">Beste lengte</div><div class="row-val">600–1200 tekens. Witregel tussen alinea's. Sluiten met een echte vraag.</div></div>
+        <div class="tip-box"><strong>Tip uit het boek:</strong> elk woord telt even zwaar. Begin sterk, maar blijf ook tot de laatste zin bij je onderwerp. Afdwalen schaadt je embedding.</div>
+      </div>
+    </div>
+
+    <div id="result-video" class="result-card">
+      <div class="result-header">
+        <span class="format-badge b-video">Video</span>
+        <span class="result-title">Maak een korte video</span>
+      </div>
+      <div class="result-body">
+        <div class="row"><div class="row-label">Waarom dit</div><div class="row-val">Video genereert de meeste dwell time — mensen blijven langer kijken dan lezen. Dwell time is een officieel signaal dat zwaar meetelt.</div></div>
+        <div class="row"><div class="row-label">Signaalsterkte</div><div class="signal-dots"><div class="dot on-coral"></div><div class="dot on-coral"></div><div class="dot on-coral"></div><div class="dot on-coral"></div><div class="dot on-coral"></div></div></div>
+        <div class="row"><div class="row-label">Beste lengte</div><div class="row-val">Onder de 60 seconden. Ondertitels zijn verplicht — LinkedIn verwerkt de transcript als tekst voor je embedding.</div></div>
+        <div class="tip-box"><strong>Tip uit het boek:</strong> de eerste 3 seconden bepalen alles. Ontwerp je opening voor iemand zonder geluid — want de meeste mensen starten met geluid uit.</div>
+      </div>
+    </div>
+
+    <div id="result-carrousel" class="result-card">
+      <div class="result-header">
+        <span class="format-badge b-carrousel">Carrousel</span>
+        <span class="result-title">Maak een carrousel (document/PDF)</span>
+      </div>
+      <div class="result-body">
+        <div class="row"><div class="row-label">Waarom dit</div><div class="row-val">Carrousels scoren goed op opslaan en delen — actieve signalen die zwaarder wegen dan likes. Mensen bewaren ze voor later.</div></div>
+        <div class="row"><div class="row-label">Signaalsterkte</div><div class="signal-dots"><div class="dot on-teal"></div><div class="dot on-teal"></div><div class="dot on-teal"></div><div class="dot on-teal"></div><div class="dot"></div></div></div>
+        <div class="row"><div class="row-label">Beste omvang</div><div class="row-val">8–10 slides. Eerste slide moet direct de aandacht grijpen met beeld én een prikkelende tekst.</div></div>
+        <div class="tip-box"><strong>Tip uit het boek:</strong> de LLM leest je caption, niet de tekst op de slides. Schrijf een uitgebreide, topicaal consistente caption — dát bepaalt bij wie je carrousel terechtkomt.</div>
+      </div>
+    </div>
+
+    <div id="result-poll" class="result-card">
+      <div class="result-header">
+        <span class="format-badge b-poll">Poll</span>
+        <span class="result-title">Plaats een poll</span>
+      </div>
+      <div class="result-body">
+        <div class="row"><div class="row-label">Waarom dit</div><div class="row-val">Polls genereren snel veel klikken en zijn laagdrempelig. Goed als je zichtbaar wilt blijven of een gesprek wilt opstarten met weinig tijd.</div></div>
+        <div class="row"><div class="row-label">Signaalsterkte</div><div class="signal-dots"><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="row"><div class="row-label">Beste opzet</div><div class="row-val">3 antwoordopties. Looptijd van 7 dagen. Plan altijd een vervolgpost met jouw conclusie.</div></div>
+        <div class="tip-box"><strong>Waarschuwing uit het boek:</strong> polls genereren passieve engagement (klikken), geen zware actieve signalen zoals comments. Gebruik ze als afwisseling, niet als hoofdformat.</div>
+      </div>
+    </div>
+
+    <div id="result-artikel" class="result-card">
+      <div class="result-header">
+        <span class="format-badge b-artikel">Artikel / nieuwsbrief</span>
+        <span class="result-title">Schrijf een LinkedIn-artikel of nieuwsbrief</span>
+      </div>
+      <div class="result-body">
+        <div class="row"><div class="row-label">Waarom dit</div><div class="row-val">Artikelen bouwen de sterkste topicale autoriteit. Ze blijven langer leven dan gewone posts en elke nieuwe reactie voegt een vers signaal toe aan de GR-sequence van de reageerder.</div></div>
+        <div class="row"><div class="row-label">Signaalsterkte</div><div class="signal-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div></div></div>
+        <div class="row"><div class="row-label">Beste aanpak</div><div class="row-val">Diepgang over één specifiek onderwerp. Gebruik koppen en alinea's. Sluit af met een vraag om reacties uit te lokken.</div></div>
+        <div class="tip-box"><strong>Tip uit het boek:</strong> een nieuwsbrief met abonnees creëert terugkerende engagement. Elke editie bouwt verder aan het patroon dat het systeem over jou leert.</div>
+      </div>
+    </div>
+
+    <button class="reset-btn" id="reset-btn" onclick="reset()">Opnieuw beginnen</button>
+
+    <div class="footer">
+      Gebaseerd op <em>The Unofficial LinkedIn Algorithm Guide, Q1 2026</em> — Trust Insights
+    </div>
+
+  </div>
+
+  <script>
+    const answers = {};
+    const logic = {
+      mening:     { kort: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'poll'     }, middel: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'poll'     }, lang: { denken: 'tekst',    reageren: 'tekst',    delen: 'carrousel',  klikken: 'poll'     } },
+      uitleggen:  { kort: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'video'    }, middel: { denken: 'carrousel', reageren: 'carrousel', delen: 'carrousel',  klikken: 'video'    }, lang: { denken: 'carrousel', reageren: 'carrousel', delen: 'carrousel',  klikken: 'video'    } },
+      gesprek:    { kort: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'poll'     }, middel: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'poll'     }, lang: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'poll'     } },
+      zichtbaar:  { kort: { denken: 'poll',     reageren: 'poll',     delen: 'tekst',      klikken: 'poll'     }, middel: { denken: 'tekst',    reageren: 'tekst',    delen: 'carrousel',  klikken: 'video'    }, lang: { denken: 'video',    reageren: 'video',    delen: 'carrousel',  klikken: 'video'    } },
+      autoriteit: { kort: { denken: 'tekst',    reageren: 'tekst',    delen: 'tekst',      klikken: 'tekst'    }, middel: { denken: 'artikel',  reageren: 'artikel',  delen: 'carrousel',  klikken: 'carrousel'}, lang: { denken: 'artikel',  reageren: 'artikel',  delen: 'artikel',    klikken: 'artikel'  } },
+    };
+
+    function pick(key, val, el) {
+      answers[key] = val;
+      el.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      if (key === 'goal') document.getElementById('step2').classList.add('visible');
+      if (key === 'tijd')  document.getElementById('step3').classList.add('visible');
+      if (key === 'reactie') showResult();
+    }
+
+    function showResult() {
+      const fmt = ((logic[answers.goal] || {})[answers.tijd] || {})[answers.reactie] || 'tekst';
+      ['tekst','video','carrousel','poll','artikel'].forEach(f => {
+        document.getElementById('result-' + f).classList.toggle('visible', f === fmt);
+      });
+      document.getElementById('result-divider').classList.add('visible');
+      document.getElementById('reset-btn').classList.add('visible');
+    }
+
+    function reset() {
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.getElementById('step2').classList.remove('visible');
+      document.getElementById('step3').classList.remove('visible');
+      document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      ['tekst','video','carrousel','poll','artikel'].forEach(f => document.getElementById('result-' + f).classList.remove('visible'));
+      document.getElementById('result-divider').classList.remove('visible');
+      document.getElementById('reset-btn').classList.remove('visible');
+    }
+  </script>
+</body>
+</html>
