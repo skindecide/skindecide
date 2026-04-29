@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turkije Rondreis — September/Oktober</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --gold: #D4A547;
+    --cream: #FAF6EF;
+    --dark: #1A1208;
+    --mid: #5C4A2A;
+    --light: #EDE4D3;
+    --done: #6B8E6E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '☽';
+    position: absolute;
+    right: 60px;
+    top: 20px;
+    font-size: 120px;
+    opacity: 0.07;
+    line-height: 1;
+  }
+  header .flag {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  header .subtitle {
+    font-size: 15px;
+    opacity: 0.6;
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--light);
+    border-bottom: 1px solid #D5C9B5;
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 30px 80px;
+  }
+
+  /* SECTION TITLES */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--dark);
+  }
+
+  /* CHECKLIST GLOBAL */
+  .section { margin-bottom: 70px; }
+
+  /* PREP CHECKLIST */
+  .prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .prep-card {
+    background: white;
+    border: 1px solid #E0D6C5;
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .prep-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prep-card h3 .icon { font-size: 18px; }
+  .prep-card ul { list-style: none; }
+  .prep-card ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #F0EAE0;
+    cursor: pointer;
+  }
+  .prep-card ul li:last-child { border-bottom: none; }
+  .prep-card ul li .cb {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #C5B99A;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .prep-card ul li.checked .cb {
+    background: var(--done);
+    border-color: var(--done);
+    color: white;
+  }
+  .prep-card ul li.checked .cb::after { content: '✓'; font-size: 11px; }
+  .prep-card ul li.checked span { text-decoration: line-through; opacity: 0.5; }
+
+  /* ITINERARY */
+  .itinerary { display: flex; flex-direction: column; gap: 0; }
+
+  .destination-block {
+    border-left: 3px solid var(--light);
+    padding-left: 28px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+    position: relative;
+  }
+  .destination-block::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    position: absolute;
+    left: -8.5px;
+    top: 8px;
+    border: 2px solid var(--cream);
+  }
+  .destination-block.transit::before { background: var(--mid); width: 10px; height: 10px; left: -6.5px; }
+
+  .dest-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 10px;
+    padding-top: 4px;
+  }
+  .dest-emoji { font-size: 24px; flex-shrink: 0; }
+  .dest-info {}
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+  .dest-dates {
+    font-size: 12px;
+    color: var(--mid);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .days-grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .day-row {
+    background: white;
+    border: 1px solid #E8E0D0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .day-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 0.5px;
+    padding-top: 2px;
+  }
+  .day-label .weekday { font-size: 11px; opacity: 0.6; display: block; }
+  .day-content {}
+  .day-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .day-title .badge {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .day-title .badge.gold { background: var(--gold); }
+  .day-title .badge.green { background: var(--done); }
+
+  .sights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .sight-tag {
+    font-size: 12px;
+    background: var(--light);
+    color: var(--mid);
+    padding: 3px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sight-tag:hover { background: var(--gold); color: white; }
+  .sight-tag.done { background: #E8F0E8; color: var(--done); border-color: var(--done); text-decoration: line-through; opacity: 0.6; }
+  .sight-tag .star { font-size: 10px; }
+
+  /* TRANSIT ROW */
+  .transit-row {
+    background: var(--dark);
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    margin-top: 4px;
+  }
+  .transit-row .arrow { color: var(--gold); font-size: 16px; }
+
+  /* PER-CITY CHECKLIST */
+  .city-checklist {
+    background: #FDF9F2;
+    border: 1px dashed #D5C5A5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .city-checklist h4 {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .city-checklist ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 4px;
+  }
+  .city-checklist ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+  .city-checklist ul li .cb {
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #C5B99A;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .city-checklist ul li.checked .cb { background: var(--done); border-color: var(--done); color: white; }
+  .city-checklist ul li.checked .cb::after { content: '✓'; font-size: 10px; }
+  .city-checklist ul li.checked span { text-decoration: line-through; opacity: 0.5; }
+
+  /* TIPS BOX */
+  .tip-box {
+    background: linear-gradient(135deg, #2C1810, #1A1208);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .tip-box strong { color: var(--gold); }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    background: white;
+    border: 1px solid #E0D6C5;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 40px;
+  }
+  .progress-section h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 16px; }
+  .progress-bar-wrap { margin-bottom: 8px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--mid); margin-bottom: 5px; }
+  .progress-bar { height: 6px; background: var(--light); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); border-radius: 10px; transition: width 0.4s; }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+    color: var(--mid);
+    opacity: 0.6;
+    border-top: 1px solid var(--light);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 40px 20px 36px; }
+    main { padding: 30px 16px 60px; }
+    nav { padding: 0 16px; }
+    .day-row { grid-template-columns: 60px 1fr; }
+    .prep-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="flag">🇹🇷 Turkije Rondreis 2025</div>
+  <h1>Istanbul tot<br><em>Fethiye</em></h1>
+  <p class="subtitle">14 september — 7 oktober · 24 dagen</p>
+</header>
+
+<nav>
+  <a href="#voorbereiding">✅ Voorbereiding</a>
+  <a href="#istanbul">🏙️ Istanbul</a>
+  <a href="#cappadocie">🎈 Cappadocië</a>
+  <a href="#sanliurfa">🏛️ Şanlıurfa</a>
+  <a href="#mardin">🏜️ Mardin</a>
+  <a href="#iskenderun">🌊 İskenderun</a>
+  <a href="#fethiye">🏝️ Fethiye</a>
+</nav>
+
+<main>
+
+  <!-- VOORBEREIDING -->
+  <section class="section" id="voorbereiding">
+    <p class="section-label">Checklist</p>
+    <h2 class="section-title">Voorbereiding</h2>
+
+    <div class="progress-section">
+      <h3>Voortgang</h3>
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span>Documenten & Visa</span><span id="prog-docs">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="bar-docs" style="width:0%"></div></div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span>Boekingen</span><span id="prog-book">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="bar-book" style="width:0%"></div></div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span>Praktisch</span><span id="prog-pract">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="bar-pract" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="prep-grid">
+
+      <div class="prep-card">
+        <h3><span class="icon">📄</span> Documenten</h3>
+        <ul id="docs-list">
+          <li onclick="toggle(this)"><div class="cb"></div><span>Paspoort geldig tot minstens april 2026</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>E-visa aanvragen via evisa.gov.tr (~€20 p.p.)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Kopieën paspoort maken (digitaal + print)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Reisverzekering afsluiten (inclusief annulering)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>EHIC / Europese zorgpas meenemen</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Rijbewijs meenemen (voor huurauto)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Internationaal rijbewijs regelen (aanbevolen)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Noodcontacten noteren (ambassade NL/DE)</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card">
+        <h3><span class="icon">✈️</span> Vluchten & Hotels</h3>
+        <ul id="book-list">
+          <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht NL/DE → Istanbul (14 sep)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht Istanbul → Cappadocië (19 sep)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht Adana → Fethiye avond (30 sep)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht Fethiye → NL/DE (7 okt)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Istanbul (14–18 sep, 5 nachten)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Göreme Cappadocië (19–22 sep, 4 nachten)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Şanlıurfa (22–24 sep, 2 nachten)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Mardin Oude Stad (24–28 sep, 4 nachten)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Fethiye (30 sep–7 okt, 7 nachten)</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card">
+        <h3><span class="icon">🎈</span> Activiteiten Vooraf Boeken</h3>
+        <ul>
+          <li onclick="toggle(this)"><div class="cb"></div><span>🏎️ F1 tickets Istanbul Park (17 sep) — nú kopen</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>🎈 Luchtballon Cappadocië (minstens 2 maanden vooraf, ~€250 p.p.)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>🪂 Paragliden Ölüdeniz Babadağ (vooraf reserveren)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Huurauto Cappadocië → ophalen Kayseri/Nevşehir luchthaven</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Huurauto inleveren Adana (30 sep)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Gids Göbekli Tepe boeken (optioneel maar aanbevolen)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Zeilboot 12 eilanden Fethiye reserveren</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card">
+        <h3><span class="icon">📱</span> Simkaart & Connectiviteit</h3>
+        <ul id="pract-list">
+          <li onclick="toggle(this)"><div class="cb"></div><span>Turkse simkaart kopen op Istanbul Airport (Turkcell/Vodafone TR)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Of: eSIM vooraf kopen (Airalo app, ~€15 voor 10GB)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Offline kaarten downloaden (Google Maps / Maps.me)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Powerbank opladen/meenemen</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Adapter Type F (werkt in Turkije)</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card">
+        <h3><span class="icon">💰</span> Geld & Betalen</h3>
+        <ul>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Turkse Lira wisselen of pinnen op Ataturk/Sabiha Airport</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Creditcard meenemen (Visa/Mastercard breed geaccepteerd)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Wisselkoers check: €1 ≈ 36–38 TL (fluctueert)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Kleine biljetten handig voor bazaars en taxi's</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Museum Pass Istanbul overwegen (dekt meerdere attracties)</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card">
+        <h3><span class="icon">🎒</span> Praktisch Meenemen</h3>
+        <ul>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Zonnebrand (hoge factor, september nog warm)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Hoofddoek/sjaal (voor moskeebezoek)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Wandelschoenen (Cappadocië hikes, Mardin straatjes)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Licht jasje (Cappadocië 's avonds fris)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Waterschoenen (Saklikent Kloof waden)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Zwemkleding + handdoek</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>DEET muggenspray (zuidoost-Turkije)</span></li>
+          <li onclick="toggle(this)"><div class="cb"></div><span>Kleine rugzak voor dagtochten</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ISTANBUL -->
+  <section class="section" id="istanbul">
+    <p class="section-label">14 – 18 september · 5 nachten</p>
+    <h2 class="section-title">🏙️ Istanbul</h2>
+
+    <div class="tip-box">
+      <strong>Tip:</strong> Koop de <strong>Istanbul Museum Pass</strong> online via muze.gov.tr — dekt Hagia Sophia, Topkapı, Basilica Cisterne en meer. Ga vroeg (voor 9u) naar Hagia Sophia om de drukte voor te zijn. Voor de F1 op zondag: check parkeerroutes vooraf, de omgeving is druk.
+    </div>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek uit Istanbul</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht Istanbul → Cappadocië ingecheckt</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Luchtballon Cappadocië bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Göreme bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Huurauto gereserveerd op luchthaven</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">14 sep<span class="weekday">Zondag</span></div>
+            <div class="day-content">
+              <div class="day-title">Aankomst <span class="badge green">Rustig</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Inchecken hotel</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Avondwandeling Sultanahmet</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🍽️ Eerste Turkse dinner</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">15 sep<span class="weekday">Maandag</span></div>
+            <div class="day-content">
+              <div class="day-title">Historisch centrum</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Hagia Sophia</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Blauwe Moskee</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Basilica Cisterne</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Topkapı Paleis</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Hippodroom</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Grand Bazaar</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">16 sep<span class="weekday">Dinsdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Beyoğlu & Bosporus</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Galata Tower</div>
+                <div class="sight-tag" onclick="toggleSight(this)">İstiklal Street</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Taksim Square</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Galata Bridge</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Balat Neighborhood</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🛁 Turkse Hamam</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">17 sep<span class="weekday">Woensdag</span></div>
+            <div class="day-content">
+              <div class="day-title">F1 dag <span class="badge">🏎️ GRAND PRIX</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Ochtend: Ortaköy Cami</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Ochtend: Dolmabahçe Paleis</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Middag/avond: Istanbul Park</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">18 sep<span class="weekday">Donderdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Chille dag + shoppen</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Bosporus Cruise</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Nişantaşı (shoppen)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Vadi Istanbul</div>
+                <div class="sight-tag" onclick="toggleSight(this)">İstinye Park</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Galatasaray Stadium</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRANSIT -->
+  <div class="transit-row">
+    <span class="arrow">✈️</span>
+    <span><strong>19 sep</strong> — Vlucht Istanbul → Kayseri/Nevşehir · Auto ophalen op luchthaven</span>
+  </div>
+
+  <!-- CAPPADOCIE -->
+  <section class="section" id="cappadocie">
+    <p class="section-label">19 – 22 september · 4 nachten</p>
+    <h2 class="section-title">🎈 Cappadocië</h2>
+
+    <div class="tip-box">
+      <strong>Luchtballon:</strong> Dit moet je minstens 2 maanden vooraf boeken. Kies een kwalitatief bureau (Royal Balloon, Butterfly Balloons) — geen goedkoopste optie. Vlucht duurt ±1 uur, vertrek vóór zonsopkomst. <strong>Tip:</strong> Slaap vroeg op de avond vóór de ballonvlucht — je wordt ±04:30u opgehaald.
+    </div>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek uit Cappadocië</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Route naar Şanlıurfa gepland (~4,5 uur)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Şanlıurfa bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Gids Göbekli Tepe eventueel geboekt</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Tank auto vol voordat je vertrekt</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">19 sep<span class="weekday">Vrijdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Aankomst + eerste verkenning</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Auto ophalen luchthaven</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Rose Valley zonsondergang</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Göreme Sunset Point</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Eerste avond Göreme</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">20 sep<span class="weekday">Zaterdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Luchtballon + valleien <span class="badge gold">🎈 VROEG OP</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Hot Air Balloon Ride</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Göreme Open Air Museum</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Love Valley hike</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Red Valley</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Sunset Point</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">21 sep<span class="weekday">Zondag</span></div>
+            <div class="day-content">
+              <div class="day-title">Ondergronds & Fairy Chimneys</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Underground City Derinkuyu</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Üçhisar Castle</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Paşabağ (Fairy Chimneys)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Devrent Valley</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">22 sep<span class="weekday">Maandag</span></div>
+            <div class="day-content">
+              <div class="day-title">Ihlara Valley dag</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Ihlara Valley hike</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Selime Monastery</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Nar Lake</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Vroeg avond: vertrek naar Şanlıurfa</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSIT -->
+  <div class="transit-row">
+    <span class="arrow">🚗</span>
+    <span><strong>23 sep ochtend</strong> — Rit Cappadocië → Şanlıurfa (±4,5 uur)</span>
+  </div>
+
+  <!-- SANLIURFA -->
+  <section class="section" id="sanliurfa">
+    <p class="section-label">23 – 24 september · 2 nachten</p>
+    <h2 class="section-title">🏛️ Şanlıurfa</h2>
+
+    <div class="tip-box">
+      <strong>Göbekli Tepe:</strong> Ga 's ochtends vroeg (openingstijd 08:30u) om de warmte en drukte te vermijden. Een gids geeft enorm veel extra context — sterk aanbevolen. Bezoek daarna het Şanlıurfa Museum voor de <em>Urfa Man</em>, de oudste menselijke sculptuur ooit gevonden. Vrouwen: hoofddoek meenemen voor Balıklıgöl.
+    </div>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek uit Şanlıurfa</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Route naar Mardin gepland (~2,5 uur)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Mardin Oude Stad bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Eventueel Deyrul Zafaran Klooster reserveren</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">23 sep<span class="weekday">Dinsdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Aankomst + oude stad</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Balıklıgöl (Heilig Visvijver)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Şanlıurfa Sokaklari (bazaar)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Hz. İbrahim Doğduğu Mağara</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Ayn Zeliha Gölü</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Şanlıurfa Museum (Urfa Man)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🎵 Sıra Gecesi (avond muziek)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">24 sep<span class="weekday">Woensdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Göbekli Tepe dag <span class="badge">⭐ MUST</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Göbekli Tepe (ochtend)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Kızılkoyun Nekropolis</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Karahan Tepe (optioneel)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Middag: vertrek → Mardin</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSIT -->
+  <div class="transit-row">
+    <span class="arrow">🚗</span>
+    <span><strong>24 sep middag</strong> — Rit Şanlıurfa → Mardin (±2,5 uur)</span>
+  </div>
+
+  <!-- MARDIN -->
+  <section class="section" id="mardin">
+    <p class="section-label">24 – 28 september · 4 nachten</p>
+    <h2 class="section-title">🏜️ Mardin</h2>
+
+    <div class="tip-box">
+      <strong>Verblijf:</strong> Boek een hotel in de Oude Stad (Eski Mardin) — die sfeer 's avonds is onbetaalbaar. De zonsondergang over de Mesopotamische vlakte vanuit Zinciriye Medresesi is één van de mooiste momenten van de hele reis. <strong>Deyrul Zafaran Klooster</strong> is 6 km buiten de stad — regelmatige rondleidingen, bel vooraf om tijden te checken.
+    </div>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek uit Mardin</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Route naar İskenderun gepland (~3 uur)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Verblijf İskenderun bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Avondvlucht Adana → Fethiye geboekt (30 sep)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Huurauto inleverlocatie Adana bevestigd</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">24/25 sep<span class="weekday">Wo/Do</span></div>
+            <div class="day-content">
+              <div class="day-title">Aankomst + oude stad verkennen</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Zinciriye Medresesi + uitzicht</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Kasımiye Medresesi</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Ulu Camii</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Zonsondergang vanuit de stad</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🍷 Assyrische wijn proeven</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">26 sep<span class="weekday">Vrijdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Dagtochten</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Deyrul Zafaran Klooster</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Midyat Stone Mansions</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Beyazsu</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">27 sep<span class="weekday">Zaterdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Dara & bazaar</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Dara Ancient City</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Mardin bazaar & straatjes</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Laatste zonsondergang</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSIT -->
+  <div class="transit-row">
+    <span class="arrow">🚗</span>
+    <span><strong>28 sep</strong> — Rit Mardin → İskenderun (±3 uur)</span>
+  </div>
+
+  <!-- ISKENDERUN -->
+  <section class="section" id="iskenderun">
+    <p class="section-label">28 – 30 september · 2 nachten</p>
+    <h2 class="section-title">🌊 İskenderun</h2>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek uit İskenderun</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Ritplanning: İskenderun → Adana (~1,5 uur)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Huurauto inlever check-in Adana bevestigd</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Online inchecken vlucht Adana → Fethiye</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Hotel Fethiye nogmaals bevestigd</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">28–29 sep<span class="weekday">Zo/Ma</span></div>
+            <div class="day-content">
+              <div class="day-title">Familie 🙂</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Familie bezoek</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Lokaal eten</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Middellandse Zeekust</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">30 sep<span class="weekday">Dinsdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Vertrekdag <span class="badge">✈️ AVONDVLUCHT</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Ochtend: laatste tijd familie</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Middag: rijden naar Adana (~1,5u)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Auto inleveren Adana</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🍽️ Adana Kebab!</div>
+                <div class="sight-tag" onclick="toggleSight(this)">✈️ Avondvlucht → Fethiye</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSIT -->
+  <div class="transit-row">
+    <span class="arrow">✈️</span>
+    <span><strong>30 sep avond</strong> — Vlucht Adana → Fethiye (via Istanbul) · Aankomst laat</span>
+  </div>
+
+  <!-- FETHIYE -->
+  <section class="section" id="fethiye">
+    <p class="section-label">1 – 7 oktober · 7 nachten</p>
+    <h2 class="section-title">🏝️ Fethiye</h2>
+
+    <div class="tip-box">
+      <strong>Paragliden:</strong> Boek vooraf en zorg dat je vroeg op pad bent. De vlucht van Babadağ (1900m) met zicht op de Blauwe Lagune is legendarisch — niet missen. <strong>Saklikent Kloof:</strong> Neem waterschoenen mee, je waadt echt door het water. <strong>Kayaköy:</strong> Combineer met een wandeling naar Ölüdeniz (16 km) voor de echte avonturiers.
+    </div>
+
+    <div class="city-checklist">
+      <h4>✅ Regelen voor vertrek</h4>
+      <ul>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Vlucht Fethiye → NL/DE online inchecken (6 okt avond)</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Taxi/transfer naar luchthaven geregeld</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Souvenirs ingepakt</span></li>
+        <li onclick="toggle(this)"><div class="cb"></div><span>Laatste Turkse lira uitgegeven of gewisseld</span></li>
+      </ul>
+    </div>
+
+    <div class="itinerary">
+      <div class="destination-block">
+        <div class="days-grid">
+
+          <div class="day-row">
+            <div class="day-label">1 okt<span class="weekday">Woensdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Aankomst + relaxen</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Inchecken + bijkomen</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Fethiye boulevard</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Vismarkt + diner</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">2 okt<span class="weekday">Donderdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Ölüdeniz & Paragliden <span class="badge">🪂 BOEK VOORAF</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Babadağ Paragliden (1900m)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Ölüdeniz Blauwe Lagune</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Beach 222</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">3 okt<span class="weekday">Vrijdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Saklikent & Tlos</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Saklikent Gorge (waden!)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Saklikent National Park</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Canyon Saklikent</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Tlos ruïnes</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">4 okt<span class="weekday">Zaterdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Boot & eilanden</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Karaköy Boat Rent</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Büyük Boncuklu Bay</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Butterfly Valley (vanuit boot)</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Zwemmen & snorkelen</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">5 okt<span class="weekday">Zondag</span></div>
+            <div class="day-content">
+              <div class="day-title">Kayaköy & Kabak</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">⭐ Kayaköy spookstad</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Kabak valley</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Olive Garden lunch</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">6 okt<span class="weekday">Maandag</span></div>
+            <div class="day-content">
+              <div class="day-title">Fethiye stad & vrij</div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">Amyntas Rotsgraven</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Paspatur Bazaar</div>
+                <div class="sight-tag" onclick="toggleSight(this)">Laatste stranddag</div>
+                <div class="sight-tag" onclick="toggleSight(this)">🍽️ Afscheidsdiner</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-label">7 okt<span class="weekday">Dinsdag</span></div>
+            <div class="day-content">
+              <div class="day-title">Vertrek <span class="badge green">Tot volgende keer 🇹🇷</span></div>
+              <div class="sights">
+                <div class="sight-tag" onclick="toggleSight(this)">✈️ Vlucht naar NL/DE</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Turkije Rondreis 2025 · 14 september – 7 oktober · 24 dagen</footer>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function toggleSight(el) {
+    el.classList.toggle('done');
+  }
+
+  function updateProgress() {
+    const groups = [
+      { listId: 'docs-list', barId: 'bar-docs', progId: 'prog-docs' },
+      { listId: 'book-list', barId: 'bar-book', progId: 'prog-book' },
+      { listId: 'pract-list', barId: 'bar-pract', progId: 'prog-pract' },
+    ];
+    groups.forEach(g => {
+      const list = document.getElementById(g.listId);
+      if (!list) return;
+      const items = list.querySelectorAll('li');
+      const checked = list.querySelectorAll('li.checked');
+      const pct = items.length ? Math.round((checked.length / items.length) * 100) : 0;
+      document.getElementById(g.barId).style.width = pct + '%';
+      document.getElementById(g.progId).textContent = pct + '%';
+    });
+  }
+
+  // Also update for all checklists combined
+  document.addEventListener('click', () => {
+    setTimeout(updateProgress, 50);
+  });
+</script>
+</body>
+</html>
