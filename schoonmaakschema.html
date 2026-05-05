@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schoonmaakschema</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --warm-white: #FDFBF8;
+    --sage: #7A9E7E;
+    --sage-dark: #4A6E4E;
+    --terracotta: #C97D5B;
+    --charcoal: #2D2D2D;
+    --mid-gray: #888;
+    --light-gray: #bbb;
+    --border: #E0D9D0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; }
+
+  .top-nav {
+    background: var(--warm-white); border-bottom: 1px solid var(--border);
+    padding: 0 16px; display: flex; align-items: center; height: 56px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-icon { font-size: 1.3rem; width: 36px; }
+  .nav-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; flex: 1; text-align: center; }
+  .reset-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 0.75rem; color: var(--mid-gray); font-family: 'DM Sans', sans-serif;
+    padding: 4px 8px; border-radius: 8px;
+  }
+
+  .tab-bar {
+    display: flex; background: var(--warm-white);
+    border-bottom: 1px solid var(--border); position: sticky; top: 56px; z-index: 99;
+  }
+  .tab {
+    flex: 1; padding: 13px 8px; text-align: center; font-size: 0.83rem; font-weight: 500;
+    cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif;
+    color: var(--mid-gray); border-bottom: 3px solid transparent; transition: all 0.2s;
+  }
+  .tab.aw { color: var(--sage-dark); border-bottom-color: var(--sage); }
+  .tab.am { color: var(--terracotta); border-bottom-color: var(--terracotta); }
+
+  .main { padding: 16px; max-width: 680px; margin: 0 auto; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .progress-wrap {
+    background: var(--warm-white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 18px; margin: 16px 0;
+  }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--mid-gray); margin-bottom: 8px; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+  .fw { background: var(--sage); }
+  .fm { background: var(--terracotta); }
+
+  .legend {
+    background: var(--warm-white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 18px; margin-bottom: 4px;
+  }
+  .legend-title { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 10px; }
+  .legend-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .legend-tag { background: var(--cream); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 0.74rem; color: var(--sage-dark); font-weight: 500; }
+
+  .room-card {
+    background: var(--warm-white); border: 1px solid var(--border);
+    border-radius: 16px; margin-bottom: 10px; overflow: hidden;
+  }
+  .room-card.done { opacity: 0.55; }
+
+  .room-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px; cursor: pointer; user-select: none;
+  }
+  .room-icon { font-size: 1.2rem; width: 32px; text-align: center; }
+  .room-info { flex: 1; }
+  .room-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; }
+  .room-meta { font-size: 0.72rem; color: var(--mid-gray); margin-top: 2px; }
+
+  .mini-wrap { display: flex; align-items: center; gap: 7px; }
+  .mini-bar { width: 44px; height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .mini-fill { height: 100%; border-radius: 99px; width: 0%; transition: width 0.3s; }
+  .wfill .mini-fill { background: var(--sage); }
+  .mfill .mini-fill { background: var(--terracotta); }
+  .mini-label { font-size: 0.7rem; color: var(--mid-gray); min-width: 30px; text-align: right; }
+  .chevron { color: var(--light-gray); font-size: 0.75rem; transition: transform 0.2s; margin-left: 2px; }
+  .room-card.open .chevron { transform: rotate(180deg); }
+
+  .task-list { display: none; border-top: 1px solid var(--border); }
+  .room-card.open .task-list { display: block; }
+
+  .task-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 16px; border-bottom: 1px solid #f0ebe4;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: rgba(0,0,0,0.018); }
+  .task-item.checked .task-text { text-decoration: line-through; color: var(--light-gray); }
+  .task-item.checked .tool-tag { opacity: 0.35; }
+  .task-item.warning { background: rgba(201,125,91,0.08); border-left: 3px solid var(--terracotta); }
+  .task-item.warning:hover { background: rgba(201,125,91,0.13); }
+  .task-item.warning .task-text { font-weight: 500; }
+
+  .cb {
+    width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border);
+    flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; background: white;
+  }
+  .weekly-view .task-item.checked .cb { border-color: var(--sage); background: var(--sage); }
+  .monthly-view .task-item.checked .cb { border-color: var(--terracotta); background: var(--terracotta); }
+  .ck { color: white; font-size: 0.7rem; opacity: 0; transition: opacity 0.2s; }
+  .task-item.checked .ck { opacity: 1; }
+
+  .task-body { flex: 1; }
+  .task-text { font-size: 0.875rem; line-height: 1.45; }
+  .tool-tag {
+    display: inline-block; margin-top: 4px; font-size: 0.69rem;
+    padding: 2px 8px; border-radius: 10px; font-weight: 500;
+  }
+  .weekly-view .tool-tag { background: rgba(122,158,126,0.12); color: var(--sage-dark); }
+  .monthly-view .tool-tag { background: rgba(201,125,91,0.1); color: var(--terracotta); }
+
+  .all-done { text-align: center; padding: 40px 20px; display: none; }
+  .all-done.show { display: block; }
+  .all-done-icon { font-size: 3rem; margin-bottom: 12px; }
+  .all-done h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 6px; }
+  .all-done p { font-size: 0.85rem; color: var(--mid-gray); }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <span class="nav-icon">🌿</span>
+  <span class="nav-title">Schoonmaakschema</span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reset</button>
+</div>
+
+<div class="tab-bar">
+  <button class="tab aw" onclick="switchView('weekly')">🗓️ Wekelijks</button>
+  <button class="tab" onclick="switchView('monthly')">📅 Maandelijks</button>
+</div>
+
+<div class="main">
+
+  <div id="weekly-view" class="view weekly-view active">
+    <div class="legend" style="margin-top:16px">
+      <div class="legend-title">Schoonmaakspullen</div>
+      <div class="legend-tags">
+        <span class="legend-tag">🧴 Allesreiniger</span>
+        <span class="legend-tag">🧽 Microvezeldoek</span>
+        <span class="legend-tag">🤍 Sleepy Doekjes</span>
+        <span class="legend-tag">🪣 Ragebol</span>
+        <span class="legend-tag">🧹 Swiffer Muur</span>
+        <span class="legend-tag">🪶 Handswiffer Duster</span>
+        <span class="legend-tag">🔵 Philips One-Up</span>
+        <span class="legend-tag">💨 Kärcher SC3</span>
+        <span class="legend-tag">🪟 Kärcher Ramen</span>
+        <span class="legend-tag">🧹 Stofzuiger</span>
+        <span class="legend-tag">🍋 Citroenzuur</span>
+        <span class="legend-tag">🥄 Baking soda</span>
+        <span class="legend-tag">🍶 Witte azijn</span>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Voortgang deze week</span><span id="wpct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill fw" id="wbar"></div></div>
+    </div>
+    <div id="weekly-rooms"></div>
+    <div class="all-done" id="wdone">
+      <div class="all-done-icon">🌟</div>
+      <h3>Alles gedaan!</h3>
+      <p>Het huis blinkt weer. Goed bezig!</p>
+    </div>
+  </div>
+
+  <div id="monthly-view" class="view monthly-view">
+    <div class="progress-wrap" style="margin-top:16px">
+      <div class="progress-label"><span>Voortgang deze maand</span><span id="mpct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill fm" id="mbar"></div></div>
+    </div>
+    <div id="monthly-rooms"></div>
+    <div class="all-done" id="mdone">
+      <div class="all-done-icon">✨</div>
+      <h3>Maandbeurt gedaan!</h3>
+      <p>Tot in de puntjes schoon. Fantastisch!</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const DATA = {
+  weekly: [
+    { icon:'🛏️', name:'Grote Slaapkamer', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Stof afnemen oppervlakken (nachtkastjes, vensterbank)', m:'Handswiffer / Microvezeldoek' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Spiegels schoonmaken', m:'Sleepy Doekjes' },
+      { t:'Beddengoed af — baking soda op matras strooien, 30 min laten intrekken', m:'Baking soda' },
+      { t:'Matras stofzuigen (baking soda opzuigen)', m:'Stofzuiger' },
+      { t:'Vloer stofzuigen (ook onder bed)', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+      { t:'Beddengoed verschonen en opmaken', m:'—' },
+    ]},
+    { icon:'💄', name:'Kleine Slaapkamer (Kaptafel)', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Stof afnemen plankjes/kastjes', m:'Handswiffer Duster' },
+      { t:'Kaptafelblad afnemen (make-up resten)', m:'Sleepy Doekjes' },
+      { t:'Spiegel schoonmaken', m:'Sleepy Doekjes' },
+      { t:'Makeup kwasten wassen (lauwwarm water + milde shampoo, liggend drogen)', m:'Milde shampoo' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Vloer stofzuigen', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'💻', name:'Kantoor', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Stof van boekenkast/plankjes', m:'Handswiffer Duster' },
+      { t:'Bureau afnemen', m:'Microvezeldoek' },
+      { t:'Scherm, toetsenbord en muis afnemen', m:'Sleepy Doekjes' },
+      { t:'Prullenbak legen', m:'—' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Vloer stofzuigen', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'🚿', name:'Badkamer', tasks:[
+      { t:'⚠️ Gebruik een SCHOON microvezeldoek — nooit hetzelfde als elders', m:'Microvezeldoek (nieuw)' },
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Spiegel schoonmaken', m:'Sleepy Doekjes' },
+      { t:'Plankjes en nistje afnemen', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Lades afnemen (binnen- en buitenkant)', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Wastafel en kraan stomen — citroenzuur voor kalkvlekken', m:'Kärcher SC3 + Citroenzuur' },
+      { t:'Douche/bad en voegen stomen', m:'Kärcher SC3' },
+      { t:'Putjes/afvoer schoonmaken (haar verwijderen, rand reinigen)', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Toilet schrobben — scheutje witte azijn in de pot', m:'Ragebol + Witte azijn' },
+      { t:'Toilet buiten, deksel en bril stomen', m:'Kärcher SC3' },
+      { t:'Plinten afnemen', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Tegelvloer stomen', m:'Kärcher SC3' },
+    ]},
+    { icon:'🧺', name:'Zolder & Washok', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Houten kastje wasmiddel afnemen', m:'Microvezeldoek' },
+      { t:'Wasmachine: zeepbak afspoelen, rubberrand afnemen', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Vloer stofzuigen', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'🛋️', name:'Woonkamer & Open Keuken', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Stof van meubels, tv-meubel, plankjes', m:'Handswiffer Duster' },
+      { t:'Kookplaat afnemen', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Aanrecht en spoelbak reinigen', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Buitenkant keukenfronten afvegen', m:'Sleepy Doekjes' },
+      { t:'Afzuigkap filter controleren/afvegen', m:'Microvezeldoek' },
+      { t:'Prullenbakken legen', m:'—' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Vloer stofzuigen (ook onder bank)', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'🚽', name:'Toilet Ruimte', tasks:[
+      { t:'⚠️ Gebruik een SCHOON microvezeldoek — nooit hetzelfde als badkamer of elders', m:'Microvezeldoek (nieuw)' },
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Wasbakje en kraan stomen — citroenzuur voor kalkvlekken', m:'Kärcher SC3 + Citroenzuur' },
+      { t:'Toilet schrobben — scheutje witte azijn in de pot', m:'Ragebol + Witte azijn' },
+      { t:'Toilet buiten, bril en wanden eromheen stomen', m:'Kärcher SC3' },
+      { t:'Plinten afnemen', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Tegelvloer stomen', m:'Kärcher SC3' },
+    ]},
+    { icon:'📦', name:'Berging', tasks:[
+      { t:'Muren/plafond afstoffen met Swiffer', m:'Swiffer Muur' },
+      { t:'Oppervlakken vluchtig afstoffen', m:'Handswiffer Duster' },
+      { t:'Plinten afstoffen', m:'Handswiffer Duster' },
+      { t:'Vloer stofzuigen', m:'Stofzuiger' },
+      { t:'Vloer dweilen', m:'Philips One-Up' },
+    ]},
+  ],
+  monthly: [
+    { icon:'🛏️', name:'Grote Slaapkamer', tasks:[
+      { t:'Spinnenwebben in hoeken (ook achter meubels)', m:'Ragebol / Swiffer Muur' },
+      { t:'Muren op vlekken controleren en afvegen', m:'Swiffer Muur / Allesreiniger' },
+      { t:'Gordijnen afstoffen of wassen', m:'Handswiffer / Was' },
+      { t:'Binnenkant kasten afnemen', m:'Microvezeldoek' },
+      { t:'Matras draaien en luchten', m:'—' },
+      { t:'Ramen schoonmaken', m:'Kärcher Ramenreiniger' },
+    ]},
+    { icon:'💄', name:'Kleine Slaapkamer (Kaptafel)', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Muren afstoffen', m:'Swiffer Muur' },
+      { t:'Kaptafellade(s) uitruimen en grondig schoonmaken', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Raam(kozijn) schoonmaken', m:'Kärcher Ramenreiniger' },
+      { t:'Vloer grondig dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'💻', name:'Kantoor', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Muren afstoffen', m:'Swiffer Muur' },
+      { t:'Kabels en stekkerdozen afvegen', m:'Sleepy Doekjes' },
+      { t:'Ramen schoonmaken', m:'Kärcher Ramenreiniger' },
+      { t:'Vloer grondig dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'🚿', name:'Badkamer', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Muren afstoffen', m:'Swiffer Muur' },
+      { t:'Ventilatierooster afstoffen', m:'Handswiffer Duster' },
+      { t:'Lades uitruimen en grondig afnemen', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Kalkafzetting kranen/douchearm: citroenzuur 15 min laten inwerken, dan stomen', m:'Citroenzuur + Kärcher SC3' },
+      { t:'Voegen diepte-stomen — baking soda op hardnekkige voegen', m:'Kärcher SC3 + Baking soda' },
+      { t:'Afvoer/putje: baking soda + azijn, 10 min wachten, dan doorspoelen', m:'Baking soda + Witte azijn' },
+      { t:'Ramen schoonmaken', m:'Kärcher Ramenreiniger' },
+    ]},
+    { icon:'🧺', name:'Zolder & Washok', tasks:[
+      { t:'Spinnenwebben in hoeken en dakranden', m:'Ragebol / Swiffer Muur' },
+      { t:'Houten kastje wasmiddel uitruimen en grondig schoonmaken', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Planken en opbergrekken afstoffen', m:'Handswiffer Duster' },
+      { t:'Wasmachine ontkalken: leeg draaien op 60° met citroenzuur', m:'Citroenzuur' },
+      { t:'Rubberen afdichting en filter grondig reinigen', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Dakramen schoonmaken', m:'Kärcher Ramenreiniger' },
+      { t:'Vloer grondig dweilen', m:'Philips One-Up' },
+    ]},
+    { icon:'🛋️', name:'Woonkamer & Open Keuken', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Muren/plafond afstoffen', m:'Swiffer Muur' },
+      { t:'Bank/kussens stofzuigen — baking soda instrooien, 20 min, stofzuigen', m:'Stofzuiger + Baking soda' },
+      { t:'Binnenkant keukenkastjes uitruimen en afnemen', m:'Microvezeldoek + Allesreiniger' },
+      { t:'Afzuigkap vetfilter weken in heet water + ontvetter', m:'Ontvetter / Afwasmiddel' },
+      { t:'Oven deepclean: baking soda pasta aanbrengen, nacht inwerken, dan stomen', m:'Baking soda + Kärcher SC3' },
+      { t:'Spoelbak en afvoer: baking soda + azijn, dan stomen', m:'Baking soda + Azijn + Kärcher SC3' },
+      { t:'Koelkast uitruimen en schoonmaken', m:'Allesreiniger + Microvezeldoek' },
+      { t:'Ramen lappen', m:'Kärcher Ramenreiniger' },
+    ]},
+    { icon:'🚽', name:'Toilet Ruimte', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Ventilatierooster afstoffen', m:'Handswiffer Duster' },
+      { t:'Waterreservoir buiten afnemen', m:'Microvezeldoek' },
+      { t:'Wanden rondom toilet diepte-stomen', m:'Kärcher SC3' },
+    ]},
+    { icon:'📦', name:'Berging', tasks:[
+      { t:'Spinnenwebben in hoeken', m:'Ragebol / Swiffer Muur' },
+      { t:'Planken afstoffen en evt. uitruimen', m:'Handswiffer Duster' },
+      { t:'Controleer op vocht/schimmel', m:'—' },
+      { t:'Vloer grondig dweilen', m:'Philips One-Up' },
+    ]},
+  ]
+};
+
+let state = { weekly:{}, monthly:{} };
+try { const s = localStorage.getItem('sm3'); if(s) state = JSON.parse(s); } catch(e){}
+function save() { try { localStorage.setItem('sm3', JSON.stringify(state)); } catch(e){} }
+
+function resetAll() {
+  if (!confirm('Alle vinkjes wissen?')) return;
+  state = { weekly:{}, monthly:{} };
+  save(); renderAll();
+}
+
+function switchView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.getElementById(v+'-view').classList.add('active');
+  const tabs = document.querySelectorAll('.tab');
+  tabs[0].className = 'tab' + (v==='weekly' ? ' aw' : '');
+  tabs[1].className = 'tab' + (v==='monthly' ? ' am' : '');
+}
+
+function toggleTask(v, ri, ti) {
+  if (!state[v][ri]) state[v][ri] = {};
+  state[v][ri][ti] = !state[v][ri][ti];
+  save(); renderRoom(v, ri); updateProgress(v);
+}
+
+function toggleRoom(v, ri) {
+  document.getElementById('card-'+v+'-'+ri).classList.toggle('open');
+}
+
+function renderRoom(v, ri) {
+  const room = DATA[v][ri];
+  const rs = state[v][ri] || {};
+  const checked = Object.values(rs).filter(Boolean).length;
+  const total = room.tasks.length;
+  const pct = total ? Math.round(checked/total*100) : 0;
+  const card = document.getElementById('card-'+v+'-'+ri);
+  card.classList.toggle('done', checked===total);
+  card.querySelector('.mini-fill').style.width = pct+'%';
+  card.querySelector('.mini-label').textContent = checked+'/'+total;
+  card.querySelector('.task-list').innerHTML = room.tasks.map((t,i) => {
+    const ok = !!rs[i];
+    const isWarning = t.t.startsWith('⚠️');
+    return `<div class="task-item${ok?' checked':''}${isWarning?' warning':''}" onclick="toggleTask('${v}',${ri},${i})">
+      <div class="cb"><span class="ck">✓</span></div>
+      <div class="task-body">
+        <div class="task-text">${t.t}</div>
+        <span class="tool-tag">${t.m}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateProgress(v) {
+  let tot=0, chk=0;
+  DATA[v].forEach((r,ri)=>{ tot+=r.tasks.length; chk+=Object.values(state[v][ri]||{}).filter(Boolean).length; });
+  const pct = tot ? Math.round(chk/tot*100) : 0;
+  document.getElementById(v[0]+'bar').style.width = pct+'%';
+  document.getElementById(v[0]+'pct').textContent = pct+'%';
+  document.getElementById(v[0]+'done').classList.toggle('show', chk===tot && tot>0);
+}
+
+function renderAll() {
+  ['weekly','monthly'].forEach(v => {
+    const fill = v==='weekly'?'wfill':'mfill';
+    document.getElementById(v+'-rooms').innerHTML = DATA[v].map((r,ri)=>`
+      <div class="room-card" id="card-${v}-${ri}">
+        <div class="room-header" onclick="toggleRoom('${v}',${ri})">
+          <div class="room-icon">${r.icon}</div>
+          <div class="room-info">
+            <div class="room-name">${r.name}</div>
+            <div class="room-meta">${r.tasks.length} taken</div>
+          </div>
+          <div class="mini-wrap ${fill}">
+            <div class="mini-bar"><div class="mini-fill"></div></div>
+            <span class="mini-label">0/${r.tasks.length}</span>
+          </div>
+          <div class="chevron">▾</div>
+        </div>
+        <div class="task-list"></div>
+      </div>`).join('');
+    DATA[v].forEach((_,ri)=>renderRoom(v,ri));
+    updateProgress(v);
+  });
+}
+
+renderAll();
+</script>
+</body>
+</html>
