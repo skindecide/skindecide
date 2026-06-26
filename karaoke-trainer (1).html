@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karaoke-trainer — leer een nummer op de beat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0E0B1F;--night-2:#171234;--night-3:#221a4a;
+    --coral:#FF4D6D;--amber:#FFB627;--teal:#25D0C0;
+    --cream:#FFF4E6;--muted:#9B95C0;--line:rgba(155,149,192,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1200px 700px at 80% -10%, rgba(255,77,109,.18), transparent 60%),
+      radial-gradient(900px 600px at 0% 8%, rgba(37,208,192,.12), transparent 55%),
+      var(--night);
+    color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+  header{padding:48px 0 20px}
+  .eyebrow{font-family:'Space Mono';font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:32px;height:2px;background:var(--coral)}
+  h1{font-family:'Anton';font-weight:400;line-height:.9;font-size:clamp(2.6rem,9vw,5rem);
+    text-transform:uppercase;letter-spacing:-.01em}
+  h1 .a{color:var(--coral)} h1 .b{color:var(--amber)}
+  .sub{max-width:600px;margin-top:14px;color:var(--muted);font-size:1.02rem}
+  .sub b{color:var(--cream)}
+
+  .panel{background:var(--night-2);border:1px solid var(--line);border-radius:16px;
+    padding:clamp(16px,3vw,24px);margin-top:18px}
+  .step{font-family:'Space Mono';font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--teal);margin-bottom:11px}
+  input[type=text],textarea{width:100%;background:var(--night);color:var(--cream);
+    border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-family:'DM Sans';font-size:1rem}
+  textarea{min-height:120px;line-height:1.5;resize:vertical}
+  input::placeholder,textarea::placeholder{color:#6a6493}
+  .grid2{display:grid;gap:16px}
+  @media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+  .btn{background:var(--coral);border:0;color:#fff;font-weight:700;font-size:.92rem;
+    padding:11px 18px;border-radius:10px;cursor:pointer;transition:.16s;font-family:'DM Sans'}
+  .btn:hover{transform:translateY(-1px)} .btn:disabled{opacity:.4;cursor:default;transform:none}
+  .btn.amber{background:var(--amber);color:#1a1200}
+  .btn.teal{background:var(--teal);color:#062b27}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .btn.ghost:hover{color:var(--cream);border-color:var(--muted)}
+  .tiny{font-size:.82rem;color:var(--muted)}
+
+  #player{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;
+    margin-top:18px;border:1px solid var(--line)}
+  #player.hidden{display:none}
+
+  .modes{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 14px}
+  .modes button{background:var(--night-2);border:1px solid var(--line);color:var(--muted);
+    padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:500;font-size:.9rem;transition:.16s;font-family:'DM Sans'}
+  .modes button.on{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .modes button:disabled{opacity:.4;cursor:default}
+
+  .stage{background:var(--night-2);border:1px solid var(--line);border-radius:16px;
+    padding:clamp(18px,3.5vw,30px);min-height:220px}
+  .empty{color:var(--muted);text-align:center;padding:44px 10px}
+
+  /* sync */
+  .syncNow{font-family:'Anton';font-weight:400;font-size:clamp(1.5rem,5.5vw,2.6rem);
+    line-height:1.12;text-transform:none;word-break:break-word}
+  .syncNext{color:var(--muted);margin-top:10px;font-size:1.05rem;min-height:1.4em}
+  .ctr{color:var(--coral)}
+  .tapbtn{width:100%;margin-top:20px;background:var(--amber);color:#1a1200;border:0;
+    border-radius:14px;padding:22px;font-family:'Anton';font-size:1.5rem;cursor:pointer;
+    letter-spacing:.02em;transition:.08s}
+  .tapbtn:active{transform:scale(.985);background:#ffc94d}
+  .progress{height:5px;background:var(--night);border-radius:3px;overflow:hidden;margin-top:18px}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--amber))}
+
+  /* karaoke */
+  .karaoke{display:flex;flex-direction:column;gap:5px;max-height:60vh;overflow-y:auto;padding-right:4px}
+  .kline{font-size:clamp(1.02rem,3vw,1.45rem);color:#534e7e;padding:5px 8px;border-radius:8px;
+    transition:.18s;line-height:1.3;cursor:pointer}
+  .kline:hover{color:var(--muted)}
+  .kline.active{color:var(--cream);font-weight:700;background:rgba(255,77,109,.13);transform:scale(1.01);transform-origin:left}
+  .kline.done{color:#6f6a9b}
+  .karctrls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  .offset{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted)}
+  input[type=range]{accent-color:var(--coral)}
+
+  .legend{font-size:.82rem;color:var(--muted);margin-top:14px}
+  .legend b{color:var(--coral)} .legend .t{color:var(--teal)}
+  .note{background:var(--night-2);border:1px solid var(--line);border-radius:13px;
+    padding:14px 16px;font-size:.84rem;color:var(--muted);margin:22px 0}
+  .note b{color:var(--amber)}
+  footer{padding:10px 0 60px;color:var(--muted);font-size:.83rem}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:8px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Karaoke-trainer · op de echte beat</div>
+    <h1>Zing <span class="a">mee</span> op de <span class="b">muziek</span></h1>
+    <p class="sub">Plak een <b>YouTube-link</b> en je <b>songtekst</b>. Je tikt één keer de timing mee — daarna lichten de regels precies op de beat op, want de app volgt de échte audio van het nummer.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="panel">
+    <div class="step">Stap 1 — Video &amp; tekst</div>
+    <div class="grid2">
+      <div>
+        <label class="tiny">YouTube-link of video-ID</label>
+        <input type="text" id="url" placeholder="https://www.youtube.com/watch?v=…" style="margin-top:6px">
+        <button class="btn teal" id="loadVid" style="margin-top:10px">Laad video</button>
+      </div>
+      <div>
+        <label class="tiny">Songtekst — één regel per regel</label>
+        <textarea id="lyrics" placeholder="Plak hier de tekst…&#10;één regel&#10;per regel" style="margin-top:6px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn" id="prep">Klaarzetten →</button>
+      <span class="tiny" id="meta"></span>
+    </div>
+    <div id="player" class="hidden"></div>
+    <div class="tiny" id="vidHint" style="display:none;margin-top:8px">
+      Speelt de video niet? <a id="fallbackLink" href="#" target="_blank" rel="noopener" style="color:var(--teal)">Open 'm op YouTube</a> ·
+      open dit bestand als download in een echte browsertab (niet in het chat-voorbeeld).
+    </div>
+  </div>
+
+  <div class="modes" id="modes">
+    <button data-m="sync" class="on" disabled>1 · Timing meetikken</button>
+    <button data-m="kar" disabled>2 · Meezingen</button>
+    <button data-m="practice" disabled>3 · Regel oefenen</button>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="empty">Laad een video en tekst, klik <b>"Klaarzetten"</b>, en begin met timing meetikken.</div>
+  </div>
+
+  <div class="row">
+    <button class="btn ghost" id="saveTiming">Timing kopiëren</button>
+    <button class="btn ghost" id="loadTiming">Timing plakken</button>
+    <span class="tiny">Bewaar je tik-werk zodat je 't niet kwijtraakt.</span>
+  </div>
+  <textarea id="timingIO" placeholder="Hier verschijnt/plak je de timing-code…" style="margin-top:10px;display:none"></textarea>
+
+  <div class="note">
+    <b>Hoe de sync werkt:</b> bij stap 1 speelt het nummer; tik op de spatiebalk (of de grote knop) precies wanneer een regel begint. Eén doorloop volstaat. Daarna bij "Meezingen" loopt alles op de beat. Klopt iets net niet? Gebruik de offset-schuif of tik die regel opnieuw.
+  </div>
+
+  <div class="note">
+    <b>Over de tekst:</b> de app bevat zelf geen songteksten — je gebruikt je eigen kopie. De muziek komt rechtstreeks van YouTube (de officiële bron). Alles draait lokaal in je browser.
+  </div>
+
+  <footer>Werkt het beste in Chrome/Edge/Safari op desktop of mobiel.</footer>
+</div>
+
+<script>
+/* ---------- YouTube API ---------- */
+let YT_READY=false, player=null, pendingAttach=false;
+(function(){const t=document.createElement('script');t.src="https://www.youtube.com/iframe_api";
+  t.onerror=()=>{document.getElementById('meta').textContent="Kon de YouTube-speler niet laden (adblocker/offline?).";};
+  document.head.appendChild(t);})();
+window.onYouTubeIframeAPIReady=function(){YT_READY=true;if(pendingAttach)attachPlayer();};
+
+function parseId(s){
+  s=(s||"").trim();
+  if(/^[\w-]{11}$/.test(s))return s;
+  const m=s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|\/v\/)([\w-]{11})/);
+  return m?m[1]:null;
+}
+function createPlayer(id){
+  const box=document.getElementById('player');
+  box.classList.remove('hidden');
+  const orig=(location.origin&&location.origin!=='null')?('&origin='+encodeURIComponent(location.origin)):'';
+  box.innerHTML='<iframe id="ytframe" '
+    +'src="https://www.youtube-nocookie.com/embed/'+id+'?enablejsapi=1&playsinline=1&rel=0&modestbranding=1'+orig+'" '
+    +'allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen '
+    +'style="width:100%;height:100%;border:0"></iframe>';
+  const fb=document.getElementById('fallbackLink');
+  fb.href="https://www.youtube.com/watch?v="+id;
+  document.getElementById('vidHint').style.display='block';
+  document.getElementById('meta').textContent="Video geladen — even wachten op de speler…";
+  player=null;
+  attachPlayer();
+}
+function attachPlayer(){
+  if(!YT_READY||!document.getElementById('ytframe')){pendingAttach=true;return;}
+  pendingAttach=false;
+  player=new YT.Player('ytframe',{events:{
+    onReady:()=>{document.getElementById('meta').textContent="Video klaar ✓";},
+    onError:(e)=>{document.getElementById('meta').textContent="Deze video kan niet ingebed worden — gebruik 'Open op YouTube' of probeer een andere upload.";}
+  }});
+}
+document.getElementById('loadVid').onclick=()=>{
+  const id=parseId(document.getElementById('url').value);
+  if(!id){document.getElementById('meta').textContent="Geen geldige YouTube-link/ID";return;}
+  createPlayer(id);
+};
+
+/* ---------- data ---------- */
+let LINES=[], times=[];   // times[i] = seconds (null = nog niet)
+let mode='sync', raf=null, offset=0;
+const stage=document.getElementById('stage');
+const modeBtns=[...document.querySelectorAll('#modes button')];
+
+document.getElementById('prep').onclick=()=>{
+  LINES=document.getElementById('lyrics').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  if(!LINES.length){document.getElementById('meta').textContent="Plak eerst songtekst.";return;}
+  if(times.length!==LINES.length)times=LINES.map(()=>null);
+  document.getElementById('meta').textContent=`${LINES.length} regels klaar`;
+  modeBtns.forEach(b=>b.disabled=false);
+  setMode('sync');
+};
+modeBtns.forEach(b=>b.onclick=()=>{if(!b.disabled)setMode(b.dataset.m);});
+function setMode(m){
+  mode=m;cancelAnimationFrame(raf);
+  modeBtns.forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  ({sync:renderSync,kar:renderKaraoke,practice:renderPractice}[m])();
+}
+function mark(line){return line.replace(/(\w+'(?:\w+)?|\bpa'|\bna'|\bto')/g,'<span class="ctr">$1</span>');}
+function now(){return (player&&player.getCurrentTime)?player.getCurrentTime():0;}
+
+/* ---------- MODE 1: meetikken ---------- */
+let si=0;
+function renderSync(){
+  si=0;drawSync();
+  document.onkeydown=(e)=>{if(mode==='sync'&&e.code==='Space'){e.preventDefault();tapSync();}};
+}
+function drawSync(){
+  const cur=LINES[si]||"— klaar —";
+  const nxt=LINES[si+1]?("volgende: "+LINES[si+1]):"laatste regel";
+  const synced=times.filter(t=>t!=null).length;
+  stage.innerHTML=`
+    <div class="tiny" style="color:var(--amber)">Regel ${Math.min(si+1,LINES.length)} / ${LINES.length} · ${synced} getikt</div>
+    <div class="syncNow" style="margin-top:8px">${mark(cur)}</div>
+    <div class="syncNext">${si<LINES.length?nxt:""}</div>
+    <button class="tapbtn" id="tap">${si<LINES.length?"TIK ▸ (regel begint)":"Klaar — ga naar Meezingen"}</button>
+    <div class="row">
+      <button class="btn ghost" id="playPause">▶ / ❚❚ afspelen</button>
+      <button class="btn ghost" id="back">↶ Regel terug</button>
+      <button class="btn ghost" id="restart">Opnieuw vanaf 0</button>
+    </div>
+    <div class="progress"><i style="width:${(si/LINES.length)*100}%"></i></div>
+    <div class="legend">Speel de video af en tik op <b>spatie</b> of de grote knop zodra je een nieuwe regel hoort beginnen.</div>`;
+  document.getElementById('tap').onclick=tapSync;
+  document.getElementById('playPause').onclick=()=>{
+    const st=player&&player.getPlayerState?player.getPlayerState():-1;
+    if(st===1)player.pauseVideo();else player.playVideo();
+  };
+  document.getElementById('back').onclick=()=>{if(si>0){si--;times[si]=null;drawSync();}};
+  document.getElementById('restart').onclick=()=>{if(player)player.seekTo(0,true);si=0;times=LINES.map(()=>null);drawSync();};
+}
+function tapSync(){
+  if(si>=LINES.length){setMode('kar');return;}
+  times[si]=now();
+  si++;
+  if(si>=LINES.length){drawSync();return;}
+  drawSync();
+}
+
+/* ---------- MODE 2: meezingen ---------- */
+function renderKaraoke(){
+  document.onkeydown=null;
+  const synced=times.filter(t=>t!=null).length;
+  stage.innerHTML=`
+    <div class="karctrls">
+      <button class="btn amber" id="kplay">▶ Afspelen</button>
+      <button class="btn ghost" id="kpause">❚❚ Pauze</button>
+      <div class="offset">offset
+        <input type="range" id="off" min="-3" max="3" step="0.1" value="${offset}" style="width:130px">
+        <span id="offv">${offset.toFixed(1)}s</span>
+      </div>
+    </div>
+    <div class="legend">${synced<LINES.length?`<b>${LINES.length-synced} regels nog niet getikt</b> — die lichten niet op. Ga terug naar stap 1 om ze toe te voegen. `:""}Klik op een regel om daarheen te springen.</div>
+    <div class="karaoke" id="kbody" style="margin-top:14px"></div>`;
+  const body=document.getElementById('kbody');
+  LINES.forEach((l,i)=>{
+    const d=document.createElement('div');d.className='kline';d.id='k'+i;d.innerHTML=mark(l);
+    d.onclick=()=>{if(times[i]!=null&&player){player.seekTo(Math.max(0,times[i]-0.15),true);player.playVideo();}};
+    body.appendChild(d);
+  });
+  document.getElementById('kplay').onclick=()=>player&&player.playVideo();
+  document.getElementById('kpause').onclick=()=>player&&player.pauseVideo();
+  const off=document.getElementById('off');
+  off.oninput=()=>{offset=parseFloat(off.value);document.getElementById('offv').textContent=offset.toFixed(1)+"s";};
+  loopKaraoke();
+}
+function loopKaraoke(){
+  if(mode!=='kar')return;
+  const t=now()+offset;
+  let idx=-1,best=-1e9;
+  times.forEach((tm,i)=>{if(tm!=null&&tm<=t&&tm>=best){best=tm;idx=i;}});
+  document.querySelectorAll('.kline').forEach((e,i)=>{
+    e.classList.toggle('active',i===idx);
+    e.classList.toggle('done',times[i]!=null&&i<idx);
+  });
+  if(idx>=0){const el=document.getElementById('k'+idx);el&&el.scrollIntoView({block:'center',behavior:'smooth'});}
+  raf=requestAnimationFrame(loopKaraoke);
+}
+
+/* ---------- MODE 3: regel oefenen ---------- */
+let pIdx=0, pSlow=false;
+function renderPractice(){
+  document.onkeydown=null;
+  const opts=LINES.map((l,i)=>`<option value="${i}" ${times[i]==null?'disabled':''}>${i+1}. ${l.slice(0,40)}${times[i]==null?' (geen timing)':''}</option>`).join("");
+  stage.innerHTML=`
+    <div class="step">Herhaal één regel tot hij zit</div>
+    <select id="psel" style="width:100%;background:var(--night);color:var(--cream);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-family:'DM Sans'">${opts}</select>
+    <div class="syncNow" id="pline" style="margin-top:16px"></div>
+    <div class="karctrls">
+      <button class="btn amber" id="ploop">🔁 Herhaal deze regel</button>
+      <button class="btn ghost" id="pstop">■ Stop</button>
+      <button class="btn ghost" id="pslow">🐢 Halve snelheid: uit</button>
+    </div>
+    <div class="legend"><span class="t">Tip:</span> luister, pauzeer, en zing 'm na. De regel loopt in een lus tot je stopt.</div>`;
+  const sel=document.getElementById('psel');
+  const setLine=()=>{pIdx=parseInt(sel.value)||0;document.getElementById('pline').innerHTML=mark(LINES[pIdx]||"");};
+  sel.onchange=setLine;setLine();
+  document.getElementById('ploop').onclick=()=>{if(times[pIdx]!=null){player.seekTo(times[pIdx],true);player.setPlaybackRate(pSlow?0.5:1);player.playVideo();loopPractice();}};
+  document.getElementById('pstop').onclick=()=>{player&&player.pauseVideo();cancelAnimationFrame(raf);};
+  document.getElementById('pslow').onclick=(e)=>{pSlow=!pSlow;e.target.textContent=`🐢 Halve snelheid: ${pSlow?'aan':'uit'}`;if(player)player.setPlaybackRate(pSlow?0.5:1);};
+}
+function loopPractice(){
+  if(mode!=='practice')return;
+  const start=times[pIdx];
+  let end=null;for(let j=pIdx+1;j<times.length;j++){if(times[j]!=null){end=times[j];break;}}
+  if(end==null&&player.getDuration)end=player.getDuration();
+  if(end!=null&&now()>=end){player.seekTo(start,true);}
+  raf=requestAnimationFrame(loopPractice);
+}
+
+/* ---------- timing opslaan/laden ---------- */
+const io=document.getElementById('timingIO');
+document.getElementById('saveTiming').onclick=()=>{
+  io.style.display='block';
+  io.value=JSON.stringify({v:parseId(document.getElementById('url').value)||"",lines:LINES,times:times});
+  io.select();
+};
+document.getElementById('loadTiming').onclick=()=>{
+  io.style.display='block';
+  if(!io.value.trim()){io.placeholder="Plak hier je eerder gekopieerde timing-code en klik nog eens.";return;}
+  try{
+    const d=JSON.parse(io.value);
+    if(d.lines&&d.times){
+      document.getElementById('lyrics').value=d.lines.join('\n');
+      LINES=d.lines;times=d.times;
+      if(d.v)document.getElementById('url').value="https://www.youtube.com/watch?v="+d.v;
+      modeBtns.forEach(b=>b.disabled=false);
+      document.getElementById('meta').textContent="Timing geladen ✓";
+      setMode('kar');
+    }
+  }catch(e){document.getElementById('meta').textContent="Kon timing niet lezen.";}
+};
+</script>
+</body>
+</html>
