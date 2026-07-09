@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mijn Stijlgids — Deep Autumn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F3EA; --card:#FFFDF8; --ink:#33241A; --soft:#7A6656;
+  --line:#DACBB6; --gold:#B08A4F; --terra:#B85C38;
+  --ok:#5A7A48; --warn:#C0862E; --bad:#A6402E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:28px 18px 80px}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px}
+h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(30px,7vw,42px);line-height:1.05}
+.sub{font-family:'Playfair Display',serif;font-style:italic;color:var(--soft);font-size:16px;margin-top:6px}
+h2{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;margin-bottom:4px}
+h3{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 10px}
+.tabs{display:flex;gap:8px;margin:26px 0 22px;border-bottom:1px solid var(--line)}
+.tab{background:none;border:none;font-family:'Jost',sans-serif;font-size:14px;font-weight:600;letter-spacing:.06em;color:var(--soft);padding:10px 4px;margin-right:14px;cursor:pointer;border-bottom:2.5px solid transparent}
+.tab.active{color:var(--ink);border-bottom-color:var(--terra)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:9px}
+.sw{border-radius:10px;padding:10px 10px 8px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between}
+.sw b{font-size:12.5px;font-weight:600;display:block;line-height:1.2}
+.sw span{font-size:10px;opacity:.85}
+.combo{display:flex;border-radius:10px;overflow:hidden;height:44px;flex:1;min-width:150px}
+.combo div{flex:1;display:flex;align-items:center;padding:0 10px;font-size:11.5px;font-weight:600}
+.combos{display:flex;flex-wrap:wrap;gap:9px}
+.rule{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.rule .dot{flex:0 0 8px;width:8px;height:8px;border-radius:50%;margin-top:7px}
+.dot.ja{background:var(--ok)} .dot.nee{background:var(--bad)}
+.rule b{font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 10px;border-radius:99px;margin:0 6px 6px 0}
+.pill.ja{background:#E7EDDC;color:var(--ok)} .pill.nee{background:#F3DCD4;color:var(--bad);text-decoration:line-through}
+.muted{color:var(--soft);font-size:13.5px}
+/* checker */
+.drop{border:1.5px dashed var(--gold);border-radius:14px;background:#FCF8F0;padding:28px 18px;text-align:center;cursor:pointer;transition:background .15s}
+.drop:hover{background:#F6EEDF}
+.drop p{color:var(--soft);font-size:13.5px}
+.drop .big{font-size:15px;color:var(--ink);font-weight:600;margin-bottom:4px}
+#preview{max-width:100%;max-height:300px;border-radius:12px;display:block;margin:0 auto 10px;box-shadow:0 6px 24px rgba(51,36,26,.15)}
+.detected{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.dsw{width:58px;border-radius:9px;padding:6px;cursor:pointer;border:2px solid transparent;text-align:center}
+.dsw span{display:block;font-size:9px;font-weight:600}
+.dsw.off{opacity:.28;border-color:var(--bad)}
+.status{font-size:12.5px;border-radius:9px;padding:9px 12px;margin-top:12px}
+.status.busy{background:#F5EDDD;color:var(--soft)}
+.status.good{background:#E7EDDC;color:var(--ok)}
+.status.info{background:#F5EDDD;color:var(--soft)}
+.chiplbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);font-weight:600;margin:16px 0 7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:7px 9px 5px;font-family:'Jost',sans-serif;font-size:10.5px;font-weight:500;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:62px}
+.chip svg{color:#8A7360}
+.chip.sel{background:var(--ink);color:#F8F3EA;border-color:var(--ink)}
+.chip.sel svg{color:#E8C98F}
+.chip.txt{padding:8px 14px;font-size:13px;border-radius:99px;min-width:0}
+textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:11px 13px;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);resize:vertical;min-height:48px;margin-top:14px}
+textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.btn{width:100%;margin-top:14px;background:var(--ink);color:#F8F3EA;border:none;border-radius:11px;padding:14px;font-family:'Jost',sans-serif;font-size:15px;font-weight:600;letter-spacing:.05em;cursor:pointer}
+.btn:hover{background:#4A3526}
+.btn.ghost{background:none;border:1.5px solid var(--line);color:var(--soft);margin-top:8px;padding:10px}
+.loading{text-align:center;padding:20px 0;color:var(--soft);font-size:13.5px}
+.loading .spin,.status .spin{width:14px;height:14px;border:2.5px solid var(--line);border-top-color:var(--terra);border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:8px;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.scorewrap{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.scorenum{font-family:'Playfair Display',serif;font-weight:700;font-size:44px;line-height:1}
+.scorenum small{font-size:18px;color:var(--soft);font-weight:500}
+.verdictpill{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 13px;border-radius:99px}
+.cat{padding:13px 0;border-top:1px solid var(--line)}
+.cat .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.cat .head b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.bar{height:5px;background:#EEE4D3;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.bar i{display:block;height:100%;border-radius:99px}
+.tips li{margin:0 0 8px 18px}
+.err{background:#F3DCD4;color:var(--bad);border-radius:10px;padding:12px 14px;font-size:13.5px;margin-top:12px}
+.note-ai{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:18px 0 8px}
+footer{text-align:center;color:var(--soft);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-top:44px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Persoonlijke stijlgids</div>
+  <h1>Deep Autumn <em style="font-family:'Playfair Display';font-style:italic;font-weight:500">&amp; petite</em></h1>
+  <div class="sub">warm · diep · rijk — taille hoog, lijnen lang</div>
+
+  <div class="tabs">
+    <button class="tab active" data-t="gids">Mijn gids</button>
+    <button class="tab" data-t="check">Product check</button>
+  </div>
+
+  <!-- ==================== GIDS ==================== -->
+  <div id="tab-gids">
+    <div class="card">
+      <h2>Mijn profiel</h2>
+      <p class="muted">1.53 m · zachte zandloper, petite · gedefinieerde taille · vollere buste · schouders en heupen in balans · zwartbruin haar, warme bruine ogen, licht olijf-huid (neutraal-warm) · hoog contrast</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Powerkleuren</h3>
+      <div class="grid" id="palette"></div>
+      <h3>Liever vermijden</h3>
+      <div><span class="pill nee">Babyroze</span><span class="pill nee">Lichtblauw</span><span class="pill nee">Lila</span><span class="pill nee">Grijs</span><span class="pill nee">Fuchsia</span><span class="pill nee">Fel wit</span></div>
+      <p class="muted">Zwart kán — maar dan met goud, rode lip of lage hals bij het gezicht. Espresso of bordeaux wint het altijd.</p>
+      <h3>Winnende combinaties</h3>
+      <div class="combos" id="combos"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Halslijnen</h3>
+      <div class="rule"><div class="dot ja"></div><div><b>Ja:</b> V-hals, scoop, wikkel, sweetheart — verlengen je bovenlichaam en flatteren je buste. Hoge hals kán, maar alleen in dunne aansluitende stof.</div></div>
+      <div class="rule"><div class="dot nee"></div><div><b>Nee:</b> dikke col, brede boothals (verbreedt), hoog dichtgeknoopt in stijve stof.</div></div>
+
+      <h3>Taille — jouw goudmijn</h3>
+      <div class="rule"><div class="dot ja"></div><div><b>Ja:</b> altijd high waist. Wikkeljurken, riem op het smalste punt, cropped of ingestopte tops. De taille markeren = direct langere benen.</div></div>
+      <div class="rule"><div class="dot nee"></div><div><b>Nee:</b> lage taille, rechte zakvormige jurken zonder taille, lange losse tops over de heup.</div></div>
+
+      <h3>Mouwen &amp; schouders</h3>
+      <div class="rule"><div class="dot ja"></div><div><b>Ja:</b> aansluitende mouw, 3/4-mouw (pols tonen verlengt), kleine pofmouw, mouwloos.</div></div>
+      <div class="rule"><div class="dot nee"></div><div><b>Nee:</b> enorme ballonmouwen, zware schoudervullingen, oversized drop-shoulder — die overweldigen een petite frame.</div></div>
+
+      <h3>Lengtes</h3>
+      <div class="rule"><div class="dot ja"></div><div><b>Rok/jurk:</b> boven de knie óf maxi tot de enkel. Midi alleen aansluitend of met split.</div></div>
+      <div class="rule"><div class="dot nee"></div><div><b>Niet:</b> wijde midi die eindigt op het breedste punt van de kuit — dat hakt je lengte doormidden.</div></div>
+      <div class="rule"><div class="dot ja"></div><div><b>Broeken:</b> high waist, full-length met hakje of enkellang. Wide-leg kan, mits hoog in de taille.</div></div>
+      <div class="rule"><div class="dot nee"></div><div><b>Niet:</b> baggy laaghangend, cargo met veel volume onderaan, oprollen van te lange pijpen.</div></div>
+      <div class="rule"><div class="dot ja"></div><div><b>Jassen:</b> cropped of tot de heup; een lange jas alleen open, als verticale lijn.</div></div>
+
+      <h3>Prints, stoffen &amp; schoenen</h3>
+      <div class="rule"><div class="dot ja"></div><div>Kleine tot medium prints, verticale lijnen, soepelvallende stoffen, monochroom van top tot teen (jouw superkracht), puntige schoenen in nude/huidskleur.</div></div>
+      <div class="rule"><div class="dot nee"></div><div>Enorme prints, stijve dikke stoffen die volume toevoegen, brede enkelbandjes die het been afsnijden, horizontale kleurbreuk op de heup.</div></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Make-up spiekbrief</h3>
+      <p><b>Foundation:</b> neutraal-warm of olijf (N/W/O) — nooit roze-basis. <b>Blush:</b> terracotta of perzik. <b>Lippen:</b> warm rood, brick, terracotta-nude, mauve-bruin. <b>Ogen:</b> brons, koper, champagne, olijf, goud. <b>Sieraden:</b> goud &amp; parels, geen zilver.</p>
+    </div>
+  </div>
+
+  <!-- ==================== CHECK ==================== -->
+  <div id="tab-check" class="hide">
+    <div class="card">
+      <h2>Staat dit mij?</h2>
+      <p class="muted" style="margin-bottom:14px">Kies een foto. De kleuren worden direct op je telefoon geanalyseerd en de app probeert de details (halslijn, mouw, lengte…) automatisch te herkennen. Lukt dat niet, dan tik je gewoon het <b>plaatje</b> aan dat op je kledingstuk lijkt — je hoeft geen modetermen te kennen.</p>
+
+      <div class="drop" id="drop">
+        <p class="big">Tik om een foto te kiezen</p>
+        <p>webshopfoto of pashokje · jpg / png / webp</p>
+      </div>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp,image/gif" class="hide">
+      <img id="preview" class="hide" alt="Gekozen kledingstuk">
+      <div id="autostatus" class="hide"></div>
+      <div id="detwrap" class="hide">
+        <div class="chiplbl">Gevonden kleuren — tik een kleur weg die niet bij het item hoort (huid/achtergrond)</div>
+        <div class="detected" id="detected"></div>
+      </div>
+
+      <div class="chiplbl">Wat is het?</div>
+      <div class="chips" data-g="item" id="g-item"></div>
+      <div class="chiplbl">Halslijn — tik het plaatje dat lijkt</div>
+      <div class="chips" data-g="hals" id="g-hals"></div>
+      <div class="chiplbl">Mouwen</div>
+      <div class="chips" data-g="mouw" id="g-mouw"></div>
+      <div class="chiplbl">Pasvorm</div>
+      <div class="chips" data-g="pas" id="g-pas"></div>
+      <div class="chiplbl">Lengte</div>
+      <div class="chips" data-g="len" id="g-len"></div>
+      <div class="chiplbl">Taillehoogte (broek/rok)</div>
+      <div class="chips" data-g="taille" id="g-taille"></div>
+
+      <textarea id="note" placeholder="Optioneel: extra context — bijv. 'voor een bruiloft', 'dunne ribstof', 'met hakken'"></textarea>
+      <button class="btn" id="go">Beoordeel dit item</button>
+      <button class="btn ghost hide" id="reset">Nieuw item checken</button>
+      <div id="out"></div>
+    </div>
+  </div>
+
+  <footer>Mijn stijlgids · Deep Autumn · Petite</footer>
+</div>
+
+<script>
+/* ================= data ================= */
+const PALETTE=[["#4A2C1A","Espresso"],["#6B4226","Chocoladebruin"],["#B3854D","Camel"],["#B85C38","Terracotta"],["#6E1F2E","Bordeaux"],["#B02E20","Warm dieprood"],["#1F4A38","Smaragdgroen"],["#66682F","Olijfgroen"],["#C89A2E","Mosterdgeel"],["#F3EAD8","Crème / ivoor"],["#175A66","Petrolblauw"],["#4A2B45","Aubergine"]];
+const AVOID=[["#F2C7D3","babyroze"],["#BFD9EE","lichtblauw"],["#CDBBE3","lila"],["#9EA3A8","grijs"],["#D4368F","fuchsia"],["#FFFFFF","fel wit"],["#A7C7E7","pastelblauw"],["#B7E4C7","pastelgroen"]];
+const COMBOS=[[["#F3EAD8","Crème"],["#6B4226","Chocobruin"]],[["#B3854D","Camel"],["#6E1F2E","Bordeaux"]],[["#1F4A38","Smaragd"],["#C29A44","Goud"]],[["#F3EAD8","Off-white"],["#B85C38","Terracotta"]]];
+
+/* ================= plaatjes-kiezers ================= */
+const svg=inner=>`<svg viewBox="0 0 48 40" width="42" height="35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const torso=`<path d="M4,20 L16,10 M32,10 L44,20 M4,20 L5,38 M44,20 L43,38"/>`;
+const HALS=[
+ ["V-hals",9.5,torso+`<path d="M16,10 L24,28 L32,10"/>`],
+ ["Scoop",9.5,torso+`<path d="M16,10 C16,27 32,27 32,10"/>`],
+ ["Wikkel",9.5,torso+`<path d="M16,10 L33,29 M32,10 L15,29"/>`],
+ ["Sweetheart",9,torso+`<path d="M16,10 C17,21 21,23 24,19 C27,23 31,21 32,10"/>`],
+ ["Ronde hals",7,torso+`<path d="M16,10 C18,18 30,18 32,10"/>`],
+ ["Hoge hals (dun)",6.5,torso+`<path d="M16,10 C19,13 29,13 32,10"/><path d="M18,6 L30,6"/>`],
+ ["Col (dik)",3,torso+`<rect x="17" y="2" width="14" height="9" rx="2"/>`],
+ ["Boothals",4,`<path d="M4,22 L10,13 M38,13 L44,22 M4,22 L5,38 M44,22 L43,38"/><path d="M10,13 C18,18 30,18 38,13"/>`]
+];
+const arm=`<path d="M7,10 L7,38 M7,10 L17,7"/>`;
+const bare=(x,y)=>`<path d="M${x},${y} L40,34" stroke-dasharray="2 3.5" stroke-width="1.6"/>`;
+const MOUW=[
+ ["Mouwloos",9,arm+`<path d="M17,7 C14,12 14,17 17,21"/>`+bare(19,10)],
+ ["Kapmouw",9,arm+`<path d="M17,7 L23,12 L19,17"/>`+bare(23,13)],
+ ["Kort",8.5,arm+`<path d="M17,7 L26,15 L21,21 L14,14"/>`+bare(26,16)],
+ ["3/4",9.5,arm+`<path d="M17,7 L33,22 L29,27 L13,13"/>`+bare(33,23)],
+ ["Lang aansluitend",8.5,arm+`<path d="M17,7 L40,28 L36,33 L13,13"/>`],
+ ["Kleine pof",8,arm+`<path d="M15,12 C13,5 25,3 25,11 C25,15 20,17 17,15"/>`+bare(25,13)],
+ ["Ballonmouw",3,arm+`<path d="M16,8 C8,16 16,32 28,30 C36,29 38,20 30,16 C26,13 20,10 16,8"/><path d="M28,30 L34,34"/>`],
+ ["Drop-shoulder",4,arm+`<path d="M17,7 L30,17 M24,9 L21,16"/><path d="M30,17 L26,23 L14,14"/>`+bare(30,18)]
+];
+const PAS=[
+ ["Getailleerd",9.5,`<path d="M15,4 C15,13 19,16 19,20 C19,24 15,27 15,36 M33,4 C33,13 29,16 29,20 C29,24 33,27 33,36"/><path d="M15,36 L33,36 M15,4 L33,4"/>`],
+ ["Aansluitend",9,`<path d="M16,4 C16,14 18,17 18,20 C18,24 16,27 16,36 M32,4 C32,14 30,17 30,20 C30,24 32,27 32,36"/><path d="M16,36 L32,36 M16,4 L32,4"/>`],
+ ["Recht",6,`<path d="M16,4 L16,36 M32,4 L32,36 M16,4 L32,4 M16,36 L32,36"/>`],
+ ["Oversized",3.5,`<path d="M11,4 L8,36 M37,4 L40,36 M11,4 L37,4 M8,36 L40,36"/>`]
+];
+const fig=(dress,legsY)=>`<circle cx="24" cy="4.5" r="3"/>`+dress+`<path d="M21,${legsY} L21,38 M27,${legsY} L27,38"/>`;
+const LEN=[
+ ["Cropped / taille",9,fig(`<path d="M19,9 L18,18 L30,18 L29,9 Z"/>`,18)],
+ ["Tot heup",7.5,fig(`<path d="M19,9 L18,23 L30,23 L29,9 Z"/>`,23)],
+ ["Over de heup los",5.5,fig(`<path d="M18,9 L17,25 L31,25 L30,9 Z"/>`,25)],
+ ["Boven knie",9,fig(`<path d="M19,9 L16,27 L32,27 L29,9 Z"/>`,27)],
+ ["Kniehoogte",7.5,fig(`<path d="M19,9 L16,30 L32,30 L29,9 Z"/>`,30)],
+ ["Midi wijd",3.5,fig(`<path d="M19,9 L12,34 L36,34 L29,9 Z"/>`,34)],
+ ["Midi aansluitend",7,fig(`<path d="M19,9 L20,34 L28,34 L29,9 Z"/><path d="M24,26 L24,34"/>`,34)],
+ ["Maxi / enkel",8.5,fig(`<path d="M19,9 L16,37 L32,37 L29,9 Z"/>`,37)]
+];
+const broek=`<path d="M14,8 C14,18 12,24 12,32 L15,32 C17,26 19,22 20,18 M34,8 C34,18 36,24 36,32 L33,32 C31,26 29,22 28,18 M20,18 L24,16 L28,18"/>`;
+const band=y=>`<path d="M14,${y} L34,${y} M14,${y+2.5} L34,${y+2.5}"/>`;
+const TAILLE=[
+ ["High waist",9.5,broek+band(8)],
+ ["Normaal",6.5,broek+band(13)],
+ ["Low rise",3,broek+band(18)]
+];
+const ITEM=["Top","Jurk","Rok","Broek","Jas","Anders"];
+function buildChips(id,arr,plain){
+  const g=document.getElementById(id);
+  arr.forEach(x=>{
+    const b=document.createElement("button");
+    if(plain){b.className="chip txt";b.textContent=x;b.dataset.v=x}
+    else{b.className="chip";b.dataset.s=x[1];b.dataset.v=x[0];b.innerHTML=svg(x[2])+"<span>"+x[0]+"</span>"}
+    g.appendChild(b);
+  });
+}
+buildChips("g-item",ITEM,true);
+buildChips("g-hals",HALS);buildChips("g-mouw",MOUW);buildChips("g-pas",PAS);buildChips("g-len",LEN);buildChips("g-taille",TAILLE);
+
+/* ================= kleurmath ================= */
+function hex2rgb(h){const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+function rgb2lab(r,g,b){
+  let[x,y,z]=[r,g,b].map(v=>{v/=255;return v>.04045?Math.pow((v+.055)/1.055,2.4):v/12.92});
+  const X=(x*.4124+y*.3576+z*.1805)/.95047,Y=x*.2126+y*.7152+z*.0722,Z=(x*.0193+y*.1192+z*.9505)/1.08883;
+  const f=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;
+  const fx=f(X),fy=f(Y),fz=f(Z);
+  return[116*fy-16,500*(fx-fy),200*(fy-fz)];
+}
+function dE(l1,l2){return Math.hypot(l1[0]-l2[0],l1[1]-l2[1],l1[2]-l2[2])}
+function rgb2hsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,s=0,l=(mx+mn)/2;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?((g-b)/d+(g<b?6:0)):mx===g?((b-r)/d+2):((r-g)/d+4);h*=60}return[h,s,l]}
+const ANCHORS=[["#C8A183","warm beige"],["#8B5E3C","cognac"],["#EBDCC3","zand"],["#9C7A3C","brons"]];
+const PAL_LAB=PALETTE.concat(ANCHORS).map(([h,n])=>({lab:rgb2lab(...hex2rgb(h)),name:n,hex:h}));
+const AV_LAB=AVOID.map(([h,n])=>({lab:rgb2lab(...hex2rgb(h)),name:n,hex:h}));
+const lum=h=>{const[r,g,b]=hex2rgb(h);return(0.299*r+0.587*g+0.114*b)/255};
+
+/* ================= gids render ================= */
+const pal=document.getElementById("palette");
+PALETTE.forEach(([hx,nm])=>{const d=document.createElement("div");d.className="sw";d.style.background=hx;const dark=lum(hx)>.62;d.innerHTML=`<b style="color:${dark?"#33241A":"#FBF6EC"}">${nm}</b><span style="color:${dark?"#5E4B3B":"#EADFCE"}">${hx.toUpperCase()}</span>`;pal.appendChild(d)});
+const cbx=document.getElementById("combos");
+COMBOS.forEach(p=>{const d=document.createElement("div");d.className="combo";d.innerHTML=p.map(([hx,nm])=>`<div style="background:${hx};color:${lum(hx)>.62?"#33241A":"#FBF6EC"}">${nm}</div>`).join("");cbx.appendChild(d)});
+
+/* ================= tabs & chips ================= */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");
+  document.getElementById("tab-gids").classList.toggle("hide",t.dataset.t!=="gids");
+  document.getElementById("tab-check").classList.toggle("hide",t.dataset.t!=="check");
+}));
+document.querySelectorAll(".chips").forEach(g=>g.addEventListener("click",e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  const was=b.classList.contains("sel");
+  g.querySelectorAll(".chip").forEach(c=>c.classList.remove("sel"));
+  if(!was)b.classList.add("sel");
+}));
+function chipVal(group){const c=document.querySelector(`.chips[data-g="${group}"] .chip.sel`);return c?{label:c.dataset.v,score:c.dataset.s?parseFloat(c.dataset.s):null}:null}
+function selectChip(group,label){
+  if(!label)return false;
+  const g=document.querySelector(`.chips[data-g="${group}"]`);
+  const c=[...g.querySelectorAll(".chip")].find(c=>c.dataset.v.toLowerCase()===String(label).toLowerCase());
+  if(!c)return false;
+  g.querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));
+  c.classList.add("sel");return true;
+}
+
+/* ================= foto, kleuren & autodetectie ================= */
+const drop=document.getElementById("drop"),file=document.getElementById("file"),
+      preview=document.getElementById("preview"),go=document.getElementById("go"),
+      out=document.getElementById("out"),note=document.getElementById("note"),
+      resetBtn=document.getElementById("reset"),detWrap=document.getElementById("detwrap"),
+      detEl=document.getElementById("detected"),autoS=document.getElementById("autostatus");
+let detColors=[],curImg=null;
+drop.addEventListener("click",()=>file.click());
+drop.addEventListener("dragover",e=>e.preventDefault());
+drop.addEventListener("drop",e=>{e.preventDefault();if(e.dataTransfer.files[0])load(e.dataTransfer.files[0])});
+file.addEventListener("change",()=>{if(file.files[0])load(file.files[0])});
+
+function load(f){
+  if(!/^image\//.test(f.type)){out.innerHTML='<div class="err">Kies een afbeelding (jpg, png, webp).</div>';return}
+  const r=new FileReader();
+  r.onload=()=>{const img=new Image();img.onload=()=>{
+    curImg=img;
+    preview.src=r.result;preview.classList.remove("hide");drop.classList.add("hide");
+    resetBtn.classList.remove("hide");out.innerHTML="";
+    extractColors(img);
+    autoDetect(img);
+  };img.src=r.result};
+  r.readAsDataURL(f);
+}
+resetBtn.addEventListener("click",()=>{
+  preview.classList.add("hide");drop.classList.remove("hide");detWrap.classList.add("hide");
+  autoS.className="hide";autoS.innerHTML="";
+  detColors=[];curImg=null;out.innerHTML="";note.value="";file.value="";resetBtn.classList.add("hide");
+  document.querySelectorAll(".chip.sel").forEach(c=>c.classList.remove("sel"));
+});
+
+function scaledB64(img,maxPx,q){
+  let{width:w,height:h}=img;
+  if(Math.max(w,h)>maxPx){const s=maxPx/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}
+  const cv=document.createElement("canvas");cv.width=w;cv.height=h;
+  const ctx=cv.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);
+  ctx.drawImage(img,0,0,w,h);
+  return cv.toDataURL("image/jpeg",q).split(",")[1];
+}
+
+async function autoDetect(img){
+  autoS.className="status busy";
+  autoS.innerHTML='<span class="spin"></span>Ik probeer de details automatisch te herkennen…';
+  const opts={
+    item:ITEM,hals:HALS.map(x=>x[0]),mouw:MOUW.map(x=>x[0]),
+    pas:PAS.map(x=>x[0]),len:LEN.map(x=>x[0]),taille:TAILLE.map(x=>x[0])
+  };
+  const ask=Object.entries(opts).map(([k,v])=>k+': kies uit ['+v.join(" | ")+'] of null').join("; ");
+  const sizes=[[800,0.72],[520,0.65]];
+  for(const[px,q]of sizes){
+    try{
+      const b64=scaledB64(img,px,q);
+      const res=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,
+          messages:[{role:"user",content:[
+            {type:"text",text:"Analyseer het kledingstuk op de foto. Antwoord UITSLUITEND met geldige JSON, exact deze velden en uitsluitend de gegeven opties (letterlijk overnemen) of null als niet zichtbaar: "+ask+'. Formaat: {"item":"...","hals":"...","mouw":"...","pas":"...","len":"...","taille":"..."} — niets anders.'},
+            {type:"image",source:{type:"base64",media_type:"image/jpeg",data:b64}}
+          ]}]
+        })});
+      const raw=await res.text();let data=null;try{data=JSON.parse(raw)}catch(_){}
+      if(!res.ok||!data||data.error)throw new Error(data?.error?.message||("HTTP "+res.status));
+      const txt=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
+      const clean=txt.replace(/```json|```/g,"").trim();
+      const j=JSON.parse(clean.slice(clean.indexOf("{"),clean.lastIndexOf("}")+1));
+      let n=0;
+      for(const k of Object.keys(opts))if(selectChip(k,j[k]))n++;
+      if(n>0){
+        autoS.className="status good";
+        autoS.textContent="✓ "+n+" details automatisch herkend — controleer hieronder en pas aan waar nodig.";
+      }else{
+        autoS.className="status info";
+        autoS.textContent="Details niet herkend — tik hieronder de plaatjes aan die lijken op je kledingstuk.";
+      }
+      return;
+    }catch(e){console.error("Autodetectie:",e)}
+  }
+  autoS.className="status info";
+  autoS.textContent="Automatisch herkennen lukt niet in deze omgeving — geen probleem: tik hieronder gewoon de plaatjes aan die op je kledingstuk lijken.";
+}
+
+function extractColors(img){
+  const S=90,cv=document.createElement("canvas");
+  const sc=S/Math.max(img.width,img.height);
+  cv.width=Math.max(1,Math.round(img.width*sc));cv.height=Math.max(1,Math.round(img.height*sc));
+  const ctx=cv.getContext("2d",{willReadFrequently:true});
+  ctx.drawImage(img,0,0,cv.width,cv.height);
+  const{data}=ctx.getImageData(0,0,cv.width,cv.height);
+  const W=cv.width,H=cv.height,border={},bins={};
+  const key=(r,g,b)=>((r>>4)<<8)|((g>>4)<<4)|(b>>4);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    const i=(y*W+x)*4,r=data[i],g=data[i+1],b=data[i+2];
+    if(data[i+3]<200)continue;
+    const k=key(r,g,b);
+    if(x<W*.06||x>W*.94||y<H*.06||y>H*.94)border[k]=(border[k]||0)+1;
+    (bins[k]=bins[k]||{n:0,r:0,g:0,b:0});
+    const B=bins[k];B.n++;B.r+=r;B.g+=g;B.b+=b;
+  }
+  const bgKeys=Object.entries(border).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>+e[0]);
+  const bgLabs=bgKeys.map(k=>{const B=bins[k];return rgb2lab(B.r/B.n,B.g/B.n,B.b/B.n)});
+  const total=Object.values(bins).reduce((s,B)=>s+B.n,0);
+  let cand=Object.values(bins).map(B=>{
+    const r=B.r/B.n,g=B.g/B.n,b=B.b/B.n;
+    return{r,g,b,n:B.n,lab:rgb2lab(r,g,b),hsl:rgb2hsl(r,g,b)};
+  }).filter(c=>c.n/total>0.012);
+  cand=cand.filter(c=>{
+    if(bgLabs.some(bg=>dE(c.lab,bg)<16))return false;
+    const[h,s,l]=c.hsl;
+    if(h>=8&&h<=45&&s>=.15&&s<=.62&&l>=.35&&l<=.85)return false;
+    return true;
+  });
+  cand.sort((a,b)=>b.n-a.n);
+  const merged=[];
+  for(const c of cand){
+    const m=merged.find(m=>dE(m.lab,c.lab)<14);
+    if(m){const t=m.n+c.n;m.r=(m.r*m.n+c.r*c.n)/t;m.g=(m.g*m.n+c.g*c.n)/t;m.b=(m.b*m.n+c.b*c.n)/t;m.n=t;m.lab=rgb2lab(m.r,m.g,m.b)}
+    else merged.push({...c});
+  }
+  merged.sort((a,b)=>b.n-a.n);
+  const top=merged.slice(0,4);
+  const sum=top.reduce((s,c)=>s+c.n,0)||1;
+  detColors=top.map(c=>({
+    hex:"#"+[c.r,c.g,c.b].map(v=>Math.round(v).toString(16).padStart(2,"0")).join("").toUpperCase(),
+    share:c.n/sum,on:true
+  }));
+  renderDetected();
+}
+function renderDetected(){
+  detEl.innerHTML="";
+  if(!detColors.length){detWrap.classList.add("hide");return}
+  detWrap.classList.remove("hide");
+  detColors.forEach(c=>{
+    const d=document.createElement("div");
+    d.className="dsw"+(c.on?"":" off");
+    d.style.background=c.hex;
+    d.innerHTML=`<span style="color:${lum(c.hex)>.62?"#33241A":"#FBF6EC"}">${Math.round(c.share*100)}%</span>`;
+    d.title=c.hex;
+    d.addEventListener("click",()=>{c.on=!c.on;renderDetected()});
+    detEl.appendChild(d);
+  });
+}
+
+/* ================= beoordelingsengine ================= */
+function scoreColor(){
+  const act=detColors.filter(c=>c.on);
+  if(!act.length)return null;
+  const tot=act.reduce((s,c)=>s+c.share,0);
+  let acc=0,parts=[];
+  for(const c of act){
+    const lab=rgb2lab(...hex2rgb(c.hex)),[h,s,l]=rgb2hsl(...hex2rgb(c.hex));
+    let sc,why;
+    const nearPal=PAL_LAB.reduce((m,p)=>dE(lab,p.lab)<m.d?{d:dE(lab,p.lab),p}:m,{d:1e9});
+    const nearAv=AV_LAB.reduce((m,p)=>dE(lab,p.lab)<m.d?{d:dE(lab,p.lab),p}:m,{d:1e9});
+    if(l<.13){sc=6.5;why="zwart — kán, met goud of rode lip erbij"}
+    else if(l>.94&&s<.12){sc=5;why="fel wit — crème/ivoor flatteert meer"}
+    else if(nearPal.d<=nearAv.d+3){
+      sc=Math.max(5.5,Math.min(9.6,10-nearPal.d/7));
+      why=(nearPal.d<14?"vrijwel exact ":"in de buurt van ")+nearPal.p.name.toLowerCase();
+    }else{
+      sc=nearAv.d<12?2.5:4.2;
+      why="dicht bij "+nearAv.p.name+" — staat op je vermijd-lijst";
+    }
+    acc+=sc*(c.share/tot);
+    parts.push({hex:c.hex,why,sc});
+  }
+  parts.sort((a,b)=>b.sc-a.sc);
+  const main=parts[0],worst=parts[parts.length-1];
+  let uitleg=main.why.charAt(0).toUpperCase()+main.why.slice(1);
+  if(parts.length>1&&worst.sc<5.5&&worst!==main)uitleg+="; let op: één kleur is "+worst.why;
+  return{score:Math.round(acc*10)/10,uitleg,parts};
+}
+function scoreShape(){
+  const answered=["hals","mouw","pas"].map(g=>({g,v:chipVal(g)})).filter(x=>x.v&&x.v.score!=null);
+  if(!answered.length)return null;
+  const avg=answered.reduce((s,x)=>s+x.v.score,0)/answered.length;
+  const worst=answered.reduce((m,x)=>x.v.score<m.v.score?x:m,answered[0]);
+  const best=answered.reduce((m,x)=>x.v.score>m.v.score?x:m,answered[0]);
+  let uitleg=best.v.score>=8?best.v.label+" is precies goed voor jouw figuur":best.v.label+" is oké";
+  if(worst.v.score<5.5)uitleg+="; "+worst.v.label.toLowerCase()+" werkt tegen je";
+  return{score:Math.round(avg*10)/10,uitleg,worst:worst.v};
+}
+function scoreLength(){
+  const answered=["len","taille"].map(g=>({g,v:chipVal(g)})).filter(x=>x.v&&x.v.score!=null);
+  if(!answered.length)return null;
+  const avg=answered.reduce((s,x)=>s+x.v.score,0)/answered.length;
+  const worst=answered.reduce((m,x)=>x.v.score<m.v.score?x:m,answered[0]);
+  let uitleg=avg>=7.5?"Deze lengte houdt je lijn lang op 1.53 m":avg>=5.5?"Kan, maar let op je proporties":worst.v.label+" verkort je optisch — jouw grootste valkuil";
+  return{score:Math.round(avg*10)/10,uitleg,worst:worst.v};
+}
+function buildTips(kleur,vorm,len){
+  const tips=[];
+  if(kleur&&kleur.score<6)tips.push("Zoek exact dit model in terracotta, crème of chocoladebruin — de snit kan goed zijn terwijl de kleur je tegenwerkt.");
+  if(kleur&&kleur.parts.some(p=>p.why.includes("zwart")))tips.push("Draag je het toch: gouden sieraden en een warme rode lip bij het gezicht.");
+  if(vorm&&vorm.worst&&vorm.worst.score<5.5){
+    const w=vorm.worst.label.toLowerCase();
+    if(w.includes("ballon")||w.includes("oversized")||w.includes("drop"))tips.push("Balanceer het volume: stop de voorkant in (French tuck) en houd de onderkant strak en high waist.");
+    if(w.includes("col"))tips.push("Kies dezelfde look met dunne hoge hals of V-hals in plaats van een dikke col.");
+    if(w.includes("boot"))tips.push("Zelfde item met V- of scoop-hals zoeken — dat verlengt in plaats van verbreedt.");
+  }
+  if(len&&len.worst&&len.worst.score<5.5){
+    const w=len.worst.label.toLowerCase();
+    if(w.includes("midi"))tips.push("Kies de versie met split, of ga korter (boven knie) of juist maxi tot de enkel.");
+    if(w.includes("low"))tips.push("Zoek de high waist-versie — dat is jouw belangrijkste regel.");
+    if(w.includes("heup"))tips.push("Instoppen of knopen op de taille maakt dit meteen flatteus.");
+  }
+  tips.push("Puntige nude schoenen of een hakje erbij verlengt je been extra.");
+  if(vorm&&vorm.score>=8)tips.push("Monochroom stylen (zelfde kleurfamilie onder en boven) maakt deze snit nóg langer.");
+  return tips.slice(0,3);
+}
+function offlineVerdict(){
+  const kleur=scoreColor(),vorm=scoreShape(),len=scoreLength();
+  if(!kleur&&!vorm&&!len)return null;
+  const cats=[],w=[];
+  if(kleur){cats.push({naam:"Kleur",score:kleur.score,uitleg:kleur.uitleg});w.push([kleur.score,.38])}
+  if(vorm){cats.push({naam:"Snit & silhouet",score:vorm.score,uitleg:vorm.uitleg});w.push([vorm.score,.4])}
+  if(len){cats.push({naam:"Lengte & proporties",score:len.score,uitleg:len.uitleg});w.push([len.score,.22])}
+  const tw=w.reduce((s,x)=>s+x[1],0);
+  const score=Math.round(w.reduce((s,x)=>s+x[0]*x[1],0)/tw*10)/10;
+  const oordeel=score>=7?"ja":score>=5?"twijfel":"nee";
+  const item=chipVal("item")?chipVal("item").label:"Item";
+  const missing=[];
+  if(!kleur)missing.push("foto voor kleuranalyse");
+  if(!vorm)missing.push("vorm-details");
+  const samenvatting=(oordeel==="ja"?"Dit werkt goed voor jou. ":oordeel==="twijfel"?"Gemengd beeld — het hangt van de styling af. ":"Dit item werkt op te veel punten tegen je. ")+(missing.length?"(Beoordeeld zonder "+missing.join(" en ")+".)":"");
+  return{item,score,oordeel,samenvatting,categorien:cats,draag_het_zo:buildTips(kleur,vorm,len),alternatief:score<7?"Zelfde soort item, maar dan in een warme dieptekleur, high waist en met V- of scoop-hals.":""};
+}
+
+/* ================= beoordelen ================= */
+go.addEventListener("click",()=>{
+  const r=offlineVerdict();
+  if(!r){out.innerHTML='<div class="err">Kies eerst een foto en/of tik minstens één plaatje aan.</div>';return}
+  render(r);
+  aiEnrich(r);
+});
+
+async function aiEnrich(base){
+  const old=document.getElementById("aibox");if(old)old.remove();
+  const holder=document.createElement("div");holder.id="aibox";
+  holder.innerHTML='<div class="loading" style="padding:10px 0"><span class="spin"></span>AI-stylist kijkt mee…</div>';
+  out.appendChild(holder);
+  try{
+    const colors=detColors.filter(c=>c.on).map(c=>c.hex+" ("+Math.round(c.share*100)+"%)").join(", ")||"onbekend";
+    const kenm=["item","hals","mouw","pas","len","taille"].map(g=>{const v=chipVal(g);return v?g+": "+v.label:null}).filter(Boolean).join(", ")||"geen";
+    const extra=note.value.trim();
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,
+        messages:[{role:"user",content:"Je bent een personal stylist. Draagster: 1.53 m, petite zachte zandloper (gedefinieerde taille, vollere buste), kleurtype Deep Autumn (powerkleuren: espresso, chocoladebruin, camel, terracotta, bordeaux, warm dieprood, smaragd, olijf, mosterd, crème, petrol, aubergine; vermijden: pastels, grijs, fuchsia, fel wit; goud i.p.v. zilver). Item — exact gemeten kleuren uit de foto: "+colors+". Kenmerken: "+kenm+". "+(extra?"Context: "+extra+". ":"")+"Een regelsysteem gaf score "+base.score+"/10 ("+base.oordeel+"). Geef UITSLUITEND geldige JSON: {\"tips\":[\"max 18 woorden\",\"max 18 woorden\",\"max 18 woorden\"],\"opmerking\":\"1 korte zin met het scherpste inzicht\"} — niets anders, onder 120 woorden totaal."}]
+      })});
+    const raw=await res.text();let data=null;try{data=JSON.parse(raw)}catch(_){}
+    if(!res.ok||!data||data.error)throw 0;
+    const txt=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
+    const clean=txt.replace(/```json|```/g,"").trim();
+    const j=JSON.parse(clean.slice(clean.indexOf("{"),clean.lastIndexOf("}")+1));
+    holder.innerHTML='<div class="note-ai">AI-stylist tips</div>'+
+      (j.opmerking?'<p style="margin-bottom:8px"><em>'+esc(j.opmerking)+'</em></p>':"")+
+      '<ul class="tips">'+(j.tips||[]).map(t=>"<li>"+esc(t)+"</li>").join("")+"</ul>";
+  }catch(e){holder.remove()}
+}
+
+function render(r){
+  const colFor=s=>s>=7?"var(--ok)":s>=5?"var(--warn)":"var(--bad)";
+  const pillCss=r.oordeel==="ja"?"background:#E7EDDC;color:var(--ok)":r.oordeel==="twijfel"?"background:#F5E8CE;color:var(--warn)":"background:#F3DCD4;color:var(--bad)";
+  const pillTxt=r.oordeel==="ja"?"Staat je goed":r.oordeel==="twijfel"?"Twijfelgeval":"Liever niet";
+  let html=`<div style="margin-top:20px">
+    <div class="eyebrow">${esc(r.item)}</div>
+    <div class="scorewrap"><div class="scorenum">${r.score}<small>/10</small></div><span class="verdictpill" style="${pillCss}">${pillTxt}</span></div>
+    <p style="margin-bottom:16px">${esc(r.samenvatting)}</p>`;
+  r.categorien.forEach(cat=>{
+    html+=`<div class="cat"><div class="head"><b>${esc(cat.naam)}</b><span style="font-weight:600;color:${colFor(cat.score)}">${cat.score}/10</span></div>
+    <div class="bar"><i style="width:${Math.min(100,cat.score*10)}%;background:${colFor(cat.score)}"></i></div>
+    <p class="muted" style="font-size:14px">${esc(cat.uitleg)}</p></div>`;
+  });
+  if(r.draag_het_zo.length)html+=`<h3>Draag het zo</h3><ul class="tips">${r.draag_het_zo.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`;
+  if(r.alternatief)html+=`<h3>Zoek liever dit</h3><p class="muted">${esc(r.alternatief)}</p>`;
+  html+=`</div>`;
+  out.innerHTML=html;
+  out.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function esc(s){const d=document.createElement("div");d.textContent=String(s??"");return d.innerHTML}
+</script>
+</body>
+</html>
