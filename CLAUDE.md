@@ -46,8 +46,9 @@ Its helpers live in `.claude/skills/video-use/helpers/`:
 
 House caption style (from `video/references/stijl/`): `tools/style_captions.py <video>
 <transcript.json> -o out.mp4 --tag "Product >>>" --fix "fout=goed"`. It burns one-word
-serif captions and an optional product tag, and normalises loudness to -14 LUFS.
-Use it for videos that are already cut and only need finishing.
+serif captions and normalises loudness to -14 LUFS. **Don't use `--tag`**: the user does
+not want a product line under the captions. Even for videos that are already cut, always
+review the edit (silences, slow parts, lines that add nothing) and propose trims first.
 
 Local transcription has limits: it can't tell speakers apart, it doesn't tag laughter or
 other sounds, and Whisper sometimes drops "um"/"uh". Check the transcript and use

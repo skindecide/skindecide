@@ -41,10 +41,16 @@ het netwerk blokkeert TikTok. Vraag de gebruiker om het bestand te sturen.
 1. **9:16, 1080×1920, 30fps.**
 2. **Praatvideo's (zoals ref1):** captions één woord tegelijk, witte serif, kleine letters,
    midden in beeld, zachte schaduw, geen box. Rustig tempo: alleen haperingen/stiltes eruit,
-   niet over-cutten. B-roll of foto's als kleine inzet bovenin of als korte cutaway bij
+   niet over-cutten. **Geen productnaam/tag onder de captions.** B-roll of foto's als kleine inzet bovenin of als korte cutaway bij
    de hook en bij voorbeelden. Eindig met een CTA.
 3. **Product-/beautyvideo's (zoals ref2):** snelle cuts op de beat (1–3s), product als
-   eerste shot, eindresultaat lang laten staan, één subtiele tekstregel, muziek in plaats van
-   voice-over.
+   eerste shot, eindresultaat lang laten staan, muziek in plaats van voice-over.
+   **Geen producttag-regel** (gebruiker wil dat niet).
 4. **Kleur:** natuurlijk en warm, zacht. Geen zware grade, huidtinten moeten kloppen.
 5. **Loudness:** rond -14 tot -12 LUFS (sociale media).
+
+## Montage beoordelen (wens gebruiker)
+
+Kijk bij elke aangeleverde video kritisch of de montage strakker kan: stiltes aan begin en
+eind, pauzes > ~0.4s, herhalingen en zinnen die niets toevoegen. Stel concrete inkortingen
+voor (met tijden en nieuwe lengte) en wacht op akkoord vóór het knippen.
