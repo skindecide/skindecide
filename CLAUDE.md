@@ -44,6 +44,11 @@ Its helpers live in `.claude/skills/video-use/helpers/`:
   grade, overlays and subtitles.
 - `grade.py` applies colour grade presets (`--list-presets`).
 
+House caption style (from `video/references/stijl/`): `tools/style_captions.py <video>
+<transcript.json> -o out.mp4 --tag "Product >>>" --fix "fout=goed"`. It burns one-word
+serif captions and an optional product tag, and normalises loudness to -14 LUFS.
+Use it for videos that are already cut and only need finishing.
+
 Local transcription has limits: it can't tell speakers apart, it doesn't tag laughter or
 other sounds, and Whisper sometimes drops "um"/"uh". Check the transcript and use
 `timeline_view` at the cuts that matter.
