@@ -56,6 +56,7 @@ video/
 │   └── edit/            ← all working files for that project (skill's convention)
 │       ├── takes_packed.md, edl.json, master.srt, project.md
 │       └── final.mp4
+├── references/<theme>/  ← reference videos, screenshots and notes.md on what to copy from them
 └── exports/             ← finished videos the user wants to keep
 ```
 
@@ -66,6 +67,9 @@ live only in this container: it gets wiped, so they need to download them.
 
 ## House rules
 
+- **Check `video/references/` first.** Before proposing a plan, read the relevant `notes.md`
+  and look at the references (use `timeline_view` or sample frames for videos), and match
+  their pacing, caption style and look unless the user says otherwise.
 - **Plan before cutting.** Describe the plan in plain language and wait for the user to agree
   (skill rule 11).
 - **Check your own output before showing it.** Run `ffprobe` on the duration, look at frames at
