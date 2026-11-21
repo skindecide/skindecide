@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "sources": {
+    "raw": "raw.mp4"
+  },
+  "ranges": [
+    {
+      "source": "raw",
+      "start": 1.2,
+      "end": 17.42,
+      "reason": "opening ingekort; hook start sneller"
+    },
+    {
+      "source": "raw",
+      "start": 20.45,
+      "end": 40.55,
+      "reason": "zin 'ik had ze zelf nog niet eerder gezien...' eruit"
+    },
+    {
+      "source": "raw",
+      "start": 41.15,
+      "end": 42.72,
+      "reason": "hapering 'om ... dit wondje' ingekort"
+    }
+  ],
+  "hold_last_frame_s": 0.5,
+  "total_duration_s": 38.39
+}
