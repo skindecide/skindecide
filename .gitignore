@@ -1,6 +1,12 @@
 # Video media is large — keep it out of git
-video/footage/*
+video/footage/**
+!video/footage/**/
 !video/footage/.gitkeep
+!video/footage/**/edit/project.md
+!video/footage/**/edit/edl.json
+!video/footage/**/edit/*.py
+!video/footage/**/edit/*.ass
+!video/footage/**/edit/*.srt
 video/exports/*
 !video/exports/.gitkeep
 **/edit/transcripts/
