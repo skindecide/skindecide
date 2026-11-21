@@ -7,6 +7,13 @@ De app (`velvet-authority/index.html`) toont dat rapport.
 **Koop niets, plaats niets in winkelmandjes, voer geen bestellingen uit.**
 **Verzin nooit producten, prijzen, maten, voorraad, kleuren of links.**
 
+## 0. Werkwijze
+
+1. Draai `python3 -I velvet-authority/scan/scan.py`. Dit verzamelt via openbare routes (nieuw-in-pagina's, productpagina's, sitemaps uit robots.txt) de verifieerbare kandidaten in `scan/out/candidates-JJJJ-MM-DD.json`, met de status van alle zeven retailers. Het werkt de sitemap-momentopname in `scan/state/` bij; die moet je meecommitten, want alleen zo is "nieuw sinds gisteren" aantoonbaar voor Gina Tricot.
+2. Kies uit de kandidaten de beste matches per categorie volgens de regels hieronder. Bekijk van elke kandidaat de productfoto (download de `image` en bekijk hem) voordat je kleur en silhouet beoordeelt.
+3. Schrijf het rapport-JSON en werk `reports/index.json` bij.
+4. **Nooit** botcontroles omzeilen, browserverificatie oplossen of interne API's van de shops aanroepen. Blokkeert een shop, dan staat dat eerlijk in de scanstatus.
+
 ## 1. Retailers (alle zeven, elke dag)
 
 | Retailer | Primaire bron | Fallback |
