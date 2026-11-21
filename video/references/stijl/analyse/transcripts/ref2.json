@@ -1,0 +1,424 @@
+{
+  "language_code": "ko",
+  "text": "🎵 Every single night, I pray that my tits are sittin' right 🎵 🎵 Mulan Rouge, my corset is so tight 🎵 🎵 Baby girl, in control, I feel like Nicole 🎵 🎵 And every single day, I wake up, the world is my buffet 🎵",
+  "words": [
+    {
+      "text": "🎵",
+      "start": 0.0,
+      "end": 0.04,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.0
+    },
+    {
+      "text": "Every",
+      "start": 0.04,
+      "end": 0.28,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.017
+    },
+    {
+      "text": "single",
+      "start": 0.28,
+      "end": 0.54,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.869
+    },
+    {
+      "text": "night,",
+      "start": 0.54,
+      "end": 1.04,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.869
+    },
+    {
+      "text": " ",
+      "start": 1.04,
+      "end": 1.4,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "I",
+      "start": 1.4,
+      "end": 2.36,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.954
+    },
+    {
+      "text": "pray",
+      "start": 2.36,
+      "end": 2.68,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.961
+    },
+    {
+      "text": "that",
+      "start": 2.68,
+      "end": 2.96,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.946
+    },
+    {
+      "text": "my",
+      "start": 2.96,
+      "end": 3.26,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.96
+    },
+    {
+      "text": "tits",
+      "start": 3.26,
+      "end": 3.52,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.641
+    },
+    {
+      "text": "are",
+      "start": 3.52,
+      "end": 3.64,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.991
+    },
+    {
+      "text": "sittin'",
+      "start": 3.64,
+      "end": 4.14,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.54
+    },
+    {
+      "text": " ",
+      "start": 4.14,
+      "end": 4.28,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "right",
+      "start": 4.28,
+      "end": 4.46,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.985
+    },
+    {
+      "text": "🎵",
+      "start": 4.46,
+      "end": 4.98,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.761
+    },
+    {
+      "text": "🎵",
+      "start": 4.98,
+      "end": 5.68,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.822
+    },
+    {
+      "text": "Mulan",
+      "start": 5.68,
+      "end": 6.08,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.527
+    },
+    {
+      "text": "Rouge,",
+      "start": 6.08,
+      "end": 6.32,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.906
+    },
+    {
+      "text": " ",
+      "start": 6.32,
+      "end": 6.48,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "my",
+      "start": 6.48,
+      "end": 6.62,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.97
+    },
+    {
+      "text": "corset",
+      "start": 6.62,
+      "end": 7.08,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.681
+    },
+    {
+      "text": "is",
+      "start": 7.08,
+      "end": 7.32,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.99
+    },
+    {
+      "text": "so",
+      "start": 7.32,
+      "end": 7.52,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.306
+    },
+    {
+      "text": "tight",
+      "start": 7.52,
+      "end": 7.82,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.971
+    },
+    {
+      "text": "🎵",
+      "start": 7.82,
+      "end": 8.76,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.982
+    },
+    {
+      "text": "🎵",
+      "start": 8.76,
+      "end": 8.76,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.993
+    },
+    {
+      "text": "Baby",
+      "start": 8.76,
+      "end": 9.06,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.917
+    },
+    {
+      "text": "girl,",
+      "start": 9.06,
+      "end": 9.46,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.906
+    },
+    {
+      "text": " ",
+      "start": 9.46,
+      "end": 9.52,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "in",
+      "start": 9.52,
+      "end": 9.74,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.733
+    },
+    {
+      "text": "control,",
+      "start": 9.74,
+      "end": 10.22,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.992
+    },
+    {
+      "text": " ",
+      "start": 10.22,
+      "end": 10.8,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "I",
+      "start": 10.8,
+      "end": 10.98,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.988
+    },
+    {
+      "text": "feel",
+      "start": 10.98,
+      "end": 11.16,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.997
+    },
+    {
+      "text": "like",
+      "start": 11.16,
+      "end": 11.48,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.995
+    },
+    {
+      "text": "Nicole",
+      "start": 11.48,
+      "end": 11.9,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.96
+    },
+    {
+      "text": "🎵",
+      "start": 11.9,
+      "end": 12.96,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.985
+    },
+    {
+      "text": "🎵",
+      "start": 12.96,
+      "end": 12.96,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.993
+    },
+    {
+      "text": "And",
+      "start": 12.96,
+      "end": 13.5,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.844
+    },
+    {
+      "text": "every",
+      "start": 13.5,
+      "end": 13.84,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.984
+    },
+    {
+      "text": "single",
+      "start": 13.84,
+      "end": 14.18,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.994
+    },
+    {
+      "text": "day,",
+      "start": 14.18,
+      "end": 14.68,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.989
+    },
+    {
+      "text": " ",
+      "start": 14.68,
+      "end": 15.7,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "I",
+      "start": 15.7,
+      "end": 15.98,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.982
+    },
+    {
+      "text": "wake",
+      "start": 15.98,
+      "end": 16.24,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.994
+    },
+    {
+      "text": "up,",
+      "start": 16.24,
+      "end": 16.62,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.995
+    },
+    {
+      "text": " ",
+      "start": 16.62,
+      "end": 16.76,
+      "type": "spacing",
+      "speaker_id": "speaker_0"
+    },
+    {
+      "text": "the",
+      "start": 16.76,
+      "end": 16.86,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.59
+    },
+    {
+      "text": "world",
+      "start": 16.86,
+      "end": 17.12,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.167
+    },
+    {
+      "text": "is",
+      "start": 17.12,
+      "end": 17.32,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.98
+    },
+    {
+      "text": "my",
+      "start": 17.32,
+      "end": 17.52,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.879
+    },
+    {
+      "text": "buffet",
+      "start": 17.52,
+      "end": 17.82,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.968
+    },
+    {
+      "text": "🎵",
+      "start": 17.82,
+      "end": 18.52,
+      "type": "word",
+      "speaker_id": "speaker_0",
+      "probability": 0.961
+    }
+  ],
+  "source": "faster-whisper"
+}
