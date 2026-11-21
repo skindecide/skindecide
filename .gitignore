@@ -1,0 +1,21 @@
+# Video media is large — keep it out of git
+video/footage/*
+!video/footage/.gitkeep
+video/exports/*
+!video/exports/.gitkeep
+**/edit/transcripts/
+**/edit/clips_graded/
+**/edit/verify/
+**/edit/animations/**/node_modules/
+*.mp4
+*.mov
+*.MOV
+*.MP4
+*.mkv
+*.webm
+*.wav
+*.m4a
+# Secrets
+.env
+.claude/skills/video-use/.env
+__pycache__/

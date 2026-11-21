@@ -1,0 +1,9 @@
+# AI video editor (see CLAUDE.md). Install: bash setup.sh
+faster-whisper>=1.2
+av>=11,<17                       # faster-whisper 1.2 breaks on PyAV 17+
+opencv-python-headless>=4.10,<5  # 5.x drops CascadeClassifier & other classic APIs
+requests
+librosa
+matplotlib
+pillow
+numpy
