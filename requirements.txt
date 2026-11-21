@@ -7,3 +7,4 @@ librosa
 matplotlib
 pillow
 numpy
+gdown                            # download shared Google Drive links (video uploads)

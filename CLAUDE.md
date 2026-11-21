@@ -91,8 +91,16 @@ live only in this container: it gets wiped, so they need to download them.
 - Use `--draft` renders while iterating and switch to full quality for the final render.
 - Don't re-transcribe a source that already has a transcript in `edit/transcripts/`.
 
+## Large uploads (Google Drive)
+
+Videos too big for the chat come in as Google Drive links shared as "anyone with the link".
+Download them into the project folder with
+`gdown --fuzzy "<link>" -O video/footage/<project>/raw.mp4` (for a folder link:
+`gdown --folder "<link>" -O video/footage/<project>/`). If gdown reports a permission
+error, ask the user to set sharing to "Iedereen met de link".
+
 ## Network note (cloud sessions)
 
 faster-whisper downloads models from Hugging Face. This repo's cloud environment
-("skindecide") allows those hosts. If a model download fails with a proxy 403, the session
+("skindecide") allows those hosts, plus Google Drive for large uploads. If a model download fails with a proxy 403, the session
 is probably running on a different environment.
