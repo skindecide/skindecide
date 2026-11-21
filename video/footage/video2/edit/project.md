@@ -9,4 +9,4 @@
 **Strategy:** Productregel verwijderd (gebruikerswens). Montage strakker gemaakt op basis van review, akkoord gebruiker ("ja voor allemaal, ik wil jouw expertise").
 **Decisions:** Zie `edl.json` / `cut.py`. Opening 1.9s → 0.7s; zin 17.42–20.45 ("ik had ze zelf nog niet eerder gezien…") eruit op bestaande cutpunten; hapering 40.55–41.15 eruit; laatste frame +0.5s. 30ms audiofades per segment. 42.7s → 38.5s. -15.1 LUFS, piek -0.9 dBFS.
 **Reasoning log:** Geplande trim 24.4–25.8 NIET gedaan: geen lege stilte maar B-roll (patchvel tonen + patch opplakken), kernbeeld van de review. Hook-herschikking niet gedaan: verhaallijn puist → product → resultaat loopt logisch.
-**Outstanding:** "boem" (rond 5s) bevestigen.
+**Outstanding:** geen. "boem" bevestigd door gebruiker.
