@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkinDecide Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0ece2; --surface:#faf8f4; --surface-2:#f4f0e8; --line:#ddd8ce;
+  --ink:#1a1612; --muted:#6b6358; --accent:#c8432a; --accent-soft:#f6ddd5;
+  --good:#5e8a5a; --good-soft:#e3eddc; --warn:#c08a2e; --bad:#c8432a; --bad-soft:#f6ddd5;
+  --track:#e8e3d8; --shadow:0 1px 2px rgba(26,22,18,.04);
+}
+:root[data-theme="dark"]{
+  --bg:#141210; --surface:#1d1a17; --surface-2:#24201c; --line:#35302a;
+  --ink:#f2ece2; --muted:#a39a8d; --accent:#e8846e; --accent-soft:#3a231c;
+  --good:#8fbf87; --good-soft:#1f2b1d; --warn:#e0b35e; --bad:#e8846e; --bad-soft:#3a231c;
+  --track:#2e2924; --shadow:none;
+}
+:root[data-theme="sage"]{
+  --bg:#e9ede4; --surface:#f7f9f4; --surface-2:#eef2ea; --line:#d3dacb;
+  --ink:#1b211a; --muted:#5d6858; --accent:#4f7a55; --accent-soft:#dbe8d8;
+  --good:#4f7a55; --good-soft:#dbe8d8; --warn:#b5852b; --bad:#b9533b; --bad-soft:#f3ddd4;
+  --track:#dfe5d8;
+}
+:root[data-theme="blush"]{
+  --bg:#f6ebe8; --surface:#fdf8f6; --surface-2:#f9efec; --line:#ead7d1;
+  --ink:#2a1a1a; --muted:#7a6260; --accent:#b8506a; --accent-soft:#f5dce2;
+  --good:#5e8a5a; --good-soft:#e3eddc; --warn:#c08a2e; --bad:#b8506a; --bad-soft:#f5dce2;
+  --track:#f0e2de;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+.mono{font-family:'DM Mono',monospace}
+.label{font-family:'DM Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;letter-spacing:-.01em}
+h1{font-size:34px;line-height:1.1}
+h2{font-size:22px}
+h3{font-size:17px}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 24px 0;display:flex;flex-direction:column;gap:12px}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'DM Serif Display',serif;font-size:20px}
+.logo-dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.sm{padding:4px 9px;font-size:12px}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--ink);border-color:var(--line)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 -4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;padding:10px 12px;cursor:pointer;color:var(--muted);font-size:13.5px;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+.tab .live{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* layout */
+.page{display:none;padding-top:28px}
+.page.active{display:block}
+.head{margin-bottom:22px}
+.head .label{margin-bottom:6px}
+.head p{color:var(--muted);max-width:720px;margin-top:6px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g-main{grid-template-columns:1.6fr 1fr}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.mt{margin-top:14px}
+.kpi .v{font-family:'DM Serif Display',serif;font-size:32px;line-height:1.1;margin-top:6px}
+.kpi .s{color:var(--muted);font-size:12.5px;margin-top:2px}
+.kpi .s b{color:var(--ink);font-weight:500}
+.pill{display:inline-flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;border-radius:5px;padding:2px 6px;min-width:24px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
+.pill.ig{color:#b8506a}.pill.tt{color:var(--ink)}.pill.yt{color:#c8432a}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+.empty{color:var(--muted);font-size:13px;padding:14px 0}
+.muted{color:var(--muted)}
+.up{color:var(--good)}.down{color:var(--bad)}
+
+/* bars */
+.brow{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(60px,1.1fr) 62px;align-items:center;gap:10px;padding:7px 0;font-size:13.5px}
+.brow .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .n{text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.bar{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px;background:var(--accent)}
+.bar i.good{background:var(--good)}.bar i.warn{background:var(--warn)}.bar i.bad{background:var(--bad)}
+.srow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(60px,1fr) 34px;align-items:center;gap:12px;padding:6px 0;font-size:13.5px}
+.srow .n{text-align:right;font-family:'DM Mono',monospace;font-size:12px}
+.srow .sub{display:block;font-size:11.5px;color:var(--muted)}
+
+/* table */
+.tablewrap{overflow-x:auto;margin:0 -20px;padding:0 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+th{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:400;text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;user-select:none}
+th.num,td.num{text-align:right}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.num{font-family:'DM Mono',monospace;font-size:12px}
+tr:last-child td{border-bottom:none}
+td .title{font-weight:500}
+td .meta{font-size:11.5px;color:var(--muted)}
+th.sorted{color:var(--ink)}
+
+/* insight cards */
+.insight{border-radius:10px;padding:13px 15px;margin-bottom:10px;border:1px solid var(--line)}
+.insight.good{background:var(--good-soft);border-color:transparent}
+.insight.bad{background:var(--bad-soft);border-color:transparent}
+.insight b{display:block;font-weight:600;margin-bottom:3px}
+.insight p{font-size:13px;color:var(--ink);opacity:.85}
+
+/* trending */
+.topic{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:var(--surface)}
+.topic-h{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.rank{flex:none;width:24px;height:24px;border-radius:6px;background:var(--accent);color:#fff;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center;justify-content:center}
+.topic h3{font-family:'DM Sans',sans-serif;font-size:14.5px;font-weight:600;flex:1}
+.topic p{font-size:13px;color:var(--muted);margin:6px 0 4px}
+.hook{border-left:3px solid var(--good);background:var(--good-soft);border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:10px}
+.hook.alt{border-left-color:var(--warn);background:var(--surface-2)}
+.hook .q{font-family:'DM Serif Display',serif;font-style:italic;font-size:16px;margin:4px 0}
+.hook p{font-size:12.5px;color:var(--muted)}
+.idea{display:grid;grid-template-columns:52px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:12px;background:var(--surface)}
+.idea .num{background:var(--accent);color:#fff;font-family:'DM Serif Display',serif;font-size:24px;display:flex;align-items:center;justify-content:center}
+.idea:nth-child(3n+2) .num{background:var(--good)}
+.idea:nth-child(3n) .num{background:var(--warn)}
+.idea .body{padding:14px 16px}
+.idea .hk{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;margin:8px 0}
+.idea .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12.5px}
+.idea .cols .label{margin-bottom:2px}
+
+/* content bank + planner */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar select,.toolbar input{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px}
+.kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.col{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:120px}
+.col-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:8px;font-size:13px}
+.item .it{font-weight:500;margin-bottom:4px}
+.item .ia{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:180px;display:flex;flex-direction:column}
+.day.post{border-color:var(--accent)}
+.day h3{font-size:16px;margin-bottom:2px}
+.day .items{flex:1;margin:10px 0}
+.pitem{display:flex;gap:6px;align-items:flex-start;font-size:12.5px;padding:7px 8px;background:var(--surface-2);border-radius:8px;margin-bottom:6px}
+.pitem.done .ptxt{text-decoration:line-through;color:var(--muted)}
+.pitem input{margin-top:3px;accent-color:var(--accent)}
+.pitem .ptxt{flex:1;min-width:0;word-wrap:break-word}
+.x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:0 2px}
+.x:hover{color:var(--bad)}
+
+/* change */
+.delta{font-family:'DM Mono',monospace;font-size:12px;margin-left:6px}
+
+/* modal */
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:0;width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 40px)}
+dialog::backdrop{background:rgba(20,16,12,.45)}
+.mh{padding:18px 20px 0;display:flex;justify-content:space-between;align-items:center}
+.mb{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mb .full{grid-column:1/-1}
+.mb label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.mb input,.mb select,.mb textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;color:var(--ink);width:100%}
+.mb textarea{min-height:80px;resize:vertical;font-family:'DM Mono',monospace;font-size:12px}
+.mf{padding:0 20px 18px;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:84px;border:2px solid var(--line);border-radius:10px;padding:6px;cursor:pointer;background:none;font-size:11.5px;text-align:center}
+.sw.on{border-color:var(--accent)}
+.sw span{display:block;height:34px;border-radius:6px;margin-bottom:5px}
+.note{font-size:12px;color:var(--muted);background:var(--surface-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-bottom:16px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+
+@media (max-width:980px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3,.g-main{grid-template-columns:1fr}
+  .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kanban{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  .wrap,.topbar-in{padding-left:16px;padding-right:16px}
+  .g4,.g2,.kanban,.week{grid-template-columns:1fr}
+  h1{font-size:28px}
+  .brandrow{flex-direction:column;align-items:flex-start}
+  .mb{grid-template-columns:1fr}
+  .idea .cols{grid-template-columns:1fr}
+  .tablewrap{margin:0 -20px}
+  .brow{grid-template-columns:28px minmax(0,1fr) 54px;}
+  .brow .bar{grid-column:2/4;grid-row:2}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brandrow">
+      <div class="logo"><span class="logo-dot"></span>SkinDecide <span class="label" style="margin-left:4px">Command Center</span></div>
+      <div class="actions">
+        <button class="btn" data-act="add-post">+ Post toevoegen</button>
+        <button class="btn" data-act="data">Data</button>
+        <button class="btn" data-act="settings">Thema &amp; instellingen</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="overview">Overzicht</button>
+      <button class="tab" data-tab="ig">Instagram</button>
+      <button class="tab" data-tab="tt">TikTok</button>
+      <button class="tab" data-tab="yt">YouTube</button>
+      <button class="tab" data-tab="trend"><span class="live"></span>Trending nu</button>
+      <button class="tab" data-tab="bank">Contentbank</button>
+      <button class="tab" data-tab="plan">Weekplanner</button>
+      <button class="tab" data-tab="change">Wat veranderde</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="page active" id="p-overview"></section>
+  <section class="page" id="p-ig"></section>
+  <section class="page" id="p-tt"></section>
+  <section class="page" id="p-yt"></section>
+  <section class="page" id="p-trend"></section>
+  <section class="page" id="p-bank"></section>
+  <section class="page" id="p-plan"></section>
+  <section class="page" id="p-change"></section>
+</main>
+
+<dialog id="modal"><form method="dialog" id="mform"></form></dialog>
+<input type="file" id="fileIn" accept=".csv,.json,text/csv,application/json" hidden>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const KEY = 'skindecide-dashboard-v1';
+const PLAT = { ig:'Instagram', tt:'TikTok', yt:'YouTube Shorts' };
+const PL_SHORT = { ig:'IG', tt:'TT', yt:'YT' };
+const CATS = ['Ingrediënt spotlight','Claim decoder','INCI uitleg','Mythe vs feit','Productvergelijking','Routine','Achter de schermen'];
+const FORMATS = ['Reel','Carousel','Single post','TikTok video','Short','Story'];
+const STATUSES = ['Idee','Script','Gefilmd','Gepost'];
+const DAYS = ['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
+
+function samplePosts(){
+  const P = (platform,title,category,format,date,views,likes,comments,saves,shares,duration)=>({id:uid(),platform,title,category,format,date,views,likes,comments,saves,shares,duration});
+  return [
+    P('ig','Wat is INCI? Je leest het verkeerde deel van het etiket','INCI uitleg','Carousel','2026-01-05',6421,512,48,730,96,0),
+    P('ig','"Klinisch bewezen" betekent niets — hier is het bewijs','Claim decoder','Single post','2026-01-07',4210,388,61,402,140,0),
+    P('ig','Niacinamide: het ingrediënt dat doet wat het belooft','Ingrediënt spotlight','Reel','2026-01-09',9850,820,74,1120,210,30),
+    P('ig','Parfum verstopt zich onder 5 namen','INCI uitleg','Carousel','2026-01-12',7340,602,55,980,188,0),
+    P('ig','Retinol vs retinal — wat is het verschil?','Productvergelijking','Reel','2026-01-14',5120,401,38,512,77,45),
+    P('ig','Mijn ochtendroutine voor een gevoelige huid','Routine','Reel','2026-01-16',2187,170,22,96,12,58),
+    P('ig','"Hypoallergeen" — mythe of feit?','Mythe vs feit','Carousel','2026-01-19',3985,320,44,410,66,0),
+    P('ig','Zo testen we een INCI-lijst (achter de schermen)','Achter de schermen','Reel','2026-01-21',1131,88,9,21,4,72),
+    P('ig','Vitamine C serums: 3 vergeleken op INCI','Productvergelijking','Carousel','2026-01-23',6010,455,52,690,101,0),
+    P('ig','Azelaïnezuur in 30 seconden','Ingrediënt spotlight','Reel','2026-01-26',8120,690,58,870,160,28),
+    P('ig','"Dermatologisch getest" ontleed','Claim decoder','Reel','2026-01-28',5480,470,66,540,155,26),
+    P('ig','Avondroutine: minder stappen, meer bewijs','Routine','Carousel','2026-01-30',1657,140,15,88,9,0),
+    P('tt','Dit staat écht in je "clean" serum','Claim decoder','TikTok video','2026-01-06',48200,5100,312,2900,1400,22),
+    P('tt','Niacinamide in 20 seconden','Ingrediënt spotlight','TikTok video','2026-01-10',71400,7900,410,5200,1900,19),
+    P('tt','Parfum heeft 5 namen — check je etiket','INCI uitleg','TikTok video','2026-01-13',39800,3600,205,3100,880,24),
+    P('tt','Retinol vs bakuchiol: wie wint?','Productvergelijking','TikTok video','2026-01-17',54300,5800,520,3400,1250,34),
+    P('tt','Mijn volledige routine (lang)','Routine','TikTok video','2026-01-20',8200,610,40,190,35,95),
+    P('tt','"Hypoallergeen" bestaat juridisch niet','Mythe vs feit','TikTok video','2026-01-24',36100,3300,380,1800,990,18),
+    P('tt','Kantoortour: zo bouwen we SkinDecide','Achter de schermen','TikTok video','2026-01-27',6400,520,48,60,20,61),
+    P('tt','Zonnebrand: chemisch vs mineraal','Productvergelijking','TikTok video','2026-01-31',61800,6400,640,4900,1700,29),
+    P('yt','Wat is INCI? (Short)','INCI uitleg','Short','2026-01-08',3400,210,18,0,40,45),
+    P('yt','Niacinamide uitgelegd','Ingrediënt spotlight','Short','2026-01-15',5200,340,22,0,61,38),
+    P('yt','Klinisch bewezen? Lees dit eerst','Claim decoder','Short','2026-01-22',2900,190,31,0,44,30),
+    P('yt','Mijn routine voor gevoelige huid','Routine','Short','2026-01-29',980,52,6,0,5,59),
+  ];
+}
+function sampleTrends(){
+  return {
+    updated:'2026-01-31',
+    source:'Handmatig bijgehouden: top-video\'s onder #skincare #skincaretips #ingredients op TikTok en Instagram',
+    kpis:[
+      {label:'TikTok topvideo',value:'7,8M',sub:'Rijstwater-toner review · 92K saves'},
+      {label:'Meeste saves',value:'141K',sub:'"Dupe vs origineel" vergelijking'},
+      {label:'IG top reel',value:'413K',sub:'Zonnebrand onder make-up test'},
+    ],
+    topics:[
+      {title:'Ingrediënten-"dupes" — viraal',text:'Vergelijkingen van dure serums met goedkope alternatieven op basis van de INCI-lijst domineren. Kijkers bewaren ze als boodschappenlijst.',tags:'dupe, INCI, vergelijking',heat:'Heet'},
+      {title:'Skin cycling & minder stappen',text:'Minimalistische routines ("3 producten is genoeg") groeien. Past perfect bij evidence-based positionering.',tags:'routine, minimalisme',heat:'Stijgend'},
+      {title:'Zonnebrand onder make-up',text:'Tests met pilling, white cast en filters. Veel vragen in de comments over chemische vs minerale filters.',tags:'SPF, filters',heat:'Stijgend'},
+      {title:'Claim-checks van influencerproducten',text:'"Ik check de INCI van jouw favoriete product" — reactievideo\'s met stitch/duet scoren hoog op comments.',tags:'stitch, claims',heat:'Heet'},
+      {title:'Barrièreherstel (ceramides)',text:'Na de retinol-hype: content over overexfoliëren en de huidbarrière herstellen.',tags:'ceramides, barrière',heat:'Stabiel'},
+    ],
+    hooks:[
+      {hook:'"Ik heb de INCI van dit virale product gecheckt…"',why:'Nieuwsgierigheid + autoriteit. Verschijnt in 4 van de top-10 video\'s.'},
+      {hook:'"Stop met geld uitgeven aan …"',why:'Verliesaversie. Hoge share-rate, kijkers taggen vrienden.'},
+      {hook:'"Het verschil tussen X en Y in 20 seconden"',why:'Duidelijke belofte en korte duur → hoge completion rate.'},
+      {hook:'"Dermatologen willen niet dat je dit weet" — maar dan eerlijk',why:'Werkt alleen als je het direct ontkracht met bewijs. Riskant voor geloofwaardigheid.',alt:true},
+    ],
+    ideas:[
+      {title:'Dupe-check: duur vs goedkoop serum',hook:'"Deze twee serums hebben bijna dezelfde INCI. Eén kost €68."',topic:'Leg de eerste 5 ingrediënten naast elkaar, toon wat het prijsverschil verklaart.',ingredient:'Niacinamide-serums'},
+      {title:'3 producten is genoeg',hook:'"Je hebt geen 10-stappenroutine nodig. Dit is het bewijs."',topic:'Reiniger, actief ingrediënt, SPF — per stap één studie.',ingredient:'Basisroutine'},
+      {title:'Chemische vs minerale SPF onder make-up',hook:'"Waarom je foundation gaat pillen (en het ligt niet aan je foundation)"',topic:'Filters uitleggen + wat in de INCI op siliconen wijst.',ingredient:'Zonnebrand'},
+      {title:'Stitch: ik check jouw favoriete product',hook:'"Jullie vroegen om deze. Ik heb de INCI erbij gepakt."',topic:'Reageer op een virale review, laat SkinDecide het product decoderen.',ingredient:'Community-verzoek'},
+      {title:'Overexfoliëren herkennen',hook:'"Als je huid zo voelt, stop dan met je zuren."',topic:'Symptomen + welke ingrediënten de barrière herstellen.',ingredient:'Ceramides'},
+    ]
+  };
+}
+function sampleBank(){
+  const B=(title,platform,category,status,note='')=>({id:uid(),title,platform,category,status,note});
+  return [
+    B('Salicylzuur vs glycolzuur','tt','Productvergelijking','Script','Hook: "Welk zuur past bij jouw huid?"'),
+    B('"Non-comedogeen" ontleed','ig','Claim decoder','Idee'),
+    B('Peptiden: hype of bewijs?','ig','Ingrediënt spotlight','Idee'),
+    B('SPF-mythes in 20 sec','tt','Mythe vs feit','Gefilmd'),
+    B('Zo leest SkinDecide een INCI','yt','INCI uitleg','Idee'),
+    B('Niacinamide in 20 seconden','tt','Ingrediënt spotlight','Gepost'),
+  ];
+}
+function samplePlan(){
+  const I=(day,platform,text,done=false)=>({id:uid(),day,platform,text,done});
+  return [
+    I(0,'ig','Carousel: "Non-comedogeen" ontleed'),
+    I(0,'tt','SPF-mythes in 20 sec'),
+    I(2,'ig','Reel: Peptiden — hype of bewijs?'),
+    I(2,'yt','Short: Zo leest SkinDecide een INCI'),
+    I(4,'tt','Salicylzuur vs glycolzuur'),
+    I(4,'ig','Repost TikTok als Reel'),
+    I(6,'ig','Captions + hashtags volgende week voorbereiden'),
+  ];
+}
+function defaults(){
+  return {
+    sample:true,
+    theme:'cream', accent:'',
+    account:'@skindecide',
+    followers:{ig:2282,tt:1485,yt:310},
+    hearts:29900,
+    weeklyTarget:3,
+    posts:samplePosts(), trends:sampleTrends(), bank:sampleBank(), plan:samplePlan(),
+    snapshots:[{date:'2026-01-16',followers:{ig:1990,tt:1120,yt:240}}],
+  };
+}
+function uid(){return Math.random().toString(36).slice(2,10)}
+
+let S;
+function load(){
+  try{ const raw=localStorage.getItem(KEY); if(raw){ S=Object.assign(defaults(),JSON.parse(raw)); return; } }catch(e){}
+  S=defaults();
+}
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){} }
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=new Intl.NumberFormat('nl-NL');
+function fmt(n){ n=+n||0; if(n>=1e6) return (n/1e6).toFixed(1).replace('.',',')+'M'; if(n>=1e4) return Math.round(n/1e3)+'K'; return nf.format(Math.round(n)); }
+function pct(x,d=1){ return (x*100).toFixed(d).replace('.',',')+'%'; }
+const sum=(a,f)=>a.reduce((s,x)=>s+(+f(x)||0),0);
+const avg=(a,f)=>a.length?sum(a,f)/a.length:0;
+const eng=p=>(+p.likes||0)+(+p.comments||0)+(+p.saves||0)+(+p.shares||0);
+const parseD=s=>new Date(s+'T12:00:00');
+const dayName=s=>DAYS[(parseD(s).getDay()+6)%7];
+function dateNL(s){ try{return parseD(s).toLocaleDateString('nl-NL',{day:'numeric',month:'short'})}catch(e){return s} }
+function refDate(){ const ds=S.posts.map(p=>p.date).filter(Boolean).sort(); return ds.length?parseD(ds[ds.length-1]):new Date(); }
+function within(p,from,to){ const d=parseD(p.date); return d>from && d<=to; }
+function tone(score){ return score>=70?'good':score>=40?'warn':'bad'; }
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); }
+const pill=p=>`<span class="pill ${p}">${PL_SHORT[p]||'?'}</span>`;
+
+/* ============================================================
+   ANALYTICS
+   ============================================================ */
+function byCategory(posts){
+  const m={};
+  posts.forEach(p=>{ (m[p.category]=m[p.category]||[]).push(p); });
+  const rows=Object.entries(m).map(([cat,ps])=>({cat,n:ps.length,avgViews:avg(ps,p=>p.views),er:sum(ps,eng)/Math.max(1,sum(ps,p=>p.views))}));
+  const max=Math.max(1,...rows.map(r=>r.avgViews));
+  rows.forEach(r=>r.score=Math.round(r.avgViews/max*100));
+  return rows.sort((a,b)=>b.score-a.score);
+}
+// cross-platform: normalize each post against its own platform's average so TikTok's bigger numbers don't dominate
+function crossCategory(){
+  const pAvg={}; ['ig','tt','yt'].forEach(k=>pAvg[k]=avg(S.posts.filter(p=>p.platform===k),p=>p.views)||1);
+  const m={};
+  S.posts.forEach(p=>{ (m[p.category]=m[p.category]||[]).push(p.views/pAvg[p.platform]); });
+  const rows=Object.entries(m).map(([cat,xs])=>({cat,n:xs.length,idx:xs.reduce((a,b)=>a+b,0)/xs.length}));
+  const max=Math.max(0.01,...rows.map(r=>r.idx));
+  rows.forEach(r=>r.score=Math.round(r.idx/max*100));
+  return rows.sort((a,b)=>b.score-a.score);
+}
+function health(k){
+  const ps=S.posts.filter(p=>p.platform===k);
+  const V=Math.max(1,sum(ps,p=>p.views));
+  const ref=refDate(), from=new Date(ref-28*864e5);
+  const recent=ps.filter(p=>within(p,from,ref)).length;
+  const shortPs=ps.filter(p=>+p.duration>0 && +p.duration<=30), longPs=ps.filter(p=>+p.duration>30);
+  const rows=[
+    {name:'Engagement rate',val:sum(ps,eng)/V,target:k==='ig'?0.12:0.10},
+    {name:k==='yt'?'Likes per view':'Saves per view',val:k==='yt'?sum(ps,p=>p.likes)/V:sum(ps,p=>p.saves)/V,target:k==='yt'?0.06:0.05},
+    {name:'Shares per view',val:sum(ps,p=>p.shares)/V,target:0.025},
+    {name:'Comments per view',val:sum(ps,p=>p.comments)/V,target:0.008},
+  ].map(r=>({...r,score:Math.min(100,Math.round(r.val/r.target*100)),sub:pct(r.val)}));
+  rows.push({name:'Postfrequentie',sub:`${recent} posts / 4 wk`,score:Math.min(100,Math.round(recent/(S.weeklyTarget*4)*100))});
+  if(shortPs.length&&longPs.length){
+    const r=avg(shortPs,p=>p.views)/Math.max(1,avg(longPs,p=>p.views));
+    rows.push({name:'Kort (≤30s) vs lang',sub:`${r.toFixed(1).replace('.',',')}× meer views`,score:Math.min(100,Math.round(r/3*100))});
+  }
+  return rows;
+}
+function insights(k){
+  const ps=S.posts.filter(p=>p.platform===k);
+  const good=[],bad=[];
+  if(ps.length<3){ return {good:[{t:'Nog te weinig data',x:'Voeg minstens 3 posts toe om patronen te zien.'}],bad:[]}; }
+  const A=avg(ps,p=>p.views);
+  const cats=byCategory(ps).filter(c=>c.n>=1);
+  const rel=v=>{const d=Math.round((v/A-1)*100); return (d>=0?'+':'')+d+'%';};
+  if(cats.length){
+    const b=cats[0]; good.push({t:`${b.cat} = sterkste onderwerp`,x:`Gemiddeld ${fmt(b.avgViews)} views (${rel(b.avgViews)} t.o.v. je gemiddelde) over ${b.n} post${b.n>1?'s':''}. Maak hier een vaste serie van.`});
+    const w=cats[cats.length-1]; if(cats.length>1) bad.push({t:`${w.cat} blijft achter`,x:`Gemiddeld ${fmt(w.avgViews)} views (${rel(w.avgViews)}). Probeer een sterkere hook of verwerk het in een ander format.`});
+  }
+  const fm={}; ps.forEach(p=>(fm[p.format]=fm[p.format]||[]).push(p));
+  const fr=Object.entries(fm).map(([f,a])=>({f,n:a.length,v:avg(a,p=>p.views),s:sum(a,p=>p.saves)/Math.max(1,sum(a,p=>p.views))})).sort((a,b)=>b.v-a.v);
+  if(fr.length>1){ good.push({t:`${fr[0].f} presteert het best`,x:`${fmt(fr[0].v)} gem. views tegen ${fmt(fr[fr.length-1].v)} voor ${fr[fr.length-1].f}.`});
+    const bs=[...fr].sort((a,b)=>b.s-a.s)[0]; if(bs.s>0&&bs.f!==fr[0].f) good.push({t:`${bs.f} wordt het vaakst bewaard`,x:`${pct(bs.s)} van de kijkers slaat dit format op — goed voor het algoritme.`}); }
+  const sh=ps.filter(p=>+p.duration>0&&+p.duration<=30), lo=ps.filter(p=>+p.duration>30);
+  if(sh.length&&lo.length){ const r=avg(sh,p=>p.views)/Math.max(1,avg(lo,p=>p.views));
+    if(r>=1.2) good.push({t:'Korte video\'s (≤30s) winnen',x:`${r.toFixed(1).replace('.',',')}× meer views dan langere video's. Snelheid houdt kijkers vast.`});
+    if(r>=1.2) bad.push({t:'Lange video\'s (30s+) haken af',x:`${lo.length} video's boven 30 seconden halen gemiddeld ${fmt(avg(lo,p=>p.views))} views. Knip ze op of start met de conclusie.`});
+    else if(r<0.8) good.push({t:'Langere video\'s werken hier',x:`Video's boven 30s halen ${fmt(avg(lo,p=>p.views))} gem. views. Je publiek wil diepgang.`}); }
+  const dm={}; ps.forEach(p=>(dm[dayName(p.date)]=dm[dayName(p.date)]||[]).push(p.views));
+  const dr=Object.entries(dm).filter(([,a])=>a.length>=2).map(([d,a])=>({d,v:a.reduce((x,y)=>x+y,0)/a.length})).sort((a,b)=>b.v-a.v);
+  if(dr.length>1) good.push({t:`${dr[0].d} is je beste postdag`,x:`${fmt(dr[0].v)} gem. views, tegen ${fmt(dr[dr.length-1].v)} op ${dr[dr.length-1].d.toLowerCase()}.`});
+  const low=[...ps].sort((a,b)=>a.views-b.views)[0];
+  if(low && low.views<A*0.5) bad.push({t:`Laagste post: "${low.title}"`,x:`${fmt(low.views)} views (${rel(low.views)}). ${low.category==='Achter de schermen'||low.category==='Routine'?'Persoonlijke content scoort lager zonder concrete belofte in de hook.':'Check of de eerste 2 seconden duidelijk genoeg waren.'}`});
+  const ref=refDate(); const from=new Date(ref-28*864e5);
+  const rec=ps.filter(p=>within(p,from,ref)).length;
+  if(rec<S.weeklyTarget*4) bad.push({t:'Postfrequentie onder doel',x:`${rec} posts in de laatste 4 weken; doel is ${S.weeklyTarget*4}. Gebruik de weekplanner om vooruit te werken.`});
+  return {good,bad};
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function sampleNote(){ return S.sample?`<div class="note">Je ziet <b>voorbeelddata</b> gebaseerd op je eigen post-onderwerpen. Vervang ze via <b>Data → CSV importeren</b> of <b>+ Post toevoegen</b>; alle grafieken rekenen automatisch mee.</div>`:''; }
+
+function topRows(posts,n){
+  const top=[...posts].sort((a,b)=>b.views-a.views).slice(0,n); const max=Math.max(1,...top.map(p=>p.views));
+  return top.length?top.map(p=>`<div class="brow">${pill(p.platform)}<span class="t" title="${esc(p.title)}">${esc(p.title)}</span><div class="bar"><i style="width:${p.views/max*100}%"></i></div><span class="n">${fmt(p.views)}</span></div>`).join(''):'<div class="empty">Nog geen posts.</div>';
+}
+function scoreRows(rows,subKey){
+  return rows.map(r=>`<div class="srow"><span>${esc(r.name||r.cat)}${r[subKey]!==undefined?`<span class="sub">${esc(r[subKey])}</span>`:''}</span><div class="bar"><i class="${tone(r.score)}" style="width:${r.score}%"></i></div><span class="n">${r.score}</span></div>`).join('');
+}
+
+function renderOverview(){
+  const ig=S.posts.filter(p=>p.platform==='ig'), tt=S.posts.filter(p=>p.platform==='tt'), yt=S.posts.filter(p=>p.platform==='yt');
+  const cc=crossCategory();
+  const fmts={}; S.posts.forEach(p=>{const k=p.platform+'|'+p.format;});
+  $('#p-overview').innerHTML=`
+  <div class="head"><div class="label">Social media command center · ${esc(S.account)}</div><h1>SkinDecide in één oogopslag</h1></div>
+  ${sampleNote()}
+  <div class="grid g4">
+    <div class="card kpi"><div class="label">Instagram</div><div class="v">${nf.format(S.followers.ig)}</div><div class="s">volgers · <b>${ig.length}</b> posts gevolgd</div></div>
+    <div class="card kpi"><div class="label">TikTok</div><div class="v">${nf.format(S.followers.tt)}</div><div class="s">volgers · <b>${fmt(S.hearts)}</b> hearts · ${tt.length} video's</div></div>
+    <div class="card kpi"><div class="label">YouTube Shorts</div><div class="v">${nf.format(S.followers.yt)}</div><div class="s">abonnees · <b>${yt.length}</b> shorts · gem. ${fmt(avg(yt,p=>p.views))} views</div></div>
+    <div class="card kpi"><div class="label">Top onderwerp</div><div class="v" style="font-size:24px;margin-top:10px">${esc(cc[0]?.cat||'—')}</div><div class="s">wint op alle platforms samen</div></div>
+  </div>
+  <div class="grid g-main mt">
+    <div class="card"><div class="card-h"><div class="label">Top 5 posts op views · alle platforms</div></div>${topRows(S.posts,5)}</div>
+    <div class="card"><div class="card-h"><div class="label">Winnende contenttypes · cross-platform</div></div>${scoreRows(cc.map(r=>({...r,sub:r.n+(r.n===1?' post':' posts')})),'sub')}</div>
+  </div>
+  <div class="grid g3 mt">
+    ${['ig','tt','yt'].map(k=>`<div class="card"><div class="card-h"><div class="label">${PLAT[k]} · health score</div><button class="btn sm ghost" data-go="${k}">Details →</button></div>${scoreRows(health(k),'sub')}</div>`).join('')}
+  </div>`;
+}
+
+const sortState={ig:{k:'views',d:-1},tt:{k:'views',d:-1},yt:{k:'views',d:-1}};
+function renderPlatform(k){
+  const ps=S.posts.filter(p=>p.platform===k);
+  const st=sortState[k];
+  const val=(p,key)=>key==='er'?eng(p)/Math.max(1,p.views):key==='title'||key==='date'||key==='category'?String(p[key]||''):+p[key]||0;
+  const sorted=[...ps].sort((a,b)=>{const x=val(a,st.k),y=val(b,st.k);return (x>y?1:x<y?-1:0)*st.d;});
+  const V=sum(ps,p=>p.views);
+  const ins=insights(k);
+  const cols=[['date','Datum'],['title','Post'],['views','Views',1],['likes','Likes',1],['comments','Comm.',1],['saves',k==='yt'?'Saves':'Saves',1],['shares','Shares',1],['er','Eng. %',1]];
+  $('#p-'+k).innerHTML=`
+  <div class="head"><div class="label">Platform analytics</div><h1>${PLAT[k]} — ${esc(S.account)}</h1></div>
+  ${sampleNote()}
+  <div class="grid g4">
+    <div class="card kpi"><div class="label">${k==='yt'?'Abonnees':'Volgers'}</div><div class="v">${nf.format(S.followers[k])}</div><div class="s">totaal publiek</div></div>
+    <div class="card kpi"><div class="label">Posts gevolgd</div><div class="v">${ps.length}</div><div class="s">${fmt(V)} views totaal</div></div>
+    <div class="card kpi"><div class="label">Gem. views</div><div class="v">${fmt(avg(ps,p=>p.views))}</div><div class="s">per post</div></div>
+    <div class="card kpi"><div class="label">Engagement</div><div class="v">${pct(sum(ps,eng)/Math.max(1,V))}</div><div class="s">likes + comments + saves + shares</div></div>
+  </div>
+  <div class="card mt">
+    <div class="card-h"><div class="label">Best presterende posts · klik op een kolom om te sorteren</div><button class="btn sm" data-act="add-post" data-plat="${k}">+ Post</button></div>
+    <div class="tablewrap"><table>
+      <thead><tr>${cols.map(([key,l,num])=>`<th class="${num?'num':''} ${st.k===key?'sorted':''}" data-sort="${key}" data-plat="${k}">${l}${st.k===key?(st.d<0?' ↓':' ↑'):''}</th>`).join('')}<th></th></tr></thead>
+      <tbody>${sorted.map(p=>`<tr>
+        <td class="mono" style="font-size:12px;white-space:nowrap">${dateNL(p.date)}</td>
+        <td><div class="title">${esc(p.title)}</div><div class="meta">${esc(p.category)} · ${esc(p.format)}${+p.duration?` · ${p.duration}s`:''}</div></td>
+        <td class="num">${nf.format(p.views)}</td><td class="num">${nf.format(p.likes)}</td><td class="num">${nf.format(p.comments)}</td><td class="num">${nf.format(p.saves)}</td><td class="num">${nf.format(p.shares)}</td>
+        <td class="num">${pct(eng(p)/Math.max(1,p.views))}</td>
+        <td style="white-space:nowrap"><button class="btn sm ghost" data-act="edit-post" data-id="${p.id}">Bewerk</button><button class="x" data-act="del-post" data-id="${p.id}" title="Verwijderen">×</button></td>
+      </tr>`).join('')||`<tr><td colspan="9" class="empty">Nog geen posts op ${PLAT[k]}.</td></tr>`}</tbody>
+    </table></div>
+  </div>
+  <div class="grid g2 mt">
+    <div class="card"><div class="card-h"><div class="label">Wat werkt</div></div>${ins.good.map(i=>`<div class="insight good"><b>${esc(i.t)}</b><p>${esc(i.x)}</p></div>`).join('')||'<div class="empty">Nog geen duidelijke winnaars.</div>'}</div>
+    <div class="card"><div class="card-h"><div class="label">Wat niet werkt</div></div>${ins.bad.map(i=>`<div class="insight bad"><b>${esc(i.t)}</b><p>${esc(i.x)}</p></div>`).join('')||'<div class="empty">Niets opvallends — goed bezig.</div>'}</div>
+  </div>
+  <div class="grid g2 mt">
+    <div class="card"><div class="card-h"><div class="label">Onderwerpen op ${PLAT[k]}</div></div>${scoreRows(byCategory(ps).map(r=>({...r,sub:`${r.n} post${r.n===1?'':'s'} · gem. ${fmt(r.avgViews)}`})),'sub')||'<div class="empty">—</div>'}</div>
+    <div class="card"><div class="card-h"><div class="label">Health score</div></div>${scoreRows(health(k),'sub')}</div>
+  </div>`;
+}
+
+function renderTrend(){
+  const T=S.trends;
+  $('#p-trend').innerHTML=`
+  <div class="head"><div class="label">Trendonderzoek · bijgewerkt ${esc(dateNL(T.updated))}</div><h1>Trending nu — wat werkt in skincare</h1><p>${esc(T.source)}</p></div>
+  <div class="toolbar"><button class="btn" data-act="trend-meta">Bron &amp; datum bijwerken</button><button class="btn" data-act="add-topic">+ Trend</button><button class="btn" data-act="add-hook">+ Hook</button><button class="btn" data-act="add-idea">+ Video-idee</button></div>
+  <div class="grid g3">${T.kpis.map((x,i)=>`<div class="card kpi"><div class="card-h" style="margin:0"><div class="label">${esc(x.label)}</div><button class="btn sm ghost" data-act="edit-kpi" data-i="${i}">Bewerk</button></div><div class="v">${esc(x.value)}</div><div class="s">${esc(x.sub)}</div></div>`).join('')}</div>
+  <div class="grid g-main mt">
+    <div class="card"><div class="card-h"><div class="label">Trending onderwerpen · top ${T.topics.length}</div></div>
+      ${T.topics.map((t,i)=>`<div class="topic"><div class="topic-h"><span class="rank">${i+1}</span><h3>${esc(t.title)}</h3><span class="tag">${esc(t.heat||'')}</span><button class="btn sm ghost" data-act="edit-topic" data-i="${i}">Bewerk</button><button class="x" data-act="del-topic" data-i="${i}">×</button></div><p>${esc(t.text)}</p>${String(t.tags||'').split(',').filter(s=>s.trim()).map(s=>`<span class="tag">${esc(s.trim())}</span>`).join('')}</div>`).join('')||'<div class="empty">Voeg een trend toe.</div>'}
+    </div>
+    <div class="card"><div class="card-h"><div class="label">Winnende hooks · meest herhaalde patronen</div></div>
+      ${T.hooks.map((h,i)=>`<div class="hook ${h.alt?'alt':''}"><div class="label" style="display:flex;justify-content:space-between">Hook #${i+1}<span><button class="btn sm ghost" data-act="edit-hook" data-i="${i}">Bewerk</button><button class="x" data-act="del-hook" data-i="${i}">×</button></span></div><div class="q">${esc(h.hook)}</div><p>${esc(h.why)}</p></div>`).join('')||'<div class="empty">Voeg een hook toe.</div>'}
+    </div>
+  </div>
+  <div class="card mt"><div class="card-h"><div><div class="label">Trend → actie</div><h2 style="margin-top:4px">${T.ideas.length} SkinDecide video-ideeën op basis van deze trends</h2><p class="muted" style="font-size:13px">Elk idee koppelt een bevestigd trendsignaal aan jouw expertise. Film ze in één batch.</p></div></div>
+    ${T.ideas.map((d,i)=>`<div class="idea"><div class="num">${i+1}</div><div class="body">
+      <div style="display:flex;gap:8px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap"><h3 style="font-family:'DM Sans';font-weight:600;font-size:15px">${esc(d.title)}</h3><span><button class="btn sm" data-act="idea-to-bank" data-i="${i}">→ Contentbank</button> <button class="btn sm ghost" data-act="edit-idea" data-i="${i}">Bewerk</button><button class="x" data-act="del-idea" data-i="${i}">×</button></span></div>
+      <div class="hk"><span class="label">Hook</span> ${esc(d.hook)}</div>
+      <div class="cols"><div><div class="label">Onderwerp</div>${esc(d.topic)}</div><div><div class="label">Ingrediënt / product</div>${esc(d.ingredient)}</div></div>
+    </div></div>`).join('')}
+  </div>`;
+}
+
+let bankFilter='all';
+function renderBank(){
+  const items=S.bank.filter(b=>bankFilter==='all'||b.platform===bankFilter);
+  $('#p-bank').innerHTML=`
+  <div class="head"><div class="label">Ideeën &amp; productie</div><h1>Contentbank</h1><p>Verzamel ideeën en schuif ze door van idee naar gepost. Ideeën uit Trending nu komen hier binnen.</p></div>
+  <div class="toolbar"><button class="btn primary" data-act="add-bank">+ Idee</button>
+    <select id="bankFilter"><option value="all">Alle platforms</option>${Object.entries(PLAT).map(([k,v])=>`<option value="${k}" ${bankFilter===k?'selected':''}>${v}</option>`).join('')}</select></div>
+  <div class="kanban">${STATUSES.map((s,si)=>{const col=items.filter(b=>b.status===s);return `<div class="col"><div class="col-h"><span class="label">${s}</span><span class="pill">${col.length}</span></div>
+    ${col.map(b=>`<div class="item"><div class="it">${esc(b.title)}</div><div>${pill(b.platform)} <span class="tag">${esc(b.category)}</span></div>${b.note?`<div class="muted" style="font-size:12px;margin-top:6px">${esc(b.note)}</div>`:''}
+      <div class="ia">${si>0?`<button class="btn sm" data-act="bank-move" data-id="${b.id}" data-dir="-1">←</button>`:''}${si<3?`<button class="btn sm" data-act="bank-move" data-id="${b.id}" data-dir="1">${STATUSES[si+1]} →</button>`:''}<button class="btn sm ghost" data-act="bank-plan" data-id="${b.id}">Plan in</button><button class="btn sm ghost" data-act="edit-bank" data-id="${b.id}">Bewerk</button><button class="x" data-act="del-bank" data-id="${b.id}">×</button></div></div>`).join('')}
+  </div>`}).join('')}</div>`;
+}
+
+function renderPlan(){
+  const posting=new Set(); S.plan.forEach(i=>{ if(i.platform!=='none') posting.add(i.day); });
+  const done=S.plan.filter(i=>i.done).length;
+  $('#p-plan').innerHTML=`
+  <div class="head"><div class="label">Deze week · ${done}/${S.plan.length} afgerond</div><h1>Weekplanner</h1><p>Doel: ${S.weeklyTarget} posts per week per platform. Dagen met een gekleurde rand hebben geplande content.</p></div>
+  <div class="toolbar"><button class="btn" data-act="plan-clear-done">Afgeronde items wissen</button></div>
+  <div class="week">${DAYS.map((d,di)=>{const its=S.plan.filter(i=>i.day===di);return `<div class="day ${posting.has(di)?'post':''}"><h3>${d}</h3><div class="label">${its.length} item${its.length===1?'':'s'}</div>
+    <div class="items">${its.map(i=>`<div class="pitem ${i.done?'done':''}"><input type="checkbox" data-act="plan-toggle" data-id="${i.id}" ${i.done?'checked':''} aria-label="Afgerond">${i.platform!=='none'?pill(i.platform):''}<span class="ptxt">${esc(i.text)}</span><button class="x" data-act="plan-del" data-id="${i.id}">×</button></div>`).join('')}</div>
+    <button class="btn sm" data-act="plan-add" data-day="${di}">+ Toevoegen</button></div>`}).join('')}</div>`;
+}
+
+function renderChange(){
+  const ref=refDate(), mid=new Date(ref-14*864e5), start=new Date(ref-28*864e5);
+  const cur=S.posts.filter(p=>within(p,mid,ref)), prev=S.posts.filter(p=>within(p,start,mid));
+  const d=(a,b,isPct)=>{ if(!b) return `<span class="delta muted">—</span>`; const x=(a-b)/b; return `<span class="delta ${x>=0?'up':'down'}">${x>=0?'▲':'▼'} ${pct(Math.abs(x),0)}</span>`; };
+  const metric=(ps)=>({n:ps.length,v:sum(ps,p=>p.views),a:avg(ps,p=>p.views),er:sum(ps,eng)/Math.max(1,sum(ps,p=>p.views)),s:sum(ps,p=>p.saves)});
+  const C=metric(cur),P=metric(prev);
+  const snaps=[...S.snapshots].sort((a,b)=>a.date<b.date?-1:1); const last=snaps[snaps.length-1];
+  const top5=new Set([...S.posts].sort((a,b)=>b.views-a.views).slice(0,5).map(p=>p.id));
+  const newTop=cur.filter(p=>top5.has(p.id));
+  const cc=byCategory(cur), pc=Object.fromEntries(byCategory(prev).map(r=>[r.cat,r.avgViews]));
+  $('#p-change').innerHTML=`
+  <div class="head"><div class="label">Laatste 14 dagen vs de 14 dagen ervoor · t/m ${dateNL(ref.toISOString().slice(0,10))}</div><h1>Wat veranderde</h1><p>Vergelijkt je recentste posts met de periode ervoor. Sla regelmatig een volgers-snapshot op om ook groei te zien.</p></div>
+  ${sampleNote()}
+  <div class="grid g4">
+    <div class="card kpi"><div class="label">Posts</div><div class="v">${C.n}${d(C.n,P.n)}</div><div class="s">was ${P.n}</div></div>
+    <div class="card kpi"><div class="label">Views totaal</div><div class="v">${fmt(C.v)}${d(C.v,P.v)}</div><div class="s">was ${fmt(P.v)}</div></div>
+    <div class="card kpi"><div class="label">Gem. views per post</div><div class="v">${fmt(C.a)}${d(C.a,P.a)}</div><div class="s">was ${fmt(P.a)}</div></div>
+    <div class="card kpi"><div class="label">Engagement</div><div class="v">${pct(C.er)}${d(C.er,P.er)}</div><div class="s">was ${pct(P.er)}</div></div>
+  </div>
+  <div class="grid g2 mt">
+    <div class="card"><div class="card-h"><div class="label">Volgersgroei sinds snapshot ${last?dateNL(last.date):''}</div><button class="btn sm" data-act="snapshot">Snapshot opslaan</button></div>
+      ${['ig','tt','yt'].map(k=>{const was=last?.followers?.[k]; const now=S.followers[k]; const diff=was!=null?now-was:null;
+        return `<div class="srow"><span>${PLAT[k]}<span class="sub">${nf.format(now)} nu${was!=null?` · was ${nf.format(was)}`:''}</span></span><span></span><span class="n ${diff>0?'up':diff<0?'down':''}" style="white-space:nowrap">${diff==null?'—':(diff>=0?'+':'')+nf.format(diff)}</span></div>`}).join('')}
+      <p class="muted" style="font-size:12px;margin-top:10px">Pas volgers aan via Thema &amp; instellingen, en sla daarna een snapshot op.</p>
+    </div>
+    <div class="card"><div class="card-h"><div class="label">Onderwerpen deze periode</div></div>
+      ${cc.map(r=>{const was=pc[r.cat];return `<div class="srow"><span>${esc(r.cat)}<span class="sub">${r.n} post${r.n===1?'':'s'} · gem. ${fmt(r.avgViews)}</span></span><div class="bar"><i class="${tone(r.score)}" style="width:${r.score}%"></i></div><span class="n" style="white-space:nowrap">${was?d(r.avgViews,was):'<span class="delta muted">nieuw</span>'}</span></div>`}).join('')||'<div class="empty">Geen posts in deze periode.</div>'}
+    </div>
+  </div>
+  <div class="card mt"><div class="card-h"><div class="label">Nieuwe toppers · recente posts in je all-time top 5</div></div>
+    ${newTop.length?newTop.map(p=>`<div class="brow">${pill(p.platform)}<span class="t">${esc(p.title)}</span><span class="muted" style="font-size:12px">${dateNL(p.date)} · ${esc(p.category)}</span><span class="n">${fmt(p.views)}</span></div>`).join(''):'<div class="empty">Geen recente post in de top 5.</div>'}
+  </div>`;
+}
+
+function renderAll(){
+  applyTheme(); renderOverview(); ['ig','tt','yt'].forEach(renderPlatform); renderTrend(); renderBank(); renderPlan(); renderChange();
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+const THEMES={cream:['SkinDecide','#f0ece2','#c8432a'],dark:['Donker','#141210','#e8846e'],sage:['Salie','#e9ede4','#4f7a55'],blush:['Blush','#f6ebe8','#b8506a']};
+function applyTheme(){
+  const r=document.documentElement;
+  let t=S.theme; if(t==='auto') t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'cream';
+  if(t==='cream') r.removeAttribute('data-theme'); else r.setAttribute('data-theme',t);
+  r.style.removeProperty('--accent'); if(S.accent) r.style.setProperty('--accent',S.accent);
+}
+
+/* ============================================================
+   MODAL FORMS
+   ============================================================ */
+function openForm(title,fields,data,onSave,extra=''){
+  const f=$('#mform');
+  f.innerHTML=`<div class="mh"><h2>${esc(title)}</h2><button class="x" value="cancel" style="font-size:20px">×</button></div>
+  <div class="mb">${extra}${fields.map(fd=>{
+    const v=data?.[fd.k]??fd.def??''; const cls=fd.full?'full':'';
+    if(fd.type==='select') return `<label class="${cls}">${fd.l}<select name="${fd.k}">${fd.opts.map(o=>{const [ov,ol]=Array.isArray(o)?o:[o,o];return `<option value="${esc(ov)}" ${String(ov)===String(v)?'selected':''}>${esc(ol)}</option>`}).join('')}</select></label>`;
+    if(fd.type==='textarea') return `<label class="${cls}">${fd.l}<textarea name="${fd.k}">${esc(v)}</textarea></label>`;
+    return `<label class="${cls}">${fd.l}<input name="${fd.k}" type="${fd.type||'text'}" value="${esc(v)}" ${fd.type==='number'?'min="0" step="any"':''} ${fd.req?'required':''}></label>`;
+  }).join('')}</div>
+  <div class="mf"><button class="btn" value="cancel" formnovalidate>Annuleren</button><button class="btn primary" value="ok">Opslaan</button></div>`;
+  const dlg=$('#modal');
+  f.onsubmit=e=>{
+    if(e.submitter?.value!=='ok') return;
+    const out={}; fields.forEach(fd=>{ let v=f.elements[fd.k].value; if(fd.type==='number') v=+v||0; out[fd.k]=v; });
+    onSave(out); save(); renderAll();
+  };
+  dlg.showModal();
+}
+const postFields=[
+  {k:'title',l:'Titel / hook',full:1,req:1},
+  {k:'platform',l:'Platform',type:'select',opts:Object.entries(PLAT)},
+  {k:'date',l:'Datum',type:'date',req:1},
+  {k:'category',l:'Onderwerp',type:'select',opts:CATS},
+  {k:'format',l:'Format',type:'select',opts:FORMATS},
+  {k:'views',l:'Views',type:'number'},{k:'likes',l:'Likes',type:'number'},
+  {k:'comments',l:'Comments',type:'number'},{k:'saves',l:'Saves',type:'number'},
+  {k:'shares',l:'Shares',type:'number'},{k:'duration',l:'Duur (sec, 0 = geen video)',type:'number'},
+];
+function clearSample(){ if(S.sample){ S.sample=false; } }
+
+/* ============================================================
+   CSV / JSON
+   ============================================================ */
+function parseCSV(text){
+  const sep=(text.split('\n')[0].match(/;/g)||[]).length>(text.split('\n')[0].match(/,/g)||[]).length?';':',';
+  const rows=[];let row=[],cell='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; } else cell+=c; }
+    else if(c==='"') q=true; else if(c===sep){row.push(cell);cell='';} else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n')i++; row.push(cell);rows.push(row);row=[];cell=''; } else cell+=c; }
+  if(cell||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(r=>r.some(c=>c.trim()));
+}
+const HEAD_MAP={platform:'platform',platform_:'platform',titel:'title',title:'title',hook:'title',onderwerp:'category',categorie:'category',category:'category',format:'format',type:'format',datum:'date',date:'date',views:'views',weergaven:'views',plays:'views',likes:'likes',comments:'comments',reacties:'comments',saves:'saves',opgeslagen:'saves',shares:'shares',gedeeld:'shares',duur:'duration',duration:'duration'};
+function normPlat(v){ v=String(v).toLowerCase(); if(v.startsWith('t')) return 'tt'; if(v.startsWith('y')) return 'yt'; return 'ig'; }
+function normDate(v){ v=String(v).trim(); let m=v.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/); if(m) return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`; m=v.match(/^\d{4}-\d{2}-\d{2}/); return m?m[0]:new Date().toISOString().slice(0,10); }
+const numv=v=>+String(v).replace(/\./g,'').replace(',','.').replace(/[^\d.]/g,'')||0;
+function importCSV(text,replace){
+  const rows=parseCSV(text); if(rows.length<2) throw new Error('Leeg bestand');
+  const heads=rows[0].map(h=>HEAD_MAP[h.trim().toLowerCase().replace(/\s+/g,'_')]||null);
+  if(!heads.includes('views')||!heads.includes('title')) throw new Error('Kolommen "titel" en "views" zijn verplicht');
+  const posts=rows.slice(1).map(r=>{const p={id:uid(),platform:'ig',title:'',category:CATS[0],format:'Reel',date:'',views:0,likes:0,comments:0,saves:0,shares:0,duration:0};
+    heads.forEach((h,i)=>{ if(!h) return; const v=r[i]??''; if(h==='platform') p.platform=normPlat(v); else if(h==='date') p.date=normDate(v); else if(['views','likes','comments','saves','shares','duration'].includes(h)) p[h]=numv(v); else p[h]=v.trim()||p[h]; });
+    if(!p.date) p.date=new Date().toISOString().slice(0,10); return p;}).filter(p=>p.title);
+  S.posts=replace?posts:S.posts.concat(posts); S.sample=false; return posts.length;
+}
+function download(name,text,type){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); }
+function toCSV(){ const h=['platform','datum','titel','onderwerp','format','views','likes','comments','saves','shares','duur']; const q=v=>`"${String(v??'').replace(/"/g,'""')}"`;
+  return [h.join(',')].concat(S.posts.map(p=>[PLAT[p.platform],p.date,p.title,p.category,p.format,p.views,p.likes,p.comments,p.saves,p.shares,p.duration].map(q).join(','))).join('\n'); }
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+function go(tab){ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab)); document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='p-'+tab)); try{localStorage.setItem(KEY+'-tab',tab)}catch(e){} window.scrollTo({top:0}); }
+let importMode='add';
+document.addEventListener('click',e=>{
+  const tab=e.target.closest('.tab'); if(tab) return go(tab.dataset.tab);
+  const g=e.target.closest('[data-go]'); if(g) return go(g.dataset.go);
+  const th=e.target.closest('th[data-sort]'); if(th){ const st=sortState[th.dataset.plat]; if(st.k===th.dataset.sort) st.d*=-1; else {st.k=th.dataset.sort; st.d=['title','category'].includes(st.k)?1:-1;} return renderPlatform(th.dataset.plat); }
+  const b=e.target.closest('[data-act]'); if(!b||b.type==='checkbox') return;
+  const a=b.dataset.act, id=b.dataset.id, i=+b.dataset.i, T=S.trends;
+  const findP=()=>S.posts.find(p=>p.id===id);
+  switch(a){
+    case 'add-post': openForm('Post toevoegen',postFields,{platform:b.dataset.plat||'ig',date:new Date().toISOString().slice(0,10),format:b.dataset.plat==='tt'?'TikTok video':b.dataset.plat==='yt'?'Short':'Reel'},d=>{ if(S.sample&&confirm('Voorbeelddata eerst wissen? (Annuleren = je post wordt toegevoegd aan de voorbeelden)')) S.posts=[]; clearSample(); S.posts.push({id:uid(),...d}); toast('Post toegevoegd'); }); break;
+    case 'edit-post': openForm('Post bewerken',postFields,findP(),d=>{ Object.assign(findP(),d); toast('Opgeslagen'); }); break;
+    case 'del-post': if(confirm('Deze post verwijderen?')){ S.posts=S.posts.filter(p=>p.id!==id); save(); renderAll(); } break;
+    case 'settings': openSettings(); break;
+    case 'data': openData(); break;
+    case 'trend-meta': openForm('Bron & datum',[{k:'updated',l:'Bijgewerkt op',type:'date'},{k:'source',l:'Bron / hashtags',full:1}],T,d=>Object.assign(T,d)); break;
+    case 'edit-kpi': openForm('Kerncijfer bewerken',[{k:'label',l:'Label',full:1},{k:'value',l:'Waarde',full:1},{k:'sub',l:'Toelichting',full:1}],T.kpis[i],d=>Object.assign(T.kpis[i],d)); break;
+    case 'add-topic': case 'edit-topic': openForm(a==='add-topic'?'Trend toevoegen':'Trend bewerken',[{k:'title',l:'Trend',full:1,req:1},{k:'text',l:'Uitleg',type:'textarea',full:1},{k:'tags',l:'Tags (komma gescheiden)'},{k:'heat',l:'Status',type:'select',opts:['Heet','Stijgend','Stabiel','Dalend']}],a==='edit-topic'?T.topics[i]:{},d=>{ a==='edit-topic'?Object.assign(T.topics[i],d):T.topics.push(d); }); break;
+    case 'del-topic': T.topics.splice(i,1); save(); renderTrend(); break;
+    case 'add-hook': case 'edit-hook': openForm(a==='add-hook'?'Hook toevoegen':'Hook bewerken',[{k:'hook',l:'Hook',full:1,req:1},{k:'why',l:'Waarom het werkt',type:'textarea',full:1},{k:'alt',l:'Type',type:'select',opts:[['','Bewezen'],['1','Experimenteel / riskant']]}],a==='edit-hook'?{...T.hooks[i],alt:T.hooks[i].alt?'1':''}:{},d=>{ d.alt=!!d.alt; a==='edit-hook'?Object.assign(T.hooks[i],d):T.hooks.push(d); }); break;
+    case 'del-hook': T.hooks.splice(i,1); save(); renderTrend(); break;
+    case 'add-idea': case 'edit-idea': openForm(a==='add-idea'?'Video-idee toevoegen':'Video-idee bewerken',[{k:'title',l:'Titel',full:1,req:1},{k:'hook',l:'Hook',full:1},{k:'topic',l:'Onderwerp / aanpak',type:'textarea',full:1},{k:'ingredient',l:'Ingrediënt / product',full:1}],a==='edit-idea'?T.ideas[i]:{},d=>{ a==='edit-idea'?Object.assign(T.ideas[i],d):T.ideas.push(d); }); break;
+    case 'del-idea': T.ideas.splice(i,1); save(); renderTrend(); break;
+    case 'idea-to-bank': { const d=T.ideas[i]; S.bank.push({id:uid(),title:d.title,platform:'tt',category:'Productvergelijking',status:'Idee',note:'Hook: '+d.hook}); save(); renderBank(); toast('Toegevoegd aan contentbank'); } break;
+    case 'add-bank': case 'edit-bank': { const it=S.bank.find(x=>x.id===id); openForm(it?'Idee bewerken':'Idee toevoegen',[{k:'title',l:'Titel',full:1,req:1},{k:'platform',l:'Platform',type:'select',opts:Object.entries(PLAT)},{k:'category',l:'Onderwerp',type:'select',opts:CATS},{k:'status',l:'Status',type:'select',opts:STATUSES},{k:'note',l:'Notitie / hook',type:'textarea',full:1}],it||{status:'Idee'},d=>{ it?Object.assign(it,d):S.bank.push({id:uid(),...d}); }); } break;
+    case 'bank-move': { const it=S.bank.find(x=>x.id===id); const si=STATUSES.indexOf(it.status)+(+b.dataset.dir); it.status=STATUSES[Math.max(0,Math.min(3,si))]; save(); renderBank(); } break;
+    case 'del-bank': S.bank=S.bank.filter(x=>x.id!==id); save(); renderBank(); break;
+    case 'bank-plan': { const it=S.bank.find(x=>x.id===id); openForm('Inplannen',[{k:'day',l:'Dag',type:'select',opts:DAYS.map((d,k)=>[k,d])}],{day:0},d=>{ S.plan.push({id:uid(),day:+d.day,platform:it.platform,text:it.title,done:false}); toast('Ingepland op '+DAYS[+d.day]); }); } break;
+    case 'plan-add': openForm('Toevoegen aan '+DAYS[+b.dataset.day],[{k:'text',l:'Wat?',full:1,req:1},{k:'platform',l:'Platform',type:'select',opts:[...Object.entries(PLAT),['none','Geen (taak)']]}],{},d=>S.plan.push({id:uid(),day:+b.dataset.day,platform:d.platform,text:d.text,done:false})); break;
+    case 'plan-del': S.plan=S.plan.filter(x=>x.id!==id); save(); renderPlan(); break;
+    case 'plan-clear-done': S.plan=S.plan.filter(x=>!x.done); save(); renderPlan(); break;
+    case 'snapshot': { const today=new Date().toISOString().slice(0,10); S.snapshots=S.snapshots.filter(s=>s.date!==today); S.snapshots.push({date:today,followers:{...S.followers}}); save(); renderChange(); toast('Snapshot opgeslagen'); } break;
+  }
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('[data-act="plan-toggle"]')){ const it=S.plan.find(x=>x.id===e.target.dataset.id); it.done=e.target.checked; save(); renderPlan(); }
+  if(e.target.id==='bankFilter'){ bankFilter=e.target.value; renderBank(); }
+});
+
+function openSettings(){
+  const extra=`<div class="full"><div class="label" style="margin-bottom:8px">Thema</div><div class="swatches">${Object.entries({auto:['Automatisch','linear-gradient(90deg,#f0ece2 50%,#141210 50%)','#c8432a'],...THEMES}).map(([k,[n,bg,ac]])=>`<button type="button" class="sw ${S.theme===k?'on':''}" data-theme-pick="${k}"><span style="background:${bg.startsWith('linear')?bg:`linear-gradient(135deg,${bg} 60%,${ac} 60%)`}"></span>${n}</button>`).join('')}</div></div>
+  <label>Accentkleur (optioneel)<input type="color" name="accentPick" value="${S.accent||'#c8432a'}"></label><label style="justify-content:flex-end"><button type="button" class="btn sm" id="accReset">Standaard accent</button></label>`;
+  openForm('Thema & instellingen',[
+    {k:'account',l:'Accountnaam',full:1},
+    {k:'ig',l:'Instagram volgers',type:'number'},{k:'tt',l:'TikTok volgers',type:'number'},
+    {k:'yt',l:'YouTube abonnees',type:'number'},{k:'hearts',l:'TikTok hearts totaal',type:'number'},
+    {k:'weeklyTarget',l:'Doel: posts per week per platform',type:'number'},
+  ],{account:S.account,...S.followers,hearts:S.hearts,weeklyTarget:S.weeklyTarget},d=>{
+    S.account=d.account; S.followers={ig:d.ig,tt:d.tt,yt:d.yt}; S.hearts=d.hearts; S.weeklyTarget=Math.max(1,d.weeklyTarget||3);
+  },extra);
+  const f=$('#mform');
+  f.querySelectorAll('[data-theme-pick]').forEach(btn=>btn.onclick=()=>{ S.theme=btn.dataset.themePick; S.accent=''; f.querySelectorAll('.sw').forEach(x=>x.classList.toggle('on',x===btn)); save(); applyTheme(); });
+  f.elements.accentPick.oninput=e=>{ S.accent=e.target.value; save(); applyTheme(); };
+  $('#accReset').onclick=()=>{ S.accent=''; save(); applyTheme(); };
+}
+function openData(){
+  const f=$('#mform');
+  f.innerHTML=`<div class="mh"><h2>Data</h2><button class="x" value="cancel" style="font-size:20px">×</button></div>
+  <div class="mb" style="grid-template-columns:1fr">
+    <div><b>Posts importeren uit CSV</b><p class="muted" style="font-size:12.5px;margin:4px 0 8px">Exporteer je posts uit Instagram/TikTok/YouTube (of Metricool, Later, enz.) naar een spreadsheet met kolommen: <span class="mono">platform, datum, titel, onderwerp, format, views, likes, comments, saves, shares, duur</span>. Alleen <i>titel</i> en <i>views</i> zijn verplicht.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn primary" data-imp="replace">CSV importeren (vervangen)</button><button type="button" class="btn" data-imp="add">CSV toevoegen</button><button type="button" class="btn" id="tplCsv">Leeg sjabloon</button></div></div>
+    <div><b>Back-up</b><p class="muted" style="font-size:12.5px;margin:4px 0 8px">Alles wordt in deze browser bewaard. Maak een back-up om op een ander apparaat verder te werken.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="expJson">Back-up downloaden (.json)</button><button type="button" class="btn" data-imp="json">Back-up terugzetten</button><button type="button" class="btn" id="expCsv">Posts als CSV</button></div></div>
+    <div><b>Opnieuw beginnen</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="btn" id="clrPosts">Alle posts wissen</button><button type="button" class="btn" id="rstAll">Terug naar voorbeelddata</button></div></div>
+  </div><div class="mf"><button class="btn" value="cancel">Sluiten</button></div>`;
+  f.onsubmit=null;
+  f.querySelectorAll('[data-imp]').forEach(btn=>btn.onclick=()=>{ importMode=btn.dataset.imp; $('#fileIn').value=''; $('#fileIn').click(); });
+  $('#tplCsv').onclick=()=>download('skindecide-posts-sjabloon.csv','platform,datum,titel,onderwerp,format,views,likes,comments,saves,shares,duur\nInstagram,2026-02-02,Voorbeeld post,Ingrediënt spotlight,Reel,1000,80,5,40,10,25\n','text/csv');
+  $('#expJson').onclick=()=>download('skindecide-dashboard-backup.json',JSON.stringify(S,null,2),'application/json');
+  $('#expCsv').onclick=()=>download('skindecide-posts.csv',toCSV(),'text/csv');
+  $('#clrPosts').onclick=()=>{ if(confirm('Alle posts wissen?')){ S.posts=[]; S.sample=false; save(); renderAll(); $('#modal').close(); toast('Posts gewist'); } };
+  $('#rstAll').onclick=()=>{ if(confirm('Alles terugzetten naar voorbeelddata? Je eigen data gaat verloren.')){ const th=S.theme,ac=S.accent; S=defaults(); S.theme=th; S.accent=ac; save(); renderAll(); $('#modal').close(); toast('Voorbeelddata hersteld'); } };
+  $('#modal').showModal();
+}
+$('#fileIn').addEventListener('change',async e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const text=await file.text();
+  try{
+    if(importMode==='json'){ const d=JSON.parse(text); if(!Array.isArray(d.posts)) throw new Error('Geen geldige back-up'); S=Object.assign(defaults(),d); toast('Back-up teruggezet'); }
+    else { const n=importCSV(text,importMode==='replace'); toast(n+' posts geïmporteerd'); }
+    save(); renderAll(); $('#modal').close();
+  }catch(err){ alert('Import mislukt: '+err.message); }
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{ if(S.theme==='auto') applyTheme(); });
+
+load(); renderAll();
+try{ const t=localStorage.getItem(KEY+'-tab'); if(t&&$('#p-'+t)) go(t); }catch(e){}
+</script>
+</body>
+</html>
