@@ -41,3 +41,9 @@
 **Feedback:** akkoord met v6-stijl, maar cijfer "12" te groot.
 **Decisions:** alleen "12" op \fs190 (rest script \fs280); cijfers in dit script zijn van zichzelf te groot. Vastgelegd in tools/fonts/README.md.
 **Outstanding:** feedback op v7.
+
+## Session 1h — 2026-11-25 (v8)
+
+**Feedback:** te veel ruimte tussen bovenste en onderste regel.
+**Decisions:** titel als 2 losse events (regel 1 \an2 y=1160, regel 2 \an5 y=1220) i.p.v. \N; gap getest op 1150–1240, 1220 = strak zonder overlap.
+**Outstanding:** feedback op v8.

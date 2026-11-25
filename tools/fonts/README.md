@@ -8,7 +8,10 @@ brand content.
 with free look-alikes):
 - Line 1: **DM Serif Display** (looks like Moglite), `\fs104`
 - Line 2: **Mrs Saint Delafield** (signature script, looks like adelia/Mistrully), `\fs280`
-- ASS: `{\pos(540,1230)\fad(0,300)}line one\N{\fnMrs Saint Delafield\fs280}line two`
+- ASS: two separate events. One `\N` line leaves a big gap because the script font has
+  tall line metrics, so tune the gap by eye:
+  `{\an2\pos(540,1160)}line one`
+  `{\an5\pos(540,1220)\fnMrs Saint Delafield\fs280}na {\fs190}12{\fs280} uur`
 
 Other fonts here (Playfair Display, Cormorant Garamond, Bodoni Moda) were earlier options.
 
