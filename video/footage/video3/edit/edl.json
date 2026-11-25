@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "sources": {
+    "raw": "raw.mp4"
+  },
+  "audio": "silent (muziek toevoegen in app)",
+  "title": "pincurl reveal na 12 uur",
+  "ranges": [
+    {
+      "source": "raw",
+      "start": 0.0,
+      "end": 1.6,
+      "beat": "hook: handen gevouwen, sjaal nog om"
+    },
+    {
+      "source": "raw",
+      "start": 26.0,
+      "end": 29.0,
+      "beat": "sjaal af, pins zichtbaar"
+    },
+    {
+      "source": "raw",
+      "start": 108.5,
+      "end": 110.5,
+      "beat": "pins eruit, krullen vallen"
+    },
+    {
+      "source": "raw",
+      "start": 150.0,
+      "end": 151.5,
+      "beat": "krullen"
+    },
+    {
+      "source": "raw",
+      "start": 199.5,
+      "end": 201.0,
+      "beat": "laatste pin eruit"
+    },
+    {
+      "source": "raw",
+      "start": 207.0,
+      "end": 209.0,
+      "beat": "alle krullen los (piek)"
+    },
+    {
+      "source": "raw",
+      "start": 225.5,
+      "end": 227.0,
+      "beat": "losschudden"
+    },
+    {
+      "source": "raw",
+      "start": 265.0,
+      "end": 266.5,
+      "beat": "uitborstelen"
+    },
+    {
+      "source": "raw",
+      "start": 271.0,
+      "end": 273.0,
+      "beat": "uitborstelen"
+    },
+    {
+      "source": "raw",
+      "start": 280.0,
+      "end": 281.5,
+      "beat": "krullen uitgezakt"
+    },
+    {
+      "source": "raw",
+      "start": 405.0,
+      "end": 407.5,
+      "beat": "redden: haarzwiep"
+    },
+    {
+      "source": "raw",
+      "start": 509.5,
+      "end": 514.0,
+      "beat": "eindresultaat + duim omlaag"
+    }
+  ],
+  "total_duration_s": 25.1
+}
