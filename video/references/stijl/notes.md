@@ -54,3 +54,10 @@ het netwerk blokkeert TikTok. Vraag de gebruiker om het bestand te sturen.
 Kijk bij elke aangeleverde video kritisch of de montage strakker kan: stiltes aan begin en
 eind, pauzes > ~0.4s, herhalingen en zinnen die niets toevoegen. Stel concrete inkortingen
 voor (met tijden en nieuwe lengte) en wacht op akkoord vóór het knippen.
+
+## Titels / tekst in beeld (geleerd, pincurl-video)
+
+Korte titel (bv. "pincurl reveal na 12 uur") alleen tijdens de hook (~eerste 4s), daarna weg
+met korte fade. Positie: **borsthoogte (y≈1180)**, zelfde serif als de captions: valt buiten
+de TikTok/Reels-UI, op een rustige achtergrond, en bedekt haar en gezicht niet. Nooit
+midden (gezicht) en bij haar-video's niet bovenin (bedekt het onderwerp).

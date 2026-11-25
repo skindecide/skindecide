@@ -17,3 +17,9 @@
 **Feedback:** eindshot te lang; pins eruithalen sneller; netter sjaal-af-shot.
 **Decisions:** sjaal af nu 29.2–31.6 (sjaal als gordijn opgetild, dan gezicht met pins) i.p.v. 26–29 (fladderig). Pin-shots ingekort naar 1.0–1.3s. Eindshot 4.5s → 2.8s (509.8–512.6). Titel 0–4.0s. Totaal 25.1s → 20.2s.
 **Outstanding:** feedback op v3.
+
+## Session 1d — 2026-11-25 (v4)
+
+**Vraag gebruiker:** titel hoog, midden of weg?
+**Decisions:** titel naar borsthoogte (y=1180), zelfde plek als huis-captions. Hoog bedekte haar/sjaal (onderwerp van de video), midden viel op kin/mond. Weglaten niet: zonder gesproken tekst geeft "12 uur" de context en de nieuwsgierigheid voor de eerste seconde.
+**Outstanding:** feedback op v4.
