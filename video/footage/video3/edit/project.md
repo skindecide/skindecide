@@ -5,3 +5,9 @@
 **Decisions:** zie `edl.json` / `cut.py` (12 shots, 25.1s). Weglopen (3:56–4:22, 7:46–7:58) en herhalingen eruit.
 **Reasoning log:** Niet openen met eindresultaat omdat het resultaat tegenvalt: spanning opbouwen naar de duim. Shots per stuk geëxtraheerd (één filtergraph met 12 trims liep OOM op de 8.6 min HEVC).
 **Outstanding:** feedback op v1 (tempo, shotkeuze, titel aan/uit, lengte).
+
+## Session 1b — 2026-11-25 (v2)
+
+**Feedback:** titel niet de hele tijd in beeld.
+**Decisions:** titel alleen 0–4.6s (hook + sjaal af), fade-out 0.3s. Verder gelijk aan v1.
+**Outstanding:** verdere feedback op v2.

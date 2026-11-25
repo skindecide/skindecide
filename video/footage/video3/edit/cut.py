@@ -16,6 +16,7 @@ SHOTS = [  # (start, end, beat)
     (509.5, 514.0, "eindresultaat + duim omlaag"),
 ]
 TITLE = "pincurl reveal na 12 uur"
+TITLE_END = 4.6  # alleen tijdens hook + sjaal af (gebruiker: niet de hele tijd)
 total = sum(e - s for s, e, _ in SHOTS)
 ass = f"""[Script Info]
 ScriptType: v4.00+
@@ -28,7 +29,7 @@ Style: Title,Liberation Serif,84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H60000000,0,0
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:{total:05.2f},Title,,0,0,0,,{{\\pos(540,360)}}{TITLE}
+Dialogue: 0,0:00:00.00,0:00:{TITLE_END:05.2f},Title,,0,0,0,,{{\\pos(540,360)\\fad(0,300)}}{TITLE}
 """
 open("edit/title.ass", "w").write(ass)
 import os
@@ -45,7 +46,7 @@ subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "con
                 "-i", "edit/clips/list.txt", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
                 "-vf", "ass=edit/title.ass", "-map", "0:v", "-map", "1:a", "-shortest",
                 "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p",
-                "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "edit/final_v1.mp4"], check=True)
+                "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "edit/final_v2.mp4"], check=True)
 json.dump({"version": 1, "sources": {"raw": SRC}, "audio": "silent (muziek toevoegen in app)",
            "title": TITLE,
            "ranges": [{"source": "raw", "start": s, "end": e, "beat": b} for s, e, b in SHOTS],
