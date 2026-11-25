@@ -94,10 +94,12 @@ live only in this container: it gets wiped, so they need to download them.
 ## Large uploads (Google Drive)
 
 Videos too big for the chat come in as Google Drive links shared as "anyone with the link".
-Download them into the project folder with
-`gdown --fuzzy "<link>" -O video/footage/<project>/raw.mp4` (for a folder link:
-`gdown --folder "<link>" -O video/footage/<project>/`). If gdown reports a permission
-error, ask the user to set sharing to "Iedereen met de link".
+Take the file ID from the link (`/file/d/<ID>/`) and download with curl (gdown is blocked:
+it goes through `*.googleusercontent.com` hosts that the network does not allow):
+`curl -sL -o video/footage/<project>/raw.mp4 "https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t"`.
+Check the result with `file` and `ffprobe`. If you get a small HTML file instead of video, sharing
+is not public: ask the user to set it to "Iedereen met de link". Folder links don't work
+this way, so ask for links to the individual files.
 
 ## Network note (cloud sessions)
 
