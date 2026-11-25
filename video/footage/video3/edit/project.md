@@ -35,3 +35,9 @@
 **Feedback:** fontlijst van dafont (Moglite, adelia, Mistrully, …); kies 1 of combineer 2, mooi en leesbaar.
 **Decisions:** dafont geblokkeerd + meestal alleen persoonlijk gebruik, dus vrije Google-lookalikes: DM Serif Display (≈Moglite) + Mrs Saint Delafield (≈adelia/Mistrully), 6 scripts vergeleken. Script \fs280, blok op y=1230 (vrij van kin en TikTok-UI).
 **Outstanding:** feedback op v6.
+
+## Session 1g — 2026-11-25 (v7)
+
+**Feedback:** akkoord met v6-stijl, maar cijfer "12" te groot.
+**Decisions:** alleen "12" op \fs190 (rest script \fs280); cijfers in dit script zijn van zichzelf te groot. Vastgelegd in tools/fonts/README.md.
+**Outstanding:** feedback op v7.

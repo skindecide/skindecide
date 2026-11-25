@@ -17,4 +17,5 @@ fonts are free for personal use only, so they need a licence for brand content.
 
 With libass: `ass=file.ass:fontsdir=/home/user/skindecide/tools/fonts`. Check the
 `fontselect:` lines (`-loglevel verbose`) to confirm the font loaded rather than a fallback.
-Script fonts render smaller in libass than in drawtext at the same size, so check a frame.
+Digits in Mrs Saint Delafield are oversized: wrap them in `{\\fs190}12{\\fs280}` so they
+match the letters (the user asked for this). Script fonts render smaller in libass than in drawtext at the same size, so check a frame.
