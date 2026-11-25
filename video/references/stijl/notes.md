@@ -58,7 +58,7 @@ voor (met tijden en nieuwe lengte) en wacht op akkoord vóór het knippen.
 ## Titels / tekst in beeld (geleerd, pincurl-video)
 
 Korte titel (bv. "pincurl reveal na 12 uur") alleen tijdens de hook (~eerste 4s), daarna weg
-met korte fade. **Op 2 regels, Playfair Display: regel 1 recht, regel 2 cursief**
-(`tools/fonts/`). Positie: **borsthoogte (y≈1180)**, zelfde serif als de captions: valt buiten
+met korte fade. **Op 2 regels: regel 1 DM Serif Display, regel 2 handschrift Mrs Saint Delafield**
+(zie `tools/fonts/README.md`). Positie: **borsthoogte (y≈1230)**, zelfde serif als de captions: valt buiten
 de TikTok/Reels-UI, op een rustige achtergrond, en bedekt haar en gezicht niet. Nooit
 midden (gezicht) en bij haar-video's niet bovenin (bedekt het onderwerp).

@@ -29,3 +29,9 @@
 **Feedback:** titel op 2 regels, mooier lettertype.
 **Decisions:** Playfair Display 96: "pincurl reveal" regular / "na 12 uur" italic, borsthoogte, 0–4s. 5 fonts vergeleken (title-font-options.jpg); Playfair-mix gekozen om editorial look + leesbaarheid. fontselect-log bevestigt dat de font laadde.
 **Outstanding:** feedback op v5.
+
+## Session 1f — 2026-11-25 (v6)
+
+**Feedback:** fontlijst van dafont (Moglite, adelia, Mistrully, …); kies 1 of combineer 2, mooi en leesbaar.
+**Decisions:** dafont geblokkeerd + meestal alleen persoonlijk gebruik, dus vrije Google-lookalikes: DM Serif Display (≈Moglite) + Mrs Saint Delafield (≈adelia/Mistrully), 6 scripts vergeleken. Script \fs280, blok op y=1230 (vrij van kin en TikTok-UI).
+**Outstanding:** feedback op v6.
