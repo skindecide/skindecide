@@ -14,32 +14,32 @@
     },
     {
       "source": "raw",
-      "start": 26.0,
-      "end": 29.0,
-      "beat": "sjaal af, pins zichtbaar"
+      "start": 29.2,
+      "end": 31.6,
+      "beat": "sjaal af als gordijn, pins zichtbaar (netter dan v2)"
     },
     {
       "source": "raw",
-      "start": 108.5,
-      "end": 110.5,
+      "start": 108.7,
+      "end": 109.8,
       "beat": "pins eruit, krullen vallen"
     },
     {
       "source": "raw",
-      "start": 150.0,
-      "end": 151.5,
+      "start": 150.2,
+      "end": 151.2,
       "beat": "krullen"
     },
     {
       "source": "raw",
-      "start": 199.5,
-      "end": 201.0,
+      "start": 199.7,
+      "end": 200.7,
       "beat": "laatste pin eruit"
     },
     {
       "source": "raw",
       "start": 207.0,
-      "end": 209.0,
+      "end": 208.3,
       "beat": "alle krullen los (piek)"
     },
     {
@@ -74,10 +74,10 @@
     },
     {
       "source": "raw",
-      "start": 509.5,
-      "end": 514.0,
-      "beat": "eindresultaat + duim omlaag"
+      "start": 509.8,
+      "end": 512.6,
+      "beat": "eindresultaat + duim omlaag (korter dan v2)"
     }
   ],
-  "total_duration_s": 25.1
+  "total_duration_s": 20.2
 }

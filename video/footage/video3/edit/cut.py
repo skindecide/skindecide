@@ -1,22 +1,22 @@
 """v1: pincurl reveal na 12 uur, ~25s, silent (music added in-app), title text."""
 import json, subprocess
 SRC = "raw.mp4"
-SHOTS = [  # (start, end, beat)
+SHOTS = [  # (start, end, beat)  — v3
     (0.0, 1.6, "hook: handen gevouwen, sjaal nog om"),
-    (26.0, 29.0, "sjaal af, pins zichtbaar"),
-    (108.5, 110.5, "pins eruit, krullen vallen"),
-    (150.0, 151.5, "krullen"),
-    (199.5, 201.0, "laatste pin eruit"),
-    (207.0, 209.0, "alle krullen los (piek)"),
+    (29.2, 31.6, "sjaal af als gordijn, pins zichtbaar (netter dan v2)"),
+    (108.7, 109.8, "pins eruit, krullen vallen"),
+    (150.2, 151.2, "krullen"),
+    (199.7, 200.7, "laatste pin eruit"),
+    (207.0, 208.3, "alle krullen los (piek)"),
     (225.5, 227.0, "losschudden"),
     (265.0, 266.5, "uitborstelen"),
     (271.0, 273.0, "uitborstelen"),
     (280.0, 281.5, "krullen uitgezakt"),
     (405.0, 407.5, "redden: haarzwiep"),
-    (509.5, 514.0, "eindresultaat + duim omlaag"),
+    (509.8, 512.6, "eindresultaat + duim omlaag (korter dan v2)"),
 ]
 TITLE = "pincurl reveal na 12 uur"
-TITLE_END = 4.6  # alleen tijdens hook + sjaal af (gebruiker: niet de hele tijd)
+TITLE_END = 4.0  # alleen tijdens hook + sjaal af (gebruiker: niet de hele tijd)
 total = sum(e - s for s, e, _ in SHOTS)
 ass = f"""[Script Info]
 ScriptType: v4.00+
@@ -46,7 +46,7 @@ subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "con
                 "-i", "edit/clips/list.txt", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
                 "-vf", "ass=edit/title.ass", "-map", "0:v", "-map", "1:a", "-shortest",
                 "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p",
-                "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "edit/final_v2.mp4"], check=True)
+                "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "edit/final_v3.mp4"], check=True)
 json.dump({"version": 1, "sources": {"raw": SRC}, "audio": "silent (muziek toevoegen in app)",
            "title": TITLE,
            "ranges": [{"source": "raw", "start": s, "end": e, "beat": b} for s, e, b in SHOTS],

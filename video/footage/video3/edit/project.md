@@ -11,3 +11,9 @@
 **Feedback:** titel niet de hele tijd in beeld.
 **Decisions:** titel alleen 0–4.6s (hook + sjaal af), fade-out 0.3s. Verder gelijk aan v1.
 **Outstanding:** verdere feedback op v2.
+
+## Session 1c — 2026-11-25 (v3)
+
+**Feedback:** eindshot te lang; pins eruithalen sneller; netter sjaal-af-shot.
+**Decisions:** sjaal af nu 29.2–31.6 (sjaal als gordijn opgetild, dan gezicht met pins) i.p.v. 26–29 (fladderig). Pin-shots ingekort naar 1.0–1.3s. Eindshot 4.5s → 2.8s (509.8–512.6). Titel 0–4.0s. Totaal 25.1s → 20.2s.
+**Outstanding:** feedback op v3.
