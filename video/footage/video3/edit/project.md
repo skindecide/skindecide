@@ -23,3 +23,9 @@
 **Vraag gebruiker:** titel hoog, midden of weg?
 **Decisions:** titel naar borsthoogte (y=1180), zelfde plek als huis-captions. Hoog bedekte haar/sjaal (onderwerp van de video), midden viel op kin/mond. Weglaten niet: zonder gesproken tekst geeft "12 uur" de context en de nieuwsgierigheid voor de eerste seconde.
 **Outstanding:** feedback op v4.
+
+## Session 1e — 2026-11-25 (v5)
+
+**Feedback:** titel op 2 regels, mooier lettertype.
+**Decisions:** Playfair Display 96: "pincurl reveal" regular / "na 12 uur" italic, borsthoogte, 0–4s. 5 fonts vergeleken (title-font-options.jpg); Playfair-mix gekozen om editorial look + leesbaarheid. fontselect-log bevestigt dat de font laadde.
+**Outstanding:** feedback op v5.
