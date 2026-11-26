@@ -62,3 +62,9 @@ met korte fade. **Op 2 regels: regel 1 DM Serif Display, regel 2 handschrift Mrs
 (zie `tools/fonts/README.md`). Positie: **borsthoogte (y≈1230)**, zelfde serif als de captions: valt buiten
 de TikTok/Reels-UI, op een rustige achtergrond, en bedekt haar en gezicht niet. Nooit
 midden (gezicht) en bij haar-video's niet bovenin (bedekt het onderwerp).
+
+## Harde regel gebruiker (2026-11-26)
+
+**Niks aan het beeld veranderen.** Wel knippen, volgorde en tekst/animaties erop. Géén
+kleurcorrectie, filters, bijsnijden, inzoomen, collages of split screen. (De collage uit
+de tekst-reference wordt daarom níet overgenomen.)

@@ -9,17 +9,16 @@ Pieces (all rendered with libass from one generated .ass file):
      (DotGothic16) for a few frames, then a small white sans subtitle.
   3. CHAPTERS: a big italic serif label (e.g. "maandag") stays on screen. While it is up,
      the spoken words appear SMALL in white sans underneath, not as big italics.
-  4. COLLAGE: three clips stacked as horizontal strips (1080x640 each) -> 1080x1920,
-     typically the background for the title card.
+
+RULE (from the user): never change the picture itself. Only cuts and text on top.
+No colour grading, filters, crops, zooms, reframing, collages or split screens.
+The original colour metadata (bt709, tv range) is copied to the output.
 
 Usage:
   python tools/house_style.py render <video> -o out.mp4 \
       [--transcript words.json] [--fix "fout=goed" ...] \
       [--title "a week of|working remotely|as a digital marketing manager" --title-at 0 --title-dur 3] \
       [--chapter "maandag@4.0-9.5" ...] [--silent] [--no-loudnorm]
-
-  python tools/house_style.py collage out.mp4 --clip raw.mp4@12.0 --clip raw.mp4@40 \
-      --clip raw.mp4@80 --dur 2.5
 
 Title parts are split with "|": small|BIG|subtitle (subtitle optional). In BIG, "/" makes
 a line break. --transcript takes Scribe-shaped JSON (transcribe_local.py output, or a
@@ -58,12 +57,17 @@ Style: Word,{SERIF_I},250,{CREAM},{CREAM},&H00000000,&H78000000,0,1,0,0,100,100,
 Style: Chapter,{SERIF_I},210,{CREAM},{CREAM},&H00000000,&H78000000,0,1,0,0,100,100,0,0,1,0,3,5,40,40,0,1
 Style: Small,{SANS},68,{WHITE},{WHITE},&H00000000,&H50000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1
 Style: TSmall,{SANS},66,{WHITE},{WHITE},&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
-Style: TBig,{ROUNDED},190,{PINK},{PINK},&H00000000,&HA0000000,0,0,0,0,100,100,-4,0,1,0,3,5,40,40,0,1
+Style: TBig,{ROUNDED},160,{PINK},{PINK},&H00000000,&HA0000000,0,0,0,0,100,100,-4,0,1,0,3,5,40,40,0,1
 Style: TSub,{SANS},50,{WHITE},{WHITE},&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
+
+
+# Copy the source's colour signalling so players show the same colours (sources are bt709 SDR).
+COLOR_TAGS = ["-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
+              "-color_range", "tv"]
 
 
 def ts(s: float) -> str:
@@ -118,7 +122,7 @@ def chapter_events(chapters):
             for label, s, e, y in chapters]
 
 
-def title_events(spec: str, t0: float, dur: float, y=960):
+def title_events(spec: str, t0: float, dur: float, y=1185):
     parts = spec.split("|")
     small, big = parts[0], parts[1]
     sub = parts[2] if len(parts) > 2 else ""
@@ -127,8 +131,8 @@ def title_events(spec: str, t0: float, dur: float, y=960):
     out = []
     end = t0 + dur
     per_char = 0.07
-    y_small = y - 95 * n_big_lines - 40
-    y_sub = y + 95 * n_big_lines + 30
+    y_small = y - 80 * n_big_lines - 45
+    y_sub = y + 80 * n_big_lines + 35
     # 1. typewriter with cursor
     for i in range(1, len(small) + 1):
         a = t0 + (i - 1) * per_char
@@ -187,7 +191,7 @@ def cmd_render(a):
     if a.silent:
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
     cmd += ["-vf", f"ass={ass}:fontsdir={FONTS}", "-c:v", "libx264", "-preset", "medium", "-crf", "17",
-            "-pix_fmt", "yuv420p"]
+            "-pix_fmt", "yuv420p", *COLOR_TAGS]
     if a.silent:
         cmd += ["-map", "0:v", "-map", "1:a", "-shortest", "-c:a", "aac", "-b:a", "128k"]
     else:
@@ -202,24 +206,6 @@ def cmd_render(a):
         for line in sorted(set(l for l in r.stderr.splitlines() if "fontselect" in l)):
             print(line.split("] ", 1)[-1])
     print(f"{len(events)} events -> {out}  ({ass})")
-
-
-def cmd_collage(a):
-    clips = []
-    for c in a.clip:
-        src, start = c.rsplit("@", 1)
-        clips.append((src, float(start)))
-    if len(clips) != 3:
-        raise SystemExit("collage needs exactly 3 --clip")
-    inputs, filt = [], []
-    for i, (src, start) in enumerate(clips):
-        inputs += ["-ss", str(start), "-t", str(a.dur), "-i", src]
-        filt.append(f"[{i}:v]fps=30,scale=1080:-2,crop=1080:640:0:(ih-640)*{a.crop_y},setsar=1[s{i}]")
-    fc = ";".join(filt) + ";[s0][s1][s2]vstack=3[v]"
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", fc,
-                    "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "14",
-                    "-pix_fmt", "yuv420p", a.output], check=True)
-    print(f"collage -> {a.output}")
 
 
 def main():
@@ -239,14 +225,8 @@ def main():
     r.add_argument("--silent", action="store_true", help="replace audio with silence")
     r.add_argument("--no-loudnorm", action="store_true")
     r.add_argument("--debug", action="store_true", help="print which fonts libass picked")
-    c = sub.add_parser("collage")
-    c.add_argument("output")
-    c.add_argument("--clip", action="append", default=[], help='"video@start"')
-    c.add_argument("--dur", type=float, default=2.5)
-    c.add_argument("--crop-y", type=float, default=0.5,
-                   help="which band of each clip to keep: 0 = top, 0.5 = middle, 1 = bottom")
     a = ap.parse_args()
-    cmd_render(a) if a.cmd == "render" else cmd_collage(a)
+    cmd_render(a)
 
 
 if __name__ == "__main__":

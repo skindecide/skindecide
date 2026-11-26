@@ -51,8 +51,6 @@ all captions and titles:
 - `--title "small|BIG/two lines|subtitle" --title-at 0 --title-dur 2.6`: typed small line
   with a cursor, then a big pink rounded line (Nunito Black) with a pixel glitch in and out.
 - `--chapter "label@start-end"`: big italic label stays up, spoken words go small under it.
-- `collage out.mp4 --clip v.mp4@t --clip ... --clip ... --dur 2.6 --crop-y 0.2`: three
-  strips stacked, the usual background for the title card.
 - `--silent` for music-only videos (the user adds music in the app). `--debug` prints
   which fonts libass picked; check it, because a missing font fails silently.
 No product tag under captions (the user doesn't want it). `tools/style_captions.py` is the
@@ -81,6 +79,12 @@ and committing them lets an edit be re-rendered later. Tell the user when finish
 live only in this container: it gets wiped, so they need to download them.
 
 ## House rules
+
+- **Never change the picture itself (the user's hard rule).** Only cut, reorder, trim and
+  put text on top. No colour grading (`grade.py`/`--grade` stay off), no filters, no crops,
+  zooms, reframing, collages, split screens or speed effects. Keep the source resolution and
+  aspect ratio, and copy the colour metadata (bt709/tv). Check the output with `ffprobe`
+  (color_space must not be `unknown`) and compare a frame's mean RGB with the source.
 
 - **Check `video/references/` first.** Before proposing a plan, read the relevant `notes.md`
   and look at the references (use `timeline_view` or sample frames for videos), and match

@@ -36,3 +36,9 @@ typewriter (Inter Medium) + groot roze (#F7C8EA) Nunito Black met DotGothic16-pi
 in/uit + witte ondertitel; hoofdstuklabels Instrument Serif Italic met kleine Inter-captions
 eronder; collage van 3 stroken. Eerste toepassingen: Lancôme, Paula's Choice
 (hoofdstuk "1 uur later"), pincurl v9 (collage + titelkaart).
+
+## Harde regel gebruiker (2026-11-26)
+
+**Niks aan het beeld veranderen.** Wel knippen, volgorde en tekst/animaties erop. Géén
+kleurcorrectie, filters, bijsnijden, inzoomen, collages of split screen. (De collage uit
+de tekst-reference wordt daarom níet overgenomen.)

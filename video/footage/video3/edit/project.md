@@ -50,3 +50,4 @@
 
 ## 2026-11-26 — huisstijl v2
 Opnieuw gerenderd met tools/house_style.py (nieuwe captions/titels, zie video/references/tekst/notes.md).
+**Correctie:** collage verwijderd (gebruiker: niks aan het beeld veranderen). v9 = v8-montage + titelkaart (typewriter + roze glitch) op borsthoogte (y=1185) over de eigen openingsbeelden. Kleurmetadata hersteld (v9-collageversie had "unknown"); gemiddelde RGB van een frame gelijk aan bron (99.7/94.0/83.5 vs 99.5/93.6/83.4).
