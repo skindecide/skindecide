@@ -44,11 +44,20 @@ Its helpers live in `.claude/skills/video-use/helpers/`:
   grade, overlays and subtitles.
 - `grade.py` applies colour grade presets (`--list-presets`).
 
-House caption style (from `video/references/stijl/`): `tools/style_captions.py <video>
-<transcript.json> -o out.mp4 --tag "Product >>>" --fix "fout=goed"`. It burns one-word
-serif captions and normalises loudness to -14 LUFS. **Don't use `--tag`**: the user does
-not want a product line under the captions. Even for videos that are already cut, always
-review the edit (silences, slow parts, lines that add nothing) and propose trims first.
+**House text style (v2, from `video/references/tekst/`): `tools/house_style.py`.** Use it for
+all captions and titles:
+- `render <video> -o out.mp4 --transcript words.json [--fix "fout=goed"]`: one-word captions,
+  thin italic serif (Instrument Serif), cream, chest height. Long words shrink to fit.
+- `--title "small|BIG/two lines|subtitle" --title-at 0 --title-dur 2.6`: typed small line
+  with a cursor, then a big pink rounded line (Nunito Black) with a pixel glitch in and out.
+- `--chapter "label@start-end"`: big italic label stays up, spoken words go small under it.
+- `collage out.mp4 --clip v.mp4@t --clip ... --clip ... --dur 2.6 --crop-y 0.2`: three
+  strips stacked, the usual background for the title card.
+- `--silent` for music-only videos (the user adds music in the app). `--debug` prints
+  which fonts libass picked; check it, because a missing font fails silently.
+No product tag under captions (the user doesn't want it). `tools/style_captions.py` is the
+old v1 style. Even for videos that are already cut, always review the edit (silences, slow
+parts, lines that add nothing) and propose trims first.
 
 Local transcription has limits: it can't tell speakers apart, it doesn't tag laughter or
 other sounds, and Whisper sometimes drops "um"/"uh". Check the transcript and use

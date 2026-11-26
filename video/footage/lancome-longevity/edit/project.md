@@ -4,3 +4,6 @@
 **Decisions:** Liberation Serif 165px, wit, kleine letters, zonder leestekens, op borsthoogte (y=1180), zachte schaduw. Tag "Lancôme Absolue Longevity MD >>>" Liberation Sans 40px op y=1320, hele video. Transcript: faster-whisper medium, nl, met productnaam als vocab. Audio loudnorm -14 LUFS (gemeten -15.1 LUFS, piek -1.0 dBFS). 1080x1920, 60fps behouden.
 **Reasoning log:** Schaduw versterkt omdat witte tekst wegviel tegen de witte badjas.
 **Outstanding:** Feedback gebruiker op captionpositie/grootte en of de tag de hele video moet blijven staan.
+
+## 2026-11-26 — huisstijl v2
+Opnieuw gerenderd met tools/house_style.py (nieuwe captions/titels, zie video/references/tekst/notes.md).

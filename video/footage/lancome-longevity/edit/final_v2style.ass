@@ -1,0 +1,89 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Word,Instrument Serif,250,&H00D6F4FF,&H00D6F4FF,&H00000000,&HA0000000,0,1,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: Chapter,Instrument Serif,210,&H00D6F4FF,&H00D6F4FF,&H00000000,&HA0000000,0,1,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: Small,Inter Medium,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: TSmall,Inter Medium,66,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: TBig,Nunito ExtraLight Black,190,&H00EAC8F7,&H00EAC8F7,&H00000000,&HA0000000,0,0,0,0,100,100,-4,0,1,0,3,5,40,40,0,1
+Style: TSub,Inter Medium,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:00.14,Word,,0,0,0,,{\an5\pos(540,1180)}hoe
+Dialogue: 1,0:00:00.14,0:00:00.44,Word,,0,0,0,,{\an5\pos(540,1180)}ouder
+Dialogue: 1,0:00:00.44,0:00:00.56,Word,,0,0,0,,{\an5\pos(540,1180)}ik
+Dialogue: 1,0:00:00.56,0:00:01.10,Word,,0,0,0,,{\an5\pos(540,1180)}word
+Dialogue: 1,0:00:01.10,0:00:01.30,Word,,0,0,0,,{\an5\pos(540,1180)}hoe
+Dialogue: 1,0:00:01.30,0:00:01.90,Word,,0,0,0,,{\an5\pos(540,1180)}belangrijker
+Dialogue: 1,0:00:01.90,0:00:02.04,Word,,0,0,0,,{\an5\pos(540,1180)}ik
+Dialogue: 1,0:00:02.04,0:00:02.20,Word,,0,0,0,,{\an5\pos(540,1180)}het
+Dialogue: 1,0:00:02.20,0:00:02.34,Word,,0,0,0,,{\an5\pos(540,1180)}vind
+Dialogue: 1,0:00:02.34,0:00:02.54,Word,,0,0,0,,{\an5\pos(540,1180)}om
+Dialogue: 1,0:00:02.54,0:00:02.78,Word,,0,0,0,,{\an5\pos(540,1180)}goed
+Dialogue: 1,0:00:02.78,0:00:02.92,Word,,0,0,0,,{\an5\pos(540,1180)}op
+Dialogue: 1,0:00:02.92,0:00:03.04,Word,,0,0,0,,{\an5\pos(540,1180)}mijn
+Dialogue: 1,0:00:03.04,0:00:03.26,Word,,0,0,0,,{\an5\pos(540,1180)}huid
+Dialogue: 1,0:00:03.26,0:00:03.46,Word,,0,0,0,,{\an5\pos(540,1180)}te
+Dialogue: 1,0:00:03.46,0:00:03.92,Word,,0,0,0,,{\an5\pos(540,1180)}letten
+Dialogue: 1,0:00:03.92,0:00:04.10,Word,,0,0,0,,{\an5\pos(540,1180)}sinds
+Dialogue: 1,0:00:04.10,0:00:04.48,Word,,0,0,0,,{\an5\pos(540,1180)}kort
+Dialogue: 1,0:00:04.48,0:00:04.82,Word,,0,0,0,,{\an5\pos(540,1180)}begin
+Dialogue: 1,0:00:04.82,0:00:05.08,Word,,0,0,0,,{\an5\pos(540,1180)}ik
+Dialogue: 1,0:00:05.08,0:00:05.36,Word,,0,0,0,,{\an5\pos(540,1180)}daarom
+Dialogue: 1,0:00:05.36,0:00:05.50,Word,,0,0,0,,{\an5\pos(540,1180)}mijn
+Dialogue: 1,0:00:05.50,0:00:05.76,Word,,0,0,0,,{\an5\pos(540,1180)}dag
+Dialogue: 1,0:00:05.76,0:00:05.96,Word,,0,0,0,,{\an5\pos(540,1180)}met
+Dialogue: 1,0:00:05.96,0:00:06.16,Word,,0,0,0,,{\an5\pos(540,1180)}de
+Dialogue: 1,0:00:06.16,0:00:06.68,Word,,0,0,0,,{\an5\pos(540,1180)}longevity
+Dialogue: 1,0:00:06.68,0:00:07.54,Word,,0,0,0,,{\an5\pos(540,1180)}anticipate
+Dialogue: 1,0:00:07.54,0:00:07.68,Word,,0,0,0,,{\an5\pos(540,1180)}serum
+Dialogue: 1,0:00:07.68,0:00:08.00,Word,,0,0,0,,{\an5\pos(540,1180)}van
+Dialogue: 1,0:00:08.00,0:00:08.64,Word,,0,0,0,,{\an5\pos(540,1180)}lancôme
+Dialogue: 1,0:00:08.64,0:00:08.80,Word,,0,0,0,,{\an5\pos(540,1180)}deze
+Dialogue: 1,0:00:08.80,0:00:08.92,Word,,0,0,0,,{\an5\pos(540,1180)}is
+Dialogue: 1,0:00:08.92,0:00:09.20,Word,,0,0,0,,{\an5\pos(540,1180)}gemaakt
+Dialogue: 1,0:00:09.20,0:00:09.46,Word,,0,0,0,,{\an5\pos(540,1180)}om
+Dialogue: 1,0:00:09.46,0:00:09.68,Word,,0,0,0,,{\an5\pos(540,1180)}vroeg
+Dialogue: 1,0:00:09.68,0:00:09.96,Word,,0,0,0,,{\an5\pos(540,1180)}te
+Dialogue: 1,0:00:09.96,0:00:10.46,Word,,0,0,0,,{\an5\pos(540,1180)}beginnen
+Dialogue: 1,0:00:10.46,0:00:10.52,Word,,0,0,0,,{\an5\pos(540,1180)}dus
+Dialogue: 1,0:00:10.52,0:00:10.84,Word,,0,0,0,,{\an5\pos(540,1180)}voordat
+Dialogue: 1,0:00:10.84,0:00:10.94,Word,,0,0,0,,{\an5\pos(540,1180)}je
+Dialogue: 1,0:00:10.94,0:00:11.48,Word,,0,0,0,,{\an5\pos(540,1180)}huidtekenen
+Dialogue: 1,0:00:11.48,0:00:11.72,Word,,0,0,0,,{\an5\pos(540,1180)}van
+Dialogue: 1,0:00:11.72,0:00:12.18,Word,,0,0,0,,{\an5\pos(540,1180)}veroudering
+Dialogue: 1,0:00:12.18,0:00:12.40,Word,,0,0,0,,{\an5\pos(540,1180)}laat
+Dialogue: 1,0:00:12.40,0:00:12.96,Word,,0,0,0,,{\an5\pos(540,1180)}zien
+Dialogue: 1,0:00:12.96,0:00:13.06,Word,,0,0,0,,{\an5\pos(540,1180)}in
+Dialogue: 1,0:00:13.06,0:00:13.28,Word,,0,0,0,,{\an5\pos(540,1180)}plaats
+Dialogue: 1,0:00:13.28,0:00:13.48,Word,,0,0,0,,{\an5\pos(540,1180)}van
+Dialogue: 1,0:00:13.48,0:00:13.74,Word,,0,0,0,,{\an5\pos(540,1180)}pas
+Dialogue: 1,0:00:13.74,0:00:14.39,Word,,0,0,0,,{\an5\pos(540,1180)}erna
+Dialogue: 1,0:00:14.76,0:00:15.20,Word,,0,0,0,,{\an5\pos(540,1180)}aangezien
+Dialogue: 1,0:00:15.20,0:00:15.36,Word,,0,0,0,,{\an5\pos(540,1180)}het
+Dialogue: 1,0:00:15.36,0:00:15.46,Word,,0,0,0,,{\an5\pos(540,1180)}een
+Dialogue: 1,0:00:15.46,0:00:16.04,Word,,0,0,0,,{\an5\pos(540,1180)}luxeproduct
+Dialogue: 1,0:00:16.04,0:00:16.38,Word,,0,0,0,,{\an5\pos(540,1180)}is
+Dialogue: 1,0:00:16.38,0:00:16.46,Word,,0,0,0,,{\an5\pos(540,1180)}probeer
+Dialogue: 1,0:00:16.46,0:00:16.62,Word,,0,0,0,,{\an5\pos(540,1180)}ik
+Dialogue: 1,0:00:16.62,0:00:16.68,Word,,0,0,0,,{\an5\pos(540,1180)}er
+Dialogue: 1,0:00:16.68,0:00:16.98,Word,,0,0,0,,{\an5\pos(540,1180)}ook
+Dialogue: 1,0:00:16.98,0:00:17.32,Word,,0,0,0,,{\an5\pos(540,1180)}echt
+Dialogue: 1,0:00:17.32,0:00:17.58,Word,,0,0,0,,{\an5\pos(540,1180)}even
+Dialogue: 1,0:00:17.58,0:00:17.78,Word,,0,0,0,,{\an5\pos(540,1180)}van
+Dialogue: 1,0:00:17.78,0:00:17.96,Word,,0,0,0,,{\an5\pos(540,1180)}te
+Dialogue: 1,0:00:17.96,0:00:18.36,Word,,0,0,0,,{\an5\pos(540,1180)}genieten
+Dialogue: 1,0:00:18.36,0:00:18.84,Word,,0,0,0,,{\an5\pos(540,1180)}voordat
+Dialogue: 1,0:00:18.84,0:00:18.98,Word,,0,0,0,,{\an5\pos(540,1180)}de
+Dialogue: 1,0:00:18.98,0:00:19.30,Word,,0,0,0,,{\an5\pos(540,1180)}hectiek
+Dialogue: 1,0:00:19.30,0:00:19.48,Word,,0,0,0,,{\an5\pos(540,1180)}van
+Dialogue: 1,0:00:19.48,0:00:19.62,Word,,0,0,0,,{\an5\pos(540,1180)}de
+Dialogue: 1,0:00:19.62,0:00:19.76,Word,,0,0,0,,{\an5\pos(540,1180)}dag
+Dialogue: 1,0:00:19.76,0:00:20.45,Word,,0,0,0,,{\an5\pos(540,1180)}begint

@@ -4,7 +4,13 @@ From Google Fonts via the @fontsource npm packages (woff2 converted to TTF with 
 All are licensed under the SIL Open Font License 1.1, so they are safe for commercial and
 brand content.
 
-**House title style** (chosen by the user from their dafont inspiration list, rebuilt
+**House style v2** (tools/house_style.py, from video/references/tekst/):
+- Instrument Serif Italic: captions and chapter labels
+- Nunito Black (family name `Nunito ExtraLight Black`): big pink title line
+- DotGothic16: pixel glitch frames
+- Inter Medium (system font): small typed line, subtitle, small captions
+
+**Earlier title style (v1)** (chosen by the user from their dafont inspiration list, rebuilt
 with free look-alikes):
 - Line 1: **DM Serif Display** (looks like Moglite), `\fs104`
 - Line 2: **Mrs Saint Delafield** (signature script, looks like adelia/Mistrully), `\fs280`

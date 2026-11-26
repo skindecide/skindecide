@@ -27,3 +27,12 @@ manier van tekst-editing en het lettertype mooi.
   (mock: `analyse/caption-mock.jpg`, links = huidige stijl). De echte reference is iets
   dunner/sierlijker.
 - Titelkaart/hoofdstukken: voor vlogs of "dag/week van"-video's.
+
+## Status: overgenomen als huisstijl v2 (2026-11-26)
+
+Gebruiker: "alles, lettertypes en animaties". Gebouwd in `tools/house_style.py`:
+captions Instrument Serif Italic crème (#FFF4D6) 250px met auto-verkleinen; titelkaart
+typewriter (Inter Medium) + groot roze (#F7C8EA) Nunito Black met DotGothic16-pixelglitch
+in/uit + witte ondertitel; hoofdstuklabels Instrument Serif Italic met kleine Inter-captions
+eronder; collage van 3 stroken. Eerste toepassingen: Lancôme, Paula's Choice
+(hoofdstuk "1 uur later"), pincurl v9 (collage + titelkaart).

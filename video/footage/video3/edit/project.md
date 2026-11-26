@@ -47,3 +47,6 @@
 **Feedback:** te veel ruimte tussen bovenste en onderste regel.
 **Decisions:** titel als 2 losse events (regel 1 \an2 y=1160, regel 2 \an5 y=1220) i.p.v. \N; gap getest op 1150–1240, 1220 = strak zonder overlap.
 **Outstanding:** feedback op v8.
+
+## 2026-11-26 — huisstijl v2
+Opnieuw gerenderd met tools/house_style.py (nieuwe captions/titels, zie video/references/tekst/notes.md).
