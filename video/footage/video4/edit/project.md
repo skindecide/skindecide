@@ -10,3 +10,10 @@
 **Feedback:** krullen die uit de pins vallen zichtbaarder (satisfying); titelregels "another/blowout" te ver uit elkaar; eerste airwrap-shot (400s) ongemakkelijk.
 **Decisions:** 4 drop-shots van 1.6–2.4s die de hele beweging tonen: 24.4–26.2 (pin, krul valt), 52.4–54.2 (pin, lange krul), 117.4–119.8 (roller afgerold), 130.2–131.8 (roller, haar vliegt los). Airwrap nu 405.0–406.3 + 478.5–479.8. Volume-shot 255s eruit, eindshot 2.8s. Titel: grote regels als losse events, TITLE_LINE_STEP 105 (vaste huisstijl). 20.9s.
 **Outstanding:** feedback op v2.
+
+## Session 1c — 2026-11-27 (v3)
+
+**Feedback:** achterkant-shot langer; drop-shots hadden niet de mooiste krullen, alleen mooie krullen kiezen.
+**Decisions:** drops vervangen door gedefinieerde spiraalkrullen: 36.4–38.4, 46.8–48.4, 64.6–66.4, plus glorie-shot alle krullen 123.7–125.0. Afgewezen: 24s/53s (pluizig/gedraaid), roller-shots 117s/130s (steil haar). Achterkant 512.6–516.2 (over schouder → achterkant, 3.6s i.p.v. 1.5s). Losschud-shot 162s eruit. 20.9s.
+**Les:** bij reveals op krulkwaliteit selecteren (strak, spiraal, veerkrachtig), niet alleen op beweging.
+**Outstanding:** feedback op v3.

@@ -68,3 +68,10 @@ midden (gezicht) en bij haar-video's niet bovenin (bedekt het onderwerp).
 **Niks aan het beeld veranderen.** Wel knippen, volgorde en tekst/animaties erop. Géén
 kleurcorrectie, filters, bijsnijden, inzoomen, collages of split screen. (De collage uit
 de tekst-reference wordt daarom níet overgenomen.)
+
+## Haar-reveals (geleerd, blowout-video)
+
+Het vallen van krullen uit pins/rollers is het "satisfying" hoogtepunt: shots van ~1.6–2s die
+de hele beweging tonen (net vóór loslaten tot krul hangt). **Kies alleen mooie krullen**:
+strak, spiraalvormig, veerkrachtig. Geen pluizige/gedraaide krullen of steile strengen uit
+rollers. Achterkant-shot mag ruim (~3.5s). Shots waarin ze ongemakkelijk kijkt vermijden.
