@@ -190,7 +190,7 @@ def cmd_render(a):
     cmd = ["ffmpeg", "-hide_banner", "-loglevel", "verbose" if a.debug else "error", "-y", "-i", a.video]
     if a.silent:
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
-    cmd += ["-vf", f"ass={ass}:fontsdir={FONTS}", "-c:v", "libx264", "-preset", "medium", "-crf", "17",
+    cmd += ["-vf", f"ass={ass}:fontsdir={FONTS}", "-c:v", "libx264", "-preset", "medium", "-crf", str(a.crf),
             "-pix_fmt", "yuv420p", *COLOR_TAGS]
     if a.silent:
         cmd += ["-map", "0:v", "-map", "1:a", "-shortest", "-c:a", "aac", "-b:a", "128k"]
@@ -225,6 +225,7 @@ def main():
     r.add_argument("--silent", action="store_true", help="replace audio with silence")
     r.add_argument("--no-loudnorm", action="store_true")
     r.add_argument("--debug", action="store_true", help="print which fonts libass picked")
+    r.add_argument("--crf", type=int, default=17, help="x264 quality; 19-20 for 60fps exports to keep files small")
     a = ap.parse_args()
     cmd_render(a)
 

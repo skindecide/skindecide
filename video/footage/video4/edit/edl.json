@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "sources": {
+    "raw": "raw.mp4"
+  },
+  "output": "1080x1920@60, silent",
+  "title": "another day | another blowout",
+  "ranges": [
+    {
+      "source": "raw",
+      "start": 14.6,
+      "end": 17.0,
+      "beat": "sjaal af als gordijn, rollers zichtbaar (titel)"
+    },
+    {
+      "source": "raw",
+      "start": 61.0,
+      "end": 62.2,
+      "beat": "pin eruit, krullen"
+    },
+    {
+      "source": "raw",
+      "start": 105.0,
+      "end": 106.2,
+      "beat": "krullen met rollers bovenop"
+    },
+    {
+      "source": "raw",
+      "start": 111.0,
+      "end": 112.2,
+      "beat": "roller eruit"
+    },
+    {
+      "source": "raw",
+      "start": 140.0,
+      "end": 141.0,
+      "beat": "laatste roller eruit"
+    },
+    {
+      "source": "raw",
+      "start": 147.0,
+      "end": 148.0,
+      "beat": "haarzwiep voorover"
+    },
+    {
+      "source": "raw",
+      "start": 162.0,
+      "end": 163.2,
+      "beat": "losschudden, volume"
+    },
+    {
+      "source": "raw",
+      "start": 188.0,
+      "end": 189.8,
+      "beat": "grote volle krullen"
+    },
+    {
+      "source": "raw",
+      "start": 255.0,
+      "end": 256.2,
+      "beat": "volume met handen"
+    },
+    {
+      "source": "raw",
+      "start": 400.0,
+      "end": 401.3,
+      "beat": "airwrap voorkantjes"
+    },
+    {
+      "source": "raw",
+      "start": 419.0,
+      "end": 420.2,
+      "beat": "airwrap"
+    },
+    {
+      "source": "raw",
+      "start": 502.0,
+      "end": 503.5,
+      "beat": "achterkant"
+    },
+    {
+      "source": "raw",
+      "start": 523.0,
+      "end": 526.3,
+      "beat": "eindresultaat voorkant"
+    }
+  ],
+  "total_duration_s": 19.5
+}
