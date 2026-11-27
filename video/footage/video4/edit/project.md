@@ -23,3 +23,9 @@
 **Feedback:** bovenkant loslaten mist; shot op 0:06 (pin zijkant 64.6s) ongemakkelijk, niets gebeurt; achterkant-shot mag een knip.
 **Decisions:** + bovenkant: 111.2–112.6 (roller afgerold) en 140.8–142.2 (laatste roller eruit). − 64.6–66.4. Achterkant gesplitst: 512.6–513.8 (over schouder) | 514.3–515.9 (zwiepen), omdraaien eruit. 21.1s.
 **Outstanding:** feedback op v4.
+
+## Session 1e — 2026-11-27 (v5)
+
+**Feedback:** tekst sneller in beeld; de visuele hook in het begin is het belangrijkst.
+**Decisions:** titelanimatie versneld in huisstijl (vast): typen 0.025s/teken, grote regel na +0.04s (≈0.3s), glitch 0.22s i.p.v. 0.34s → titel volledig staand ≈0.55s (was ≈1.2s).
+**Outstanding:** feedback op v5.

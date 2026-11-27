@@ -135,7 +135,7 @@ def title_events(spec: str, t0: float, dur: float, y=1185, step=TITLE_LINE_STEP)
     ys = [round(y + (k - (n - 1) / 2) * step) for k in range(n)]
     out = []
     end = t0 + dur
-    per_char = 0.07
+    per_char = 0.025  # fast: the hook must land within ~0.5s (user)
     y_small = ys[0] - step // 2 - 60
     y_sub = ys[-1] + step // 2 + 45
 
@@ -149,19 +149,19 @@ def title_events(spec: str, t0: float, dur: float, y=1185, step=TITLE_LINE_STEP)
         b = t0 + i * per_char
         out.append(ev(a, b, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small[:i]}|", layer=3))
     typed = t0 + len(small) * per_char
-    big_at = typed + 0.15
+    big_at = typed + 0.04
     out.append(ev(typed, big_at, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small}|", layer=3))
     out.append(ev(big_at, end, "TSmall", f"{{\\an5\\pos(540,{y_small})\\fad(0,150)}}{small}", layer=3))
     # 2. big lines with pixel glitch frames
     pix = f"\\fn{PIXEL}\\fsp6"
-    glitch = [(0.00, 0.07, False), (0.07, 0.17, True), (0.17, 0.24, False), (0.24, 0.34, True)]
+    glitch = [(0.00, 0.05, False), (0.05, 0.11, True), (0.11, 0.16, False), (0.16, 0.22, True)]
     for a, b, g in glitch:
         out += big_events(big_at + a, big_at + b, pix if g else "")
-    out += big_events(big_at + 0.34, end, "\\fad(0,150)")
+    out += big_events(big_at + 0.22, end, "\\fad(0,150)")
     out += big_events(end - 0.22, end - 0.12, pix, layer=4)  # glitch out
     # 3. subtitle
     if sub:
-        out.append(ev(big_at + 0.35, end, "TSub", f"{{\\an5\\pos(540,{y_sub})\\fad(120,150)}}{sub}", layer=3))
+        out.append(ev(big_at + 0.22, end, "TSub", f"{{\\an5\\pos(540,{y_sub})\\fad(120,150)}}{sub}", layer=3))
     return out
 
 

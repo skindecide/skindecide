@@ -42,3 +42,8 @@ eronder; collage van 3 stroken. Eerste toepassingen: Lancôme, Paula's Choice
 **Niks aan het beeld veranderen.** Wel knippen, volgorde en tekst/animaties erop. Géén
 kleurcorrectie, filters, bijsnijden, inzoomen, collages of split screen. (De collage uit
 de tekst-reference wordt daarom níet overgenomen.)
+
+## Tempo titel (gebruiker, 2026-11-27)
+
+De visuele hook in het begin is het belangrijkst: titel moet binnen ~0.5s volledig staan.
+Typewriter 0.025s/teken, grote regel na ~0.3s, korte glitch (vast in tools/house_style.py).
