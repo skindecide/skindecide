@@ -17,3 +17,9 @@
 **Decisions:** drops vervangen door gedefinieerde spiraalkrullen: 36.4–38.4, 46.8–48.4, 64.6–66.4, plus glorie-shot alle krullen 123.7–125.0. Afgewezen: 24s/53s (pluizig/gedraaid), roller-shots 117s/130s (steil haar). Achterkant 512.6–516.2 (over schouder → achterkant, 3.6s i.p.v. 1.5s). Losschud-shot 162s eruit. 20.9s.
 **Les:** bij reveals op krulkwaliteit selecteren (strak, spiraal, veerkrachtig), niet alleen op beweging.
 **Outstanding:** feedback op v3.
+
+## Session 1d — 2026-11-27 (v4)
+
+**Feedback:** bovenkant loslaten mist; shot op 0:06 (pin zijkant 64.6s) ongemakkelijk, niets gebeurt; achterkant-shot mag een knip.
+**Decisions:** + bovenkant: 111.2–112.6 (roller afgerold) en 140.8–142.2 (laatste roller eruit). − 64.6–66.4. Achterkant gesplitst: 512.6–513.8 (over schouder) | 514.3–515.9 (zwiepen), omdraaien eruit. 21.1s.
+**Outstanding:** feedback op v4.

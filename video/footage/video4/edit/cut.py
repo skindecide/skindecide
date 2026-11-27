@@ -1,17 +1,19 @@
 """another day, another blowout: ~20s silent cut, picture untouched (only cut + downscale 4K->1080)."""
 import json, os, subprocess
 SRC = "raw.mp4"
-SHOTS = [  # v3
+SHOTS = [  # v4
     (14.6, 17.0, "sjaal af als gordijn, rollers zichtbaar (titel)"),
     (36.4, 38.4, "pin eruit, strakke spiraalkrul springt"),
     (46.8, 48.4, "lange gedefinieerde spiraalkrullen"),
-    (64.6, 66.4, "pin zijkant eruit, krullen veren"),
+    (111.2, 112.6, "bovenkant: roller afgerold, haar valt los"),
     (123.7, 125.0, "alle krullen gelijkmatig (glorie-shot)"),
+    (140.8, 142.2, "bovenkant: laatste roller eruit, bovenkant los"),
     (147.0, 148.0, "haarzwiep voorover"),
     (188.0, 189.8, "grote volle krullen"),
     (405.0, 406.3, "airwrap voorkantje"),
     (478.5, 479.8, "airwrap, arm omhoog"),
-    (512.6, 516.2, "over schouder kijken, dan achterkant (langer)"),
+    (512.6, 513.8, "over schouder kijken"),
+    (514.3, 515.9, "achterkant, haar zwiept (knip: omdraaien eruit)"),
     (523.0, 525.8, "eindresultaat voorkant"),
 ]
 COLOR = ["-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]

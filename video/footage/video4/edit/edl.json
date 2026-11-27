@@ -26,15 +26,21 @@
     },
     {
       "source": "raw",
-      "start": 64.6,
-      "end": 66.4,
-      "beat": "pin zijkant eruit, krullen veren"
+      "start": 111.2,
+      "end": 112.6,
+      "beat": "bovenkant: roller afgerold, haar valt los"
     },
     {
       "source": "raw",
       "start": 123.7,
       "end": 125.0,
       "beat": "alle krullen gelijkmatig (glorie-shot)"
+    },
+    {
+      "source": "raw",
+      "start": 140.8,
+      "end": 142.2,
+      "beat": "bovenkant: laatste roller eruit, bovenkant los"
     },
     {
       "source": "raw",
@@ -63,8 +69,14 @@
     {
       "source": "raw",
       "start": 512.6,
-      "end": 516.2,
-      "beat": "over schouder kijken, dan achterkant (langer)"
+      "end": 513.8,
+      "beat": "over schouder kijken"
+    },
+    {
+      "source": "raw",
+      "start": 514.3,
+      "end": 515.9,
+      "beat": "achterkant, haar zwiept (knip: omdraaien eruit)"
     },
     {
       "source": "raw",
@@ -73,5 +85,5 @@
       "beat": "eindresultaat voorkant"
     }
   ],
-  "total_duration_s": 20.9
+  "total_duration_s": 21.1
 }
