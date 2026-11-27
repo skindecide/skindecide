@@ -14,27 +14,27 @@
     },
     {
       "source": "raw",
-      "start": 61.0,
-      "end": 62.2,
-      "beat": "pin eruit, krullen"
+      "start": 24.4,
+      "end": 26.2,
+      "beat": "pin eruit, krul valt (zijkant)"
     },
     {
       "source": "raw",
-      "start": 105.0,
-      "end": 106.2,
-      "beat": "krullen met rollers bovenop"
+      "start": 52.4,
+      "end": 54.2,
+      "beat": "pin eruit, lange krul valt"
     },
     {
       "source": "raw",
-      "start": 111.0,
-      "end": 112.2,
-      "beat": "roller eruit"
+      "start": 117.4,
+      "end": 119.8,
+      "beat": "roller afgerold, haar valt"
     },
     {
       "source": "raw",
-      "start": 140.0,
-      "end": 141.0,
-      "beat": "laatste roller eruit"
+      "start": 130.2,
+      "end": 131.8,
+      "beat": "roller eruit, haar vliegt los"
     },
     {
       "source": "raw",
@@ -56,21 +56,15 @@
     },
     {
       "source": "raw",
-      "start": 255.0,
-      "end": 256.2,
-      "beat": "volume met handen"
+      "start": 405.0,
+      "end": 406.3,
+      "beat": "airwrap voorkantje (vervangt ongemakkelijk shot 400s)"
     },
     {
       "source": "raw",
-      "start": 400.0,
-      "end": 401.3,
-      "beat": "airwrap voorkantjes"
-    },
-    {
-      "source": "raw",
-      "start": 419.0,
-      "end": 420.2,
-      "beat": "airwrap"
+      "start": 478.5,
+      "end": 479.8,
+      "beat": "airwrap, arm omhoog"
     },
     {
       "source": "raw",
@@ -81,9 +75,9 @@
     {
       "source": "raw",
       "start": 523.0,
-      "end": 526.3,
+      "end": 525.8,
       "beat": "eindresultaat voorkant"
     }
   ],
-  "total_duration_s": 19.5
+  "total_duration_s": 20.9
 }

@@ -122,17 +122,27 @@ def chapter_events(chapters):
             for label, s, e, y in chapters]
 
 
-def title_events(spec: str, t0: float, dur: float, y=1185):
+TITLE_LINE_STEP = 105  # px between big lines: tight, lines sit right under each other (user)
+
+
+def title_events(spec: str, t0: float, dur: float, y=1185, step=TITLE_LINE_STEP):
     parts = spec.split("|")
     small, big = parts[0], parts[1]
     sub = parts[2] if len(parts) > 2 else ""
-    big_ass = big.replace("/", "\\N")
-    n_big_lines = big.count("/") + 1
+    lines = big.split("/")
+    n = len(lines)
+    # one event per big line, so the spacing is ours and not the font's tall line height
+    ys = [round(y + (k - (n - 1) / 2) * step) for k in range(n)]
     out = []
     end = t0 + dur
     per_char = 0.07
-    y_small = y - 80 * n_big_lines - 45
-    y_sub = y + 80 * n_big_lines + 35
+    y_small = ys[0] - step // 2 - 60
+    y_sub = ys[-1] + step // 2 + 45
+
+    def big_events(a, b, extra="", layer=3):
+        return [ev(a, b, "TBig", f"{{\\an5\\pos(540,{yy}){extra}}}{txt}", layer=layer)
+                for txt, yy in zip(lines, ys)]
+
     # 1. typewriter with cursor
     for i in range(1, len(small) + 1):
         a = t0 + (i - 1) * per_char
@@ -140,17 +150,15 @@ def title_events(spec: str, t0: float, dur: float, y=1185):
         out.append(ev(a, b, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small[:i]}|", layer=3))
     typed = t0 + len(small) * per_char
     big_at = typed + 0.15
-    # cursor blinks until the big line lands, then the small line stays without cursor
     out.append(ev(typed, big_at, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small}|", layer=3))
     out.append(ev(big_at, end, "TSmall", f"{{\\an5\\pos(540,{y_small})\\fad(0,150)}}{small}", layer=3))
-    # 2. big line with pixel glitch frames
+    # 2. big lines with pixel glitch frames
+    pix = f"\\fn{PIXEL}\\fsp6"
     glitch = [(0.00, 0.07, False), (0.07, 0.17, True), (0.17, 0.24, False), (0.24, 0.34, True)]
-    for a, b, pix in glitch:
-        font = f"\\fn{PIXEL}\\fsp6" if pix else ""
-        out.append(ev(big_at + a, big_at + b, "TBig", f"{{\\an5\\pos(540,{y}){font}}}{big_ass}", layer=3))
-    out.append(ev(big_at + 0.34, end, "TBig", f"{{\\an5\\pos(540,{y})\\fad(0,150)}}{big_ass}", layer=3))
-    # glitch out right before the end
-    out.append(ev(end - 0.22, end - 0.12, "TBig", f"{{\\an5\\pos(540,{y})\\fn{PIXEL}\\fsp6}}{big_ass}", layer=4))
+    for a, b, g in glitch:
+        out += big_events(big_at + a, big_at + b, pix if g else "")
+    out += big_events(big_at + 0.34, end, "\\fad(0,150)")
+    out += big_events(end - 0.22, end - 0.12, pix, layer=4)  # glitch out
     # 3. subtitle
     if sub:
         out.append(ev(big_at + 0.35, end, "TSub", f"{{\\an5\\pos(540,{y_sub})\\fad(120,150)}}{sub}", layer=3))
