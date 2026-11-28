@@ -1,12 +1,11 @@
 """another day, another blowout (deel 2): ~20s silent cut, picture untouched (only cut + downscale 4K->1080)."""
 import json, os, subprocess
 SRC = "raw.mp4"
-SHOTS = [  # v5 (user: no freeze frames; moving, fast)
+SHOTS = [  # v6 (shot 'andere zijkant' 24.3 eruit: random) (user: no freeze frames; moving, fast)
     (18.4, 19.4, "sjaal af (nog sneller)"),
     (20.0, 20.3, "rondje: voorkant"),
     (22.1, 22.4, "rondje: zijkant"),
     (23.0, 23.3, "rondje: achterkant"),
-    (24.3, 24.6, "rondje: andere zijkant"),
     (108.1, 109.4, "pin eruit, lange lok valt"),
     (118.6, 119.8, "bovenkant: pin eruit, bovenkant valt"),
     (122.6, 124.0, "bovenkant los, krullen vallen naar voren"),

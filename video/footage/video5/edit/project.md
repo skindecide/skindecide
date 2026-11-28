@@ -28,3 +28,10 @@
 **Feedback:** "of the day" langer glitchen; eindshot korter; sjaal sneller af; achterkant-shot waarin ze mooi in het midden staat (stond rechts); minder afstand tussen blowout en of the day.
 **Decisions:** --glitch-cycles 5 (≈0.55s flikkeren, was ≈0.22s); --title-gap 115 (was 135); sjaal 18.4–19.4 (1.0s); achterkant vervangen door 245.0–247.4 (gecentreerd, haar recht); eindshot 393.5–395.7 (2.2s). Titel 0–2.2s. 17.5s.
 **Outstanding:** feedback op v5.
+
+## Session 1f — 2026-11-28 (v6)
+
+**Feedback:** shot waarin ze naar links kijkt met de draai is random → weg. Eerst verkeerd geraden (airwrap 283s); gebruiker: shot 4 = rondje "andere zijkant" 24.3–24.6.
+**Decisions:** 24.3–24.6 eruit; rondje nu voor → zij → achter. Titel 0–2.0s. 17.2s.
+**Les:** bij twijfel over welk shot bedoeld wordt eerst vragen (met genummerde strip), niet gokken.
+**Outstanding:** feedback op v6.

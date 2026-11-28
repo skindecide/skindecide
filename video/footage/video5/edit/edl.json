@@ -32,12 +32,6 @@
     },
     {
       "source": "raw",
-      "start": 24.3,
-      "end": 24.6,
-      "beat": "rondje: andere zijkant"
-    },
-    {
-      "source": "raw",
       "start": 108.1,
       "end": 109.4,
       "beat": "pin eruit, lange lok valt"
@@ -97,5 +91,5 @@
       "beat": "eindresultaat: haar zit, lachen in camera (korter)"
     }
   ],
-  "total_duration_s": 17.5
+  "total_duration_s": 17.2
 }
