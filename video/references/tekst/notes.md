@@ -53,3 +53,10 @@ Typewriter 0.025s/teken, grote regel na ~0.3s, korte glitch (vast in tools/house
 Kleine getypte regel kleiner (58px) en ruimer gespatieerd (letterspatiëring 5), duidelijke
 lucht (120px) tot de grote regels, grote regels strak (105px). Het blok hangt **onder de kin**
 in het openingsshot: kies `--title-y` per video (meet de kin), extra lucht gaat naar beneden.
+
+## Kleur + "of the day"-titel (gebruiker, 2026-11-28)
+
+Grote bewegende titelregel nu **butter yellow (#F7E3A1)** i.p.v. roze (standaard in
+tools/house_style.py, `--title-color pink` voor oud). Variant "blowout of the day":
+eerste woord stilstaand in cursieve serif (crème, zoals captions), alleen "of the day"
+beweegt/glitcht: `--title "blowout|of the day" --static-small --small-serif --title-gap 135`.

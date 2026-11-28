@@ -10,3 +10,9 @@
 **Feedback/idee gebruiker:** het shot waarin ze ronddraait met de pins snel tonen met stops: voorkant, zijkant, achterkant, zijkant.
 **Decisions:** "rondje" als 4 freeze-frames van 0.37s direct na sjaal af: 25.5 (voor), 24.5 (zijkant links, pins), 27.9 (achter), 28.8 (zijkant rechts, gouden pin). Volume-shot 166s eruit. 21.7s. Freeze = timing-effect op verzoek gebruiker; beeld zelf (kleur/uitsnede) ongewijzigd.
 **Outstanding:** feedback op v2.
+
+## Session 1c — 2026-11-28 (v3)
+
+**Feedback:** titel "blowout of the day", waarbij "of the day" de bewegende tekst is; butter yellow i.p.v. roze.
+**Decisions:** "blowout" stilstaand in Instrument Serif Italic crème 150px (--small-serif --static-small), "of the day" groot Nunito Black butter yellow (#F7E3A1) met pixel-glitch. 2 varianten vergeleken (klein sans vs. serif); serif gekozen: geeft het hoofdwoord gewicht en sluit aan bij de captions. --title-y 1100 --title-gap 135.
+**Outstanding:** feedback op v3.

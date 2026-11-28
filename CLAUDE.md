@@ -49,7 +49,9 @@ all captions and titles:
 - `render <video> -o out.mp4 --transcript words.json [--fix "fout=goed"]`: one-word captions,
   thin italic serif (Instrument Serif), cream, chest height. Long words shrink to fit.
 - `--title "small|BIG/two lines|subtitle" --title-at 0 --title-dur 2.6`: typed small line
-  with a cursor, then a big pink rounded line (Nunito Black) with a pixel glitch in and out.
+  with a cursor, then a big butter-yellow rounded line (Nunito Black) with a pixel glitch in and out.
+  `--title-y` = small line height (just under the chin in the opening shot). For "blowout of
+  the day": `--static-small --small-serif --title-gap 135` (only the big line moves).
 - `--chapter "label@start-end"`: big italic label stays up, spoken words go small under it.
 - `--silent` for music-only videos (the user adds music in the app). `--debug` prints
   which fonts libass picked; check it, because a missing font fails silently.

@@ -37,6 +37,7 @@ FONTS = Path(__file__).resolve().parent / "fonts"
 # Colours in ASS order (&HAABBGGRR)
 CREAM = "&H00D6F4FF"   # #FFF4D6
 PINK = "&H00EAC8F7"    # #F7C8EA
+BUTTER = "&H00A1E3F7"  # #F7E3A1 butter yellow (user, 2026-11-28)
 WHITE = "&H00FFFFFF"
 
 SERIF_I = "Instrument Serif"           # italic face selected with \i1
@@ -129,7 +130,8 @@ TITLE_GAP = 120         # px from small line centre to first big line centre
 SMALL_FS, SMALL_SP = 58, 5
 
 
-def title_events(spec: str, t0: float, dur: float, y_small=1075, step=TITLE_LINE_STEP, gap=TITLE_GAP):
+def title_events(spec: str, t0: float, dur: float, y_small=1075, step=TITLE_LINE_STEP, gap=TITLE_GAP,
+                 color=None, type_small=True, small_serif=False):
     """y_small = centre of the small typed line; everything else hangs below it.
     Pick it just under the chin in the opening shot."""
     parts = spec.split("|")
@@ -142,31 +144,46 @@ def title_events(spec: str, t0: float, dur: float, y_small=1075, step=TITLE_LINE
     end = t0 + dur
     per_char = 0.025  # fast: the hook must land within ~0.5s (user)
     sm = f"\\an5\\pos(540,{y_small})\\fs{SMALL_FS}\\fsp{SMALL_SP}"
+    sstyle = "TSmall"
+    if small_serif:  # elegant italic serif first word (e.g. "blowout"), like the captions
+        sm = f"\\an5\\pos(540,{y_small})\\fs150"
+        sstyle = "Word"
+
+    col = f"\\c{color}" if color else ""
 
     def big_events(a, b, extra="", layer=3):
-        return [ev(a, b, "TBig", f"{{\\an5\\pos(540,{yy}){extra}}}{txt}", layer=layer)
+        return [ev(a, b, "TBig", f"{{\\an5\\pos(540,{yy}){col}{extra}}}{txt}", layer=layer)
                 for txt, yy in zip(lines, ys)]
 
-    # 1. typewriter with cursor
+    # 1. typewriter with cursor (or a static small line when type_small is False)
+    if not type_small:
+        out.append(ev(t0, end, sstyle, f"{{{sm}\\fad(0,150)}}{small}", layer=3))
+        out += _title_big(out, t0, end, big_events, sub, y_sub)
+        return out
     for i in range(1, len(small) + 1):
         a = t0 + (i - 1) * per_char
         b = t0 + i * per_char
-        out.append(ev(a, b, "TSmall", f"{{{sm}}}{small[:i]}|", layer=3))
+        out.append(ev(a, b, sstyle, f"{{{sm}}}{small[:i]}|", layer=3))
     typed = t0 + len(small) * per_char
     big_at = typed + 0.04
-    out.append(ev(typed, big_at, "TSmall", f"{{{sm}}}{small}|", layer=3))
-    out.append(ev(big_at, end, "TSmall", f"{{{sm}\\fad(0,150)}}{small}", layer=3))
-    # 2. big lines with pixel glitch frames
+    out.append(ev(typed, big_at, sstyle, f"{{{sm}}}{small}|", layer=3))
+    out.append(ev(big_at, end, sstyle, f"{{{sm}\\fad(0,150)}}{small}", layer=3))
+    out += _title_big(out, big_at, end, big_events, sub, y_sub)
+    return out
+
+
+def _title_big(out, big_at, end, big_events, sub, y_sub):
+    """Big lines glitch in through the pixel font, stay, glitch out; optional subtitle."""
+    res = []
     pix = f"\\fn{PIXEL}\\fsp6"
     glitch = [(0.00, 0.05, False), (0.05, 0.11, True), (0.11, 0.16, False), (0.16, 0.22, True)]
     for a, b, g in glitch:
-        out += big_events(big_at + a, big_at + b, pix if g else "")
-    out += big_events(big_at + 0.22, end, "\\fad(0,150)")
-    out += big_events(end - 0.22, end - 0.12, pix, layer=4)  # glitch out
-    # 3. subtitle
+        res += big_events(big_at + a, big_at + b, pix if g else "")
+    res += big_events(big_at + 0.22, end, "\\fad(0,150)")
+    res += big_events(end - 0.22, end - 0.12, pix, layer=4)  # glitch out
     if sub:
-        out.append(ev(big_at + 0.22, end, "TSub", f"{{\\an5\\pos(540,{y_sub})\\fad(120,150)}}{sub}", layer=3))
-    return out
+        res.append(ev(big_at + 0.22, end, "TSub", f"{{\\an5\\pos(540,{y_sub})\\fad(120,150)}}{sub}", layer=3))
+    return res
 
 
 def probe_duration(path) -> float:
@@ -187,7 +204,13 @@ def cmd_render(a):
         chapters.append((label, s, e, a.chapter_y))
     events = []
     if a.title:
-        events += title_events(a.title, a.title_at, a.title_dur, y_small=a.title_y)
+        color = {"pink": PINK, "butter": BUTTER}.get(a.title_color)
+        if color is None:  # hex like F7E3A1
+            h = a.title_color.lstrip("#")
+            color = f"&H00{h[4:6]}{h[2:4]}{h[0:2]}".upper()
+        events += title_events(a.title, a.title_at, a.title_dur, y_small=a.title_y, color=color,
+                               type_small=not a.static_small, small_serif=a.small_serif,
+                               gap=a.title_gap)
     events += chapter_events(chapters)
     if a.transcript:
         words = [w for w in json.load(open(a.transcript))["words"] if w["type"] == "word"]
@@ -233,6 +256,14 @@ def main():
     r.add_argument("--title-dur", type=float, default=3.0)
     r.add_argument("--title-y", type=int, default=1075,
                    help="centre of the small title line; put it just under the chin in the opening shot")
+    r.add_argument("--title-color", default="butter",
+                   help="big title colour: butter (default since 2026-11-28), pink, or hex RRGGBB")
+    r.add_argument("--static-small", action="store_true",
+                   help="small title line just appears (no typing); only the big line moves")
+    r.add_argument("--small-serif", action="store_true",
+                   help="first title line in the big cream italic serif instead of small sans")
+    r.add_argument("--title-gap", type=int, default=TITLE_GAP,
+                   help="px from first line centre to first big line centre (135 with --small-serif)")
     r.add_argument("--chapter", action="append", default=[], help='"label@start-end"')
     r.add_argument("--caption-y", type=int, default=1180)
     r.add_argument("--chapter-y", type=int, default=1120)
