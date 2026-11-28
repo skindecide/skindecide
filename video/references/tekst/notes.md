@@ -47,3 +47,9 @@ de tekst-reference wordt daarom níet overgenomen.)
 
 De visuele hook in het begin is het belangrijkst: titel moet binnen ~0.5s volledig staan.
 Typewriter 0.025s/teken, grote regel na ~0.3s, korte glitch (vast in tools/house_style.py).
+
+## Witruimte titel (gebruiker, 2026-11-28)
+
+Kleine getypte regel kleiner (58px) en ruimer gespatieerd (letterspatiëring 5), duidelijke
+lucht (120px) tot de grote regels, grote regels strak (105px). Het blok hangt **onder de kin**
+in het openingsshot: kies `--title-y` per video (meet de kin), extra lucht gaat naar beneden.

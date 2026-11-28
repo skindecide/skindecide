@@ -122,22 +122,26 @@ def chapter_events(chapters):
             for label, s, e, y in chapters]
 
 
-TITLE_LINE_STEP = 105  # px between big lines: tight, lines sit right under each other (user)
+# Title layout (whitespace tuned with the user, 2026-11-28): the small typed line is tracked
+# out and sits a clear step above the big lines; the big lines sit tight under each other.
+TITLE_LINE_STEP = 105   # px between big lines
+TITLE_GAP = 120         # px from small line centre to first big line centre
+SMALL_FS, SMALL_SP = 58, 5
 
 
-def title_events(spec: str, t0: float, dur: float, y=1185, step=TITLE_LINE_STEP):
+def title_events(spec: str, t0: float, dur: float, y_small=1075, step=TITLE_LINE_STEP, gap=TITLE_GAP):
+    """y_small = centre of the small typed line; everything else hangs below it.
+    Pick it just under the chin in the opening shot."""
     parts = spec.split("|")
     small, big = parts[0], parts[1]
     sub = parts[2] if len(parts) > 2 else ""
     lines = big.split("/")
-    n = len(lines)
-    # one event per big line, so the spacing is ours and not the font's tall line height
-    ys = [round(y + (k - (n - 1) / 2) * step) for k in range(n)]
+    ys = [y_small + gap + k * step for k in range(len(lines))]
+    y_sub = ys[-1] + step // 2 + 45
     out = []
     end = t0 + dur
     per_char = 0.025  # fast: the hook must land within ~0.5s (user)
-    y_small = ys[0] - step // 2 - 60
-    y_sub = ys[-1] + step // 2 + 45
+    sm = f"\\an5\\pos(540,{y_small})\\fs{SMALL_FS}\\fsp{SMALL_SP}"
 
     def big_events(a, b, extra="", layer=3):
         return [ev(a, b, "TBig", f"{{\\an5\\pos(540,{yy}){extra}}}{txt}", layer=layer)
@@ -147,11 +151,11 @@ def title_events(spec: str, t0: float, dur: float, y=1185, step=TITLE_LINE_STEP)
     for i in range(1, len(small) + 1):
         a = t0 + (i - 1) * per_char
         b = t0 + i * per_char
-        out.append(ev(a, b, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small[:i]}|", layer=3))
+        out.append(ev(a, b, "TSmall", f"{{{sm}}}{small[:i]}|", layer=3))
     typed = t0 + len(small) * per_char
     big_at = typed + 0.04
-    out.append(ev(typed, big_at, "TSmall", f"{{\\an5\\pos(540,{y_small})}}{small}|", layer=3))
-    out.append(ev(big_at, end, "TSmall", f"{{\\an5\\pos(540,{y_small})\\fad(0,150)}}{small}", layer=3))
+    out.append(ev(typed, big_at, "TSmall", f"{{{sm}}}{small}|", layer=3))
+    out.append(ev(big_at, end, "TSmall", f"{{{sm}\\fad(0,150)}}{small}", layer=3))
     # 2. big lines with pixel glitch frames
     pix = f"\\fn{PIXEL}\\fsp6"
     glitch = [(0.00, 0.05, False), (0.05, 0.11, True), (0.11, 0.16, False), (0.16, 0.22, True)]
@@ -183,7 +187,7 @@ def cmd_render(a):
         chapters.append((label, s, e, a.chapter_y))
     events = []
     if a.title:
-        events += title_events(a.title, a.title_at, a.title_dur)
+        events += title_events(a.title, a.title_at, a.title_dur, y_small=a.title_y)
     events += chapter_events(chapters)
     if a.transcript:
         words = [w for w in json.load(open(a.transcript))["words"] if w["type"] == "word"]
@@ -227,6 +231,8 @@ def main():
     r.add_argument("--title")
     r.add_argument("--title-at", type=float, default=0.0)
     r.add_argument("--title-dur", type=float, default=3.0)
+    r.add_argument("--title-y", type=int, default=1075,
+                   help="centre of the small title line; put it just under the chin in the opening shot")
     r.add_argument("--chapter", action="append", default=[], help='"label@start-end"')
     r.add_argument("--caption-y", type=int, default=1180)
     r.add_argument("--chapter-y", type=int, default=1120)

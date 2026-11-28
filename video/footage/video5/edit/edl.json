@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "sources": {
+    "raw": "raw.mp4"
+  },
+  "output": "1080x1920@30, silent",
+  "title": "another day | another blowout",
+  "ranges": [
+    {
+      "source": "raw",
+      "start": 14.8,
+      "end": 17.4,
+      "beat": "sjaal af als gordijn, pincurls zichtbaar (titel)"
+    },
+    {
+      "source": "raw",
+      "start": 52.4,
+      "end": 54.0,
+      "beat": "pin eruit, spiraalkrul hangt"
+    },
+    {
+      "source": "raw",
+      "start": 108.1,
+      "end": 110.0,
+      "beat": "pin eruit, krul valt, volle krullen"
+    },
+    {
+      "source": "raw",
+      "start": 118.4,
+      "end": 119.9,
+      "beat": "bovenkant: pin eruit, bovenkant valt"
+    },
+    {
+      "source": "raw",
+      "start": 120.5,
+      "end": 122.0,
+      "beat": "bovenkant: tweede deel los"
+    },
+    {
+      "source": "raw",
+      "start": 126.0,
+      "end": 127.2,
+      "beat": "alle krullen (glorie-shot)"
+    },
+    {
+      "source": "raw",
+      "start": 157.5,
+      "end": 159.0,
+      "beat": "losschudden, volume"
+    },
+    {
+      "source": "raw",
+      "start": 166.0,
+      "end": 167.5,
+      "beat": "grote volle krullen"
+    },
+    {
+      "source": "raw",
+      "start": 239.0,
+      "end": 240.2,
+      "beat": "over schouder kijken"
+    },
+    {
+      "source": "raw",
+      "start": 243.0,
+      "end": 244.8,
+      "beat": "achterkant, haar zwiept"
+    },
+    {
+      "source": "raw",
+      "start": 283.0,
+      "end": 284.3,
+      "beat": "airwrap voorkantje"
+    },
+    {
+      "source": "raw",
+      "start": 304.0,
+      "end": 305.3,
+      "beat": "airwrap, blik in camera"
+    },
+    {
+      "source": "raw",
+      "start": 380.0,
+      "end": 382.8,
+      "beat": "eindresultaat voorkant"
+    }
+  ],
+  "total_duration_s": 21.7
+}
