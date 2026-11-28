@@ -8,9 +8,9 @@
   "ranges": [
     {
       "source": "raw",
-      "start": 17.8,
+      "start": 18.4,
       "end": 19.4,
-      "beat": "sjaal af (korter)"
+      "beat": "sjaal af (nog sneller)"
     },
     {
       "source": "raw",
@@ -74,15 +74,9 @@
     },
     {
       "source": "raw",
-      "start": 239.0,
-      "end": 240.2,
-      "beat": "over schouder kijken"
-    },
-    {
-      "source": "raw",
-      "start": 243.0,
-      "end": 244.8,
-      "beat": "achterkant, haar zwiept"
+      "start": 245.0,
+      "end": 247.4,
+      "beat": "achterkant, mooi in het midden"
     },
     {
       "source": "raw",
@@ -98,10 +92,10 @@
     },
     {
       "source": "raw",
-      "start": 393.0,
-      "end": 396.0,
-      "beat": "eindresultaat: haar zit, lachen in camera"
+      "start": 393.5,
+      "end": 395.7,
+      "beat": "eindresultaat: haar zit, lachen in camera (korter)"
     }
   ],
-  "total_duration_s": 19.5
+  "total_duration_s": 17.5
 }

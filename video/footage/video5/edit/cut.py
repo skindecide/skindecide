@@ -1,8 +1,8 @@
 """another day, another blowout (deel 2): ~20s silent cut, picture untouched (only cut + downscale 4K->1080)."""
 import json, os, subprocess
 SRC = "raw.mp4"
-SHOTS = [  # v4 (user: no freeze frames; moving, fast)
-    (17.8, 19.4, "sjaal af (korter)"),
+SHOTS = [  # v5 (user: no freeze frames; moving, fast)
+    (18.4, 19.4, "sjaal af (nog sneller)"),
     (20.0, 20.3, "rondje: voorkant"),
     (22.1, 22.4, "rondje: zijkant"),
     (23.0, 23.3, "rondje: achterkant"),
@@ -13,11 +13,10 @@ SHOTS = [  # v4 (user: no freeze frames; moving, fast)
     (126.0, 127.2, "alle krullen (glorie-shot)"),
     (157.5, 159.0, "losschudden, volume"),
     (166.0, 167.5, "grote volle krullen"),
-    (239.0, 240.2, "over schouder kijken"),
-    (243.0, 244.8, "achterkant, haar zwiept"),
+    (245.0, 247.4, "achterkant, mooi in het midden"),
     (283.0, 284.3, "airwrap voorkantje"),
     (304.0, 305.3, "airwrap, blik in camera"),
-    (393.0, 396.0, "eindresultaat: haar zit, lachen in camera"),
+    (393.5, 395.7, "eindresultaat: haar zit, lachen in camera (korter)"),
 ]
 COLOR = ["-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]
 os.makedirs("edit/clips", exist_ok=True)
