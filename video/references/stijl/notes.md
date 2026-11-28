@@ -76,8 +76,12 @@ de hele beweging tonen (net vóór loslaten tot krul hangt). **Kies alleen mooie
 strak, spiraalvormig, veerkrachtig. Geen pluizige/gedraaide krullen of steile strengen uit
 rollers. Achterkant-shot mag ruim (~3.5s). Shots waarin ze ongemakkelijk kijkt vermijden.
 
-## "Rondje"-stops (idee gebruiker, 2026-11-28)
+## "Rondje" (idee gebruiker, bijgesteld 2026-11-28)
 
-Bij een ronddraai-shot (bv. pincurls tonen): 4 freeze-frames van ~0.35s achter elkaar,
-voorkant → zijkant → achterkant → andere zijkant. Snel, ritmisch, laat het hele kapsel zien.
-In cut.py als ("freeze", t, hold, beat). Kies scherpe, stilstaande frames.
+Bij een ronddraai-shot: 4 **bewegende** clips van ~0.3s (géén stilstaande beelden),
+voorkant → zijkant → achterkant → andere zijkant, in de echte draairichting. Snel en ritmisch.
+
+## Begin- en eindshot (gebruiker, 2026-11-28)
+
+Beginshot (sjaal/doek af) kort houden (~1.5s): start pas bij het optillen. Eindshot: kies
+een moment waarop het haar áf is (handen vrij, poseren/lachen), niet terwijl ze het nog goedzet.

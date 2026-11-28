@@ -16,3 +16,9 @@
 **Feedback:** titel "blowout of the day", waarbij "of the day" de bewegende tekst is; butter yellow i.p.v. roze.
 **Decisions:** "blowout" stilstaand in Instrument Serif Italic crème 150px (--small-serif --static-small), "of the day" groot Nunito Black butter yellow (#F7E3A1) met pixel-glitch. 2 varianten vergeleken (klein sans vs. serif); serif gekozen: geeft het hoofdwoord gewicht en sluit aan bij de captions. --title-y 1100 --title-gap 135.
 **Outstanding:** feedback op v3.
+
+## Session 1d — 2026-11-28 (v4)
+
+**Feedback:** rondje niet als stilstaande beelden maar bewegend en sneller; betere krul-val-shots; eindshot is ze nog haar aan het goedzetten; beginshot met de doek te lang.
+**Decisions:** sjaal 17.8–19.4 (1.6s, was 2.6). Rondje = 4 bewegende clips van 0.3s in draairichting: 20.0 voor, 22.1 zij, 23.0 achter, 24.3 zij. Krul-val via OpenCV-bewegingspieken in haarzones + visuele check: 108.1–109.4 (lok valt), 118.6–119.8 en 122.6–124.0 (bovenkant los, krullen vallen naar voren), glorie 126.0–127.2. Eindshot 393–396 (haar zit, lacht, handen vrij). 19.5s.
+**Outstanding:** feedback op v4.

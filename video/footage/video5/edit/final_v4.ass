@@ -1,0 +1,25 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Word,Instrument Serif,250,&H00D6F4FF,&H00D6F4FF,&H00000000,&H78000000,0,1,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: Chapter,Instrument Serif,210,&H00D6F4FF,&H00D6F4FF,&H00000000,&H78000000,0,1,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: Small,Inter Medium,68,&H00FFFFFF,&H00FFFFFF,&H00000000,&H50000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: TSmall,Inter Medium,66,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: TBig,Nunito ExtraLight Black,160,&H00EAC8F7,&H00EAC8F7,&H00000000,&HA0000000,0,0,0,0,100,100,-4,0,1,0,3,5,40,40,0,1
+Style: TSub,Inter Medium,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 3,0:00:00.00,0:00:02.80,Word,,0,0,0,,{\an5\pos(540,1100)\fs150\fad(0,150)}blowout
+Dialogue: 3,0:00:00.00,0:00:00.05,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7}of the day
+Dialogue: 3,0:00:00.05,0:00:00.11,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7\fnDotGothic16\fsp6}of the day
+Dialogue: 3,0:00:00.11,0:00:00.16,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7}of the day
+Dialogue: 3,0:00:00.16,0:00:00.22,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7\fnDotGothic16\fsp6}of the day
+Dialogue: 3,0:00:00.22,0:00:02.80,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7\fad(0,150)}of the day
+Dialogue: 4,0:00:02.58,0:00:02.68,TBig,,0,0,0,,{\an5\pos(540,1235)\c&H00A1E3F7\fnDotGothic16\fsp6}of the day

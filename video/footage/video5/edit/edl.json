@@ -8,57 +8,51 @@
   "ranges": [
     {
       "source": "raw",
-      "start": 14.8,
-      "end": 17.4,
-      "beat": "sjaal af als gordijn, pincurls zichtbaar (titel)"
+      "start": 17.8,
+      "end": 19.4,
+      "beat": "sjaal af (korter)"
     },
     {
       "source": "raw",
-      "freeze_at": 25.5,
-      "hold": 0.35,
+      "start": 20.0,
+      "end": 20.3,
       "beat": "rondje: voorkant"
     },
     {
       "source": "raw",
-      "freeze_at": 24.5,
-      "hold": 0.35,
-      "beat": "rondje: zijkant links"
+      "start": 22.1,
+      "end": 22.4,
+      "beat": "rondje: zijkant"
     },
     {
       "source": "raw",
-      "freeze_at": 27.9,
-      "hold": 0.35,
+      "start": 23.0,
+      "end": 23.3,
       "beat": "rondje: achterkant"
     },
     {
       "source": "raw",
-      "freeze_at": 28.8,
-      "hold": 0.35,
-      "beat": "rondje: zijkant rechts"
-    },
-    {
-      "source": "raw",
-      "start": 52.4,
-      "end": 54.0,
-      "beat": "pin eruit, spiraalkrul hangt"
+      "start": 24.3,
+      "end": 24.6,
+      "beat": "rondje: andere zijkant"
     },
     {
       "source": "raw",
       "start": 108.1,
-      "end": 110.0,
-      "beat": "pin eruit, krul valt, volle krullen"
+      "end": 109.4,
+      "beat": "pin eruit, lange lok valt"
     },
     {
       "source": "raw",
-      "start": 118.4,
-      "end": 119.9,
+      "start": 118.6,
+      "end": 119.8,
       "beat": "bovenkant: pin eruit, bovenkant valt"
     },
     {
       "source": "raw",
-      "start": 120.5,
-      "end": 122.0,
-      "beat": "bovenkant: tweede deel los"
+      "start": 122.6,
+      "end": 124.0,
+      "beat": "bovenkant los, krullen vallen naar voren"
     },
     {
       "source": "raw",
@@ -71,6 +65,12 @@
       "start": 157.5,
       "end": 159.0,
       "beat": "losschudden, volume"
+    },
+    {
+      "source": "raw",
+      "start": 166.0,
+      "end": 167.5,
+      "beat": "grote volle krullen"
     },
     {
       "source": "raw",
@@ -98,10 +98,10 @@
     },
     {
       "source": "raw",
-      "start": 380.0,
-      "end": 382.8,
-      "beat": "eindresultaat voorkant"
+      "start": 393.0,
+      "end": 396.0,
+      "beat": "eindresultaat: haar zit, lachen in camera"
     }
   ],
-  "total_duration_s": 21.6
+  "total_duration_s": 19.5
 }

@@ -1,24 +1,23 @@
 """another day, another blowout (deel 2): ~20s silent cut, picture untouched (only cut + downscale 4K->1080)."""
 import json, os, subprocess
 SRC = "raw.mp4"
-# ("freeze", t, hold): one frame of the source held for `hold` seconds (user's "stops" idea)
-SHOTS = [  # v2
-    (14.8, 17.4, "sjaal af als gordijn, pincurls zichtbaar (titel)"),
-    ("freeze", 25.5, 0.35, "rondje: voorkant"),
-    ("freeze", 24.5, 0.35, "rondje: zijkant links"),
-    ("freeze", 27.9, 0.35, "rondje: achterkant"),
-    ("freeze", 28.8, 0.35, "rondje: zijkant rechts"),
-    (52.4, 54.0, "pin eruit, spiraalkrul hangt"),
-    (108.1, 110.0, "pin eruit, krul valt, volle krullen"),
-    (118.4, 119.9, "bovenkant: pin eruit, bovenkant valt"),
-    (120.5, 122.0, "bovenkant: tweede deel los"),
+SHOTS = [  # v4 (user: no freeze frames; moving, fast)
+    (17.8, 19.4, "sjaal af (korter)"),
+    (20.0, 20.3, "rondje: voorkant"),
+    (22.1, 22.4, "rondje: zijkant"),
+    (23.0, 23.3, "rondje: achterkant"),
+    (24.3, 24.6, "rondje: andere zijkant"),
+    (108.1, 109.4, "pin eruit, lange lok valt"),
+    (118.6, 119.8, "bovenkant: pin eruit, bovenkant valt"),
+    (122.6, 124.0, "bovenkant los, krullen vallen naar voren"),
     (126.0, 127.2, "alle krullen (glorie-shot)"),
     (157.5, 159.0, "losschudden, volume"),
+    (166.0, 167.5, "grote volle krullen"),
     (239.0, 240.2, "over schouder kijken"),
     (243.0, 244.8, "achterkant, haar zwiept"),
     (283.0, 284.3, "airwrap voorkantje"),
     (304.0, 305.3, "airwrap, blik in camera"),
-    (380.0, 382.8, "eindresultaat voorkant"),
+    (393.0, 396.0, "eindresultaat: haar zit, lachen in camera"),
 ]
 COLOR = ["-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]
 os.makedirs("edit/clips", exist_ok=True)
