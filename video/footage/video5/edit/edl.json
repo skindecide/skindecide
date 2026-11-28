@@ -14,6 +14,30 @@
     },
     {
       "source": "raw",
+      "freeze_at": 25.5,
+      "hold": 0.35,
+      "beat": "rondje: voorkant"
+    },
+    {
+      "source": "raw",
+      "freeze_at": 24.5,
+      "hold": 0.35,
+      "beat": "rondje: zijkant links"
+    },
+    {
+      "source": "raw",
+      "freeze_at": 27.9,
+      "hold": 0.35,
+      "beat": "rondje: achterkant"
+    },
+    {
+      "source": "raw",
+      "freeze_at": 28.8,
+      "hold": 0.35,
+      "beat": "rondje: zijkant rechts"
+    },
+    {
+      "source": "raw",
       "start": 52.4,
       "end": 54.0,
       "beat": "pin eruit, spiraalkrul hangt"
@@ -50,12 +74,6 @@
     },
     {
       "source": "raw",
-      "start": 166.0,
-      "end": 167.5,
-      "beat": "grote volle krullen"
-    },
-    {
-      "source": "raw",
       "start": 239.0,
       "end": 240.2,
       "beat": "over schouder kijken"
@@ -85,5 +103,5 @@
       "beat": "eindresultaat voorkant"
     }
   ],
-  "total_duration_s": 21.7
+  "total_duration_s": 21.6
 }

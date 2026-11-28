@@ -1,0 +1,43 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Word,Instrument Serif,250,&H00D6F4FF,&H00D6F4FF,&H00000000,&H78000000,0,1,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: Chapter,Instrument Serif,210,&H00D6F4FF,&H00D6F4FF,&H00000000,&H78000000,0,1,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: Small,Inter Medium,68,&H00FFFFFF,&H00FFFFFF,&H00000000,&H50000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1
+Style: TSmall,Inter Medium,66,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+Style: TBig,Nunito ExtraLight Black,160,&H00EAC8F7,&H00EAC8F7,&H00000000,&HA0000000,0,0,0,0,100,100,-4,0,1,0,3,5,40,40,0,1
+Style: TSub,Inter Medium,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,2,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 3,0:00:00.00,0:00:00.03,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}a|
+Dialogue: 3,0:00:00.03,0:00:00.05,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}an|
+Dialogue: 3,0:00:00.05,0:00:00.08,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}ano|
+Dialogue: 3,0:00:00.08,0:00:00.10,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}anot|
+Dialogue: 3,0:00:00.10,0:00:00.12,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}anoth|
+Dialogue: 3,0:00:00.12,0:00:00.15,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}anothe|
+Dialogue: 3,0:00:00.15,0:00:00.18,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another|
+Dialogue: 3,0:00:00.18,0:00:00.20,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another |
+Dialogue: 3,0:00:00.20,0:00:00.23,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another d|
+Dialogue: 3,0:00:00.23,0:00:00.25,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another da|
+Dialogue: 3,0:00:00.25,0:00:00.28,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another day|
+Dialogue: 3,0:00:00.28,0:00:00.32,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5}another day|
+Dialogue: 3,0:00:00.32,0:00:02.60,TSmall,,0,0,0,,{\an5\pos(540,1095)\fs58\fsp5\fad(0,150)}another day
+Dialogue: 3,0:00:00.32,0:00:00.36,TBig,,0,0,0,,{\an5\pos(540,1215)}another
+Dialogue: 3,0:00:00.32,0:00:00.36,TBig,,0,0,0,,{\an5\pos(540,1320)}blowout
+Dialogue: 3,0:00:00.36,0:00:00.42,TBig,,0,0,0,,{\an5\pos(540,1215)\fnDotGothic16\fsp6}another
+Dialogue: 3,0:00:00.36,0:00:00.42,TBig,,0,0,0,,{\an5\pos(540,1320)\fnDotGothic16\fsp6}blowout
+Dialogue: 3,0:00:00.42,0:00:00.47,TBig,,0,0,0,,{\an5\pos(540,1215)}another
+Dialogue: 3,0:00:00.42,0:00:00.47,TBig,,0,0,0,,{\an5\pos(540,1320)}blowout
+Dialogue: 3,0:00:00.47,0:00:00.54,TBig,,0,0,0,,{\an5\pos(540,1215)\fnDotGothic16\fsp6}another
+Dialogue: 3,0:00:00.47,0:00:00.54,TBig,,0,0,0,,{\an5\pos(540,1320)\fnDotGothic16\fsp6}blowout
+Dialogue: 3,0:00:00.54,0:00:02.60,TBig,,0,0,0,,{\an5\pos(540,1215)\fad(0,150)}another
+Dialogue: 3,0:00:00.54,0:00:02.60,TBig,,0,0,0,,{\an5\pos(540,1320)\fad(0,150)}blowout
+Dialogue: 4,0:00:02.38,0:00:02.48,TBig,,0,0,0,,{\an5\pos(540,1215)\fnDotGothic16\fsp6}another
+Dialogue: 4,0:00:02.38,0:00:02.48,TBig,,0,0,0,,{\an5\pos(540,1320)\fnDotGothic16\fsp6}blowout

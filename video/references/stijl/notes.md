@@ -75,3 +75,9 @@ Het vallen van krullen uit pins/rollers is het "satisfying" hoogtepunt: shots va
 de hele beweging tonen (net vóór loslaten tot krul hangt). **Kies alleen mooie krullen**:
 strak, spiraalvormig, veerkrachtig. Geen pluizige/gedraaide krullen of steile strengen uit
 rollers. Achterkant-shot mag ruim (~3.5s). Shots waarin ze ongemakkelijk kijkt vermijden.
+
+## "Rondje"-stops (idee gebruiker, 2026-11-28)
+
+Bij een ronddraai-shot (bv. pincurls tonen): 4 freeze-frames van ~0.35s achter elkaar,
+voorkant → zijkant → achterkant → andere zijkant. Snel, ritmisch, laat het hele kapsel zien.
+In cut.py als ("freeze", t, hold, beat). Kies scherpe, stilstaande frames.
